@@ -1,0 +1,28 @@
+{
+  "counter": 1,
+  "last_id": 283784254,
+  "result": [
+    {
+      "approve_comment": "Проверено продавцом",
+      "approve_date": "2026-08-14T10:15:30Z",
+      "auto_approve_date": "2026-08-15T10:15:30Z",
+      "cancellation_id": 700000001,
+      "cancellation_initiator": "CLIENT",
+      "cancellation_reason": {
+        "id": 101,
+        "name": "Покупатель передумал"
+      },
+      "cancellation_reason_message": "Тестовая причина",
+      "cancelled_at": "2026-08-14T09:15:30Z",
+      "order_date": "2026-08-13T08:00:00Z",
+      "posting_number": "TEST-POSTING-001",
+      "source_id": 600000001,
+      "state": {
+        "id": 1,
+        "name": "На рассмотрении",
+        "state": "ON_APPROVAL"
+      },
+      "tpl_integration_type": "TEST"
+    }
+  ]
+}

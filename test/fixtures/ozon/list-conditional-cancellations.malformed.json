@@ -1,0 +1,9 @@
+{
+  "counter": 1,
+  "result": [
+    {
+      "cancellation_id": 700000001,
+      "cancellation_initiator": "UNKNOWN_INITIATOR"
+    }
+  ]
+}

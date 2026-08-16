@@ -1,0 +1,15 @@
+{
+  "result": {
+    "products": [
+      {
+        "id": 28745,
+        "price": 99,
+        "action_price": 50,
+        "add_mode": "MANUAL",
+        "stock": 20
+      }
+    ],
+    "total": 1,
+    "last_id": 18
+  }
+}

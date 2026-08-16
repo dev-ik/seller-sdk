@@ -1,0 +1,34 @@
+{
+  "premium_scores": [
+    {
+      "rating": "rating_test",
+      "scores": [
+        {
+          "date": "2026-08-10T00:00:00Z",
+          "rating_value": 94.5,
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "ratings": [
+    {
+      "danger_threshold": 80,
+      "premium_threshold": 95,
+      "rating": "rating_test",
+      "values": [
+        {
+          "date_from": "2026-08-01T00:00:00Z",
+          "date_to": "2026-08-14T23:59:59Z",
+          "status": {
+            "danger": false,
+            "premium": true,
+            "warning": false
+          },
+          "value": 98.5
+        }
+      ],
+      "warning_threshold": 90
+    }
+  ]
+}

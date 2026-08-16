@@ -1,0 +1,14 @@
+{
+  "currency_code": "RUB",
+  "defects": [
+    {
+      "date": "2026-08-13",
+      "index_by_date": 0.02,
+      "processing_costs_sum_by_date": 15.5
+    }
+  ],
+  "index": 0.02,
+  "period_from": "2026-08-01",
+  "period_to": "2026-08-14",
+  "processing_costs_sum": 15.5
+}

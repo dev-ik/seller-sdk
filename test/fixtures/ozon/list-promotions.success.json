@@ -1,0 +1,15 @@
+{
+  "result": [
+    {
+      "id": 71342,
+      "title": "Synthetic promotion",
+      "date_start": "2026-08-01T00:00:00Z",
+      "date_end": "2026-08-31T23:59:59Z",
+      "auto_add_dates": ["2026-08-15T00:00:00Z"],
+      "potential_products_count": 4,
+      "is_participating": true,
+      "participating_products_count": 2,
+      "action_type": "DISCOUNT"
+    }
+  ]
+}

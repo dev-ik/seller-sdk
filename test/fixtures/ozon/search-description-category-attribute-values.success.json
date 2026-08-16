@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "id": 10001,
+      "value": "Тестовое значение",
+      "info": "Обезличенная дополнительная информация",
+      "picture": "https://example.test/search-value.png"
+    }
+  ]
+}

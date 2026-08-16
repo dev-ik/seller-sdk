@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "availability": "AVAILABLE",
+      "delivery_schema": "SDS",
+      "product_id": 500000001,
+      "sku": 600000001
+    },
+    {
+      "availability": "UNAVAILABLE",
+      "deleted_at": "2026-08-01T12:00:00Z",
+      "delivery_schema": "FBS",
+      "product_id": 500000001,
+      "sku": 600000002
+    }
+  ],
+  "errors": [
+    {
+      "code": "SKU_NOT_FOUND",
+      "sku": 600000003,
+      "message": "Sanitized SKU lookup error."
+    }
+  ]
+}

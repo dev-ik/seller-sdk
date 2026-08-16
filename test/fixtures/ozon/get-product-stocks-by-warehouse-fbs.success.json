@@ -1,0 +1,13 @@
+{
+  "result": [
+    {
+      "offer_id": "TEST-OFFER-FBS-STOCK-001",
+      "present": 100,
+      "product_id": 500000001,
+      "reserved": 10,
+      "sku": 600000001,
+      "warehouse_id": 700000001,
+      "warehouse_name": "Test FBS warehouse"
+    }
+  ]
+}

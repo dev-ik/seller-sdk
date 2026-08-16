@@ -1,0 +1,125 @@
+{
+  "items": [
+    {
+      "availabilities": [
+        {
+          "availability": "in_stock",
+          "reasons": [
+            {
+              "human_text": { "text": "Sanitized availability reason" },
+              "id": 100001
+            }
+          ],
+          "sku": 600000001,
+          "source": "TEST_SOURCE"
+        }
+      ],
+      "barcodes": ["TEST-BARCODE-001"],
+      "color_image": ["https://example.invalid/color.jpg"],
+      "commissions": [
+        {
+          "delivery_amount": 150,
+          "percent": 10,
+          "return_amount": 50,
+          "sale_schema": "TEST_SCHEMA",
+          "value": 200
+        }
+      ],
+      "created_at": "2026-08-01T10:00:00Z",
+      "currency_code": "RUB",
+      "description_category_id": 100000001,
+      "discounted_fbo_stocks": 5,
+      "errors": [
+        {
+          "attribute_id": 85,
+          "code": "TEST_WARNING",
+          "field": "attributes",
+          "level": "ERROR_LEVEL_WARNING",
+          "state": "pending",
+          "texts": {
+            "attribute_name": "TEST ATTRIBUTE",
+            "description": "Sanitized description",
+            "hint_code": "TEST_HINT",
+            "message": "Sanitized message",
+            "params": [{ "name": "TEST_PARAM", "value": "TEST_VALUE" }],
+            "short_description": "Sanitized short description"
+          }
+        }
+      ],
+      "has_discounted_fbo_item": false,
+      "id": 500000001,
+      "images": ["https://example.invalid/product.jpg"],
+      "images360": ["https://example.invalid/product-360.jpg"],
+      "is_archived": false,
+      "is_autoarchived": false,
+      "is_discounted": false,
+      "is_kgt": false,
+      "is_prepayment_allowed": true,
+      "is_seasonal": true,
+      "is_super": false,
+      "min_price": "999.99",
+      "model_info": { "count": 1, "model_id": 700000001 },
+      "name": "TEST PRODUCT",
+      "offer_id": "TEST-OFFER-001",
+      "old_price": "1499.99",
+      "price": "1299.99",
+      "price_indexes": {
+        "color_index": "COLOR_INDEX_GREEN",
+        "external_index_data": {
+          "minimal_price": "1199.99",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 85
+        },
+        "ozon_index_data": {
+          "minimal_price": "1250.00",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 90
+        },
+        "self_marketplaces_index_data": {
+          "minimal_price": "1200.00",
+          "minimal_price_currency": "RUB",
+          "price_index_value": 88
+        }
+      },
+      "primary_image": ["https://example.invalid/product-main.jpg"],
+      "promotions": [{ "is_enabled": true, "type": "REVIEWS_PROMO" }],
+      "sku": 600000001,
+      "sources": [
+        {
+          "created_at": "2026-08-01T10:00:00Z",
+          "quant_code": "TEST-QUANT-001",
+          "shipment_type": "SHIPMENT_TYPE_GENERAL",
+          "sku": 600000001,
+          "source": "SDS"
+        }
+      ],
+      "statuses": {
+        "is_created": true,
+        "moderate_status": "approved",
+        "status": "active",
+        "status_description": "Sanitized status description",
+        "status_failed": "none",
+        "status_name": "TEST STATUS",
+        "status_tooltip": "Sanitized tooltip",
+        "status_updated_at": "2026-08-10T12:00:00Z",
+        "validation_status": "valid"
+      },
+      "stocks": {
+        "has_stock": true,
+        "stocks": [
+          {
+            "present": 50,
+            "reserved": 5,
+            "sku": 600000001,
+            "source": "TEST_SOURCE"
+          }
+        ]
+      },
+      "type_id": 100001,
+      "updated_at": "2026-08-14T12:00:00Z",
+      "vat": "0.2",
+      "visibility_details": { "has_price": true, "has_stock": true },
+      "volume_weight": 1.5
+    }
+  ]
+}

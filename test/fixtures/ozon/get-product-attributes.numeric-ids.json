@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "offer_id": "TEST-OFFER-001",
+      "sku": 600000001
+    }
+  ],
+  "total": 1,
+  "last_id": "TEST-CURSOR-001"
+}

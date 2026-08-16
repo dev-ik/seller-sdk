@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "barcode": "TEST-BARCODE-001",
+      "sku": 100000001.5
+    }
+  ]
+}

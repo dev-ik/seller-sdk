@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "offer_id": "TEST-OFFER-001",
+      "product_id": 100000001,
+      "quant_info": {
+        "quants": [
+          {
+            "barcodes_extended": [
+              {
+                "barcode": "TEST-BARCODE-001",
+                "error": "",
+                "status": "VALID"
+              }
+            ],
+            "dimensions": {
+              "depth": 100,
+              "height": 200,
+              "weight": 500,
+              "width": 150
+            },
+            "marketing_price": {
+              "price": "990.00",
+              "seller_price": "1000.00"
+            },
+            "min_price": "900.00",
+            "old_price": "1100.00",
+            "price": "1000.00",
+            "quant_code": "TEST-QUANT-001",
+            "quant_sice": 3,
+            "shipment_type": "FBO",
+            "sku": 100000002,
+            "statuses": {
+              "state_description": "Обезличенное описание",
+              "state_name": "Активен",
+              "state_sys_name": "ACTIVE",
+              "state_tooltip": "Обезличенная подсказка"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

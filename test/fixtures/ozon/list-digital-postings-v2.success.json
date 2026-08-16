@@ -1,0 +1,78 @@
+{
+  "cursor": "TEST-CURSOR-002",
+  "has_next": false,
+  "postings": [
+    {
+      "additional_data": [
+        {
+          "key": "test-key",
+          "value": "test-value"
+        }
+      ],
+      "analytics_data": {
+        "city": "Тестовый город",
+        "delivery_type": "PVZ",
+        "is_legal": false,
+        "is_premium": false,
+        "payment_type_group_name": "Тестовый способ оплаты",
+        "region": "Тестовый регион",
+        "warehouse_id": 100000001,
+        "warehouse_name": "TEST-WAREHOUSE"
+      },
+      "cancel_reason_id": 0,
+      "cancellation": {
+        "cancellation_initiator": "Клиент",
+        "cancellation_type": "client"
+      },
+      "created_at": "2026-08-14T09:00:00Z",
+      "external_order": {
+        "is_external": false,
+        "platform_name": ""
+      },
+      "financial_data": {
+        "cluster_from": "TEST-FROM",
+        "cluster_to": "TEST-TO",
+        "products": [
+          {
+            "actions": [],
+            "commission": {
+              "amount": 0,
+              "currency": "RUB",
+              "percent": 0
+            },
+            "old_price": 1461,
+            "payout": 0,
+            "price": 1461,
+            "product_id": 1624109204,
+            "total_discount_percent": 0,
+            "total_discount_value": 0
+          }
+        ]
+      },
+      "in_process_at": "2026-08-14T09:05:00Z",
+      "legal_info": {
+        "company_name": "TEST-COMPANY",
+        "inn": "TEST-INN",
+        "kpp": "TEST-KPP"
+      },
+      "order_id": 29137896277,
+      "order_number": "TEST-ORDER-002",
+      "posting_number": "TEST-POSTING-002",
+      "products": [
+        {
+          "name": "Тестовый цифровой товар",
+          "offer_id": "TEST-OFFER-002",
+          "price": {
+            "amount": "1461.00",
+            "currency": "RUB"
+          },
+          "quantity": 1,
+          "required_qty_for_digital_code": 1,
+          "sku": 1624109204
+        }
+      ],
+      "status": "awaiting_packaging",
+      "waiting_deadline_for_digital_code": "2026-08-15T09:00:00Z"
+    }
+  ]
+}

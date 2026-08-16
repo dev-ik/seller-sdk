@@ -1,0 +1,18 @@
+{
+  "invalid_postings": ["TEST-POSTING-INVALID"],
+  "issued_exemplars": [
+    {
+      "exemplar_id": 800000001,
+      "mandatory_marks": ["TEST-MARK-001"],
+      "posting_number": "TEST-POSTING-003",
+      "sku": 900000001
+    }
+  ],
+  "non_issued_exemplars": [
+    {
+      "exemplar_id": 800000002,
+      "posting_number": "TEST-POSTING-004",
+      "sku": 900000002
+    }
+  ]
+}

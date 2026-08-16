@@ -1,0 +1,13 @@
+{
+  "result": {
+    "items": [
+      {
+        "errors": [
+          {
+            "attribute_id": "invalid"
+          }
+        ]
+      }
+    ]
+  }
+}

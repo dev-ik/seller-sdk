@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "ads": 1.5,
+      "ads_cluster": 1.2,
+      "available_stock_count": 20,
+      "cluster_id": 1001,
+      "cluster_name": "Тестовый кластер",
+      "days_without_sales": 0,
+      "days_without_sales_cluster": 1,
+      "excess_stock_count": 0,
+      "expiring_stock_count": 0,
+      "idc": 18.5,
+      "idc_cluster": 16.5,
+      "item_tags": ["NOVEL"],
+      "macrolocal_cluster_id": 2001,
+      "name": "Тестовый товар",
+      "offer_id": "TEST-OFFER-001",
+      "other_stock_count": 1,
+      "placement_zone": ["SORT"],
+      "requested_stock_count": 3,
+      "return_from_customer_stock_count": 0,
+      "return_to_seller_stock_count": 0,
+      "sku": 100000001,
+      "stock_defect_stock_count": 0,
+      "transit_defect_stock_count": 0,
+      "transit_stock_count": 5,
+      "turnover_grade": "POPULAR",
+      "turnover_grade_cluster": "ACTUAL",
+      "valid_stock_count": 2,
+      "waiting_docs_stock_count": 0,
+      "waiting_docs_to_export_stock_count": 0,
+      "warehouse_id": 3001,
+      "warehouse_name": "Тестовый склад"
+    }
+  ]
+}

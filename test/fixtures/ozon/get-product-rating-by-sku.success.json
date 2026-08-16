@@ -1,0 +1,31 @@
+{
+  "products": [
+    {
+      "groups": [
+        {
+          "conditions": [
+            {
+              "cost": 50,
+              "description": "Sanitized rating condition",
+              "fulfilled": true,
+              "key": "media_images_2"
+            }
+          ],
+          "improve_at_least": 1,
+          "improve_attributes": [
+            {
+              "id": 85,
+              "name": "TEST ATTRIBUTE"
+            }
+          ],
+          "key": "media",
+          "name": "TEST GROUP",
+          "rating": 70,
+          "weight": 25
+        }
+      ],
+      "rating": 42.5,
+      "sku": 600000001
+    }
+  ]
+}

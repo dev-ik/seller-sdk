@@ -1,0 +1,10 @@
+{
+  "result": {
+    "products_info": [
+      {
+        "product_id": 500000001,
+        "strategy_id": "strategy-test-001"
+      }
+    ]
+  }
+}

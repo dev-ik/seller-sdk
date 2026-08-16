@@ -1,0 +1,16 @@
+export type OzonTransportLabelStatus = "SUCCESS" | "IN_PROGRESS" | "FAILED";
+export type OzonTransportLabelError =
+  | "INVALID_STATE"
+  | "OPERATION_NOT_FOUND"
+  | "OPERATION_FAILED"
+  | "SUPPLY_NOT_BELONG_CONTRACTOR"
+  | "SUPPLY_NOT_BELONG_COMPANY"
+  | "SUPPLY_IS_EMPTY"
+  | "CARGOES_NOT_FOUND";
+export type OzonTransportOrderLabelError =
+  | "ORDER_NOT_FOUND"
+  | "OPERATION_NOT_FOUND"
+  | "OPERATION_FAILED"
+  | "ALL_SUPPLIES_SKIPPED"
+  | "LABELS_COUNT_EXCEED"
+  | "UNDEFINED";

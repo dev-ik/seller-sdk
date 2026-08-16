@@ -1,0 +1,12 @@
+{
+  "products_placement": [
+    {
+      "placement_zone": "SORT",
+      "sku": 100000001
+    },
+    {
+      "placement_zone": "OVERSIZE",
+      "sku": 100000002
+    }
+  ]
+}

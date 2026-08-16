@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "product_id": 500000001,
+      "primary_photo": ["https://example.invalid/product-main.jpg"],
+      "photo": [
+        "https://example.invalid/product-photo-1.jpg",
+        "https://example.invalid/product-photo-2.jpg"
+      ],
+      "color_photo": ["https://example.invalid/product-color.jpg"],
+      "errors": [
+        {
+          "message": "Image validation failed",
+          "url": "https://example.invalid/product-broken.jpg"
+        }
+      ]
+    }
+  ]
+}

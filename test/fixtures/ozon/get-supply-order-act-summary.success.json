@@ -1,0 +1,41 @@
+{
+  "supplies_acts": [
+    {
+      "is_agreement_completed": false,
+      "supply_id": 100000001,
+      "supply_acts": [
+        {
+          "act_id": 200000001,
+          "act_number": "TEST-ACT-001",
+          "act_state": "AWAITING_APPROVAL_BY_SELLER",
+          "created_date": "2026-08-14",
+          "deadline_utc": "2026-08-20T10:00:00Z",
+          "type": "ACCEPTANCE",
+          "summary": {
+            "approved_amount": {
+              "amount": { "amount": "100.00", "currency": "RUB" },
+              "amount_vat": { "amount": "20.00", "currency": "RUB" },
+              "amount_without_vat": {
+                "amount": "80.00",
+                "currency": "RUB"
+              }
+            },
+            "approved_quantity": 1,
+            "declared_quantity": 2,
+            "fact_amount": {
+              "amount": { "amount": "100.00", "currency": "RUB" },
+              "amount_vat": { "amount": "20.00", "currency": "RUB" },
+              "amount_without_vat": {
+                "amount": "80.00",
+                "currency": "RUB"
+              }
+            },
+            "fact_quantity": 1,
+            "sku_quantity": 1,
+            "unidentified_quantity": 0
+          }
+        }
+      ]
+    }
+  ]
+}

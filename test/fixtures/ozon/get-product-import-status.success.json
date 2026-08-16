@@ -1,0 +1,29 @@
+{
+  "result": {
+    "items": [
+      {
+        "errors": [],
+        "offer_id": "TEST-OFFER-001",
+        "product_id": 500000001,
+        "status": "imported"
+      },
+      {
+        "errors": [
+          {
+            "attribute_id": 85,
+            "attribute_name": "TEST ATTRIBUTE",
+            "code": "TEST_ERROR",
+            "description": "Sanitized validation description",
+            "field": "attributes",
+            "level": "ERROR",
+            "message": "Sanitized validation message",
+            "state": "failed"
+          }
+        ],
+        "offer_id": "TEST-OFFER-002",
+        "status": "failed"
+      }
+    ],
+    "total": 2
+  }
+}

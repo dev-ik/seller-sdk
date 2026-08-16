@@ -1,0 +1,59 @@
+{
+  "name": "seller-sdk-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Рабочее пространство типобезопасных SDK для API маркетплейсов.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20.10"
+  },
+  "packageManager": "pnpm@10.34.0",
+  "workspaces": [
+    "packages/core",
+    "packages/ozon",
+    "packages/seller-sdk"
+  ],
+  "scripts": {
+    "build": "pnpm --filter @seller-sdk/ozon build && pnpm --filter seller-sdk build",
+    "format": "prettier --write \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
+    "format:check": "prettier --check \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
+    "lint": "eslint packages test test-d vitest.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.type-tests.json",
+    "test": "vitest run",
+    "test:consumer": "node scripts/consumer-smoke.mjs",
+    "update:endpoints": "node scripts/build-ozon-catalog.mjs",
+    "check:endpoints": "node scripts/build-ozon-catalog.mjs --check",
+    "update:domains": "node scripts/build-ozon-domains.mjs",
+    "check:domains": "node scripts/build-ozon-domains.mjs --check",
+    "update:values": "node scripts/build-ozon-values.mjs",
+    "check:values": "node scripts/build-ozon-values.mjs --check",
+    "update:request-docs": "node scripts/build-ozon-request-docs.mjs",
+    "check:request-docs": "node scripts/build-ozon-request-docs.mjs --check",
+    "update:docs": "pnpm update:domains && pnpm update:request-docs",
+    "check:docs": "pnpm check:domains && pnpm check:request-docs",
+    "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "pack:check": "node scripts/pack-check.mjs",
+    "check:release": "node scripts/check-release.mjs",
+    "release:check": "pnpm check:release && pnpm verify && pnpm pack:check && pnpm test:consumer",
+    "prepare:release": "pnpm release:check && node scripts/pack-release.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.17.0",
+    "@safe-shape/core": "^1.0.1",
+    "@types/node": "20.17.10",
+    "eslint": "9.17.0",
+    "prettier": "3.4.2",
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.18.2",
+    "vitest": "2.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-ik/seller-sdk.git"
+  },
+  "homepage": "https://github.com/dev-ik/seller-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/dev-ik/seller-sdk/issues"
+  }
+}

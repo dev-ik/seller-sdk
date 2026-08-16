@@ -1,0 +1,11 @@
+{
+  "result": {
+    "product_ids": [14975],
+    "rejected": [
+      {
+        "product_id": 14976,
+        "reason": "Synthetic rejection"
+      }
+    ]
+  }
+}

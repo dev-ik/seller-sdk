@@ -1,0 +1,16 @@
+{
+  "cursor": "next-test-cursor",
+  "products": [
+    {
+      "offer_id": "TEST-OFFER-001",
+      "product_id": 100000001,
+      "quants": [
+        {
+          "quant_code": "TEST-QUANT-001",
+          "quant_size": 3
+        }
+      ]
+    }
+  ],
+  "total_items": 1
+}

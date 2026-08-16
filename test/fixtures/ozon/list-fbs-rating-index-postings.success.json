@@ -1,0 +1,19 @@
+{
+  "cursor": "next-test-cursor",
+  "errors": [
+    {
+      "charge_percent": 5,
+      "charge_price": 25.5,
+      "charge_price_currency_code": "RUB",
+      "delivery_schema": "FBS",
+      "error_at": "2026-08-13T10:30:00Z",
+      "has_grace_status": false,
+      "index": 0.1,
+      "posting_error_type": "SELLER_DELAY",
+      "posting_number": "TEST-POSTING-001",
+      "product_price": 510,
+      "product_price_currency_code": "RUB"
+    }
+  ],
+  "has_next": true
+}

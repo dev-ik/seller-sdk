@@ -1,0 +1,17 @@
+{
+  "cursor": "TEST-PRODUCT-STOCKS-CURSOR-002",
+  "items": [
+    {
+      "offer_id": "TEST-OFFER-STOCK-001",
+      "product_id": 500000001,
+      "stocks": [
+        {
+          "present": 150,
+          "reserved": "not-an-integer",
+          "shipment_type": "SHIPMENT_TYPE_GENERAL"
+        }
+      ]
+    }
+  ],
+  "total": 1
+}

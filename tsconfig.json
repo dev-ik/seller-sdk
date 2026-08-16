@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "#internal-core": ["./packages/core/src/index.ts"],
+      "@seller-sdk/ozon": ["./packages/ozon/src/index.ts"],
+      "seller-sdk": ["./packages/seller-sdk/src/index.ts"]
+    },
+    "types": ["node", "vitest/globals"]
+  },
+  "include": [
+    "packages/**/*.ts",
+    "test/**/*.ts",
+    "test-d/**/*.ts",
+    "vitest.config.ts"
+  ],
+  "exclude": ["**/dist", "node_modules"]
+}

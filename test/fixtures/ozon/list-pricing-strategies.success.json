@@ -1,0 +1,15 @@
+{
+  "strategies": [
+    {
+      "id": "strategy-test-001",
+      "name": "Synthetic strategy",
+      "type": "COMPETITOR_BASED",
+      "update_type": "MANUAL",
+      "updated_at": "2026-08-14T12:00:00Z",
+      "products_count": 2,
+      "competitors_count": 1,
+      "enabled": true
+    }
+  ],
+  "total": 1
+}

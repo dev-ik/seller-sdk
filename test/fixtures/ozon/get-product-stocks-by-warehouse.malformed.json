@@ -1,0 +1,11 @@
+{
+  "cursor": "600000001",
+  "has_next": false,
+  "stocks": [
+    {
+      "product_id": 500000001,
+      "updated_at": "not-a-date",
+      "warehouse_id": 700000001
+    }
+  ]
+}

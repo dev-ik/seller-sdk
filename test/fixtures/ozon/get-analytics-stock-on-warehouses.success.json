@@ -1,0 +1,15 @@
+{
+  "result": {
+    "rows": [
+      {
+        "free_to_sell_amount": 12,
+        "item_code": "TEST-OFFER-001",
+        "item_name": "Тестовый товар",
+        "promised_amount": 4,
+        "reserved_amount": 2,
+        "sku": 100000001,
+        "warehouse_name": "Тестовый склад"
+      }
+    ]
+  }
+}

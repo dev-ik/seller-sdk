@@ -1,0 +1,27 @@
+{
+  "cursor": "TEST-PRODUCT-STOCKS-CURSOR-002",
+  "items": [
+    {
+      "offer_id": "TEST-OFFER-STOCK-001",
+      "product_id": 500000001,
+      "stocks": [
+        {
+          "present": 150,
+          "reserved": 25,
+          "shipment_type": "SHIPMENT_TYPE_GENERAL",
+          "sku": 600000001,
+          "type": "fbs",
+          "warehouse_ids": [700000001]
+        },
+        {
+          "present": 45,
+          "reserved": 5,
+          "shipment_type": "SHIPMENT_TYPE_BOX",
+          "sku": 600000001,
+          "type": "rfbs"
+        }
+      ]
+    }
+  ],
+  "total": 1
+}

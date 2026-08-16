@@ -1,0 +1,12 @@
+{
+  "result": {
+    "fail_details": [
+      {
+        "task_id": 1002,
+        "error_for_user": "Synthetic validation error"
+      }
+    ],
+    "success_count": 1,
+    "fail_count": 1
+  }
+}

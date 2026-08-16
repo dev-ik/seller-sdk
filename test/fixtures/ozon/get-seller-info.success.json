@@ -1,0 +1,46 @@
+{
+  "company": {
+    "country": "Test Country",
+    "currency": "RUB",
+    "inn": "0000000000",
+    "legal_name": "Test Legal Entity",
+    "name": "Test Seller",
+    "ogrn": "0000000000000",
+    "ownership_form": "Test Ownership",
+    "tax_system": "OSNO"
+  },
+  "ratings": [
+    {
+      "current_value": {
+        "date_from": "2026-01-01T00:00:00Z",
+        "date_to": "2026-01-31T23:59:59Z",
+        "formatted": "85",
+        "status": {
+          "danger": false,
+          "premium": true,
+          "warning": false
+        },
+        "value": 85
+      },
+      "name": "Test rating",
+      "past_value": {
+        "date_from": "2025-12-01T00:00:00Z",
+        "date_to": "2025-12-31T23:59:59Z",
+        "formatted": "78",
+        "status": {
+          "danger": false,
+          "premium": false,
+          "warning": true
+        },
+        "value": 78
+      },
+      "rating": "Test rating label",
+      "status": "OK",
+      "value_type": "INDEX"
+    }
+  ],
+  "subscription": {
+    "is_premium": true,
+    "type": "PREMIUM_PRO"
+  }
+}

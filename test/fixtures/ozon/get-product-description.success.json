@@ -1,0 +1,8 @@
+{
+  "result": {
+    "id": 500000001,
+    "offer_id": "TEST-OFFER-001",
+    "name": "TEST PRODUCT",
+    "description": "Sanitized product description."
+  }
+}

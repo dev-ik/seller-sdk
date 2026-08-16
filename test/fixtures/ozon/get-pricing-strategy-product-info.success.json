@@ -1,0 +1,10 @@
+{
+  "result": {
+    "strategy_id": "strategy-test-001",
+    "is_enabled": true,
+    "strategy_product_price": 1450,
+    "price_downloaded_at": "2026-08-14T12:00:00Z",
+    "strategy_competitor_id": 101,
+    "strategy_competitor_product_url": "https://example.invalid/product/test"
+  }
+}

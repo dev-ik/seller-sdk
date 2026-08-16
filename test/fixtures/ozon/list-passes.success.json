@@ -1,0 +1,17 @@
+{
+  "arrival_passes": [
+    {
+      "arrival_pass_id": 700000001,
+      "arrival_reasons": ["SYNTHETIC_REASON"],
+      "arrival_time": "2026-08-20T10:00:00Z",
+      "driver_name": "Test Driver",
+      "driver_phone": "+00000000000",
+      "dropoff_point_id": 800000001,
+      "is_active": true,
+      "vehicle_license_plate": "TEST-PLATE",
+      "vehicle_model": "Test Vehicle",
+      "warehouse_id": 900000001
+    }
+  ],
+  "cursor": "next-pass-page"
+}

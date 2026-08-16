@@ -1,0 +1,6 @@
+{
+  "cancellable": true,
+  "order_number": "TEST-ORDER-004",
+  "posting_groups": [{"posting_numbers":["TEST-POSTING-005"]}],
+  "postings": [{"cancellable":true,"posting_number":"TEST-POSTING-005","why_not_cancellable":""}]
+}

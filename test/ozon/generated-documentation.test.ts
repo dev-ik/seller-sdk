@@ -1,0 +1,77 @@
+import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, expect, it } from "vitest";
+import { ozonDomainAliases } from "../../packages/ozon/src/domain-methods.js";
+
+const projectDirectory = fileURLToPath(new URL("../..", import.meta.url));
+
+describe("generated Ozon documentation", () => {
+  it("documents every public domain method and reference entry", async () => {
+    const manifest = JSON.parse(
+      await readFile(
+        path.join(projectDirectory, "docs/ozon/endpoints.json"),
+        "utf8",
+      ),
+    ) as {
+      operations: readonly { sdkMethod: string; documentation: string }[];
+    };
+    const [domainApi, reference] = await Promise.all([
+      readFile(
+        path.join(
+          projectDirectory,
+          "packages/ozon/src/domain-api.generated.ts",
+        ),
+        "utf8",
+      ),
+      readFile(
+        path.join(projectDirectory, "docs/ozon/API-REFERENCE.md"),
+        "utf8",
+      ),
+    ]);
+
+    for (const operation of manifest.operations) {
+      expect(domainApi).toContain(`readonly ${operation.sdkMethod}:`);
+      expect(domainApi).toContain(
+        `@see [Ozon Seller API](${operation.documentation})`,
+      );
+      expect(reference).toContain(`### \`${operation.sdkMethod}\``);
+    }
+
+    const aliases = Object.values(ozonDomainAliases).flatMap((domainAliases) =>
+      Object.entries(domainAliases),
+    );
+    for (const [alias, versionedMethod] of aliases) {
+      expect(domainApi).toContain(`readonly ${alias}:`);
+      expect(reference).toContain(`\`${alias}\` → \`${versionedMethod}\``);
+    }
+
+    expect(domainApi.match(/@see \[Ozon Seller API\]/g)).toHaveLength(
+      manifest.operations.length + aliases.length,
+    );
+    expect(reference.match(/^### `/gm)).toHaveLength(
+      manifest.operations.length,
+    );
+  });
+
+  it("keeps OpenAPI descriptions on request fields", async () => {
+    const endpointDirectory = path.join(
+      projectDirectory,
+      "packages/ozon/src/endpoints",
+    );
+    const files = await readdir(endpointDirectory, { recursive: true });
+    const typeFiles = files.filter((fileName) => fileName.endsWith("types.ts"));
+    const sources = await Promise.all(
+      typeFiles.map((fileName) =>
+        readFile(path.join(endpointDirectory, fileName), "utf8"),
+      ),
+    );
+    const markerCount = sources.reduce(
+      (total, source) =>
+        total + (source.match(/seller-sdk:ozon-openapi/g)?.length ?? 0),
+      0,
+    );
+
+    expect(markerCount).toBeGreaterThanOrEqual(1_400);
+  });
+});

@@ -1,0 +1,8 @@
+{
+  "warehouses": [
+    {
+      "warehouse_id": 1000001,
+      "warehouse_type": "UNKNOWN_WAREHOUSE_TYPE"
+    }
+  ]
+}

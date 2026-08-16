@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "errors": [],
+      "offer_id": "TEST-OFFER-PRICE-001",
+      "product_id": 500000001,
+      "updated": true
+    },
+    {
+      "errors": [
+        {
+          "code": "action_price_enabled_min_price_missing",
+          "message": "Minimum price is required"
+        }
+      ],
+      "offer_id": "TEST-OFFER-PRICE-002",
+      "updated": false
+    }
+  ]
+}

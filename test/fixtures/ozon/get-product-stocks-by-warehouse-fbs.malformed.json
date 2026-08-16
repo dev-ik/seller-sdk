@@ -1,0 +1,9 @@
+{
+  "result": [
+    {
+      "offer_id": "TEST-OFFER-FBS-STOCK-001",
+      "present": "not-an-integer",
+      "warehouse_id": 700000001
+    }
+  ]
+}

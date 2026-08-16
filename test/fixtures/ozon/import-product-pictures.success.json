@@ -1,0 +1,20 @@
+{
+  "result": {
+    "pictures": [
+      {
+        "is_color": false,
+        "is_primary": true,
+        "product_id": 500000001,
+        "state": "uploaded",
+        "url": "https://example.invalid/product-main.png"
+      },
+      {
+        "is_color": true,
+        "is_primary": false,
+        "product_id": 500000001,
+        "state": "uploaded",
+        "url": "https://example.invalid/product-color.jpg"
+      }
+    ]
+  }
+}

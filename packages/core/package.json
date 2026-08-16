@@ -1,0 +1,19 @@
+{
+  "name": "@seller-sdk/internal-core",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Private shared source embedded into Seller SDK marketplace packages.",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.10"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-ik/seller-sdk.git",
+    "directory": "packages/core"
+  }
+}

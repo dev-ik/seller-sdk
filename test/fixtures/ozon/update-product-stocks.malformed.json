@@ -1,0 +1,10 @@
+{
+  "result": [
+    {
+      "warehouse_id": 700000001,
+      "offer_id": "TEST-OFFER-STOCK-001",
+      "updated": "true",
+      "errors": []
+    }
+  ]
+}

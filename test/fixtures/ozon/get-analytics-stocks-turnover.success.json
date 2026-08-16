@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "ads": 1.5,
+      "current_stock": 30,
+      "idc": 20,
+      "idc_grade": "GRADES_GREEN",
+      "name": "Тестовый товар",
+      "offer_id": "TEST-OFFER-001",
+      "sku": 100000001,
+      "turnover": 18.5,
+      "turnover_grade": "GRADES_GREEN"
+    }
+  ]
+}

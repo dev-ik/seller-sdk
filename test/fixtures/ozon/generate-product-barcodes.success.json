@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "barcode": "TEST-BARCODE-002",
+      "code": "TEST_ERROR",
+      "error": "Обезличенная ошибка элемента",
+      "product_id": 100000002
+    }
+  ]
+}

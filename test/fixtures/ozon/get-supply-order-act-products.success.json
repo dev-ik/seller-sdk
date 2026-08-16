@@ -1,0 +1,51 @@
+{
+  "skus_defects": [
+    {
+      "defect_reasons": ["TEST_DEFECT_REASON"],
+      "sku": 300000001
+    }
+  ],
+  "supply_acts": [
+    {
+      "act_id": 200000001,
+      "items": [
+        {
+          "approved_amount": {
+            "amount": { "amount": "120.00", "currency": "RUB" },
+            "amount_vat": { "amount": "20.00", "currency": "RUB" },
+            "amount_without_vat": {
+              "amount": "100.00",
+              "currency": "RUB"
+            }
+          },
+          "approved_quantity": 1,
+          "declared_quantity": 2,
+          "fact_amount": {
+            "amount": { "amount": "120.00", "currency": "RUB" },
+            "amount_vat": { "amount": "20.00", "currency": "RUB" },
+            "amount_without_vat": {
+              "amount": "100.00",
+              "currency": "RUB"
+            }
+          },
+          "fact_quantity": 1,
+          "sku_info": {
+            "barcode": "TEST-BARCODE-001",
+            "image_link": "https://example.invalid/product.png",
+            "name": "TEST PRODUCT",
+            "offer_id": "TEST-OFFER-001",
+            "price_without_vat": {
+              "amount": "100.00",
+              "currency": "RUB"
+            },
+            "sku": 300000001,
+            "vat": 20
+          }
+        }
+      ],
+      "type": "DEFECT",
+      "unidentified_quantity": 0
+    }
+  ],
+  "supply_id": 100000001
+}

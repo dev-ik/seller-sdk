@@ -1,0 +1,9 @@
+{
+  "expires_at": null,
+  "roles": [
+    {
+      "name": "Admin",
+      "methods": ["/v1/actions"]
+    }
+  ]
+}

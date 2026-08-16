@@ -1,0 +1,9 @@
+{
+  "expires_at": "not-a-date-time",
+  "roles": [
+    {
+      "name": "Admin",
+      "methods": [42]
+    }
+  ]
+}

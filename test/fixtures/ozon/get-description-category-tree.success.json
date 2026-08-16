@@ -1,0 +1,24 @@
+{
+  "result": [
+    {
+      "description_category_id": 100,
+      "category_name": "Test category",
+      "disabled": false,
+      "children": [
+        {
+          "description_category_id": 101,
+          "category_name": "Test subcategory",
+          "disabled": false,
+          "children": [
+            {
+              "type_id": 1001,
+              "type_name": "Test product type",
+              "disabled": false,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

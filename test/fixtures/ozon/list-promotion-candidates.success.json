@@ -1,0 +1,17 @@
+{
+  "result": {
+    "products": [
+      {
+        "id": 226,
+        "price": 250,
+        "action_price": 175,
+        "alert_max_action_price_failed": false,
+        "max_action_price": 175,
+        "add_mode": "NOT_SET",
+        "stock": 2
+      }
+    ],
+    "total": 1,
+    "last_id": 17
+  }
+}

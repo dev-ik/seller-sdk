@@ -1,0 +1,13 @@
+{
+  "products": [
+    {
+      "product_id": 100000001,
+      "quants": [
+        {
+          "quant_code": "TEST-QUANT-001",
+          "quant_size": 3.5
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "cursor": "600000001",
+  "has_next": true,
+  "stocks": [
+    {
+      "free_stock": 90,
+      "offer_id": "TEST-OFFER-STOCK-001",
+      "present": 100,
+      "product_id": 500000001,
+      "reserved": 10,
+      "sku": 600000001,
+      "updated_at": "2026-08-14T12:30:45.123Z",
+      "warehouse_id": 700000001
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "result": {
+    "brand_certification": [
+      {
+        "brand_name": "Test Brand",
+        "has_certificate": false
+      }
+    ],
+    "total": 1
+  }
+}

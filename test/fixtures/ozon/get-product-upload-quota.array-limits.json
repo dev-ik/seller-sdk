@@ -1,0 +1,8 @@
+{
+  "operation_limits": [
+    {
+      "limit": 100,
+      "limit_type": "RATE_LIMIT_PER_MINUTE"
+    }
+  ]
+}

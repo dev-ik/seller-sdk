@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "id": 85,
+      "attribute_complex_id": 0,
+      "name": "Тестовая характеристика",
+      "description": "Обезличенное описание характеристики",
+      "type": "String",
+      "is_collection": false,
+      "is_required": true,
+      "is_aspect": false,
+      "max_value_count": 1,
+      "group_name": "Общие",
+      "group_id": 1,
+      "dictionary_id": 1001,
+      "category_dependent": true,
+      "complex_is_collection": false
+    }
+  ]
+}

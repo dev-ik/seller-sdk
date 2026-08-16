@@ -1,0 +1,23 @@
+{
+  "result": {
+    "items": [
+      {
+        "archived": false,
+        "has_fbo_stocks": true,
+        "has_fbs_stocks": false,
+        "is_discounted": false,
+        "offer_id": "TEST-OFFER-001",
+        "product_id": 500000001,
+        "quants": [
+          {
+            "quant_code": "TEST-QUANT-001",
+            "quant_size": 2
+          }
+        ],
+        "sku": 600000001
+      }
+    ],
+    "last_id": "TEST-CURSOR-001",
+    "total": 1
+  }
+}

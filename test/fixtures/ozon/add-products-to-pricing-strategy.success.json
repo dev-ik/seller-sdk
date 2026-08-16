@@ -1,0 +1,12 @@
+{
+  "result": {
+    "errors": [
+      {
+        "code": "SYNTHETIC_ERROR",
+        "error": "Synthetic rejected product",
+        "product_id": 500000002
+      }
+    ],
+    "failed_product_count": 1
+  }
+}

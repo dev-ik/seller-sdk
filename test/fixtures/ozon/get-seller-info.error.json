@@ -1,0 +1,10 @@
+{
+  "code": 7,
+  "details": [
+    {
+      "typeUrl": "type.googleapis.com/sanitized.Error",
+      "value": "dGVzdA=="
+    }
+  ],
+  "message": "Sanitized API error"
+}

@@ -1,0 +1,41 @@
+name: Publish npm packages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: npm-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    environment: npm
+    env:
+      REQUIRE_RELEASE_TAG: "true"
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm prepare:release
+
+      - name: Publish focused Ozon package
+        run: npm publish "release-artifacts/seller-sdk-ozon-$(node -p \"require('./packages/ozon/package.json').version\").tgz" --access public
+
+      - name: Publish umbrella package
+        run: npm publish "release-artifacts/seller-sdk-$(node -p \"require('./packages/seller-sdk/package.json').version\").tgz" --access public

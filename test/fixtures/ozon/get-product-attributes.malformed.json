@@ -1,0 +1,15 @@
+{
+  "result": [
+    {
+      "complex_attributes": [
+        {
+          "values": [
+            {
+              "dictionaryValueId": "not-an-integer"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

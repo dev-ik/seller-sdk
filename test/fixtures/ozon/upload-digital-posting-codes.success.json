@@ -1,0 +1,15 @@
+{
+  "exemplars_by_sku": [
+    {
+      "failed_exemplars": [
+        {
+          "key": "TEST-CODE-REJECTED",
+          "message": "Некорректный формат кода"
+        }
+      ],
+      "received_qty": 2,
+      "rejected_qty": 1,
+      "sku": 6605735423
+    }
+  ]
+}

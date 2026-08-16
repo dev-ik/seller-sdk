@@ -1,0 +1,31 @@
+{
+  "groups": [
+    {
+      "group_name": "Качество сервиса",
+      "items": [
+        {
+          "change": {
+            "direction": "DIRECTION_RISE",
+            "meaning": "MEANING_GOOD"
+          },
+          "current_value": 98.5,
+          "name": "Тестовый рейтинг",
+          "past_value": 97.2,
+          "rating": "rating_test",
+          "rating_direction": "HIGHER_IS_BETTER",
+          "status": "OK",
+          "value_type": "PERCENT"
+        }
+      ]
+    }
+  ],
+  "localization_index": [
+    {
+      "calculation_date": "2026-08-14T00:00:00Z",
+      "localization_percentage": 75
+    }
+  ],
+  "penalty_score_exceeded": false,
+  "premium": true,
+  "premium_plus": false
+}

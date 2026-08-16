@@ -1,0 +1,8 @@
+{
+  "items": [
+    {
+      "product_id": "not-an-integer",
+      "primary_photo": ["https://example.invalid/product-main.jpg"]
+    }
+  ]
+}

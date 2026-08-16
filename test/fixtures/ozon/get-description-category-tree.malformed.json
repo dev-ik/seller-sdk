@@ -1,0 +1,12 @@
+{
+  "result": [
+    {
+      "description_category_id": 100.5,
+      "children": [
+        {
+          "type_id": "1001"
+        }
+      ]
+    }
+  ]
+}

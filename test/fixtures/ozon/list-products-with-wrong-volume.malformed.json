@@ -1,0 +1,9 @@
+{
+  "cursor": "TEST-WRONG-VOLUME-CURSOR-002",
+  "products": [
+    {
+      "product_id": 500000001,
+      "width": "not-an-integer"
+    }
+  ]
+}

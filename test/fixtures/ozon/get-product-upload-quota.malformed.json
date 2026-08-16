@@ -1,0 +1,6 @@
+{
+  "operation_limits": {
+    "limit": 100,
+    "limit_type": "PER_SECOND"
+  }
+}

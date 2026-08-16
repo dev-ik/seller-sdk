@@ -1,0 +1,44 @@
+{
+  "cursor": "next-price-page",
+  "items": [
+    {
+      "product_id": 500000001,
+      "offer_id": "TEST-PRICE-001",
+      "price": {
+        "price": 2999.99,
+        "old_price": 3499.99,
+        "min_price": 2799.99,
+        "currency_code": "RUB",
+        "vat": 0.2,
+        "auto_action_enabled": true
+      },
+      "commissions": {
+        "sales_percent_fbo": 15,
+        "fbs_deliv_to_customer_amount": 60
+      },
+      "price_indexes": {
+        "color_index": "GREEN",
+        "ozon_index_data": {
+          "min_price": 2899.99,
+          "min_price_currency": "RUB",
+          "price_index_value": 0.95
+        }
+      },
+      "marketing_actions": {
+        "ozon_actions_exist": true,
+        "current_period_from": "2026-08-01T00:00:00Z",
+        "actions": [
+          {
+            "title": "Test action",
+            "value": 15,
+            "date_from": "2026-08-01T00:00:00Z",
+            "date_to": "2026-08-31T23:59:59Z"
+          }
+        ]
+      },
+      "acquiring": 1.5,
+      "volume_weight": 0.5
+    }
+  ],
+  "total": 1
+}

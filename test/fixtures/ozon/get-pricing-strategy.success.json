@@ -1,0 +1,14 @@
+{
+  "result": {
+    "competitors": [
+      {
+        "coefficient": 0.95,
+        "competitor_id": 101
+      }
+    ],
+    "enabled": true,
+    "name": "Synthetic strategy",
+    "type": "COMPETITOR_BASED",
+    "update_type": "MANUAL"
+  }
+}

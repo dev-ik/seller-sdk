@@ -1,0 +1,67 @@
+{
+  "result": [
+    {
+      "attributes": [
+        {
+          "id": 85,
+          "complex_id": 0,
+          "values": [
+            {
+              "dictionary_value_id": 970000001,
+              "value": "TEST-BRAND"
+            }
+          ]
+        }
+      ],
+      "attributes_with_defaults": [5435, 3452],
+      "barcode": "TEST-BARCODE-001",
+      "barcodes": ["TEST-BARCODE-001", "TEST-BARCODE-002"],
+      "description_category_id": 71100001,
+      "color_image": "https://example.invalid/color.png",
+      "complex_attributes": [
+        {
+          "id": 12001,
+          "complex_id": 13001,
+          "values": [
+            {
+              "dictionaryValueId": 970000002,
+              "value": "TEST-VALUE"
+            }
+          ]
+        }
+      ],
+      "depth": 210,
+      "dimension_unit": "mm",
+      "height": 10,
+      "id": 500000001,
+      "images": [
+        "https://example.invalid/product.png",
+        {
+          "default": false,
+          "file_name": "https://example.invalid/product-secondary.png",
+          "index": 1
+        }
+      ],
+      "model_info": {
+        "model_id": 43000001,
+        "count": 4
+      },
+      "name": "TEST PRODUCT",
+      "offer_id": "TEST-OFFER-001",
+      "pdf_list": [
+        {
+          "file_name": "https://example.invalid/manual.pdf",
+          "name": "TEST MANUAL"
+        }
+      ],
+      "primary_image": "https://example.invalid/product.png",
+      "sku": "600000001",
+      "type_id": 12400001,
+      "weight": 50,
+      "weight_unit": "g",
+      "width": 140
+    }
+  ],
+  "total": "1",
+  "last_id": "TEST-CURSOR-001"
+}

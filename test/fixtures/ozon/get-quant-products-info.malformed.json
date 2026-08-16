@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "quant_info": {
+        "quants": [
+          {
+            "quant_code": "TEST-QUANT-001",
+            "quant_sice": "3"
+          }
+        ]
+      }
+    }
+  ]
+}

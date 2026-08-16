@@ -1,0 +1,14 @@
+{
+  "status": [
+    {
+      "offer_id": "TEST-OFFER-DELETABLE",
+      "is_deleted": true,
+      "error": ""
+    },
+    {
+      "offer_id": "TEST-OFFER-WITH-SKU",
+      "is_deleted": false,
+      "error": "Sanitized product cannot be deleted."
+    }
+  ]
+}

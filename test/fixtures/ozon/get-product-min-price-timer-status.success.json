@@ -1,0 +1,14 @@
+{
+  "statuses": [
+    {
+      "expired_at": "2026-09-13T12:00:00Z",
+      "min_price_for_auto_actions_enabled": true,
+      "product_id": 500000001
+    },
+    {
+      "expired_at": "",
+      "min_price_for_auto_actions_enabled": false,
+      "product_id": 500000002
+    }
+  ]
+}

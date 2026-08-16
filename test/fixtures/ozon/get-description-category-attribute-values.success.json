@@ -1,0 +1,11 @@
+{
+  "has_next": true,
+  "result": [
+    {
+      "id": 10001,
+      "value": "Тестовое значение",
+      "info": "Обезличенная дополнительная информация",
+      "picture": "https://example.test/value.png"
+    }
+  ]
+}

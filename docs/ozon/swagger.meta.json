@@ -1,0 +1,11 @@
+{
+  "source": "https://docs.ozon.ru/api/seller/swagger.json",
+  "retrievedAt": "2026-08-14",
+  "sha256": "56e0ff0c64710918107ab83b574d209762fc559dbc9c80198ae31708b3881830",
+  "bytes": 3913746,
+  "openapiVersion": "3.0.0",
+  "documentVersion": "2.1",
+  "paths": 461,
+  "operations": 461,
+  "schemas": 2132
+}

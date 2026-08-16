@@ -1,0 +1,19 @@
+{
+  "company": {
+    "tax_system": "ОСНО"
+  },
+  "ratings": [
+    {
+      "current_value": {
+        "date_from": "not-a-date",
+        "value": "85"
+      },
+      "status": "Активно",
+      "value_type": "Количественный"
+    }
+  ],
+  "subscription": {
+    "is_premium": "yes",
+    "type": "Профессиональный"
+  }
+}

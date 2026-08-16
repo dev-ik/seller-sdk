@@ -1,0 +1,11 @@
+{
+  "cursor": "TEST-CURSOR-002",
+  "postings": [
+    {
+      "analytics_data": {
+        "warehouse_id": "not-a-number"
+      },
+      "posting_number": "TEST-POSTING-002"
+    }
+  ]
+}

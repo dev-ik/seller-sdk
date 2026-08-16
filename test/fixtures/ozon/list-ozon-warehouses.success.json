@@ -1,0 +1,19 @@
+{
+  "warehouses": [
+    {
+      "warehouse_id": 1000001,
+      "name": "Тестовый склад",
+      "short_name": "TEST-FBO",
+      "address": "Обезличенный адрес",
+      "timezone": "Asia/Yekaterinburg",
+      "is_active": true,
+      "warehouse_type": "FULL_FILLMENT",
+      "country_iso_numeric": 643,
+      "is_cross_dock": false,
+      "is_distribution_center": false,
+      "is_edo": true,
+      "is_express": false,
+      "is_for_supply": true
+    }
+  ]
+}

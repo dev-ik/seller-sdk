@@ -1,0 +1,20 @@
+{
+  "daily_create": {
+    "limit": 1000,
+    "reset_at": "2026-08-15T00:00:00Z",
+    "usage": 125
+  },
+  "daily_update": {
+    "limit": -1,
+    "reset_at": "2026-08-15T00:00:00Z",
+    "usage": 430
+  },
+  "operation_limits": {
+    "limit": 100,
+    "limit_type": "RATE_LIMIT_PER_MINUTE"
+  },
+  "total": {
+    "limit": 50000,
+    "usage": 12500
+  }
+}

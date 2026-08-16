@@ -1,0 +1,10 @@
+{
+  "cursor": "",
+  "errors": [
+    {
+      "posting_error_type": "UNKNOWN_ERROR",
+      "posting_number": "TEST-POSTING-001"
+    }
+  ],
+  "has_next": false
+}

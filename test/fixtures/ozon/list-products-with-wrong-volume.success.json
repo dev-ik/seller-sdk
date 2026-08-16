@@ -1,0 +1,15 @@
+{
+  "cursor": "TEST-WRONG-VOLUME-CURSOR-002",
+  "products": [
+    {
+      "height": 120,
+      "length": 300,
+      "name": "Test product",
+      "offer_id": "TEST-OFFER-WRONG-VOLUME-001",
+      "product_id": 500000001,
+      "sku": 600000001,
+      "weight": 750,
+      "width": 200
+    }
+  ]
+}

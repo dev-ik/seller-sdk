@@ -1,0 +1,10 @@
+{
+  "errors": [
+    {
+      "barcode": "TEST-BARCODE-001",
+      "code": "TEST_ERROR",
+      "error": "Обезличенная ошибка элемента",
+      "sku": 100000001
+    }
+  ]
+}
