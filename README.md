@@ -1,8 +1,20 @@
-# Seller SDK
+<p align="center">
+  <img src="./docs/assets/seller-sdk-mark.svg" width="96" height="96" alt="Логотип Seller SDK">
+</p>
 
-> Типобезопасные TypeScript-клиенты для Seller API российских маркетплейсов.
+<h1 align="center">Seller SDK</h1>
 
-[![CI](https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml)
+<p align="center">
+  <strong>Типобезопасные TypeScript-клиенты для Seller API российских маркетплейсов.</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/dev-ik/seller-sdk/ci.yml?branch=main&amp;style=flat-square&amp;label=CI&amp;logo=github" alt="Статус CI"></a>
+  <a href="./docs/ozon/API-REFERENCE.md"><img src="https://img.shields.io/badge/Ozon_Seller_API-461_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-005BFF?style=flat-square" alt="Ozon Seller API: 461 операция"></a>
+  <a href="./package.json"><img src="https://img.shields.io/badge/Node.js-%E2%89%A520.10-339933?style=flat-square&amp;logo=nodedotjs&amp;logoColor=white" alt="Node.js 20.10 или новее"></a>
+  <a href="./tsconfig.base.json"><img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white" alt="TypeScript strict"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2E3440?style=flat-square" alt="Лицензия MIT"></a>
+</p>
 
 Первый релиз поддерживает Ozon Seller API. Вы можете установить только Ozon
 без лишних реализаций или использовать общий пакет для всех поддерживаемых

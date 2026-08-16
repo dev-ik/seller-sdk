@@ -6,6 +6,7 @@ import ts from "typescript";
 
 const projectDirectory = fileURLToPath(new URL("../", import.meta.url));
 const tsconfigPath = path.join(projectDirectory, "tsconfig.json");
+const specificationPath = path.join(projectDirectory, "docs/ozon/swagger.json");
 const outputPath = path.join(projectDirectory, "packages/ozon/src/values.ts");
 const checkOnly = process.argv.includes("--check");
 
@@ -23,7 +24,12 @@ if (parsedConfig.errors.length > 0) {
 
 const program = ts.createProgram(parsedConfig.fileNames, parsedConfig.options);
 const checker = program.getTypeChecker();
-const valueSets = collectValueSets(program, checker);
+const specification = JSON.parse(await readFile(specificationPath, "utf8"));
+const enumDescriptions = collectEnumDescriptions(specification);
+const valueSets = applyEnumDescriptions(
+  collectValueSets(program, checker),
+  enumDescriptions,
+);
 const generatedText = await format(renderValues(valueSets), {
   parser: "typescript",
 });
@@ -37,7 +43,137 @@ if (checkOnly) {
   }
 } else {
   await writeFile(outputPath, generatedText, "utf8");
-  console.log(`Generated ${valueSets.length} Ozon value sets.`);
+  const documentedValueCount = valueSets.reduce(
+    (total, valueSet) =>
+      total +
+      valueSet.properties.filter(({ description }) => description).length,
+    0,
+  );
+  console.log(
+    `Generated ${valueSets.length} Ozon value sets with ${documentedValueCount} documented values.`,
+  );
+}
+
+function collectEnumDescriptions(root) {
+  const candidatesBySet = new Map();
+
+  visit(root);
+
+  const resolvedBySet = new Map();
+  for (const [key, candidates] of candidatesBySet) {
+    const values = key.split("\u0000");
+    const resolved = new Map();
+
+    for (const value of values) {
+      const descriptions = new Set(
+        candidates.map((candidate) => candidate.get(value)).filter(Boolean),
+      );
+      if (descriptions.size === 1) {
+        resolved.set(value, descriptions.values().next().value);
+      }
+    }
+
+    if (resolved.size > 0) resolvedBySet.set(key, resolved);
+  }
+
+  return resolvedBySet;
+
+  function visit(value) {
+    if (!value || typeof value !== "object") return;
+
+    if (
+      Array.isArray(value.enum) &&
+      value.enum.length >= 2 &&
+      value.enum.every((enumValue) => typeof enumValue === "string") &&
+      typeof value.description === "string"
+    ) {
+      const descriptions = extractEnumValueDescriptions(
+        value.description,
+        value.enum,
+      );
+      if (descriptions.size > 0) {
+        const key = setKey(value.enum);
+        candidatesBySet.set(key, [
+          ...(candidatesBySet.get(key) ?? []),
+          descriptions,
+        ]);
+      }
+    }
+
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+
+    for (const child of Object.values(value)) visit(child);
+  }
+}
+
+function extractEnumValueDescriptions(description, values) {
+  const occurrences = [];
+
+  for (const value of values) {
+    const token = `\`${value}\``;
+    let searchFrom = 0;
+    while (searchFrom < description.length) {
+      const index = description.indexOf(token, searchFrom);
+      if (index === -1) break;
+      const suffix = description.slice(index + token.length);
+      if (/^\s*(?:—|–|-)\s*/u.test(suffix)) {
+        occurrences.push({ index, token, value });
+        break;
+      }
+      searchFrom = index + token.length;
+    }
+  }
+
+  occurrences.sort((left, right) => left.index - right.index);
+  const output = new Map();
+
+  for (const [index, occurrence] of occurrences.entries()) {
+    const next = occurrences[index + 1];
+    let text = description.slice(
+      occurrence.index + occurrence.token.length,
+      next?.index ?? description.length,
+    );
+    text = text.split(/\n\s*\n/u, 1)[0];
+    text = text
+      .replace(/^\s*(?:—|–|-)\s*/u, "")
+      .replace(/\s+/gu, " ")
+      .replace(/[,;.]?\s*[-*]\s*$/u, "")
+      .replace(/[,;]\s*$/u, "")
+      .trim();
+
+    if (!text || text.length > 300 || /<\/?[a-z][^>]*>/iu.test(text)) {
+      continue;
+    }
+
+    text = capitalize(text).replaceAll("*/", "* /");
+    if (!/[.!?)]$/u.test(text)) text += ".";
+    output.set(occurrence.value, text);
+  }
+
+  return output;
+}
+
+function capitalize(value) {
+  const [first, ...rest] = [...value];
+  return first ? first.toLocaleUpperCase("ru-RU") + rest.join("") : value;
+}
+
+function applyEnumDescriptions(valueSets, descriptionsBySet) {
+  return valueSets.map((valueSet) => {
+    const descriptions = descriptionsBySet.get(
+      setKey(valueSet.properties.map(({ value }) => value)),
+    );
+    return {
+      ...valueSet,
+      properties: valueSet.properties.map((property) => ({
+        ...property,
+        description: descriptions?.get(property.value),
+      })),
+    };
+  });
 }
 
 function collectValueSets(currentProgram, currentChecker) {
@@ -141,18 +277,21 @@ function mergeRecords(name, records) {
 function renderValues(valueSets) {
   const lines = [
     "/**",
-    " * Generated from closed string union types in Ozon endpoint contracts.",
-    " * Run `pnpm update:values` after changing those contracts.",
+    " * Сгенерировано из закрытых строковых union-типов контрактов Ozon.",
+    " * После изменения контрактов выполните `pnpm update:values`.",
     " */",
     "export const OzonValues = {",
   ];
 
   for (const { name, typeNames, properties } of valueSets) {
     lines.push(
-      `  /** Values accepted by ${typeNames.map((typeName) => `\`${typeName}\``).join(", ")}. */`,
+      `  /** Значения для ${typeNames.map((typeName) => `\`${typeName}\``).join(", ")}. */`,
     );
     lines.push(`  ${name}: {`);
     for (const property of properties) {
+      if (property.description) {
+        lines.push(`    /** ${property.description} */`);
+      }
       lines.push(`    ${property.name}: ${JSON.stringify(property.value)},`);
     }
     lines.push("  },");

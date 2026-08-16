@@ -74,4 +74,19 @@ describe("generated Ozon documentation", () => {
 
     expect(markerCount).toBeGreaterThanOrEqual(1_400);
   });
+
+  it("keeps unambiguous OpenAPI enum descriptions on OzonValues", async () => {
+    const values = await readFile(
+      path.join(projectDirectory, "packages/ozon/src/values.ts"),
+      "utf8",
+    );
+
+    expect(values).toContain("/** Все товары, кроме архивных. */");
+    expect(values).toContain('All: "ALL"');
+    expect(values).toContain("/** Товары, которые видны покупателям. */");
+    expect(values).toContain('Visible: "VISIBLE"');
+
+    const documentedProperties = values.match(/^ {4}\/\*\* .* \*\/$/gm);
+    expect(documentedProperties?.length).toBeGreaterThanOrEqual(800);
+  });
 });

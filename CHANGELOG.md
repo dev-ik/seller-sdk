@@ -4,6 +4,13 @@
 
 Формат основан на Keep a Changelog, версии следуют Semantic Versioning.
 
+## Не выпущено
+
+### Улучшено
+
+- Добавлены генерируемые из Ozon Swagger пояснения значений `OzonValues` в
+  IntelliSense.
+
 ## 0.1.0 — 2026-08-16
 
 ### Добавлено

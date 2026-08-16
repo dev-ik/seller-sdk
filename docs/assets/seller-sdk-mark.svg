@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="112" viewBox="0 0 112 112" fill="none">
+  <title>Seller SDK</title>
+  <rect x="2" y="2" width="108" height="108" rx="28" fill="#20242C"/>
+  <rect x="2" y="2" width="108" height="108" rx="28" stroke="#303641" stroke-width="4"/>
+  <path d="M27 39L56 24L85 39L56 55L27 39Z" fill="#FF8A78"/>
+  <path d="M27 39V72L56 88V55L27 39Z" fill="#DE6556"/>
+  <path d="M85 39V72L56 88V55L85 39Z" fill="#F47A68"/>
+  <path d="M47 29L75 44L65 49L37 34L47 29Z" fill="#FFB0A4"/>
+  <path d="M43 60L37 66L43 72M69 60L75 66L69 72M60 58L52 74" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
