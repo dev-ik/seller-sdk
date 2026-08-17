@@ -1,0 +1,20 @@
+{
+  "source": "https://dev.wildberries.ru/docs/openapi/api-information",
+  "format": "OpenAPI 3.0 YAML",
+  "verifiedAt": "2026-08-17",
+  "files": [
+    "01-general.yaml",
+    "02-items.yaml",
+    "03-orders-fbs.yaml",
+    "04-orders-dbw.yaml",
+    "05-dbs.yaml",
+    "06-in-store-pickup.yaml",
+    "07-orders-fbw.yaml",
+    "08-promotion.yaml",
+    "09-communications.yaml",
+    "10-rates.yaml",
+    "11-analytics.yaml",
+    "12-reports.yaml",
+    "13-finances.yaml"
+  ]
+}

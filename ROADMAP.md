@@ -33,6 +33,13 @@
 
 ## Второй маркетплейс
 
-Следующая площадка получает отдельный пакет и запись в `MarketplaceRegistry`.
-Она не должна увеличивать зависимости `@seller-sdk/ozon` или заставлять общий
-клиент выдумывать универсальную бизнес-модель.
+Готово:
+
+- [x] самостоятельный `@seller-sdk/wb`;
+- [x] 286 операций из 13 официальных OpenAPI-файлов;
+- [x] typed registry с `Marketplace.Wb` и литералом `"wb"`;
+- [x] SafeShape runtime contracts и binary responses;
+- [x] фиксированные production/sandbox origin;
+- [x] umbrella-интеграция без универсальной бизнес-модели.
+
+Перед публикацией нужно настроить Trusted Publisher для `@seller-sdk/wb`.

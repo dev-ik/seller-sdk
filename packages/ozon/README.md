@@ -2,8 +2,7 @@
 
 > Типобезопасный серверный SDK для Ozon Seller API.
 
-Пакет устанавливается отдельно и не зависит от `seller-sdk` или будущих
-реализаций других маркетплейсов.
+Пакет устанавливается отдельно и содержит только реализацию Ozon Seller API.
 
 ## Установка
 
@@ -138,24 +137,17 @@ for await (const page of ozon.postings.fbs.listPages(input)) {
 ## Ошибки
 
 ```ts
-import { ApiError } from "@seller-sdk/ozon";
+import { toSellerSdkErrorDetails } from "@seller-sdk/ozon";
 
 try {
   await ozon.products.list({ filter: {}, limit: 100 });
 } catch (error) {
-  if (error instanceof ApiError) {
-    console.error(
-      error.status,
-      error.apiCode,
-      error.apiMessage,
-      error.requestId,
-    );
-  }
+  console.error(toSellerSdkErrorDetails(error));
 }
 ```
 
-В ошибки не попадают credentials, authorization headers и необработанные тела
-ответов.
+В нормализованный объект не попадают stack, cause, credentials, authorization
+headers и необработанные тела ответов.
 
 ## Новый метод Ozon до обновления SDK
 

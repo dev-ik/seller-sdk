@@ -2,8 +2,8 @@
 
 > Единая типобезопасная точка входа для Seller API поддерживаемых маркетплейсов.
 
-В версии `0.1.0` доступен Ozon. Если приложению нужен только Ozon, установите
-более узкий пакет `@seller-sdk/ozon`.
+Доступны Ozon и Wildberries. Если приложению нужна одна площадка, установите
+focused package `@seller-sdk/ozon` или `@seller-sdk/wb`.
 
 ## Установка
 
@@ -48,6 +48,17 @@ new SellerClient({
 });
 ```
 
+Wildberries выбирается тем же типизированным registry:
+
+```ts
+const wbSeller = new SellerClient({
+  marketplace: Marketplace.Wb,
+  credentials: { token: process.env.WB_API_TOKEN! },
+});
+
+await wbSeller.wb.general.getPing();
+```
+
 Неизвестное имя маркетплейса отклоняется TypeScript и runtime-валидацией.
 `SellerClient` выбирает конкретный SDK, но не превращает разные маркетплейсы в
 искусственную универсальную модель.
@@ -55,7 +66,8 @@ new SellerClient({
 ## Выбор пакета
 
 - `seller-sdk` — единый пакет для приложения с несколькими маркетплейсами;
-- `@seller-sdk/ozon` — только Ozon, без будущих реализаций других площадок.
+- `@seller-sdk/ozon` — только Ozon;
+- `@seller-sdk/wb` — только Wildberries.
 
 Устанавливать оба пакета одновременно не требуется.
 

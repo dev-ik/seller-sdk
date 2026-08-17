@@ -2,10 +2,11 @@
 
 ## Границы продукта
 
-Публикуются два пакета:
+Публикуются три пакета:
 
 ```text
 @seller-sdk/ozon
+@seller-sdk/wb
 seller-sdk
 ```
 
@@ -15,6 +16,7 @@ seller-sdk
 packages/
 ├── core/        # приватный общий исходный код
 ├── ozon/        # самостоятельный пакет Ozon
+├── wb/          # самостоятельный пакет Wildberries
 └── seller-sdk/  # общий пакет
 ```
 
@@ -26,13 +28,18 @@ packages/
 
 ```text
 seller-sdk
-    └── @seller-sdk/ozon
+    ├── @seller-sdk/ozon
+    └── @seller-sdk/wb
 
 @seller-sdk/ozon
     └── @safe-shape/core
 
+@seller-sdk/wb
+    └── @safe-shape/core
+
 packages/core
-    └── компилируется в @seller-sdk/ozon/dist/internal/core
+    ├── компилируется в @seller-sdk/ozon/dist/internal/core
+    └── компилируется в @seller-sdk/wb/dist/internal/core
 ```
 
 Marketplace-пакеты не должны зависеть друг от друга.
@@ -133,3 +140,10 @@ cancellation и retry. Transport всегда имеет последнее сл
 Новая площадка получает отдельный пакет, например `@seller-sdk/wb`, и запись в
 типизированном registry общего пакета. Добавление площадки не должно менять
 зависимости уже опубликованного `@seller-sdk/ozon`.
+
+## Wildberries
+
+`@seller-sdk/wb` генерируется из 13 файлов `docs/wb/swagger/*.yaml`. Публичные
+области соответствуют официальным разделам WB. Каждая операция закреплена за
+конкретным production origin и, когда он документирован, sandbox origin.
+Токен никогда не отправляется на произвольный host.

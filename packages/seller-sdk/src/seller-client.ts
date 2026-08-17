@@ -11,7 +11,13 @@ import {
   type OzonCredentials,
   type ValidationIssue,
 } from "@seller-sdk/ozon";
-import { Marketplace, type SellerClientOptions } from "./marketplace.js";
+import { WbClient, type WbCredentials } from "@seller-sdk/wb";
+import {
+  Marketplace,
+  type Marketplace as MarketplaceName,
+  type MarketplaceRegistry,
+  type SellerClientOptions,
+} from "./marketplace.js";
 
 const nonEmptyString = string().refine((value) => value.trim().length > 0, {
   message: "Expected a non-empty credential string.",
@@ -23,19 +29,47 @@ const ozonCredentialsSchema: Schema<OzonCredentials> = object({
   apiKey: nonEmptyString,
 });
 
-const sellerClientOptionsSchema: Schema<SellerClientOptions> = object({
+const wbCredentialsSchema: Schema<WbCredentials> = object({
+  token: nonEmptyString,
+});
+
+const ozonSellerClientOptionsSchema = object({
   marketplace: literal(Marketplace.Ozon),
   credentials: ozonCredentialsSchema,
 });
 
-export class SellerClient {
-  readonly marketplace: typeof Marketplace.Ozon;
-  readonly ozon: OzonClient;
+const wbSellerClientOptionsSchema = object({
+  marketplace: literal(Marketplace.Wb),
+  credentials: wbCredentialsSchema,
+});
 
-  constructor(options: SellerClientOptions) {
+export class SellerClient<const M extends MarketplaceName = MarketplaceName> {
+  readonly marketplace: M;
+  readonly client: MarketplaceRegistry[M]["client"];
+  declare readonly ozon: M extends typeof Marketplace.Ozon
+    ? OzonClient
+    : undefined;
+  declare readonly wb: M extends typeof Marketplace.Wb ? WbClient : undefined;
+
+  constructor(options: SellerClientOptions<M>) {
     const parsedOptions = parseSellerClientOptions(options);
-    this.marketplace = parsedOptions.marketplace;
-    this.ozon = new OzonClient(parsedOptions.credentials, parsedOptions.config);
+    this.marketplace = parsedOptions.marketplace as M;
+
+    const client =
+      parsedOptions.marketplace === Marketplace.Ozon
+        ? new OzonClient(parsedOptions.credentials, parsedOptions.config)
+        : new WbClient(parsedOptions.credentials, parsedOptions.config);
+    this.client = client as MarketplaceRegistry[M]["client"];
+    Object.defineProperties(this, {
+      ozon: {
+        value:
+          parsedOptions.marketplace === Marketplace.Ozon ? client : undefined,
+      },
+      wb: {
+        value:
+          parsedOptions.marketplace === Marketplace.Wb ? client : undefined,
+      },
+    });
   }
 }
 
@@ -44,7 +78,11 @@ function parseSellerClientOptions(input: unknown): SellerClientOptions {
     typeof input === "object" && input !== null && !Array.isArray(input)
       ? (input as Record<string, unknown>)
       : undefined;
-  const result = sellerClientOptionsSchema.safeParse(
+  const schema =
+    record?.["marketplace"] === Marketplace.Wb
+      ? wbSellerClientOptionsSchema
+      : ozonSellerClientOptionsSchema;
+  const result = schema.safeParse(
     record === undefined
       ? input
       : {

@@ -15,6 +15,7 @@ pnpm install
 
 - [архитектуру](ARCHITECTURE.md);
 - [источник контрактов Ozon](docs/OZON-SOURCE-OF-TRUTH.md);
+- [источник контрактов Wildberries](docs/WB-SOURCE-OF-TRUTH.md);
 - [процесс добавления endpoint](docs/ENDPOINT-WORKFLOW.md).
 
 Не реализуйте контракт по памяти или только по неофициальному SDK.
@@ -30,10 +31,14 @@ pnpm install
 ## Проверка
 
 ```bash
-pnpm release:check
+pnpm verify
 ```
 
 Команда должна пройти полностью до отправки pull request.
+
+Перед публикацией дополнительно выполните `pnpm prepare:release`. Процесс
+подготовки и публикации пакетов описан в
+[руководстве по релизу](docs/RELEASING.md).
 
 ## Коммит и pull request
 

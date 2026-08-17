@@ -11,6 +11,12 @@ import {
   Marketplace,
   OzonValues,
   SellerClient,
+  type SellerSdkErrorDetails,
+  toSellerSdkErrorDetails,
+  type Wb,
+  WbApiHost,
+  WbClient,
+  WbValues,
   type GetAnalyticsStockOnWarehousesResponse,
   type GetAnalyticsStocksResponse,
   type GetAnalyticsStocksTurnoverResponse,
@@ -1393,3 +1399,53 @@ new SellerClient({
 // @ts-expect-error Marketplace is a closed set.
 const unsupportedMarketplace: keyof MarketplaceRegistry = "unsupported";
 void unsupportedMarketplace;
+
+const wbCredentials = { token: "test-wb-token" };
+const wb = new WbClient(wbCredentials, { environment: "production" });
+const normalizedError: SellerSdkErrorDetails = toSellerSdkErrorDetails(
+  new Error("test"),
+);
+void normalizedError;
+const activeWbSubscription: "active" =
+  WbValues.GeneralSubscriptionsJamInfoState.Active;
+void activeWbSubscription;
+const wbSeller = new SellerClient({
+  marketplace: Marketplace.Wb,
+  credentials: wbCredentials,
+});
+const directWbPing: Promise<Wb.GetPingResponse> = wb.general.getPing();
+const rootWbPing: Promise<Wb.GetPingResponse> = wbSeller.wb.general.getPing();
+const wbNews: Promise<Wb.GetV2NewsResponse> = wb.general.getNews({
+  query: { from: "2026-08-01", fromID: 42 },
+});
+const wbNewsV2: Promise<Wb.GetV2NewsResponse> = wb.general.getV2News({
+  query: { from: "2026-08-01", fromID: 42 },
+});
+wb.general.getTariffConstructorOptions({
+  query: { locale: WbValues.GetV1TariffConstructorOptionsLocale.Ru },
+});
+const wbRaw = wb.rawRequest<{ future: boolean }>(
+  WbApiHost.Common,
+  "GET",
+  "/api/future",
+);
+void directWbPing;
+void rootWbPing;
+void wbNews;
+void wbNewsV2;
+void wbRaw;
+
+new SellerClient({
+  marketplace: "wb",
+  // @ts-expect-error WB credentials require token instead of Ozon clientId/apiKey.
+  credentials,
+});
+
+// @ts-expect-error A required path parameter cannot be omitted.
+wb.communications.getSellerDownloadId({});
+
+// @ts-expect-error Wildberries enum fields remain closed unions.
+wb.general.getTariffConstructorOptions({ query: { locale: "de" } });
+
+// @ts-expect-error Raw requests only accept documented WB origins.
+wb.rawRequest("https://example.com", "GET", "/api/future");

@@ -11,14 +11,21 @@
 <p align="center">
   <a href="https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/dev-ik/seller-sdk/ci.yml?branch=main&amp;style=flat-square&amp;label=CI&amp;logo=github" alt="Статус CI"></a>
   <a href="./docs/ozon/API-REFERENCE.md"><img src="https://img.shields.io/badge/Ozon_Seller_API-461_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-005BFF?style=flat-square" alt="Ozon Seller API: 461 операция"></a>
+  <a href="./docs/wb/API-REFERENCE.md"><img src="https://img.shields.io/badge/WB_API-286_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9-7B2CBF?style=flat-square" alt="Wildberries API: 286 операций"></a>
   <a href="./package.json"><img src="https://img.shields.io/badge/Node.js-%E2%89%A520.10-339933?style=flat-square&amp;logo=nodedotjs&amp;logoColor=white" alt="Node.js 20.10 или новее"></a>
   <a href="./tsconfig.base.json"><img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white" alt="TypeScript strict"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2E3440?style=flat-square" alt="Лицензия MIT"></a>
 </p>
 
-Первый релиз поддерживает Ozon Seller API. Вы можете установить только Ozon
-без лишних реализаций или использовать общий пакет для всех поддерживаемых
-маркетплейсов.
+SDK поддерживает Ozon Seller API и Wildberries API. Можно установить только
+нужную площадку или использовать общий пакет для multi-marketplace приложения.
+
+## Документация пакетов
+
+- [`@seller-sdk/ozon`](./packages/ozon/README.md) — установка, настройка и
+  примеры Ozon; [полный API Reference](./docs/ozon/API-REFERENCE.md).
+- [`@seller-sdk/wb`](./packages/wb/README.md) — установка, настройка и примеры
+  Wildberries; [полный API Reference](./docs/wb/API-REFERENCE.md).
 
 ## Быстрый старт
 
@@ -44,6 +51,22 @@ const products = await ozon.products.list({
 });
 ```
 
+Для проекта, который работает только с Wildberries:
+
+```bash
+npm i @seller-sdk/wb
+```
+
+```ts
+import { WbClient, WbValues } from "@seller-sdk/wb";
+
+const wb = new WbClient({ token: process.env.WB_API_TOKEN! });
+const connection = await wb.general.getPing();
+const tariffs = await wb.general.getTariffConstructorOptions({
+  query: { locale: WbValues.GetV1TariffConstructorOptionsLocale.Ru },
+});
+```
+
 Для приложения, которому нужна единая точка входа:
 
 ```bash
@@ -64,11 +87,12 @@ const seller = new SellerClient({
 const roles = await seller.ozon.access.getRoles();
 ```
 
-Использовать одновременно `seller-sdk` и `@seller-sdk/ozon` не требуется.
+Использовать одновременно `seller-sdk` и focused package не требуется.
 
 ## Почему SDK удобно использовать
 
 - Все 461 операция Ozon распределены по предметным областям.
+- Все 286 операций WB распределены по 13 официальным разделам.
 - TypeScript подсказывает обязательные поля, ограничения и закрытые наборы
   значений.
 - Ответы проверяются во время выполнения через SafeShape.
@@ -85,12 +109,14 @@ const roles = await seller.ozon.access.getRoles();
 ```ts
 await ozon.warehouses.listWarehouses({ limit: 100 }); // сейчас v2
 await ozon.finance.listFinanceTransactions(input); // сейчас v3
+await wb.general.getNews({ query: { from: "2026-08-01" } }); // сейчас v2
 ```
 
 Явную версию используйте только для намеренной фиксации контракта:
 
 ```ts
 await ozon.warehouses.listWarehousesV2({ limit: 100 });
+await wb.general.getV2News({ query: { from: "2026-08-01" } });
 ```
 
 Если Ozon пометил контракт устаревшим, IDE зачеркнёт и версионный метод, и его
@@ -99,13 +125,18 @@ await ozon.warehouses.listWarehousesV2({ limit: 100 });
 
 ## Конфигурация запросов
 
+Оба клиента поддерживают одинаковые настройки тайм-аутов, общего дедлайна,
+повторов, отмены и наблюдения за ответами.
+
+### Ozon
+
 ```ts
 const ozon = new OzonClient(credentials, {
   timeoutMs: 30_000,
   deadlineMs: 60_000,
   maxRetries: 2,
-  onResponse({ operationId, status, requestId, attempt }) {
-    console.info({ operationId, status, requestId, attempt });
+  onResponse({ operationId, status, requestId, attempt, willRetry }) {
+    console.info({ operationId, status, requestId, attempt, willRetry });
   },
 });
 
@@ -116,8 +147,37 @@ await ozon.products.list(input, {
 });
 ```
 
-SDK повторяет только операции, отмеченные как безопасные. Мутации не
-повторяются автоматически независимо от `maxRetries`.
+### Wildberries
+
+```ts
+const wb = new WbClient(
+  { token: process.env.WB_API_TOKEN! },
+  {
+    environment: "production",
+    timeoutMs: 30_000,
+    deadlineMs: 60_000,
+    maxRetries: 2,
+    onResponse({ operationId, status, requestId, attempt, willRetry }) {
+      console.info({ operationId, status, requestId, attempt, willRetry });
+    },
+  },
+);
+
+await wb.general.getNews(
+  { query: { from: "2026-08-01", fromID: 42 } },
+  {
+    timeoutMs: 10_000,
+    deadlineMs: 30_000,
+    maxRetries: 1,
+    signal: abortController.signal,
+  },
+);
+```
+
+`maxRetries` задаёт количество повторов после первой попытки. SDK повторяет
+только безопасные операции чтения: `GET` и методы, отмеченные в Swagger как
+`x-readonly-method`. Мутации не повторяются автоматически независимо от
+`maxRetries`.
 
 ## Пагинация
 
@@ -136,28 +196,19 @@ for await (const product of ozon.products.listAll({
 ## Обработка ошибок
 
 ```ts
-import { ApiError, ResponseValidationError } from "@seller-sdk/ozon";
+import { toSellerSdkErrorDetails } from "@seller-sdk/ozon";
 
 try {
   await ozon.products.list({ filter: {}, limit: 100 });
 } catch (error) {
-  if (error instanceof ApiError) {
-    console.error(
-      error.status,
-      error.apiCode,
-      error.apiMessage,
-      error.requestId,
-    );
-  }
-
-  if (error instanceof ResponseValidationError) {
-    console.error(error.operationId, error.issues);
-  }
+  console.error(toSellerSdkErrorDetails(error));
 }
 ```
 
-SDK не добавляет в ошибки ключ API, `Client-Id`, заголовки авторизации или
-необработанное тело ответа.
+`toSellerSdkErrorDetails()` одинаково работает для Ozon, WB и umbrella-пакета.
+Результат содержит стабильные `code`, `message`, `operationId`, HTTP status,
+request ID, API code/message и validation issues, когда они доступны. В него не
+включаются stack, cause, ключ API, `Client-Id` и заголовки авторизации.
 
 ## Требования
 

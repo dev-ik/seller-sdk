@@ -76,7 +76,7 @@
 Рекомендуемые алиасы без версии:
 
 - `getAnalyticsData` → `getAnalyticsDataV1`
-- `getAnalyticsManageStocks` → `getAnalyticsManageStocksV1` — устарел: 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks .
+- `getAnalyticsManageStocks` → `getAnalyticsManageStocksV1` — устарел: 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks. Замена в SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
 - `getAnalyticsProductQueryDetails` → `getAnalyticsProductQueryDetailsV1`
 - `listAnalyticsProductQueries` → `listAnalyticsProductQueriesV1`
 
@@ -100,7 +100,7 @@
 
 `await ozon.analytics.getAnalyticsManageStocksV1(input)`
 
-> Устарел: 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks .
+> Устарел: 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks. Замена в SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/AnalyticsAPI_ManageStocks)
 
@@ -126,7 +126,7 @@
 
 Обязательные поля запроса: `limit`.
 
-> Устарел: В будущем метод будет отключён. Переключитесь на /v1/analytics/stocks .
+> Устарел: В будущем метод будет отключён. Переключитесь на /v1/analytics/stocks. Замена в SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/AnalyticsAPI_AnalyticsGetStockOnWarehousesV2)
 
@@ -280,7 +280,7 @@
 
 Рекомендуемые алиасы без версии:
 
-- `activateTransportCargoes` → `activateTransportCargoesV1` — устарел: Asynchronously enables or disables transport cargoes for a supply; never retried automatically.
+- `activateTransportCargoes` → `activateTransportCargoesV1`
 - `bindTransportCargoes` → `bindTransportCargoesV1`
 - `createTransportCargoes` → `createTransportCargoesV1`
 - `createTransportLabels` → `createTransportLabelsV1`
@@ -304,8 +304,6 @@
 `await ozon.cargoes.activateTransportCargoesV1(input)`
 
 Обязательные поля запроса: `is_transport`, `supply_id`.
-
-> Устарел: Asynchronously enables or disables transport cargoes for a supply; never retried automatically.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/CargoesTransportActivate)
 
@@ -895,7 +893,7 @@
 
 Обязательные поля запроса: `delivery_method_id`.
 
-> Устарел: 20 марта 2026 года отключим метод. Переключитесь на /v2/carriage/delivery/list .
+> Устарел: 20 марта 2026 года отключим метод. Переключитесь на /v2/carriage/delivery/list. Замена в SDK: `ozon.deliveries.listFbsCarriageDeliveriesV2(...)` для `POST /v2/carriage/delivery/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetCarriageAvailableList)
 
@@ -1019,7 +1017,7 @@
 
 Обязательные поля запроса: `limit`.
 
-> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/delivery-method/list .
+> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/delivery-method/list. Замена в SDK: `ozon.deliveryMethods.listDeliveryMethodsV2(...)` для `POST /v2/delivery-method/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/WarehouseAPI_DeliveryMethodList)
 
@@ -1055,7 +1053,7 @@
 
 `await ozon.digital.listDigitalPostings(input)`
 
-> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v2/posting/digital/list .
+> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v2/posting/digital/list. Замена в SDK: `ozon.digital.listDigitalPostingsV2(...)` для `POST /v2/posting/digital/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ListPostingCodes)
 
@@ -1680,13 +1678,13 @@ Cоздать задание на генерацию этикеток
 - `getFinanceAccrualPostings` → `getFinanceAccrualPostingsV1`
 - `getFinanceBalance` → `getFinanceBalanceV1`
 - `getFinanceProductsBuyout` → `getFinanceProductsBuyoutV1`
-- `getFinanceTransactionTotals` → `getFinanceTransactionTotalsV3` — устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Данные могут не соответствовать информации в личном кабинете.
+- `getFinanceTransactionTotals` → `getFinanceTransactionTotalsV3` — устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Данные могут не соответствовать информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
 - `getRealizationPostingReport` → `getRealizationPostingReportV1`
 - `getRealizationReport` → `getRealizationReportV2`
 - `getRealizationReportByDay` → `getRealizationReportByDayV1`
 - `listFinanceAccrualTypes` → `listFinanceAccrualTypesV1`
 - `listFinanceCashFlow` → `listFinanceCashFlowV1`
-- `listFinanceTransactions` → `listFinanceTransactionsV3` — устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете.
+- `listFinanceTransactions` → `listFinanceTransactionsV3` — устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
 
 ### `createB2BSalesReportV1`
 
@@ -1806,7 +1804,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `date|posting_number`.
 
-> Устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Данные могут не соответствовать информации в личном кабинете.
+> Устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Данные могут не соответствовать информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionTotalV3)
 
@@ -1878,7 +1876,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `page`, `page_size`.
 
-> Устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете.
+> Устарел: Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionListV3)
 
@@ -1938,7 +1936,7 @@ Cоздать задание на генерацию этикеток
 
 - `checkNotification` → `checkNotificationV1`
 - `deleteNotification` → `deleteNotificationV1`
-- `enableNotification` → `enableNotificationV1` — устарел: Enables or disables a webhook registration; never retried automatically.
+- `enableNotification` → `enableNotificationV1`
 - `listNotificationPushTypes` → `listNotificationPushTypesV1`
 - `listNotifications` → `listNotificationsV1`
 - `setNotification` → `setNotificationV1`
@@ -1977,8 +1975,6 @@ Cоздать задание на генерацию этикеток
 `await ozon.notifications.enableNotificationV1(input)`
 
 Обязательные поля запроса: `id`, `enabled`.
-
-> Устарел: Enables or disables a webhook registration; never retried automatically.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/EnableNotification)
 
@@ -2183,7 +2179,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `delivery_method_id`, `polygons`, `warehouse_location`.
 
-> Устарел: Метод устаревает и будет отключён в будущем. Переключитесь на /v2/polygon/bind .
+> Устарел: Метод устаревает и будет отключён в будущем. Переключитесь на /v2/polygon/bind. Замена в SDK: `ozon.polygons.bindDeliveryPolygonV2(...)` для `POST /v2/polygon/bind`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PolygonAPI_BindPolygon)
 
@@ -2340,7 +2336,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `delivery_method_id`.
 
-> Устарел: Метод устаревает и будет отключён 7 сентября 2026. Переключитесь на /v1/carriage/create и /v1/carriage/approve .
+> Устарел: Метод устаревает и будет отключён 7 сентября 2026. Переключитесь на /v1/carriage/create и /v1/carriage/approve. Замены в SDK: `ozon.deliveries.createFbsCarriage(...)` для `POST /v1/carriage/create`; `ozon.deliveries.approveFbsCarriage(...)` для `POST /v1/carriage/approve`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSActCreate)
 
@@ -2354,7 +2350,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `posting_number`.
 
-> Устарел: В будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на /v2/posting/fbs/package-label/create .
+> Устарел: В будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на /v2/posting/fbs/package-label/create. Замена в SDK: `ozon.postings.createFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/create`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatch)
 
@@ -2508,7 +2504,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `id`.
 
-> Устарел: Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/get-pdf .
+> Устарел: Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/get-pdf. Замена в SDK: `ozon.postings.getFbsActPdf(...)` для `POST /v2/posting/fbs/act/get-pdf`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSGetDigitalAct)
 
@@ -2522,7 +2518,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `id`.
 
-> Устарел: Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/check-status .
+> Устарел: Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/check-status. Замена в SDK: `ozon.postings.getFbsActStatus(...)` для `POST /v2/posting/fbs/act/check-status`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSDigitalActCheckStatus)
 
@@ -2642,7 +2638,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `filter`, `limit`.
 
-> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v3/posting/fbo/list .
+> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v3/posting/fbo/list. Замена в SDK: `ozon.postings.listFboPostingsV3(...)` для `POST /v3/posting/fbo/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFboPostingList)
 
@@ -2720,7 +2716,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `filter`, `limit`, `offset`.
 
-> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/list .
+> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/list. Замена в SDK: `ozon.postings.listFbsPostingsV4(...)` для `POST /v4/posting/fbs/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFbsPostingListV3)
 
@@ -2746,7 +2742,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `filter`, `limit`, `offset`.
 
-> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/unfulfilled/list .
+> Устарел: С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/unfulfilled/list. Замена в SDK: `ozon.postings.listUnfulfilledFbsPostingsV4(...)` для `POST /v4/posting/fbs/unfulfilled/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFbsPostingUnfulfilledList)
 
@@ -3194,7 +3190,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `files`, `name`, `number`, `type_code`, `issue_date`.
 
-> Устарел: 31 августа 2026 года отключим метод. Переключитесь на методы /v2/product/certification/options , /v2/product/certification/params и /v2/product/certificate/create .
+> Устарел: 31 августа 2026 года отключим метод. Переключитесь на методы /v2/product/certification/options, /v2/product/certification/params и /v2/product/certificate/create. Замены в SDK: `ozon.products.listProductCertificateOptionsV2(...)` для `POST /v2/product/certification/options`; `ozon.products.getProductCertificateParamsV2(...)` для `POST /v2/product/certification/params`; `ozon.products.createProductCertificateV2(...)` для `POST /v2/product/certificate/create`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductCertificateCreate)
 
@@ -3310,8 +3306,6 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `one of offer_id, product_id, sku`.
 
-> Устарел: is_prepayment_allowed is deprecated in OpenAPI and remains available with a deprecated type annotation.
-
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoList)
 
 ### `getProductMinPriceTimerStatus`
@@ -3408,8 +3402,6 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `filter`, `limit`.
 
-> Устарел: warehouse_ids is preserved but marked deprecated as in OpenAPI.
-
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoStocks)
 
 ### `getProductStocksByWarehouse`
@@ -3434,7 +3426,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `sku|offer_id`.
 
-> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/product/info/stocks-by-warehouse/fbs .
+> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/product/info/stocks-by-warehouse/fbs. Замена в SDK: `ozon.products.getProductStocksByWarehouseFbsV2(...)` для `POST /v2/product/info/stocks-by-warehouse/fbs`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductStocksByWarehouseFbs)
 
@@ -3572,8 +3564,6 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `certificate_id`, `limit|page+page_size`.
 
-> Устарел: page and page_size are deprecated; prefer limit and last_id.
-
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/CertificateProductsList)
 
 ### `listCertificateProductStatuses`
@@ -3624,7 +3614,7 @@ Cоздать задание на генерацию этикеток
 
 `await ozon.products.listCertificationCategoriesV1(input)`
 
-> Устарел: 14 апреля 2025 года метод будет отключён. Переключитесь на /v2/product/certification/list .
+> Устарел: 14 апреля 2025 года метод будет отключён. Переключитесь на /v2/product/certification/list. Замена в SDK: `ozon.products.listCertificationCategoriesV2(...)` для `POST /v2/product/certification/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_V1ProductCertificationList)
 
@@ -3753,8 +3743,6 @@ Cоздать задание на генерацию этикеток
 `await ozon.products.unbindProductCertificate(input)`
 
 Обязательные поля запроса: `certificate_id`, `skus|product_id`.
-
-> Устарел: product_id is deprecated; skus is formally limited to 1000.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/CertificateUnbind)
 
@@ -3890,7 +3878,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `status`, `page`, `limit`.
 
-> Устарел: Метод устаревает и будет отключён в будущем. Переключитесь на /v2/actions/discounts-task/list .
+> Устарел: Метод устаревает и будет отключён в будущем. Переключитесь на /v2/actions/discounts-task/list. Замена в SDK: `ozon.promotions.listDiscountTasksV2(...)` для `POST /v2/actions/discounts-task/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/promos_task_list)
 
@@ -4524,7 +4512,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `comment_id`.
 
-> Устарел: Метод устаревает. Переключитесь на /v2/review/comment/delete .
+> Устарел: Метод устаревает. Переключитесь на /v2/review/comment/delete. Замена в SDK: `ozon.reviews.deleteReviewCommentV2(...)` для `POST /v2/review/comment/delete`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_CommentDelete)
 
@@ -4548,7 +4536,7 @@ Cоздать задание на генерацию этикеток
 
 `await ozon.reviews.getReviewCountV1(input)`
 
-> Устарел: Метод устаревает. Переключитесь на /v2/review/count .
+> Устарел: Метод устаревает. Переключитесь на /v2/review/count. Замена в SDK: `ozon.reviews.getReviewCountV2(...)` для `POST /v2/review/count`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewCount)
 
@@ -4572,7 +4560,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `review_id`.
 
-> Устарел: Метод устаревает. Переключитесь на /v2/review/info .
+> Устарел: Метод устаревает. Переключитесь на /v2/review/info. Замена в SDK: `ozon.reviews.getReviewInfoV2(...)` для `POST /v2/review/info`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewInfo)
 
@@ -4610,7 +4598,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `limit`.
 
-> Устарел: Метод устаревает. Переключитесь на /v2/review/list .
+> Устарел: Метод устаревает. Переключитесь на /v2/review/list. Замена в SDK: `ozon.reviews.listReviewsV2(...)` для `POST /v2/review/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewList)
 
@@ -4636,7 +4624,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `review_ids`, `status`.
 
-> Устарел: Метод устаревает. Переключитесь на /v2/review/change-status .
+> Устарел: Метод устаревает. Переключитесь на /v2/review/change-status. Замена в SDK: `ozon.reviews.updateReviewStatusV2(...)` для `POST /v2/review/change-status`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewChangeStatus)
 
@@ -4709,7 +4697,7 @@ Cоздать задание на генерацию этикеток
 
 - `addSellerActionProducts` → `addSellerActionProductsV1`
 - `archiveSellerAction` → `archiveSellerActionV1`
-- `changeSellerActionActivity` → `changeSellerActionActivityV1` — устарел: Enables or disables a seller action; never retried automatically.
+- `changeSellerActionActivity` → `changeSellerActionActivityV1`
 - `createSellerDiscountAction` → `createSellerDiscountActionV1`
 - `createSellerDiscountWithConditionAction` → `createSellerDiscountWithConditionActionV1`
 - `createSellerInstallmentAction` → `createSellerInstallmentActionV1`
@@ -4759,8 +4747,6 @@ Cоздать задание на генерацию этикеток
 `await ozon.sellerActions.changeSellerActionActivityV1(input)`
 
 Обязательные поля запроса: `action_id`, `is_turn_on`.
-
-> Устарел: Enables or disables a seller action; never retried automatically.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/SellerActionsChangeActivity)
 
@@ -5094,7 +5080,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `file_guid`.
 
-> Устарел: 10 апреля 2026 года отключим метод. Переключитесь на /v1/cargoes-label/get .
+> Устарел: 10 апреля 2026 года отключим метод. Переключитесь на /v1/cargoes-label/get. Замена в SDK: `ozon.supplyDrafts.getSupplyCargoLabels(...)` для `POST /v1/cargoes-label/get`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/CargoesAPI_CargoesLabelFile)
 
@@ -5364,7 +5350,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `supply_order_id`.
 
-> Устарел: Метод устаревает и будет отключён 19 августа 2026 года. Переключитесь на /v2/supply-order/timeslot/list .
+> Устарел: Метод устаревает и будет отключён 19 августа 2026 года. Переключитесь на /v2/supply-order/timeslot/list. Замена в SDK: `ozon.supplyOrders.listSupplyOrderTimeslotsV2(...)` для `POST /v2/supply-order/timeslot/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/SupplyOrderAPI_GetSupplyOrderTimeslots)
 
@@ -5726,7 +5712,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `limit`.
 
-> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/warehouse/list .
+> Устарел: Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/warehouse/list. Замена в SDK: `ozon.warehouses.listWarehousesV2(...)` для `POST /v2/warehouse/list`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/WarehouseAPI_WarehouseList)
 

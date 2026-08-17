@@ -1,4 +1,24 @@
 export * from "@seller-sdk/ozon";
+export * as Wb from "@seller-sdk/wb";
+export {
+  WbApiHost,
+  WbClient,
+  WB_API_ORIGINS,
+  WB_OPERATION_ALIASES,
+  WB_OPERATION_METADATA,
+  WbValues,
+  type WbApiOrigin,
+  type WbClientConfig,
+  type WbCredentials,
+  type WbDomainApi,
+  type WbEnvironment,
+  type WbRawRequestMethod,
+  type WbRawRequestOptions,
+  type WbRawRequestOrigin,
+  type WbRawResponse,
+  type WbRequestOptions,
+  type WbResponseMetadata,
+} from "@seller-sdk/wb";
 export {
   Marketplace,
   type MarketplaceRegistry,

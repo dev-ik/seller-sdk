@@ -26,7 +26,36 @@
 pnpm release:check
 ```
 
+## Wildberries
+
+Для WB источником служат `docs/wb/swagger/*.yaml`. После замены официального
+snapshot обновите дату в `docs/wb/swagger.meta.json` и выполните:
+
+```bash
+pnpm update:wb
+pnpm check:wb
+pnpm release:check
+```
+
+Не редактируйте `packages/wb/src/api.generated.ts`, `docs/wb/endpoints.json` или
+`docs/wb/API-REFERENCE.md` вручную.
+
 19. Зафиксируйте источник, дату проверки и известные ограничения.
 
 Комментарии с маркером `seller-sdk:ozon-openapi` генерируются автоматически и
 не редактируются вручную.
+
+## Устаревшие методы
+
+- Метод помечается `@deprecated` только по operation-level признаку в OpenAPI:
+  `deprecated: true` или явному предупреждению об устаревании самого метода в
+  его `description`.
+- `deprecated` у поля запроса, поля ответа или вложенной schema не переносится
+  на метод.
+- Для каждого устаревшего метода официально рекомендованный HTTP endpoint
+  должен быть реализован в SDK.
+- В `@deprecated` и API reference указываются обе замены: официальный HTTP
+  method/path и вызываемый метод SDK.
+- Если официальный deprecated-метод не содержит замену или замена ещё не
+  реализована, генерация должна завершаться ошибкой, а не публиковать неполное
+  предупреждение.

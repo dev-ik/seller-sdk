@@ -1,6 +1,11 @@
 export { ApiError, type ApiErrorOptions } from "./api-error.js";
 export { AuthenticationError } from "./authentication-error.js";
 export { ConfigurationError } from "./configuration-error.js";
+export {
+  toSellerSdkErrorDetails,
+  type SellerSdkErrorDetails,
+  type SellerSdkErrorDetailsCode,
+} from "./error-details.js";
 export { NetworkError, type NetworkErrorOptions } from "./network-error.js";
 export { RateLimitError } from "./rate-limit-error.js";
 export {

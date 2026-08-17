@@ -1,0 +1,442 @@
+// Generated runtime schemas for this Wildberries API domain.
+import type { WbSchemaComponents } from "../schema.js";
+
+export const ordersFbsComponents: WbSchemaComponents = {
+  "v3.ArchiveOrders": {
+    kind: "object",
+    properties: {
+      next: { kind: "number", integer: true, nullable: true },
+      orders: {
+        kind: "array",
+        items: { kind: "ref", name: "v3.ArchiveOrder" },
+      },
+    },
+    required: ["orders", "next"],
+  },
+  "v3.ArchiveOrder": {
+    kind: "object",
+    properties: {
+      cargoType: { kind: "string" },
+      colorCode: { kind: "string", nullable: true },
+      createdAt: { kind: "string" },
+      crossBorder: {
+        kind: "object",
+        properties: { parcel: { kind: "string" } },
+        required: [],
+        nullable: true,
+      },
+      crossBorderType: { kind: "string" },
+      id: { kind: "number", integer: true },
+      isZeroOrder: { kind: "boolean" },
+      metaDetails: {
+        kind: "array",
+        items: {
+          kind: "object",
+          properties: {
+            key: { kind: "string" },
+            value: { kind: "string", nullable: true },
+            decision: { kind: "string" },
+          },
+          required: [],
+        },
+      },
+      options: {
+        kind: "object",
+        properties: { isB2B: { kind: "boolean" } },
+        required: [],
+      },
+      orderUid: { kind: "string" },
+      priceInfo: {
+        kind: "object",
+        properties: {
+          convertedCurrencyCode: { kind: "number", integer: true },
+          convertedPrice: { kind: "number", integer: true },
+          currencyCode: { kind: "number", integer: true },
+          price: { kind: "number", integer: true },
+        },
+        required: [
+          "convertedCurrencyCode",
+          "convertedPrice",
+          "currencyCode",
+          "price",
+        ],
+      },
+      product: {
+        kind: "object",
+        properties: {
+          article: { kind: "string" },
+          chrtId: { kind: "number", integer: true },
+          nmId: { kind: "number", integer: true },
+          skus: { kind: "array", items: { kind: "string" } },
+        },
+        required: ["article", "chrtId", "nmId", "skus"],
+      },
+      rid: { kind: "string" },
+      scanPrice: { kind: "number", integer: true, nullable: true },
+      status: {
+        kind: "object",
+        properties: {
+          supplierStatus: { kind: "string" },
+          wbStatus: { kind: "string" },
+        },
+        required: ["supplierStatus", "wbStatus"],
+      },
+      stickerId: { kind: "number", integer: true },
+      supplyId: { kind: "string", nullable: true },
+      warehouseId: { kind: "number", integer: true },
+    },
+    required: [
+      "cargoType",
+      "colorCode",
+      "createdAt",
+      "crossBorder",
+      "crossBorderType",
+      "id",
+      "isZeroOrder",
+      "metaDetails",
+      "options",
+      "orderUid",
+      "priceInfo",
+      "product",
+      "rid",
+      "scanPrice",
+      "status",
+      "stickerId",
+      "supplyId",
+      "warehouseId",
+    ],
+  },
+  "v3.SupplyOrderIDsAPI": {
+    kind: "object",
+    properties: {
+      orderIds: { kind: "array", items: { kind: "number", integer: true } },
+    },
+    required: [],
+  },
+  PassOffice: {
+    kind: "object",
+    properties: {
+      name: { kind: "string" },
+      address: { kind: "string" },
+      id: { kind: "number", integer: true },
+    },
+    required: [],
+  },
+  Error: {
+    kind: "object",
+    properties: {
+      code: { kind: "string" },
+      message: { kind: "string" },
+      data: { kind: "object", properties: {}, required: [], nullable: true },
+    },
+    required: [],
+  },
+  "v3.APIErrorV2": {
+    kind: "object",
+    properties: {
+      code: { kind: "string" },
+      detail: { kind: "string" },
+      errors: {
+        kind: "array",
+        items: {
+          kind: "object",
+          properties: {
+            location: { kind: "string" },
+            message: { kind: "string" },
+            value: { kind: "unknown" },
+          },
+          required: [],
+        },
+      },
+      origin: { kind: "string" },
+      requestId: { kind: "string" },
+      status: { kind: "number", integer: true },
+      title: { kind: "string" },
+    },
+    required: ["title", "detail"],
+  },
+  AutoreturnError400: {
+    kind: "object",
+    properties: { detail: { kind: "string" }, title: { kind: "string" } },
+    required: ["title", "detail"],
+  },
+  "409SupplyDeliverError": {
+    kind: "object",
+    properties: {
+      code: { kind: "string" },
+      message: { kind: "string" },
+      data: {
+        kind: "object",
+        properties: {
+          orders: {
+            kind: "array",
+            items: {
+              kind: "object",
+              properties: {
+                id: { kind: "number", integer: true },
+                metaDetails: {
+                  kind: "array",
+                  items: {
+                    kind: "object",
+                    properties: {
+                      key: { kind: "string" },
+                      value: { kind: "string" },
+                      decision: { kind: "string" },
+                    },
+                    required: [],
+                  },
+                },
+              },
+              required: [],
+            },
+          },
+        },
+        required: [],
+        nullable: true,
+      },
+    },
+    required: [],
+  },
+  Next: { kind: "number", integer: true },
+  Order: {
+    kind: "object",
+    properties: {
+      address: {
+        kind: "object",
+        properties: {
+          fullAddress: { kind: "string" },
+          longitude: { kind: "number" },
+          latitude: { kind: "number" },
+        },
+        required: [],
+        nullable: true,
+      },
+      scanPrice: { kind: "number", nullable: true },
+      deliveryType: { kind: "string", enum: ["fbs"] },
+      supplyId: { kind: "string" },
+      orderUid: { kind: "string" },
+      article: { kind: "string" },
+      colorCode: { kind: "string" },
+      rid: { kind: "string" },
+      createdAt: { kind: "string" },
+      offices: { kind: "array", items: { kind: "string" }, nullable: true },
+      skus: { kind: "array", items: { kind: "string" } },
+      id: { kind: "number", integer: true },
+      warehouseId: { kind: "number", integer: true },
+      officeId: { kind: "number", integer: true },
+      nmId: { kind: "number", integer: true },
+      chrtId: { kind: "number", integer: true },
+      price: { kind: "number", integer: true },
+      convertedPrice: { kind: "number", integer: true },
+      currencyCode: { kind: "number", integer: true },
+      convertedCurrencyCode: { kind: "number", integer: true },
+      cargoType: { kind: "number", integer: true, enum: [1, 2, 3] },
+      crossBorderType: { kind: "number", integer: true, enum: [0, 1] },
+      comment: { kind: "string", maxLength: 300 },
+      isZeroOrder: { kind: "boolean" },
+      options: {
+        kind: "object",
+        properties: { isB2B: { kind: "boolean" } },
+        required: [],
+      },
+    },
+    required: [],
+  },
+  Supply: {
+    kind: "object",
+    properties: {
+      id: { kind: "string" },
+      isB2b: { kind: "boolean", nullable: true },
+      isPickupPointShipmentAllowed: { kind: "boolean" },
+      done: { kind: "boolean" },
+      createdAt: { kind: "string" },
+      closedAt: { kind: "string", nullable: true },
+      scanDt: { kind: "string", nullable: true },
+      name: { kind: "string" },
+      cargoType: { kind: "number", integer: true, enum: [0, 1, 2, 3] },
+      crossBorderType: {
+        kind: "number",
+        integer: true,
+        enum: [0, 1],
+        nullable: true,
+      },
+      destinationOfficeId: { kind: "number", integer: true, nullable: true },
+      recommendedWhId: { kind: "number", integer: true },
+    },
+    required: [],
+  },
+  OrderNew: {
+    kind: "object",
+    properties: {
+      address: {
+        kind: "object",
+        properties: {
+          fullAddress: { kind: "string" },
+          longitude: { kind: "number" },
+          latitude: { kind: "number" },
+        },
+        required: [],
+        nullable: true,
+      },
+      ddate: { kind: "string" },
+      sellerDate: { kind: "string", nullable: true },
+      salePrice: { kind: "number", integer: true, nullable: true },
+      requiredMeta: {
+        kind: "array",
+        items: { kind: "string" },
+        nullable: true,
+      },
+      optionalMeta: {
+        kind: "array",
+        items: { kind: "string" },
+        nullable: true,
+      },
+      deliveryType: { kind: "string", enum: ["fbs"] },
+      comment: { kind: "string", maxLength: 300 },
+      scanPrice: { kind: "number", nullable: true },
+      orderUid: { kind: "string" },
+      article: { kind: "string" },
+      colorCode: { kind: "string" },
+      rid: { kind: "string" },
+      createdAt: { kind: "string" },
+      offices: { kind: "array", items: { kind: "string" }, nullable: true },
+      skus: { kind: "array", items: { kind: "string" } },
+      id: { kind: "number", integer: true },
+      warehouseId: { kind: "number", integer: true },
+      officeId: { kind: "number", integer: true },
+      nmId: { kind: "number", integer: true },
+      chrtId: { kind: "number", integer: true },
+      price: { kind: "number", integer: true },
+      finalPrice: { kind: "number", integer: true },
+      convertedPrice: { kind: "number", integer: true },
+      convertedFinalPrice: { kind: "number", integer: true },
+      currencyCode: { kind: "number", integer: true },
+      convertedCurrencyCode: { kind: "number", integer: true },
+      cargoType: { kind: "number", integer: true, enum: [1, 2, 3] },
+      crossBorderType: { kind: "number", integer: true, enum: [0, 1] },
+      isZeroOrder: { kind: "boolean" },
+      isPickupPointShipmentAllowed: { kind: "boolean" },
+      options: {
+        kind: "object",
+        properties: { isB2B: { kind: "boolean" } },
+        required: [],
+      },
+    },
+    required: [],
+  },
+  SupplyTrbx: {
+    kind: "object",
+    properties: { id: { kind: "string" } },
+    required: [],
+  },
+  TrbxStickers: {
+    kind: "object",
+    properties: {
+      barcode: { kind: "string", minLength: 1 },
+      file: { kind: "string", minLength: 1 },
+    },
+    required: [],
+  },
+  MetaDetails: {
+    kind: "array",
+    items: {
+      kind: "object",
+      properties: {
+        key: { kind: "string" },
+        value: { kind: "string", nullable: true },
+        decision: { kind: "string" },
+      },
+      required: [],
+    },
+  },
+  "v3.GetMetaMultiRequest": {
+    kind: "object",
+    properties: {
+      orders: { kind: "array", items: { kind: "number", integer: true } },
+    },
+    required: ["orders"],
+  },
+  "v3.OrdersMetaAPI": {
+    kind: "object",
+    properties: {
+      orders: {
+        kind: "array",
+        items: { kind: "ref", name: "v3.OrderMetaAPI" },
+      },
+    },
+    required: [],
+  },
+  "v3.OrderMetaAPI": {
+    kind: "object",
+    properties: {
+      id: { kind: "number", integer: true },
+      metaDetails: {
+        kind: "array",
+        items: {
+          kind: "object",
+          properties: {
+            key: { kind: "string" },
+            value: { kind: "string", nullable: true },
+            decision: { kind: "string" },
+          },
+          required: [],
+        },
+      },
+    },
+    required: [],
+  },
+  Pass: {
+    kind: "object",
+    properties: {
+      firstName: { kind: "string" },
+      dateEnd: { kind: "string" },
+      lastName: { kind: "string" },
+      carModel: { kind: "string" },
+      carNumber: { kind: "string" },
+      officeName: { kind: "string" },
+      officeAddress: { kind: "string" },
+      officeId: { kind: "number", integer: true },
+      id: { kind: "number", integer: true },
+    },
+    required: [],
+  },
+  CrossborderTurkeyClientInfo: {
+    kind: "object",
+    properties: {
+      firstName: { kind: "string" },
+      fullName: { kind: "string" },
+      lastName: { kind: "string" },
+      middleName: { kind: "string" },
+      orderID: { kind: "number", integer: true },
+      phone: { kind: "string" },
+      phoneCode: { kind: "string" },
+    },
+    required: [],
+  },
+  CrossborderTurkeyClientInfoResp: {
+    kind: "object",
+    properties: {
+      orders: {
+        kind: "array",
+        items: { kind: "ref", name: "CrossborderTurkeyClientInfo" },
+      },
+    },
+    required: [],
+  },
+  OrdersRequestAPI: {
+    kind: "object",
+    properties: {
+      orders: { kind: "array", items: { kind: "number", integer: true } },
+    },
+    required: [],
+  },
+  "v3.APIError": {
+    kind: "object",
+    properties: {
+      code: { kind: "string" },
+      message: { kind: "string" },
+      data: { kind: "object", properties: {}, required: [] },
+    },
+    required: [],
+  },
+};

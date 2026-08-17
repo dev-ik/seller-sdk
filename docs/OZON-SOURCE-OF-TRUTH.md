@@ -35,6 +35,10 @@ Ozon может менять версии и schemas независимо от �
 - fixtures служат contract regression tests;
 - `verifiedAt` обязателен;
 - deprecated endpoint помечается до удаления;
+- operation-level deprecation не выводится из deprecated-полей вложенных
+  schemas;
+- предупреждение об устаревании содержит официальный replacement path и
+  соответствующий публичный метод SDK;
 - новая версия Ozon API не всегда требует major-версии SDK;
 - breaking changes публичного SDK следуют SemVer.
 

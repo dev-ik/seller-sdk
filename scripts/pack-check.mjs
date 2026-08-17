@@ -16,6 +16,8 @@ try {
       "--workspace",
       "@seller-sdk/ozon",
       "--workspace",
+      "@seller-sdk/wb",
+      "--workspace",
       "seller-sdk",
     ],
     {

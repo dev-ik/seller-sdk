@@ -5,10 +5,13 @@ import { fileURLToPath } from "node:url";
 const projectDirectory = dirname(dirname(fileURLToPath(import.meta.url)));
 const rootPackage = readJson("package.json");
 const ozonPackage = readJson("packages/ozon/package.json");
+const wbPackage = readJson("packages/wb/package.json");
 const umbrellaPackage = readJson("packages/seller-sdk/package.json");
+const publishedPackages = [ozonPackage, wbPackage, umbrellaPackage];
 const versions = new Set([
   rootPackage.version,
   ozonPackage.version,
+  wbPackage.version,
   umbrellaPackage.version,
 ]);
 
@@ -26,7 +29,7 @@ if (version === "0.0.0") {
   throw new Error("Версия публикуемого пакета не должна оставаться 0.0.0.");
 }
 
-for (const packageJson of [ozonPackage, umbrellaPackage]) {
+for (const packageJson of publishedPackages) {
   if (packageJson.license !== "MIT") {
     throw new Error(`В ${packageJson.name} должна быть указана лицензия MIT.`);
   }
@@ -54,8 +57,31 @@ if (process.env["REQUIRE_RELEASE_TAG"] === "true" && tag !== `v${version}`) {
   throw new Error(`Тег ${tag} не соответствует версии v${version}.`);
 }
 
+await Promise.all(
+  publishedPackages.map((packageJson) =>
+    assertVersionIsNotPublished(packageJson.name, version),
+  ),
+);
+
 console.log(`Метаданные релиза v${version} согласованы.`);
 
 function readJson(relativePath) {
   return JSON.parse(readFileSync(join(projectDirectory, relativePath), "utf8"));
+}
+
+async function assertVersionIsNotPublished(packageName, version) {
+  const encodedName = packageName.replace("/", "%2F");
+  const response = await fetch(
+    `https://registry.npmjs.org/${encodedName}/${version}`,
+    { headers: { accept: "application/json" } },
+  );
+
+  if (response.status === 404) return;
+  if (response.ok) {
+    throw new Error(`${packageName}@${version} уже опубликован в npm.`);
+  }
+
+  throw new Error(
+    `Не удалось проверить ${packageName}@${version} в npm: HTTP ${response.status}.`,
+  );
 }

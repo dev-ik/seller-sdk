@@ -26,4 +26,3 @@ yarn-error.log*
 /prompts/
 /packages/prompts/
 /docs/ADR-*.md
-/docs/wb/

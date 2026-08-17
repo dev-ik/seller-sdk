@@ -23,6 +23,12 @@ const ozonVersion = JSON.parse(
     "utf8",
   ),
 ).version;
+const wbVersion = JSON.parse(
+  readFileSync(
+    join(projectDirectory, "packages", "wb", "package.json"),
+    "utf8",
+  ),
+).version;
 const umbrellaVersion = JSON.parse(
   readFileSync(
     join(projectDirectory, "packages", "seller-sdk", "package.json"),
@@ -35,6 +41,10 @@ try {
     {
       directory: join(projectDirectory, "packages", "ozon"),
       tarball: `seller-sdk-ozon-${ozonVersion}.tgz`,
+    },
+    {
+      directory: join(projectDirectory, "packages", "wb"),
+      tarball: `seller-sdk-wb-${wbVersion}.tgz`,
     },
     {
       directory: join(projectDirectory, "packages", "seller-sdk"),
@@ -77,10 +87,10 @@ try {
   writeFileSync(
     focusedRuntimeFile,
     [
-      'import { ConfigurationError, OzonClient, OzonValues } from "@seller-sdk/ozon";',
+      'import { ConfigurationError, OzonClient, OzonValues, toSellerSdkErrorDetails } from "@seller-sdk/ozon";',
       "const credentials = { clientId: 'test-client-id', apiKey: 'test-api-key' };",
       "const ozon = new OzonClient(credentials, { maxRetries: 1 });",
-      "if (!(ozon instanceof OzonClient) || typeof ConfigurationError !== 'function' || OzonValues.FinanceTransactionType.All !== 'all' || OzonValues.ProductListVisibility.Visible !== 'VISIBLE' || typeof ozon.products.list !== 'function' || typeof ozon.products.listAll !== 'function' || typeof ozon.postings.fbs.list !== 'function' || typeof ozon.finance.listFinanceTransactions !== 'function' || typeof ozon.warehouses.listWarehouses !== 'function' || typeof ozon.rawRequest !== 'function' || typeof ozon.finance.accruals.byDay !== 'function' || typeof ozon.finance.accruals.byPostings !== 'function' || typeof ozon.finance.accruals.types !== 'function' || 'listProducts' in ozon) throw new Error('Focused smoke failed');",
+      "if (!(ozon instanceof OzonClient) || typeof ConfigurationError !== 'function' || typeof toSellerSdkErrorDetails !== 'function' || OzonValues.FinanceTransactionType.All !== 'all' || OzonValues.ProductListVisibility.Visible !== 'VISIBLE' || typeof ozon.products.list !== 'function' || typeof ozon.products.listAll !== 'function' || typeof ozon.postings.fbs.list !== 'function' || typeof ozon.finance.listFinanceTransactions !== 'function' || typeof ozon.warehouses.listWarehouses !== 'function' || typeof ozon.rawRequest !== 'function' || typeof ozon.finance.accruals.byDay !== 'function' || typeof ozon.finance.accruals.byPostings !== 'function' || typeof ozon.finance.accruals.types !== 'function' || 'listProducts' in ozon) throw new Error('Focused smoke failed');",
       "console.log('standalone @seller-sdk/ozon consumer smoke passed');",
     ].join("\n"),
   );
@@ -119,6 +129,79 @@ try {
     );
   }
 
+  const wbFocusedConsumerDirectory = join(
+    temporaryDirectory,
+    "wb-focused-consumer",
+  );
+  mkdirSync(wbFocusedConsumerDirectory, { recursive: true });
+  writeFileSync(
+    join(wbFocusedConsumerDirectory, "package.json"),
+    JSON.stringify(
+      {
+        name: "seller-sdk-wb-focused-consumer-smoke",
+        private: true,
+        type: "module",
+      },
+      null,
+      2,
+    ),
+  );
+  execFileSync(
+    "npm",
+    ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarballs[1]],
+    { cwd: wbFocusedConsumerDirectory, stdio: "pipe", env: npmEnvironment },
+  );
+  const wbFocusedRuntimeFile = join(wbFocusedConsumerDirectory, "smoke.mjs");
+  writeFileSync(
+    wbFocusedRuntimeFile,
+    [
+      'import { toSellerSdkErrorDetails, WbClient, WbValues, WB_OPERATION_METADATA } from "@seller-sdk/wb";',
+      "const wb = new WbClient({ token: 'test-wb-token' });",
+      "if (!(wb instanceof WbClient) || typeof toSellerSdkErrorDetails !== 'function' || WB_OPERATION_METADATA.length !== 286 || WbValues.GeneralSubscriptionsJamInfoState.Active !== 'active' || typeof wb.general.getPing !== 'function' || typeof wb.general.getNews !== 'function' || typeof wb.general.getV2News !== 'function' || typeof wb.items.getContentObjectParentAll !== 'function' || typeof wb.items.getContentV2ObjectParentAll !== 'function' || typeof wb.rawRequest !== 'function') throw new Error('Focused WB smoke failed');",
+      "console.log('standalone @seller-sdk/wb consumer smoke passed');",
+    ].join("\n"),
+  );
+  const wbFocusedRuntimeOutput = execFileSync(
+    process.execPath,
+    [wbFocusedRuntimeFile],
+    { cwd: wbFocusedConsumerDirectory, encoding: "utf8" },
+  );
+  if (!wbFocusedRuntimeOutput.includes("standalone @seller-sdk/wb")) {
+    throw new Error("Focused WB runtime smoke did not report success.");
+  }
+  if (
+    existsSync(
+      join(
+        wbFocusedConsumerDirectory,
+        "node_modules",
+        "@seller-sdk",
+        "ozon",
+        "package.json",
+      ),
+    ) ||
+    existsSync(
+      join(
+        wbFocusedConsumerDirectory,
+        "node_modules",
+        "seller-sdk",
+        "package.json",
+      ),
+    ) ||
+    existsSync(
+      join(
+        wbFocusedConsumerDirectory,
+        "node_modules",
+        "@seller-sdk",
+        "core",
+        "package.json",
+      ),
+    )
+  ) {
+    throw new Error(
+      "Focused WB install must not install Ozon, seller-sdk, or @seller-sdk/core.",
+    );
+  }
+
   const consumerDirectory = join(temporaryDirectory, "consumer");
 
   mkdirSync(consumerDirectory, { recursive: true });
@@ -150,9 +233,15 @@ try {
       'import type { ApproveFbsCarriageResponse, CancelFbsCarriageResponse, CancelSupplyOrderResponse, CreateFbsActResponse, CreateFbsCarriageResponse, CreateOrGetFbsPostingProductExemplarsV6Response, CreateSupplyOrderFromDraftResponse, GetFbsActBarcodeResponse, GetFbsActBarcodeTextResponse, GetFbsActContainerLabelsResponse, GetFbsCarriageResponse, GetFbsPostingProductExemplarStatusV5Response, GetSupplyCargoLabelFileResponse, GetSupplyOrderCancelStatusResponse, GetSupplyOrderContentUpdateStatusResponse, GetSupplyOrderFromDraftStatusResponse, ListAvailableFbsCarriagesResponse, ListFboSellerWarehousesResponse, ListFbsActPostingsResponse, ListFbsCarriageDeliveriesV1Response, ListFbsCarriageDeliveriesV2Response, SetFbsCarriagePostingsResponse, ShipFbsPostingPackageV4Response, ShipFbsPostingV4Response, SplitFbsPostingResponse, UpdateSupplyOrderContentResponse, ValidateFbsPostingProductExemplarsV5Response, ValidateSupplyOrderContentResponse } from "seller-sdk";',
       'import type { GetFbsActPdfResponse, GetFbsActStatusResponse, GetFbsCarriageDiscrepancyActResponse, GetFbsCarriageEttnStatusResponse, GetFbsDigitalActPdfResponse, GetFbsDigitalActStatusResponse, GetFbsTraceableAttributesResponse, ListFbsActsResponse, ListFbsAssemblyCarriagePostingsResponse, SplitTraceableFbsPostingResponse } from "seller-sdk";',
       'import { OzonClient } from "@seller-sdk/ozon";',
+      'import { WbClient, type GetPingResponse as WbGetPingResponse } from "@seller-sdk/wb";',
       "const credentials = { clientId: 'test-client-id', apiKey: 'test-api-key' };",
+      "const wbCredentials = { token: 'test-wb-token' };",
       "const seller = new SellerClient({ marketplace: Marketplace.Ozon, credentials });",
+      "const wbSeller = new SellerClient({ marketplace: Marketplace.Wb, credentials: wbCredentials });",
       "const ozon = new OzonClient(credentials, { maxRetries: 1, timeoutMs: 10_000 });",
+      "const wb = new WbClient(wbCredentials);",
+      "const wbPing: Promise<WbGetPingResponse> = wb.general.getPing();",
+      "const rootWbPing: Promise<WbGetPingResponse> = wbSeller.wb.general.getPing();",
       "const directRoles: Promise<GetRolesResponse> = ozon.access.getRoles();",
       "const domainRoles: Promise<GetRolesResponse> = ozon.access.getRoles();",
       "const domainProducts: Promise<ListProductsResponse> = ozon.products.list({ filter: { visibility: OzonValues.ProductListVisibility.All }, limit: 100 });",
@@ -472,6 +561,8 @@ try {
       "void createdOrder;",
       "void supplyOrderActSummary;",
       "void supplyOrderActProducts;",
+      "void wbPing;",
+      "void rootWbPing;",
     ].join("\n"),
   );
   writeFileSync(
@@ -511,10 +602,15 @@ try {
     [
       'import { Marketplace, SellerClient } from "seller-sdk";',
       'import { OzonClient } from "@seller-sdk/ozon";',
+      'import { WbClient } from "@seller-sdk/wb";',
       "const credentials = { clientId: 'test-client-id', apiKey: 'test-api-key' };",
       "const seller = new SellerClient({ marketplace: Marketplace.Ozon, credentials });",
       "const ozon = new OzonClient(credentials, { maxRetries: 1 });",
+      "const wbCredentials = { token: 'test-wb-token' };",
+      "const wb = new WbClient(wbCredentials);",
+      "const wbSeller = new SellerClient({ marketplace: Marketplace.Wb, credentials: wbCredentials });",
       "if (seller.marketplace !== 'ozon' || !(ozon instanceof OzonClient) || typeof seller.ozon.products.list !== 'function' || typeof ozon.finance.listFinanceTransactions !== 'function' || typeof ozon.finance.listFinanceTransactionsV3 !== 'function' || typeof ozon.warehouses.listWarehouses !== 'function' || typeof ozon.products.listAll !== 'function' || typeof ozon.rawRequest !== 'function' || typeof seller.ozon.finance.accruals.byDay !== 'function' || typeof seller.ozon.finance.accruals.byPostings !== 'function' || typeof seller.ozon.finance.accruals.types !== 'function' || 'listProducts' in seller.ozon) throw new Error('Smoke failed');",
+      "if (!(wb instanceof WbClient) || wbSeller.marketplace !== 'wb' || typeof wbSeller.wb.general.getPing !== 'function' || typeof wbSeller.wb.general.getNews !== 'function' || typeof wb.general.getV2News !== 'function' || typeof wb.items.getContentObjectParentAll !== 'function' || typeof wb.items.getContentV2ObjectParentAll !== 'function') throw new Error('WB smoke failed');",
       "console.log('seller-sdk consumer smoke passed');",
     ].join("\n"),
   );
@@ -555,6 +651,25 @@ try {
     throw new Error("Packed Ozon package must not depend on @seller-sdk/core.");
   }
 
+  const installedWbPackageJson = JSON.parse(
+    readFileSync(
+      join(
+        consumerDirectory,
+        "node_modules",
+        "@seller-sdk",
+        "wb",
+        "package.json",
+      ),
+      "utf8",
+    ),
+  );
+  if (installedWbPackageJson.name !== "@seller-sdk/wb") {
+    throw new Error("Packed WB package name is incorrect.");
+  }
+  if ("@seller-sdk/core" in (installedWbPackageJson.dependencies ?? {})) {
+    throw new Error("Packed WB package must not depend on @seller-sdk/core.");
+  }
+
   if (
     existsSync(
       join(
@@ -570,7 +685,7 @@ try {
   }
 
   console.log(
-    "seller-sdk and standalone @seller-sdk/ozon tarballs, runtime imports, type imports, and dependency isolation passed",
+    "seller-sdk plus standalone @seller-sdk/ozon and @seller-sdk/wb tarballs, runtime imports, type imports, and dependency isolation passed",
   );
 } finally {
   rmSync(temporaryDirectory, { recursive: true, force: true });

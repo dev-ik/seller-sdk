@@ -1,0 +1,2073 @@
+openapi: 3.0.1
+info:
+  version: finances
+  title: Документы и бухгалтерия
+  description: |
+    <div class="description_important">
+      Узнать больше о документах и бухгалтерии можно в <a href="https://seller.wildberries.ru/instructions/category/ba929b64-1f89-4426-82d7-ce998ee552bd?goBackOption=prevRoute&categoryId=3c971375-9939-45e8-ab82-376019be8942">справочном центре</a>
+    </div>
+
+    <div class="api-block">
+
+    Просмотр [баланса](/openapi/financial-reports-and-accounting#tag/balance), [финансовых отчётов](/openapi/financial-reports-and-accounting#tag/financialReports) и [документов](/openapi/financial-reports-and-accounting#tag/documents) продавца.
+
+    </div>
+  x-file-name: finances
+security:
+  - HeaderApiKey: []
+tags:
+  - name: Баланс
+    x-displayName: Баланс
+    description: ''
+  - name: Финансовые отчёты
+    x-displayName: Финансовые отчёты
+    description: ''
+  - name: Документы
+    x-displayName: Документы
+    description: ''
+paths:
+  /api/v1/account/balance:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    get:
+      operationId: getV1AccountBalance
+      x-readonly-method: true
+      x-category: finance
+      security:
+        - HeaderApiKey: []
+      summary: Получить баланс продавца
+      description: |
+        Метод возвращает данные виджета баланса на [главной странице](https://seller.wildberries.ru) портала продавцов.
+        <br><br>
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Сервисный | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Базовый с секретом | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Базовый | 24 ч | 1 запрос | 24 ч | 1 запрос |
+        </div>
+      tags:
+        - Баланс
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currency:
+                    example: RUB
+                    type: string
+                    description: Валюта
+                  current:
+                    example: 10196.21
+                    type: number
+                    description: Текущий баланс продавца
+                  for_withdraw:
+                    example: 6395.8
+                    type: number
+                    description: Сумма, доступная к выводу
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/sales-reports/list:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      x-token-types:
+        - personal
+        - service
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Список отчётов реализации
+      operationId: postV1SalesReportsList
+      description: |
+
+        <div class="description_token">
+            Метод <a href="/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API">доступен</a> по
+                <strong>Персональному</strong> токену, 
+                <strong>Сервисному</strong> токену
+        </div>
+
+        Метод возвращает список отчётов релизации по формату [таблицы отчётов](https://seller.wildberries.ru/suppliers-mutual-settlements).
+        <br><br>
+        Данные доступны с 1 января 2025 года.
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+        | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- |
+        | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        </div>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesReportListReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SalesReportListRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/sales-reports/detailed/{reportId}:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      x-token-types:
+        - personal
+        - service
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Детализации к отчётам реализации по ID отчётов
+      operationId: postV1SalesReportsDetailedReportId
+      description: |
+
+        <div class="description_token">
+            Метод <a href="/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API">доступен</a> по
+                <strong>Персональному</strong> токену, 
+                <strong>Сервисному</strong> токену
+        </div>
+
+        Метод возвращает детализации к [отчётам реализации](https://seller.wildberries.ru/suppliers-mutual-settlements) по ID отчётов.
+        <br><br>
+        Данные доступны с 1 января 2025 года.
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+        | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- |
+        | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        </div>
+      parameters:
+        - name: reportId
+          in: path
+          description: ID отчёта.<br>Для ежедневных отчётов вместо стандартной десериализации рекомендуем использовать нестандартные библиотеки с поддержкой [BigInt](https://www.npmjs.com/package/json-bigint)
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancialReportsDetailedReportIdReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SalesReportsDetailedRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '403':
+          $ref: '#/components/responses/403'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/sales-reports/detailed:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Детализации к отчётам реализации за период
+      operationId: postV1SalesReportsDetailed
+      description: |
+        Метод возвращает детализации к [отчётам реализации](https://seller.wildberries.ru/suppliers-mutual-settlements) за указанный период.
+        <br><br>
+        Данные доступны с 29 января 2024 года.
+
+        <div class="description_important">
+          Вы можете выгрузить данные в <a href="/knowledge-base/articles/019d49a4-650c-7b04-9596-ba441936f9d3">Google Таблицы</a>
+        </div>
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Сервисный | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Базовый с секретом | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        | Базовый | 24 ч | 2 запроса | 12 ч | 1 запрос |
+        </div>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SalesReportsDetailedReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SalesReportsDetailedRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/acquiring/list:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      x-token-types:
+        - personal
+        - service
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Список отчётов об издержках на приём платежей
+      operationId: postV1AcquiringList
+      description: |
+
+        <div class="description_token">
+            Метод <a href="/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API">доступен</a> по
+                <strong>Персональному</strong> токену, 
+                <strong>Сервисному</strong> токену
+        </div>
+
+        Метод возвращает список отчётов об издержках на приём платежей по формату [таблицы отчётов](https://seller.wildberries.ru/suppliers-mutual-settlements/reports-implementations/acquiring-reports).
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+        | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- |
+        | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        </div>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcquiringReportListReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AcquiringReportListRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/acquiring/detailed/{reportId}:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      x-token-types:
+        - personal
+        - service
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Детализации к отчётам об издержках на приём платежей по ID отчётов
+      operationId: postV1AcquiringDetailedReportId
+      description: |
+
+        <div class="description_token">
+            Метод <a href="/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API">доступен</a> по
+                <strong>Персональному</strong> токену, 
+                <strong>Сервисному</strong> токену
+        </div>
+
+        Метод возвращает детализации к [отчётам об издержках на приём платежей](https://seller.wildberries.ru/suppliers-mutual-settlements/reports-implementations/acquiring-reports) по ID отчётов.
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+        | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- |
+        | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        </div>
+      parameters:
+        - name: reportId
+          in: path
+          description: ID отчёта
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancialReportsDetailedReportIdReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AcquiringReportsDetailedRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '403':
+          $ref: '#/components/responses/403'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/finance/v1/acquiring/detailed:
+    servers:
+      - url: https://finance-api.wildberries.ru
+    post:
+      x-readonly-method: true
+      x-category: finance
+      x-token-types:
+        - personal
+        - service
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Финансовые отчёты
+      summary: Детализации к отчётам об издержках на приём платежей за период
+      operationId: postV1AcquiringDetailed
+      description: |
+
+        <div class="description_token">
+            Метод <a href="/openapi/api-information#tag/authorization/Pravila-ispolzovaniya-tokenov-dostupa-k-API">доступен</a> по
+                <strong>Персональному</strong> токену, 
+                <strong>Сервисному</strong> токену
+        </div>
+
+        Метод возвращает детализации к [отчётам об издержках на приём платежей](https://seller.wildberries.ru/suppliers-mutual-settlements/reports-implementations/acquiring-reports) за указанный период.
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+        | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- |
+        | 1 мин | 1 запрос | 1 мин | 1 запрос |
+        </div>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcquiringReportsDetailedReq'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AcquiringReportsDetailedRes'
+        '204':
+          description: Нет данных
+        '400':
+          $ref: '#/components/responses/response400FinancialReports'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '403':
+          $ref: '#/components/responses/403'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/v1/documents/categories:
+    servers:
+      - url: https://documents-api.wildberries.ru
+    get:
+      operationId: getV1DocumentsCategories
+      x-readonly-method: true
+      x-category: documents
+      tags:
+        - Документы
+      security:
+        - HeaderApiKey: []
+      summary: Категории документов
+      description: |
+        Метод возвращает категории документов для получения [списка документов продавца](/openapi/financial-reports-and-accounting#tag/documents/operation/getV1DocumentsList).
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Сервисный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый с секретом | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый | 24 ч | 1 запрос | 24 ч | 1 запрос |
+        </div>
+      parameters:
+        - $ref: '#/components/parameters/LocaleCat'
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCategories'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/v1/documents/list:
+    servers:
+      - url: https://documents-api.wildberries.ru
+    get:
+      operationId: getV1DocumentsList
+      x-readonly-method: true
+      x-category: documents
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Документы
+      summary: Список документов
+      description: |
+        Метод возвращает список документов продавца. Вы можете получить [один](/openapi/financial-reports-and-accounting#tag/documents/operation/getV1DocumentsDownload) или [несколько](/openapi/financial-reports-and-accounting#tag/documents/operation/postV1DocumentsDownloadAll) документов из полученного списка.
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Сервисный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый с секретом | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый | 24 ч | 1 запрос | 24 ч | 1 запрос |
+        </div>
+      parameters:
+        - $ref: '#/components/parameters/LocaleList'
+        - in: query
+          name: beginTime
+          schema:
+            type: string
+            format: date
+            example: '2024-07-09'
+          description: Начало периода. Только вместе с `endTime`
+        - in: query
+          name: endTime
+          schema:
+            type: string
+            format: date
+            example: '2024-07-15'
+          description: Конец периода. Только вместе с `beginTime`
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum:
+              - date
+              - category
+            default: date
+            example: category
+          description: |
+            Сортировка:
+              - `date` — по дате создания документа
+              - `category` — по категории (только при `locale=ru`)
+
+            Только вместе с `order`
+        - in: query
+          name: order
+          schema:
+            type: string
+            enum:
+              - desc
+              - asc
+            default: desc
+            example: asc
+          description: |
+            Сортировка:
+              - `desc` — по убыванию
+              - `asc` — по возрастанию
+
+            Только вместе с `sort`
+        - in: query
+          name: category
+          schema:
+            type: string
+            example: redeem-notification
+          description: ID [категории документов](./financial-reports-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля `name`
+        - in: query
+          name: serviceName
+          schema:
+            type: string
+            example: redeem-notification-44841941
+          description: Уникальный ID документа
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+            maximum: 50
+            example: 10
+          description: Максимальное количество строк ответа
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+            example: 90
+          description: После какой строки выдавать данные
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetList'
+        '400':
+          $ref: '#/components/responses/Responses400List'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/v1/documents/download:
+    servers:
+      - url: https://documents-api.wildberries.ru
+    get:
+      operationId: getV1DocumentsDownload
+      x-readonly-method: true
+      x-category: documents
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Документы
+      summary: Получить документ
+      description: |
+        Метод загружает один документ из [списка документов продавца](/openapi/financial-reports-and-accounting#tag/documents/operation/getV1DocumentsList).
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Сервисный | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый с секретом | 10 сек | 1 запрос | 10 сек | 5 запросов |
+        | Базовый | 24 ч | 1 запрос | 24 ч | 1 запрос |
+        </div>
+      parameters:
+        - in: query
+          required: true
+          name: serviceName
+          schema:
+            type: string
+            example: redeem-notification-44841941
+          description: Уникальный ID документа
+        - in: query
+          required: true
+          name: extension
+          schema:
+            type: string
+            example: zip
+          description: Формат документа
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDoc'
+        '400':
+          $ref: '#/components/responses/Responses400Download'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+  /api/v1/documents/download/all:
+    servers:
+      - url: https://documents-api.wildberries.ru
+    post:
+      operationId: postV1DocumentsDownloadAll
+      x-readonly-method: true
+      x-category: documents
+      security:
+        - HeaderApiKey: []
+      tags:
+        - Документы
+      summary: Получить документы
+      description: |
+        Метод загружает несколько документов из [списка документов продавца](/openapi/financial-reports-and-accounting#tag/documents/operation/getV1DocumentsList).
+
+        <div class="description_limit">
+        <a href="/openapi/api-information#tag/introduction/Limity-zaprosov">Лимит запросов</a> на один аккаунт продавца:
+
+
+        | Тип | Период | Лимит | Интервал | Всплеск |
+        | --- | --- | --- | --- | --- |
+        | Персональный | 5 мин | 1 запрос | 5 мин | 5 запросов |
+        | Сервисный | 5 мин | 1 запрос | 5 мин | 5 запросов |
+        | Базовый с секретом | 5 мин | 1 запрос | 5 мин | 5 запросов |
+        | Базовый | 24 ч | 1 запрос | 24 ч | 1 запрос |
+        </div>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/requestDownload'
+            example:
+              params:
+                - extension: zip
+                  serviceName: redeem-notification-44841941
+                - extension: xlsx
+                  serviceName: act-income-mp-392460936
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDocs'
+        '400':
+          $ref: '#/components/responses/Responses400DownloadAll'
+        '401':
+          $ref: '#/components/responses/401'
+        '402':
+          $ref: '#/components/responses/402'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  parameters:
+    LocaleCat:
+      name: locale
+      in: query
+      schema:
+        type: string
+        example: ru
+        default: en
+      description: |
+        Язык поля `title`:
+          - `ru` — русский
+          - `en` — английский
+          - `zh` — китайский
+    LocaleList:
+      name: locale
+      in: query
+      schema:
+        type: string
+        example: ru
+        default: en
+      description: |
+        Язык поля `category`:
+          - `ru` — русский
+          - `en` — английский
+          - `zh` — китайский
+  schemas:
+    requestDownload:
+      type: object
+      properties:
+        params:
+          type: array
+          maxItems: 50
+          minItems: 1
+          items:
+            type: object
+            properties:
+              extension:
+                type: string
+                description: Формат документа
+              serviceName:
+                type: string
+                description: Уникальный ID документа
+    GetCategories:
+      properties:
+        data:
+          type: object
+          properties:
+            categories:
+              description: Категории документов
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: redeem-notification
+                    description: ID категории документа из параметра [запроса](./financial-reports-and-accounting#tag/documents/operation/getV1DocumentsList) `category`
+                  title:
+                    type: string
+                    example: Уведомление о выкупе
+                    description: Название категории документа из поля [ответа](./financial-reports-and-accounting#tag/documents/~1api~1v1~1documents~1list/get) `category`
+    GetList:
+      properties:
+        data:
+          type: object
+          properties:
+            documents:
+              description: Категории документов
+              type: array
+              items:
+                type: object
+                properties:
+                  serviceName:
+                    type: string
+                    example: redeem-notification-44841941
+                    description: Уникальный ID документа
+                  name:
+                    type: string
+                    example: redeem-notification
+                    description: Название документа
+                  category:
+                    type: string
+                    example: Уведомление о выкупе
+                    description: Название [категории документов](./financial-reports-and-accounting#tag/documents/operation/getV1DocumentsCategories) из поля ответа `title`
+                  extensions:
+                    type: array
+                    items:
+                      type: string
+                      example: zip
+                    description: Форматы документа
+                  creationTime:
+                    type: string
+                    example: '2023-10-03T00:18:06.879Z'
+                    description: Дата и время создания документа
+                  viewed:
+                    type: boolean
+                    example: false
+                    description: Выгружен ли документ в личном кабинете
+    GetDoc:
+      properties:
+        data:
+          type: object
+          properties:
+            fileName:
+              type: string
+              example: Notice of redemption 44841941.zip
+              description: Название документа
+            extension:
+              type: string
+              example: zip
+              description: Формат документа
+            document:
+              type: string
+              example: UEsDBBQACAgIAAAAAAAAAAAAAAAAAAAAAABHAAAA0KPQstC10LTQvtC80LvQtdC90LjQtSDQviDQstGL0LrRg9C/0LUg4oSWNDQ4NDE5NDEg0L7RgiAyNS4wOS4yMDIzLnhsc3jsnQk0lP3f/0dEUiRkNwmVECI7o0WS7EklxprdkH2bKVkqISRkGSlkaxRlN2TPnmzJvu/Gzmz/Uz33fY/L8/Q8zrn/x/07565zcjrn9f1cn/V6f69v53zTVCWnYATtA+0DAX/Rg0AgM5ip5l2Yg5OwKeyu+Wl3O1vbcA3YV5FDVfPej2vXKptOK1V9LjycmPDG72uW4vcG9xdsOI1V2wj86sk6+4nHJeZ92NFgC/He3gmDlccFXSyumXYUGSKK4hLLsqu5aBTspu5lqlcGB/JNlQVn1Eumj6o8ZEWPRotEVGkH9/kf457totEKj2N2P4dSZWAIaC0ajy5J+VL5fen1YOhcGMxvvUw+XOKFOHL...LSL/tC77s0GzTi2iBuHorbMpcOaw0Hmsc/gpk7ty3/cdDYRmhkRUPAIC37P94CA8oiP/fIvpPK8n9l43YARWRgH/tI6E3ntD/nfOfPyj9jxxDwn+b8/8dZqBDQPjPNSAACJgBAAD21P9s/y8AAP//UEsHCFHrudyQEwAASxQAAFBLAQIUABQACAgIAAAAAACH4v2BaSgAAGNjAABHAAAAAAAAAAAAAAAAAAAAAADQo9Cy0LXQtNC+0LzQu9C10L3QuNC1INC+INCy0YvQutGD0L/QtSDihJY0NDg0MTk0MSDQvtGCIDI1LjA5LjIwMjMueGxzeFBLAQIUABQACAgIAAAAAADTmLxwRQcAAGAPAABLAAAAAAAAAAAAAAAAAN4oAADQo9Cy0LXQtNC+0LzQu9C10L3QuNC1INC+INCy0YvQutGD0L/QtSDihJY0NDg0MTk0MSDQvtGCIDI1LjA5LjIwMjMueGxzeC5zaWdQSwECFAAUAAgACAAAAAAAUeu53JATAABLFAAACAAAAAAAAAAAAAAAAACcMAAAbWNoZC56aXBQSwUGAAAAAAMAAwAkAQAAYkQAAAAA
+              description: Документ в кодировке base64
+    GetDocs:
+      properties:
+        data:
+          type: object
+          properties:
+            fileName:
+              type: string
+              example: documents.zip
+              description: Название документа
+            extension:
+              type: string
+              example: zip
+              description: Формат документа
+            document:
+              type: string
+              example: UEsDBBQACAgIAAAAAAAAAAAAAAAAAAAAAABHAAAA0KPQstC10LTQvtC80LvQtdC90LjQtSDQviDQstGL0LrRg9C/0LUg4oSWNDQ4NDE5NDEg0L7RgiAyNS4wOS4yMDIzLnhsc3jsnQk0lP3f/0dEUiRkNwmVECI7o0WS7EklxprdkH2bKVkqISRkGSlkaxRlN2TPnmzJvu/Gzmz/Uz33fY/L8/Q8zrn/x/07565zcjrn9f1cn/V6f69v53zTVCWnYATtA+0DAX/Rg0AgM5ip5l2Yg5OwKeyu+Wl3O1vbcA3YV5FDVfPej2vXKptOK1V9LjycmPDG72uW4vcG9xdsOI1V2wj86sk6+4nHJeZ92NFgC/He3gmDlccFXSyumXYUGSKK4hLLsqu5aBTspu5lqlcGB/JNlQVn1Eumj6o8ZEWPRotEVGkH9/kf457totEKj2N2P4dSZWAIaC0ajy5J+VL5fen1YOhcGMxvvUw+XOKFOHL...LSL/tC77s0GzTi2iBuHorbMpcOaw0Hmsc/gpk7ty3/cdDYRmhkRUPAIC37P94CA8oiP/fIvpPK8n9l43YARWRgH/tI6E3ntD/nfOfPyj9jxxDwn+b8/8dZqBDQPjPNSAACJgBAAD21P9s/y8AAP//UEsHCFHrudyQEwAASxQAAFBLAQIUABQACAgIAAAAAACH4v2BaSgAAGNjAABHAAAAAAAAAAAAAAAAAAAAAADQo9Cy0LXQtNC+0LzQu9C10L3QuNC1INC+INCy0YvQutGD0L/QtSDihJY0NDg0MTk0MSDQvtGCIDI1LjA5LjIwMjMueGxzeFBLAQIUABQACAgIAAAAAADTmLxwRQcAAGAPAABLAAAAAAAAAAAAAAAAAN4oAADQo9Cy0LXQtNC+0LzQu9C10L3QuNC1INC+INCy0YvQutGD0L/QtSDihJY0NDg0MTk0MSDQvtGCIDI1LjA5LjIwMjMueGxzeC5zaWdQSwECFAAUAAgACAAAAAAAUeu53JATAABLFAAACAAAAAAAAAAAAAAAAACcMAAAbWNoZC56aXBQSwUGAAAAAAMAAwAkAQAAYkQAAAAA
+              description: Документ в кодировке base64
+    SalesReportListReq:
+      type: object
+      description: Параметры запроса
+      required:
+        - dateFrom
+        - dateTo
+      properties:
+        dateFrom:
+          type: string
+          description: |
+            Начальная дата отчёта.<br>Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-17'
+        dateTo:
+          type: string
+          description: |
+            Конечная дата отчёта.<br>Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Время передаётся в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-20'
+        limit:
+          type: integer
+          maximum: 1000
+          default: 1000
+          description: Количество отчётов в ответе
+          example: 211
+        offset:
+          type: integer
+          default: 0
+          description: Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+          example: 345
+        period:
+          type: string
+          enum:
+            - daily
+            - weekly
+          description: |
+            Периодичность отчётов:
+              - `weekly` — еженедельные
+              - `daily` — ежедневные
+          default: weekly
+          example: daily
+    SalesReportListRes:
+      type: object
+      description: Список отчётов реализации
+      required:
+        - reportId
+        - sellerFinanceName
+        - dateFrom
+        - dateTo
+        - createDate
+        - currency
+        - reportType
+        - retailAmountSum
+        - forPaySum
+        - avgSalePercent
+        - deliveryServiceSum
+        - paidStorageSum
+        - paidAcceptanceSum
+        - deductionSum
+        - penaltySum
+        - additionalPaymentSum
+        - cashbackAmountSum
+        - cashbackDiscountSum
+        - cashbackCommissionChangeSum
+        - paymentSchedule
+        - bankPaymentSum
+      properties:
+        reportId:
+          type: integer
+          format: int64
+          description: ID отчёта
+          example: 307401554
+        sellerFinanceName:
+          type: string
+          description: Наименование продавца
+          example: ИП Кружинин В. Р.
+        dateFrom:
+          type: string
+          format: date
+          description: Дата начала отчётного периода
+          example: '2026-03-16'
+        dateTo:
+          type: string
+          format: date
+          description: Дата конца отчётного периода
+          example: '2026-03-22'
+        createDate:
+          type: string
+          format: date
+          description: Дата формирования отчёта
+          example: '2026-03-23'
+        currency:
+          type: string
+          description: Валюта отчёта
+          example: RUB
+        reportType:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+          description: "Тип отчёта:\n  - `1`\_— основной\n  - `2`\_— по\_выкупам\n  - `3` — по выкупам для Грузии\n"
+          example: 1
+        retailAmountSum:
+          type: string
+          description: Продажа
+          example: '258'
+        forPaySum:
+          type: string
+          description: К перечислению за товар
+          example: '183.79'
+        avgSalePercent:
+          type: number
+          description: Согласованная скидка, %
+          example: 0
+        deliveryServiceSum:
+          type: string
+          description: Стоимость логистики
+          example: '2558.47'
+        paidStorageSum:
+          type: string
+          description: Стоимость хранения
+          example: '626.84'
+        paidAcceptanceSum:
+          type: string
+          description: Стоимость операций при приёмке
+          example: '243.81'
+        deductionSum:
+          type: string
+          description: Прочие удержания и выплаты
+          example: '150'
+        penaltySum:
+          type: string
+          description: Общая сумма штрафов
+          example: '1457.61'
+        additionalPaymentSum:
+          type: string
+          description: Корректировка Вознаграждения Вайлдберриз (ВВ)
+          example: '9509.71'
+        cashbackAmountSum:
+          type: string
+          description: Сумма, удержанная за начисленные баллы программы лояльности
+          example: '2'
+        cashbackDiscountSum:
+          type: string
+          description: Компенсация скидки по программе лояльности
+          example: '19'
+        cashbackCommissionChangeSum:
+          type: string
+          description: Стоимость участия в программе лояльности
+          example: '0.2'
+        paymentSchedule:
+          type: string
+          description: Разовое изменение срока перечисления денежных средств
+          example: '-1'
+        bankPaymentSum:
+          type: string
+          description: Итого к оплате
+          example: '5172.94'
+    FinancialReportsDetailedReportIdReq:
+      type: object
+      description: Параметры запроса
+      properties:
+        limit:
+          type: integer
+          maximum: 100000
+          default: 100000
+          description: Количество строк в ответе
+          example: 21100
+        rrdId:
+          type: integer
+          default: 0
+          description: |
+            ID строки ответа. Необходим для получения отчёта частями.<br>Начинайте загрузку отчёта с `"rrdid":0`. В последующих запросах передавайте значение `rrdId` из последней строки предыдущего ответа.<br>Повторяйте запрос, пока не получите ответ `204`
+        fields:
+          type: array
+          items:
+            type: string
+          description: Список полей, которые вернутся в ответе. Если параметр не указан, возвращаются все поля
+          example:
+            - rrdId
+            - nmId
+            - docTypeName
+            - retailAmount
+            - acquiringFee
+            - srid
+    SalesReportsDetailedReq:
+      type: object
+      description: Параметры запроса
+      required:
+        - dateFrom
+        - dateTo
+      properties:
+        dateFrom:
+          type: string
+          description: |
+            Начальная дата отчёта.<br>Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-17'
+        dateTo:
+          type: string
+          description: |
+            Конечная дата отчёта.<br>Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Время передаётся в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-20'
+        limit:
+          type: integer
+          maximum: 100000
+          default: 100000
+          description: Количество строк в ответе
+          example: 21100
+        rrdId:
+          type: integer
+          default: 0
+          description: |
+            ID строки ответа. Необходим для получения отчёта частями.<br>Начинайте загрузку отчёта с `"rrdid":0`. В последующих запросах передавайте значение `rrdId` из последней строки предыдущего ответа.<br>Повторяйте запрос, пока не получите ответ `204`
+        period:
+          type: string
+          enum:
+            - daily
+            - weekly
+          description: |
+            Периодичность отчётов:
+              - `weekly` — еженедельные
+              - `daily` — ежедневные
+          default: weekly
+          example: daily
+        fields:
+          type: array
+          items:
+            type: string
+          description: Список полей, которые вернутся в ответе. Если параметр не указан, возвращаются все поля
+          example:
+            - rrdId
+            - nmId
+            - docTypeName
+            - retailAmount
+            - acquiringFee
+            - srid
+    SalesReportsDetailedRes:
+      type: object
+      description: Детализации к отчётам реализации
+      required:
+        - reportId
+        - dateFrom
+        - dateTo
+        - createDate
+        - currency
+        - reportType
+        - rrdId
+        - giId
+        - dlvPrc
+        - fixTariffDateFrom
+        - fixTariffDateTo
+        - subjectName
+        - nmId
+        - brandName
+        - vendorCode
+        - title
+        - techSize
+        - sku
+        - docTypeName
+        - quantity
+        - retailPrice
+        - retailAmount
+        - salePercent
+        - commissionPercent
+        - officeName
+        - sellerOperName
+        - orderDt
+        - saleDt
+        - rrDate
+        - shkId
+        - retailPriceWithDisc
+        - deliveryAmount
+        - returnAmount
+        - deliveryService
+        - giBoxTypeName
+        - productDiscountForReport
+        - sellerPromo
+        - spp
+        - kvwBase
+        - kvw
+        - supRatingUp
+        - isKgvpV2
+        - ppvzSalesCommission
+        - forPay
+        - ppvzReward
+        - acquiringFee
+        - acquiringPercent
+        - paymentProcessing
+        - acquiringBank
+        - vw
+        - vwNds
+        - ppvzOfficeName
+        - ppvzOfficeId
+        - ppvzSupplierName
+        - ppvzSupplierInn
+        - declarationNumber
+        - stickerId
+        - country
+        - srvDbs
+        - penalty
+        - additionalPayment
+        - rebillLogisticCost
+        - paidStorage
+        - deduction
+        - paidAcceptance
+        - orderId
+        - isB2b
+        - trbxId
+        - installmentCofinancingAmount
+        - wibesDiscountPercent
+        - cashbackAmount
+        - cashbackDiscount
+        - cashbackCommissionChange
+        - paymentSchedule
+        - deliveryMethod
+        - sellerPromoId
+        - sellerPromoDiscount
+        - loyaltyId
+        - loyaltyDiscount
+        - uuidPromocode
+        - salePricePromocodeDiscountPrc
+        - articleSubstitution
+        - salePriceAffiliatedDiscountPrc
+        - salePriceWholesaleDiscountPrc
+        - b2bCustomerTin
+        - paidWithSocialCertificate
+        - orderUid
+        - srid
+      properties:
+        reportId:
+          example: 1234567
+          type: integer
+          format: int64
+          description: ID отчёта
+        dateFrom:
+          type: string
+          format: date
+          description: Дата начала отчётного периода
+          example: '2026-03-16'
+        dateTo:
+          type: string
+          format: date
+          description: Дата конца отчётного периода
+          example: '2026-03-22'
+        createDate:
+          type: string
+          format: date
+          description: Дата формирования отчёта
+          example: '2026-03-23'
+        currency:
+          type: string
+          description: Валюта отчёта
+          example: RUB
+        reportType:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+          description: "Тип отчёта:\n  - `1`\_— основной\n  - `2`\_— по\_выкупам\n  - `3` — по выкупам для Грузии\n"
+          example: 1
+        rrdId:
+          example: 1232610467
+          type: integer
+          description: ID строки
+        giId:
+          example: 123456
+          type: integer
+          description: ID поставки
+        dlvPrc:
+          example: 1.8
+          type: number
+          description: Фиксированный коэффициент склада по поставке
+        fixTariffDateFrom:
+          example: '2026-03-18'
+          type: string
+          format: date
+          description: Дата начала действия фиксации
+        fixTariffDateTo:
+          example: '2026-03-19'
+          type: string
+          format: date
+          description: Дата конца действия фиксации
+        subjectName:
+          example: Мини-печи
+          type: string
+          description: Предмет
+        nmId:
+          example: 1234567
+          type: integer
+          description: Артикул WB
+        brandName:
+          example: BlahBlah
+          type: string
+          description: Бренд
+        vendorCode:
+          example: MAB123
+          type: string
+          description: Артикул продавца
+        title:
+          example: ДС тарелка
+          type: string
+          description: Название товара
+        techSize:
+          example: '0'
+          type: string
+          description: Размер
+        sku:
+          example: '1231312352310'
+          type: string
+          description: Баркод
+        docTypeName:
+          example: Продажа
+          type: string
+          description: Тип документа
+        quantity:
+          type: integer
+          example: 1
+          description: Количество
+        retailPrice:
+          example: '1249'
+          type: string
+          description: Цена розничная
+        retailAmount:
+          example: '367'
+          type: string
+          description: Вайлдберриз реализовал Товар (Пр)
+        salePercent:
+          example: 0
+          type: integer
+          description: Согласованный продуктовый дисконт, %
+        commissionPercent:
+          example: 24
+          type: number
+          description: Размер кВВ, %
+        officeName:
+          example: Коледино
+          type: string
+          description: Склад
+        sellerOperName:
+          example: Продажа
+          type: string
+          description: Обоснование для оплаты
+        orderDt:
+          example: '2026-03-14T00:00:00Z'
+          type: string
+          format: date-time
+          description: Дата и время заказа
+        saleDt:
+          example: '2026-03-21T00:00:00Z'
+          type: string
+          format: date-time
+          description: Дата и время продажи
+        rrDate:
+          example: '2025-10-20'
+          type: string
+          format: date
+          description: Дата операции
+        shkId:
+          example: 1239159661
+          type: integer
+          description: Штрихкод
+        retailPriceWithDisc:
+          example: '399.68'
+          type: string
+          description: Цена розничная с учётом согласованной скидки
+        deliveryAmount:
+          example: 0
+          type: integer
+          description: Количество доставок
+        returnAmount:
+          example: 0
+          type: integer
+          description: Количество возврата
+        deliveryService:
+          example: '0'
+          type: string
+          description: Услуги по доставке товара покупателю
+        giBoxTypeName:
+          example: Монопаллета
+          type: string
+          description: Тип коробов
+        productDiscountForReport:
+          example: 0
+          type: number
+          description: Итоговая согласованная скидка, %
+        sellerPromo:
+          example: '0'
+          type: string
+          description: Промокод, %
+        spp:
+          example: 25.31
+          type: number
+          description: Платформенные скидки, %
+        kvwBase:
+          example: 24.15
+          type: number
+          description: Размер кВВ без НДС, % базовый
+        kvw:
+          example: 1.81
+          type: number
+          description: Итоговый кВВ без НДС, %
+        supRatingUp:
+          type: number
+          description: Размер снижения кВВ из-за рейтинга, %
+        isKgvpV2:
+          type: number
+          description: Размер снижения кВВ из-за акции, %
+        ppvzSalesCommission:
+          example: '23.74'
+          type: string
+          description: Вознаграждение с продаж до вычета услуг поверенного, без НДС
+        forPay:
+          example: '376.99'
+          type: string
+          description: К перечислению продавцу за реализованный товар
+        ppvzReward:
+          example: '0'
+          type: string
+          description: Возмещение за выдачу и возврат товаров на ПВЗ
+        acquiringFee:
+          example: '14.89'
+          type: string
+          description: Компенсация платёжных услуг/Комиссия за интеграцию платёжных сервисов
+        acquiringPercent:
+          example: 4.06
+          type: number
+          description: Размер компенсации платёжных услуг/Комиссии за интеграцию платёжных сервисов, %
+        paymentProcessing:
+          example: Комиссия за организацию платежа с НДС
+          type: string
+          description: 'Тип платежа: компенсация платёжных услуг/Комиссия за интеграцию платёжных сервисов'
+        acquiringBank:
+          example: Тинькофф
+          type: string
+          description: Наименование банка-эквайера
+        vw:
+          example: '22.25'
+          type: string
+          description: Вознаграждение Вайлдберриз (ВВ), без НДС
+        vwNds:
+          example: '4.45'
+          type: string
+          description: НДС с вознаграждения Вайлдберриз
+        ppvzOfficeName:
+          example: Москва Москва Очаковское шоссе 6к2
+          type: string
+          description: Наименование офиса доставки
+        ppvzOfficeId:
+          example: 105383
+          type: integer
+          description: ID офиса доставки
+        ppvzSupplierName:
+          example: ИП Жасмин
+          type: string
+          description: Партнёр
+        ppvzSupplierInn:
+          example: '010101010101'
+          type: string
+          description: ИНН партнёра
+        declarationNumber:
+          example: ''
+          type: string
+          description: Номер таможенной декларации
+        bonusTypeName:
+          example: Штраф МП. Невыполненный заказ (отмена клиентом после недовоза)
+          type: string
+          description: Виды логистики, штрафов и корректировок ВВ
+        stickerId:
+          example: '1964038895'
+          type: string
+          description: Стикер МП
+        country:
+          example: Россия
+          type: string
+          description: Страна продажи
+        srvDbs:
+          example: true
+          type: boolean
+          description: Признак услуги платной доставки
+        penalty:
+          example: '231.35'
+          type: string
+          description: Общая сумма штрафов
+        additionalPayment:
+          example: '0'
+          type: string
+          description: Корректировка Вознаграждения Вайлдберриз (ВВ)
+        rebillLogisticCost:
+          example: '1.349'
+          type: string
+          description: Возмещение издержек по перевозке/по складским операциям с товаром
+        rebillLogisticOrg:
+          example: ИП Иванов Иван Иванович(123456789012)
+          type: string
+          description: Организатор перевозки
+        paidStorage:
+          type: string
+          description: Хранение
+          example: '12647.29'
+        deduction:
+          type: string
+          description: Удержания
+          example: '6354'
+        paidAcceptance:
+          type: string
+          description: Операции на приёмке
+          example: '865'
+        orderId:
+          type: integer
+          description: ID сборочного задания
+          example: 2816993144
+        kiz:
+          type: string
+          description: Код маркировки [Честного знака](https://честныйзнак.рф/)
+          example: "0102900000376311210G2CIS?ehge)S\x1D91002A\x1D92F9Qof4FDo/31Icm14kmtuVYQzLypxm3HWkC1vQ/+pVVjm1dNAth1laFMoAGn7yEMWlTjxIe7lQnJqZ7TRZhlHQ=="
+        isB2b:
+          type: boolean
+          description: Признак B2B-продажи
+          example: false
+        trbxId:
+          type: string
+          description: ID короба для обработки товара
+          example: WB-TRBX-1234567
+        installmentCofinancingAmount:
+          type: string
+          description: Скидка по программе софинансирования
+          example: '0'
+        wibesDiscountPercent:
+          type: number
+          description: Скидка Wibes, %
+          example: 1
+        cashbackAmount:
+          type: string
+          description: Сумма, удержанная за начисленные баллы программы лояльности
+          example: '2'
+        cashbackDiscount:
+          type: string
+          description: Компенсация скидки по программе лояльности
+          example: '19'
+        cashbackCommissionChange:
+          type: string
+          description: Стоимость участия в программе лояльности
+          example: '0.2'
+        paymentSchedule:
+          type: string
+          description: Разовое изменение срока перечисления денежных средств
+          example: '-1'
+        deliveryMethod:
+          type: string
+          description: Способ продажи и тип товара
+          example: FBS, (МГТ)
+        sellerPromoId:
+          type: integer
+          description: ID собственной акции продавца с дополнительной скидкой
+          example: 14350
+        sellerPromoDiscount:
+          type: number
+          description: Размер дополнительной скидки по собственной акции продавца, %
+          example: 3
+        loyaltyId:
+          type: integer
+          description: ID скидки лояльности от продавца
+          example: 0
+        loyaltyDiscount:
+          type: number
+          description: Размер скидки лояльности от продавца, %
+          example: 0
+        uuidPromocode:
+          type: string
+          description: ID промокода
+          example: ''
+        salePricePromocodeDiscountPrc:
+          type: number
+          description: Скидка за промокод, %
+          example: 0
+        articleSubstitution:
+          type: string
+          description: ID подменного артикула
+          example: ''
+        salePriceAffiliatedDiscountPrc:
+          type: number
+          description: Скидка по подменному артикулу, %
+          example: 0
+        agencyVat:
+          type: number
+          description: Удержание Агентского НДС, %.<br>Только для продавцов из Кыргызстана
+          example: 0
+        salePriceWholesaleDiscountPrc:
+          type: number
+          description: Оптовая скидка для бизнеса, %
+          example: 0
+        b2bCustomerTin:
+          type: string
+          description: ИНН B2B-покупателя
+          example: '010101010101'
+        paidWithSocialCertificate:
+          type: boolean
+          description: Оплата социальным сертификатом
+          example: false
+        orderUid:
+          type: string
+          description: |
+            ID корзины заказа — транзакции.<br>Заказы в одной корзине покупателя будут иметь одинаковый `orderUid`
+          example: id375f16c4bec295d9995393af803ff7b
+        srid:
+          example: 0f1c3999172603062979867564654dac5b702849
+          type: string
+          description: |
+            ID заказа.<br>В ответах методов сборочных заданий [FBS](./orders-fbs#tag/Sborochnye-zadaniya-FBS), [DBW](./orders-dbw#tag/dbwAssemblyOrders), [DBS](./orders-dbs#tag/dbsAssemblyOrders) и [Самовывоз](./in-store-pickup#tag/inStorePickupAssemblyOrders) `srid` равен `rid`
+    AcquiringReportListReq:
+      type: object
+      description: Параметры запроса
+      required:
+        - dateFrom
+        - dateTo
+      properties:
+        dateFrom:
+          type: string
+          description: |
+            Начальная дата отчёта.<br>Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-17'
+        dateTo:
+          type: string
+          description: |
+            Конечная дата отчёта.<br>Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Время передаётся в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-20'
+        limit:
+          type: integer
+          maximum: 1000
+          default: 1000
+          description: Количество отчётов в ответе
+          example: 211
+        offset:
+          type: integer
+          default: 0
+          description: Сколько элементов пропустить. Например, для значения `10` ответ начнётся с 11 элемента
+          example: 345
+    AcquiringReportListRes:
+      type: object
+      description: Список отчётов об издержках на приём платежей
+      required:
+        - reportId
+        - sellerFinanceName
+        - dateFrom
+        - dateTo
+        - createDate
+        - currency
+        - acquiringFeeSum
+        - acquiringFeeVatSum
+      properties:
+        reportId:
+          type: integer
+          format: int64
+          description: ID отчёта
+          example: 307401554
+        sellerFinanceName:
+          type: string
+          description: Наименование продавца
+          example: ИП Кружинин В. Р.
+        dateFrom:
+          type: string
+          format: date
+          description: Дата начала отчётного периода
+          example: '2026-03-16'
+        dateTo:
+          type: string
+          format: date
+          description: Дата конца отчётного периода
+          example: '2026-03-22'
+        createDate:
+          type: string
+          format: date
+          description: Дата формирования отчёта
+          example: '2026-03-31'
+        currency:
+          type: string
+          description: Валюта отчёта
+          example: RUB
+        acquiringFeeSum:
+          type: string
+          description: Сумма издержек по эквайрингу
+          example: '258'
+        acquiringFeeVatSum:
+          type: string
+          description: В том числе НДС
+          example: '83.79'
+    AcquiringReportsDetailedReq:
+      type: object
+      description: Параметры запроса
+      required:
+        - dateFrom
+        - dateTo
+      properties:
+        dateFrom:
+          type: string
+          description: |
+            Начальная дата отчёта.<br>Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Дата передаётся в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339), время — в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-17'
+        dateTo:
+          type: string
+          description: |
+            Конечная дата отчёта.<br>Дата в формате [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339). Можно передать дату или дату со временем. Время можно указывать с точностью до секунд или миллисекунд.<br>Время передаётся в часовом поясе Москва `UTC+3`.<br>Примеры:
+              - `2025-06-20`
+              - `2025-06-20T23:59:59`
+              - `2025-06-20T00:00:00.12345`
+              - `2025-06-20T00:00:00`
+          example: '2026-03-20'
+        limit:
+          type: integer
+          maximum: 100000
+          default: 100000
+          description: Количество строк в ответе
+          example: 21100
+        rrdId:
+          type: integer
+          default: 0
+          description: |
+            ID строки ответа. Необходим для получения отчёта частями.<br>Начинайте загрузку отчёта с `"rrdid":0`. В последующих запросах передавайте значение `rrdId` из последней строки предыдущего ответа.<br>Повторяйте запрос, пока не получите ответ `204`
+        fields:
+          type: array
+          items:
+            type: string
+          description: Список полей, которые вернутся в ответе. Если параметр не указан, возвращаются все поля
+          example:
+            - rrdId
+            - nmId
+            - docTypeName
+            - retailAmount
+            - acquiringFee
+            - srid
+    AcquiringReportsDetailedRes:
+      type: object
+      description: Детализации к отчётам об издержках на приём платежей
+      required:
+        - reportId
+        - currency
+        - rrdId
+        - nmId
+        - docTypeName
+        - retailAmount
+        - saleDate
+        - acqDate
+        - shkId
+        - acquiringFee
+        - acquiringFeeVat
+        - acquiringBank
+        - tin
+        - taxRegistrationReasonCode
+        - invoiceNumber
+        - invoiceDate
+        - srid
+      properties:
+        rrdId:
+          example: 1232610467
+          type: integer
+          description: ID строки
+        reportId:
+          example: 1234567
+          type: integer
+          format: int64
+          description: ID отчёта
+        acqDate:
+          example: '2026-03-21'
+          type: string
+          description: Дата операции
+        acquiringBank:
+          example: Тинькофф
+          type: string
+          description: Наименование банка-эквайера
+        tin:
+          example: '010101010101'
+          type: string
+          description: ИНН
+        taxRegistrationReasonCode:
+          example: '7701123301'
+          type: string
+          description: КПП
+        saleDate:
+          example: '2026-03-21'
+          type: string
+          description: Дата продажи
+        srid:
+          example: D0.r3f80c3eec6f845c6840128b4c19986f9.0.0
+          type: string
+          description: |
+            ID заказа.<br>В ответах методов сборочных заданий [FBS](./orders-fbs#tag/Sborochnye-zadaniya-FBS), [DBW](./orders-dbw#tag/dbwAssemblyOrders), [DBS](./orders-dbs#tag/dbsAssemblyOrders) и [Самовывоз](./in-store-pickup#tag/inStorePickupAssemblyOrders) `srid` равен `rid`
+        docTypeName:
+          example: Продажа
+          type: string
+          description: Тип документа
+        nmId:
+          example: 1234567
+          type: integer
+          description: Артикул WB
+        retailAmount:
+          example: '367'
+          type: string
+          description: Вайлдберриз реализовал Товар (Пр)
+        acquiringFee:
+          example: '14.89'
+          type: string
+          description: Размер комиссии за эквайринг, в том числе НДС
+        acquiringFeeVat:
+          example: '4.06'
+          type: string
+          description: Сумма НДС
+        invoiceNumber:
+          type: string
+          description: Номер счёта-фактуры
+          example: С/Ф 123
+        invoiceDate:
+          type: string
+          description: Дата счёта-фактуры
+          example: '2026-03-20'
+        shkId:
+          example: 1239159661
+          type: integer
+          description: Штрихкод
+        currency:
+          type: string
+          description: Валюта отчёта
+          example: RUB
+  responses:
+    '401':
+      description: Не авторизован
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              detail:
+                type: string
+                description: Детали ошибки
+              code:
+                type: string
+                description: Внутренний код ошибки
+              requestId:
+                type: string
+                description: Уникальный ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+              status:
+                type: number
+                description: HTTP статус-код
+              statusText:
+                type: string
+                description: Расшифровка HTTP статус-кода
+              timestamp:
+                type: string
+                format: date-time
+                description: Дата и время запроса
+          example:
+            title: unauthorized
+            detail: 'token problem; token is malformed: could not base64 decode signature: illegal base64 data at input byte 84'
+            code: 07e4668e--a53a3d31f8b0-[UK-oWaVDUqNrKG]; 03bce=277; 84bd353bf-75
+            requestId: 7b80742415072fe8b6b7f7761f1d1211
+            origin: s2s-api-auth-catalog
+            status: 401
+            statusText: Unauthorized
+            timestamp: '2024-09-30T06:52:38Z'
+    '402':
+      description: Требуется платёж
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              detail:
+                type: string
+                description: Детали ошибки. Ошибка возвращается только сервисам из [Каталога решений для бизнеса](/business-solutions)
+          example:
+            title: payment required
+            detail: wb solution for business has insufficient funds on its balance. please top up the balance in the company's personal account https://dev.wildberries.ru/company
+    '403':
+      description: Доступ запрещён
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              detail:
+                type: string
+                description: Детали ошибки
+              code:
+                type: string
+                description: Внутренний код ошибки
+              requestId:
+                type: string
+                description: ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+              status:
+                type: number
+                description: HTTP статус-код
+              statusText:
+                type: string
+                description: Расшифровка HTTP статус-кода
+              timestamp:
+                type: string
+                format: date-time
+                description: Дата и время запроса
+          example:
+            title: forbidden
+            detail: base token is not allowed
+            code: base token is not allowed for this path
+            requestId: 722199b2e15bbca48cc1d488a7989976
+            origin: s2s-finance
+            status: 403
+            statusText: Forbidden
+            timestamp: '2026-05-25T02:47:09Z'
+    '429':
+      description: Слишком много запросов
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              detail:
+                type: string
+                description: Детали ошибки
+              code:
+                type: string
+                description: Внутренний код ошибки
+              requestId:
+                type: string
+                description: Уникальный ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+              status:
+                type: number
+                description: HTTP статус-код
+              statusText:
+                type: string
+                description: Расшифровка HTTP статус-кода
+              timestamp:
+                type: string
+                format: date-time
+                description: Дата и время запроса
+          example:
+            title: too many requests
+            detail: limited by c122a060-a7fb-4bb4-abb0-32fd4e18d489
+            code: 07e4668e-ac2242c5c8c5-[UK-4dx7JUdskGZ]
+            requestId: 9d3c02cc698f8b041c661a7c28bed293
+            origin: s2s-api-auth-catalog
+            status: 429
+            statusText: Too Many Requests
+            timestamp: '2024-09-30T06:52:38Z'
+    response400FinancialReports:
+      description: Неправильный запрос
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                description: HTTP статус-код
+                example: 400
+              title:
+                type: string
+                description: Заголовок ошибки
+                example: GetReportDetailByPeriodNB decode error
+              detail:
+                type: string
+                description: Детали ошибки
+                example: 'GetReportDetailByPeriodNB decode error: missing dateTo params'
+              requestId:
+                type: string
+                description: ID запроса
+                example: b065c204-c5f7-431b-b12c-d4c2cc6347ec
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+                example: open-api-finreports
+    Responses400List:
+      description: Неправильный запрос
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              status:
+                type: number
+                description: HTTP статус-код
+              detail:
+                type: string
+                description: Детализация ошибки
+              requestId:
+                type: string
+                description: Уникальный ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+          examples:
+            BadSort&Orders:
+              description: Параметры sort и order нельзя указывать по отдельности
+              value:
+                title: Bad Request
+                status: 400
+                detail: sort and order must be both set or both not set
+                requestId: 41fc3b08-051d-4871-9991-6502977912ad
+                origin: docs-public-api
+            BadLimit:
+              description: Превышено допустимое значение параметра limit
+              value:
+                title: Bad Request
+                status: 400
+                detail: limit must be less than or equal to 50
+                requestId: 46ce9c17-4b74-46ed-abb1-e40d2b0d52ce
+                origin: docs-public-api
+    Responses400Download:
+      description: Неправильный запрос
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              status:
+                type: number
+                description: HTTP статус-код
+              detail:
+                type: string
+                description: Детализация ошибки
+              requestId:
+                type: string
+                description: Уникальный ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+          example:
+            title: Bad Request
+            status: 400
+            detail: serviceName and extension are required
+            requestId: 7c500a19-f531-4639-b0a4-53d6d296c349
+            origin: docs-public-api
+    Responses400DownloadAll:
+      description: Неправильный запрос
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Заголовок ошибки
+              status:
+                type: number
+                description: HTTP статус-код
+              detail:
+                type: string
+                description: Детализация ошибки
+              requestId:
+                type: string
+                description: Уникальный ID запроса
+              origin:
+                type: string
+                description: ID внутреннего сервиса WB
+          examples:
+            badRequestBodyElement:
+              description: Некорректное тело запроса
+              value:
+                title: Bad Request
+                status: 400
+                detail: request body must contain at least one element with serviceName and extension
+                requestId: 6c364410-625c-4493-a434-8cbe79dfbf18
+                origin: docs-public-api
+            badRequestBodyElementCount:
+              description: Превышено количество запрашиваемых документов
+              value:
+                title: Bad Request
+                status: 400
+                detail: documents count must be less than or equal to 50
+                requestId: 0cf25b67-865e-4126-b971-1ff2e17fe84a
+                origin: docs-public-api
+  securitySchemes:
+    HeaderApiKey:
+      type: apiKey
+      name: Authorization
+      in: header

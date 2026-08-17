@@ -26,8 +26,8 @@ export interface TransportRequest {
   readonly headers?: Readonly<Record<string, string>>;
   readonly body?: unknown;
   readonly bodyEncoding?: "json" | "form-data";
-  readonly accept?: "application/json" | "application/pdf" | "image/png";
-  readonly responseType?: "json" | "array-buffer";
+  readonly accept?: string;
+  readonly responseType?: "json" | "array-buffer" | "auto";
   readonly signal?: AbortSignal;
   readonly timeoutMs?: number;
   readonly deadlineMs?: number;

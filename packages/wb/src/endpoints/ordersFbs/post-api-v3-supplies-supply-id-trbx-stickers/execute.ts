@@ -1,0 +1,42 @@
+// Generated request mapping and execution for this Wildberries endpoint.
+import type {
+  WbOperationDefinition,
+  WbOperationExecutor,
+} from "../../../operation.js";
+import type { WbRequestOptions } from "../../../request-options.js";
+import { parsePostApiV3SuppliesSupplyIdTrbxStickersResponse } from "./contract.js";
+import type {
+  PostApiV3SuppliesSupplyIdTrbxStickersInput,
+  PostApiV3SuppliesSupplyIdTrbxStickersResponse,
+} from "./types.js";
+
+export const POST_API_V3_SUPPLIES_SUPPLY_ID_TRBX_STICKERS_OPERATION_ID =
+  "POST /api/v3/supplies/{supplyId}/trbx/stickers";
+
+const definition: WbOperationDefinition<PostApiV3SuppliesSupplyIdTrbxStickersResponse> =
+  {
+    operationId: POST_API_V3_SUPPLIES_SUPPLY_ID_TRBX_STICKERS_OPERATION_ID,
+    method: "POST",
+    path: "/api/v3/supplies/{supplyId}/trbx/stickers",
+    productionOrigin: "https://marketplace-api.wildberries.ru",
+    sandboxOrigin: "https://marketplace-api-sandbox.wildberries.ru",
+    parameters: [
+      { name: "supplyId", location: "path", required: true, array: false },
+      { name: "type", location: "query", required: true, array: false },
+    ],
+    requestContentType: "application/json",
+    retrySafety: "safe",
+    responseType: "json",
+    accept: "application/json",
+    parseResponse: parsePostApiV3SuppliesSupplyIdTrbxStickersResponse,
+    source: "https://dev.wildberries.ru/docs/openapi/orders-fbs",
+    verifiedAt: "2026-08-17",
+  };
+
+export function executePostApiV3SuppliesSupplyIdTrbxStickers(
+  execute: WbOperationExecutor,
+  input: PostApiV3SuppliesSupplyIdTrbxStickersInput,
+  options: WbRequestOptions = {},
+): Promise<PostApiV3SuppliesSupplyIdTrbxStickersResponse> {
+  return execute(definition, input, options);
+}

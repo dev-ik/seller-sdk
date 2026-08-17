@@ -7,12 +7,15 @@ export {
   ResponseValidationError,
   SellerSdkError,
   TimeoutError,
+  toSellerSdkErrorDetails,
 } from "#internal-core";
 export type {
   ApiErrorOptions,
   NetworkErrorOptions,
   ResponseValidationErrorOptions,
   SellerSdkErrorCode,
+  SellerSdkErrorDetails,
+  SellerSdkErrorDetailsCode,
   SellerSdkErrorOptions,
   TimeoutErrorOptions,
   ValidationIssue,

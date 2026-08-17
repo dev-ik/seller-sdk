@@ -5,6 +5,7 @@
     "paths": {
       "#internal-core": ["./packages/core/src/index.ts"],
       "@seller-sdk/ozon": ["./packages/ozon/src/index.ts"],
+      "@seller-sdk/wb": ["./packages/wb/src/index.ts"],
       "seller-sdk": ["./packages/seller-sdk/src/index.ts"]
     },
     "types": ["node", "vitest/globals"]

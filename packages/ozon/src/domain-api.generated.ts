@@ -190,7 +190,8 @@ export interface GeneratedOzonDomainApi {
      * [обсуждению](https://dev.ozon.ru/community/1106-Razdel-upravleniia-ostatkami-analytics-manage-stocks)
      * в сообществе разработчиков Ozon for dev.
      *
-     * @deprecated 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks .
+     * @deprecated 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks.
+     * Замена в SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/AnalyticsAPI_ManageStocks)
      */
@@ -243,7 +244,8 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated В будущем метод будет отключён. Переключитесь на /v1/analytics/stocks .
+     * @deprecated В будущем метод будет отключён. Переключитесь на /v1/analytics/stocks. Замена в
+     * SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/AnalyticsAPI_AnalyticsGetStockOnWarehousesV2)
      */
@@ -314,7 +316,8 @@ export interface GeneratedOzonDomainApi {
     /**
      * Рекомендуемый метод без версии; использует `getAnalyticsManageStocksV1` (POST /v1/analytics/manage/stocks).
      *
-     * @deprecated 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks .
+     * @deprecated 22 января 2026 года метод будет отключён. Переключитесь на /v1/analytics/stocks.
+     * Замена в SDK: `ozon.analytics.getAnalyticsStocks(...)` для `POST /v1/analytics/stocks`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/AnalyticsAPI_ManageStocks)
      */
@@ -506,8 +509,6 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `is_transport`, `supply_id`.
      *
-     * @deprecated Asynchronously enables or disables transport cargoes for a supply; never retried automatically.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/CargoesTransportActivate)
      */
     readonly activateTransportCargoesV1: BoundOperationMethod<"activateTransportCargoesV1">;
@@ -677,8 +678,6 @@ export interface GeneratedOzonDomainApi {
     readonly getTransportLabelsStatusV1: BoundOperationMethod<"getTransportLabelsStatusV1">;
     /**
      * Рекомендуемый метод без версии; использует `activateTransportCargoesV1` (POST /v1/cargoes/transport/activate).
-     *
-     * @deprecated Asynchronously enables or disables transport cargoes for a supply; never retried automatically.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/CargoesTransportActivate)
      */
@@ -1373,7 +1372,9 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `delivery_method_id`.
      *
-     * @deprecated 20 марта 2026 года отключим метод. Переключитесь на /v2/carriage/delivery/list .
+     * @deprecated 20 марта 2026 года отключим метод. Переключитесь на /v2/carriage/delivery/list.
+     * Замена в SDK: `ozon.deliveries.listFbsCarriageDeliveriesV2(...)` для `POST
+     * /v2/carriage/delivery/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetCarriageAvailableList)
      */
@@ -1534,7 +1535,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/delivery-method/list .
+     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на
+     * /v2/delivery-method/list. Замена в SDK: `ozon.deliveryMethods.listDeliveryMethodsV2(...)` для
+     * `POST /v2/delivery-method/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/WarehouseAPI_DeliveryMethodList)
      */
@@ -1628,7 +1631,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на /v2/posting/digital/list .
+     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на
+     * /v2/posting/digital/list. Замена в SDK: `ozon.digital.listDigitalPostingsV2(...)` для `POST
+     * /v2/posting/digital/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ListPostingCodes)
      */
@@ -2676,7 +2681,12 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Данные могут не соответствовать информации в личном кабинете.
+     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на
+     * /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Данные
+     * могут не соответствовать информации в личном кабинете. Замены в SDK:
+     * `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`;
+     * `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`;
+     * `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionTotalV3)
      */
@@ -2796,7 +2806,13 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете.
+     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на
+     * /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day.
+     * Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать
+     * информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)`
+     * для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для
+     * `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST
+     * /v1/finance/accrual/by-day`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionListV3)
      */
@@ -2858,7 +2874,12 @@ export interface GeneratedOzonDomainApi {
     /**
      * Рекомендуемый метод без версии; использует `getFinanceTransactionTotalsV3` (POST /v3/finance/transaction/totals).
      *
-     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Данные могут не соответствовать информации в личном кабинете.
+     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на
+     * /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day. Данные
+     * могут не соответствовать информации в личном кабинете. Замены в SDK:
+     * `ozon.finance.getFinanceAccrualPostingsV1(...)` для `POST /v1/finance/accrual/postings`;
+     * `ozon.finance.listFinanceAccrualTypesV1(...)` для `POST /v1/finance/accrual/types`;
+     * `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST /v1/finance/accrual/by-day`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionTotalV3)
      */
@@ -2896,7 +2917,13 @@ export interface GeneratedOzonDomainApi {
     /**
      * Рекомендуемый метод без версии; использует `listFinanceTransactionsV3` (POST /v3/finance/transaction/list).
      *
-     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на /v1/finance/accrual/postings , /v1/finance/accrual/types , /v1/finance/accrual/by-day . Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать информации в личном кабинете.
+     * @deprecated Метод устаревает и будет отключён 8 сентября 2026 года. Переключитесь на
+     * /v1/finance/accrual/postings, /v1/finance/accrual/types, /v1/finance/accrual/by-day.
+     * Используйте метод с последовательной отправкой запросов. Данные могут не соответствовать
+     * информации в личном кабинете. Замены в SDK: `ozon.finance.getFinanceAccrualPostingsV1(...)`
+     * для `POST /v1/finance/accrual/postings`; `ozon.finance.listFinanceAccrualTypesV1(...)` для
+     * `POST /v1/finance/accrual/types`; `ozon.finance.getFinanceAccrualByDayV1(...)` для `POST
+     * /v1/finance/accrual/by-day`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/FinanceAPI_FinanceTransactionListV3)
      */
@@ -3002,8 +3029,6 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `id`, `enabled`.
      *
-     * @deprecated Enables or disables a webhook registration; never retried automatically.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/EnableNotification)
      */
     readonly enableNotificationV1: BoundOperationMethod<"enableNotificationV1">;
@@ -3075,8 +3100,6 @@ export interface GeneratedOzonDomainApi {
     readonly deleteNotification: BoundOperationMethod<"deleteNotificationV1">;
     /**
      * Рекомендуемый метод без версии; использует `enableNotificationV1` (POST /v1/notification/enable).
-     *
-     * @deprecated Enables or disables a webhook registration; never retried automatically.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/EnableNotification)
      */
@@ -3346,7 +3369,8 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён в будущем. Переключитесь на /v2/polygon/bind .
+     * @deprecated Метод устаревает и будет отключён в будущем. Переключитесь на /v2/polygon/bind.
+     * Замена в SDK: `ozon.polygons.bindDeliveryPolygonV2(...)` для `POST /v2/polygon/bind`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PolygonAPI_BindPolygon)
      */
@@ -3530,7 +3554,10 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 7 сентября 2026. Переключитесь на /v1/carriage/create и /v1/carriage/approve .
+     * @deprecated Метод устаревает и будет отключён 7 сентября 2026. Переключитесь на
+     * /v1/carriage/create и /v1/carriage/approve. Замены в SDK:
+     * `ozon.deliveries.createFbsCarriage(...)` для `POST /v1/carriage/create`;
+     * `ozon.deliveries.approveFbsCarriage(...)` для `POST /v1/carriage/approve`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSActCreate)
      */
@@ -3553,7 +3580,10 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated В будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на /v2/posting/fbs/package-label/create .
+     * @deprecated В будущем метод будет отключён. Мы предупредим вас об этом за месяц.
+     * Переключитесь на /v2/posting/fbs/package-label/create. Замена в SDK:
+     * `ozon.postings.createFbsPackageLabelBatchV2(...)` для `POST
+     * /v2/posting/fbs/package-label/create`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatch)
      */
@@ -3777,7 +3807,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/get-pdf .
+     * @deprecated Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на
+     * /v2/posting/fbs/act/get-pdf. Замена в SDK: `ozon.postings.getFbsActPdf(...)` для `POST
+     * /v2/posting/fbs/act/get-pdf`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSGetDigitalAct)
      */
@@ -3787,7 +3819,9 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `id`.
      *
-     * @deprecated Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на /v2/posting/fbs/act/check-status .
+     * @deprecated Метод устаревает и будет отключён 22 марта 2026 года. Переключитесь на
+     * /v2/posting/fbs/act/check-status. Замена в SDK: `ozon.postings.getFbsActStatus(...)` для
+     * `POST /v2/posting/fbs/act/check-status`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSDigitalActCheckStatus)
      */
@@ -3960,7 +3994,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на /v3/posting/fbo/list .
+     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на
+     * /v3/posting/fbo/list. Замена в SDK: `ozon.postings.listFboPostingsV3(...)` для `POST
+     * /v3/posting/fbo/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFboPostingList)
      */
@@ -4134,7 +4170,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/list .
+     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на
+     * /v4/posting/fbs/list. Замена в SDK: `ozon.postings.listFbsPostingsV4(...)` для `POST
+     * /v4/posting/fbs/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFbsPostingListV3)
      */
@@ -4235,7 +4273,10 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на /v4/posting/fbs/unfulfilled/list .
+     * @deprecated С 31 августа 2026 года метод будет отключён. Переключитесь на
+     * /v4/posting/fbs/unfulfilled/list. Замена в SDK:
+     * `ozon.postings.listUnfulfilledFbsPostingsV4(...)` для `POST
+     * /v4/posting/fbs/unfulfilled/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetFbsPostingUnfulfilledList)
      */
@@ -5123,7 +5164,13 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `files`, `name`, `number`, `type_code`, `issue_date`.
      *
-     * @deprecated 31 августа 2026 года отключим метод. Переключитесь на методы /v2/product/certification/options , /v2/product/certification/params и /v2/product/certificate/create .
+     * @deprecated 31 августа 2026 года отключим метод. Переключитесь на методы
+     * /v2/product/certification/options, /v2/product/certification/params и
+     * /v2/product/certificate/create. Замены в SDK:
+     * `ozon.products.listProductCertificateOptionsV2(...)` для `POST
+     * /v2/product/certification/options`; `ozon.products.getProductCertificateParamsV2(...)` для
+     * `POST /v2/product/certification/params`; `ozon.products.createProductCertificateV2(...)` для
+     * `POST /v2/product/certificate/create`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductCertificateCreate)
      */
@@ -5302,8 +5349,6 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated is_prepayment_allowed is deprecated in OpenAPI and remains available with a deprecated type annotation.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoList)
      */
     readonly getProductInfoList: BoundOperationMethod<"getProductInfoList">;
@@ -5443,8 +5488,6 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated warehouse_ids is preserved but marked deprecated as in OpenAPI.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoStocks)
      */
     readonly getProductStocks: BoundOperationMethod<"getProductStocks">;
@@ -5472,7 +5515,10 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `sku|offer_id`.
      *
-     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/product/info/stocks-by-warehouse/fbs .
+     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на
+     * /v2/product/info/stocks-by-warehouse/fbs. Замена в SDK:
+     * `ozon.products.getProductStocksByWarehouseFbsV2(...)` для `POST
+     * /v2/product/info/stocks-by-warehouse/fbs`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductStocksByWarehouseFbs)
      */
@@ -5681,8 +5727,6 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated page and page_size are deprecated; prefer limit and last_id.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/CertificateProductsList)
      */
     readonly listCertificateProducts: BoundOperationMethod<"listCertificateProducts">;
@@ -5743,7 +5787,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated 14 апреля 2025 года метод будет отключён. Переключитесь на /v2/product/certification/list .
+     * @deprecated 14 апреля 2025 года метод будет отключён. Переключитесь на
+     * /v2/product/certification/list. Замена в SDK:
+     * `ozon.products.listCertificationCategoriesV2(...)` для `POST /v2/product/certification/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_V1ProductCertificationList)
      */
@@ -5952,8 +5998,6 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated product_id is deprecated; skus is formally limited to 1000.
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/CertificateUnbind)
      */
     readonly unbindProductCertificate: BoundOperationMethod<"unbindProductCertificate">;
@@ -5962,10 +6006,10 @@ export interface GeneratedOzonDomainApi {
      *
      * Метод позволяет добавлять характеристики и изменять их значения. Изменятся только
      * характеристики, которые вы указали в запросе. Удалить уже заполненные характеристики не
-     * получится. Для полного обновления характеристик используйте /v3/product/import . У метода
-     * есть лимит на количество операций c товарами в минуту и в сутки. Если вы превысите лимит,
-     * вернётся ошибка `429` с описанием в поле `message` и заголовками: - `Item-Retry-After` —
-     * время в минутах до обновления лимита. Для суточного лимита…
+     * получится. Для полного обновления характеристик используйте /v3/product/import. У метода есть
+     * лимит на количество операций c товарами в минуту и в сутки. Если вы превысите лимит, вернётся
+     * ошибка `429` с описанием в поле `message` и заголовками: - `Item-Retry-After` — время в
+     * минутах до обновления лимита. Для суточного лимита —…
      *
      * Обязательные поля запроса: `items`.
      *
@@ -6324,7 +6368,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён в будущем. Переключитесь на /v2/actions/discounts-task/list .
+     * @deprecated Метод устаревает и будет отключён в будущем. Переключитесь на
+     * /v2/actions/discounts-task/list. Замена в SDK: `ozon.promotions.listDiscountTasksV2(...)` для
+     * `POST /v2/actions/discounts-task/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/promos_task_list)
      */
@@ -7338,7 +7384,8 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `comment_id`.
      *
-     * @deprecated Метод устаревает. Переключитесь на /v2/review/comment/delete .
+     * @deprecated Метод устаревает. Переключитесь на /v2/review/comment/delete. Замена в SDK:
+     * `ozon.reviews.deleteReviewCommentV2(...)` для `POST /v2/review/comment/delete`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_CommentDelete)
      */
@@ -7362,7 +7409,8 @@ export interface GeneratedOzonDomainApi {
      * отзывами](https://seller-edu.ozon.ru/libra/seller-rating/podpiska-upravlenie-otzyvami) или
      * [Premium Pro](https://seller-edu.ozon.ru/seller-rating/about-rating/podpiska-premium-pro).
      *
-     * @deprecated Метод устаревает. Переключитесь на /v2/review/count .
+     * @deprecated Метод устаревает. Переключитесь на /v2/review/count. Замена в SDK:
+     * `ozon.reviews.getReviewCountV2(...)` для `POST /v2/review/count`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewCount)
      */
@@ -7391,7 +7439,8 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `review_id`.
      *
-     * @deprecated Метод устаревает. Переключитесь на /v2/review/info .
+     * @deprecated Метод устаревает. Переключитесь на /v2/review/info. Замена в SDK:
+     * `ozon.reviews.getReviewInfoV2(...)` для `POST /v2/review/info`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewInfo)
      */
@@ -7464,7 +7513,8 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает. Переключитесь на /v2/review/list .
+     * @deprecated Метод устаревает. Переключитесь на /v2/review/list. Замена в SDK:
+     * `ozon.reviews.listReviewsV2(...)` для `POST /v2/review/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewList)
      */
@@ -7508,7 +7558,8 @@ export interface GeneratedOzonDomainApi {
      *
      * Обязательные поля запроса: `review_ids`, `status`.
      *
-     * @deprecated Метод устаревает. Переключитесь на /v2/review/change-status .
+     * @deprecated Метод устаревает. Переключитесь на /v2/review/change-status. Замена в SDK:
+     * `ozon.reviews.updateReviewStatusV2(...)` для `POST /v2/review/change-status`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ReviewAPI_ReviewChangeStatus)
      */
@@ -7688,8 +7739,6 @@ export interface GeneratedOzonDomainApi {
      * в сообществе разработчиков Ozon for dev.
      *
      * Обязательные поля запроса: `action_id`, `is_turn_on`.
-     *
-     * @deprecated Enables or disables a seller action; never retried automatically.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/SellerActionsChangeActivity)
      */
@@ -7883,8 +7932,6 @@ export interface GeneratedOzonDomainApi {
     readonly archiveSellerAction: BoundOperationMethod<"archiveSellerActionV1">;
     /**
      * Рекомендуемый метод без версии; использует `changeSellerActionActivityV1` (POST /v1/seller-actions/change-activity).
-     *
-     * @deprecated Enables or disables a seller action; never retried automatically.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/SellerActionsChangeActivity)
      */
@@ -8200,7 +8247,8 @@ export interface GeneratedOzonDomainApi {
      * await ozon.supplyDrafts.getSupplyCargoLabelFile();
      * ```
      *
-     * @deprecated 10 апреля 2026 года отключим метод. Переключитесь на /v1/cargoes-label/get .
+     * @deprecated 10 апреля 2026 года отключим метод. Переключитесь на /v1/cargoes-label/get.
+     * Замена в SDK: `ozon.supplyDrafts.getSupplyCargoLabels(...)` для `POST /v1/cargoes-label/get`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/CargoesAPI_CargoesLabelFile)
      */
@@ -8515,7 +8563,10 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 19 августа 2026 года. Переключитесь на /v2/supply-order/timeslot/list .
+     * @deprecated Метод устаревает и будет отключён 19 августа 2026 года. Переключитесь на
+     * /v2/supply-order/timeslot/list. Замена в SDK:
+     * `ozon.supplyOrders.listSupplyOrderTimeslotsV2(...)` для `POST
+     * /v2/supply-order/timeslot/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/SupplyOrderAPI_GetSupplyOrderTimeslots)
      */
@@ -8936,7 +8987,9 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на /v2/warehouse/list .
+     * @deprecated Метод устаревает и будет отключён 7 апреля 2026 года. Переключитесь на
+     * /v2/warehouse/list. Замена в SDK: `ozon.warehouses.listWarehousesV2(...)` для `POST
+     * /v2/warehouse/list`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/WarehouseAPI_WarehouseList)
      */

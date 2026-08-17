@@ -15,6 +15,25 @@ const ozon = new OzonClient({ clientId, apiKey });
 Пакет самостоятельный: он не устанавливает `seller-sdk`, отдельный core или
 будущие marketplace-пакеты.
 
+## Пакет Wildberries
+
+```bash
+npm i @seller-sdk/wb
+```
+
+```ts
+import { WbClient, WbValues } from "@seller-sdk/wb";
+
+const wb = new WbClient({ token: process.env.WB_API_TOKEN! });
+const result = await wb.general.getPing();
+const tariffOptions = await wb.general.getTariffConstructorOptions({
+  query: { locale: WbValues.GetV1TariffConstructorOptionsLocale.Ru },
+});
+```
+
+Пакет включает все 286 операций из локального официального Swagger и не
+устанавливает Ozon или umbrella-пакет.
+
 ## Общий пакет
 
 ```bash
@@ -35,10 +54,11 @@ const seller = new SellerClient({
 ```ts
 export const Marketplace = {
   Ozon: "ozon",
+  Wb: "wb",
 } as const;
 ```
 
-Литерал `"ozon"` также допустим. Произвольная строка не принимается.
+Литералы `"ozon"` и `"wb"` также допустимы. Произвольная строка не принимается.
 
 ## Реестр маркетплейсов
 
@@ -50,7 +70,22 @@ export interface MarketplaceRegistry {
     credentials: OzonCredentials;
     client: OzonClient;
   };
+  wb: {
+    credentials: WbCredentials;
+    client: WbClient;
+  };
 }
+```
+
+```ts
+const seller = new SellerClient({
+  marketplace: Marketplace.Wb,
+  credentials: { token: process.env.WB_API_TOKEN! },
+});
+
+await seller.wb.items.getContentObjectParentAll({
+  query: { locale: "ru" },
+});
 ```
 
 Публичный конструктор не использует `marketplace: string` или универсальный
@@ -78,15 +113,18 @@ await ozon.warehouses.listWarehouses(input);
 
 ```ts
 await ozon.warehouses.listWarehouses(input); // сейчас v2
+await wb.general.getNews(input); // сейчас v2
 ```
 
 Для намеренной фиксации контракта используйте явную версию:
 
 ```ts
 await ozon.warehouses.listWarehousesV2(input);
+await wb.general.getV2News(input);
 ```
 
-Алиас наследует `@deprecated`, если Ozon пометил выбранный endpoint устаревшим.
+Алиас наследует `@deprecated`, если маркетплейс пометил выбранный endpoint
+устаревшим.
 
 ## Конфигурация клиента
 
@@ -167,10 +205,14 @@ RateLimitError;
 NetworkError;
 TimeoutError;
 ResponseValidationError;
+toSellerSdkErrorDetails;
 ```
 
 `ApiError` содержит `status`, `operationId`, `requestId`, `apiCode`,
 `apiMessage` и `retryAfterMs`, когда Ozon передал соответствующие значения.
+`toSellerSdkErrorDetails(error)` преобразует любую пойманную ошибку в единый
+сериализуемый `SellerSdkErrorDetails`. Структурное распознавание поддерживает
+ошибки всех focused-пакетов без зависимости от конкретной копии core.
 SafeShape-specific error types не являются частью публичного API.
 
 ## Динамическая конфигурация

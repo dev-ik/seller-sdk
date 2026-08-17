@@ -7,6 +7,7 @@ const projectDirectory = dirname(dirname(fileURLToPath(import.meta.url)));
 const outputDirectory = join(projectDirectory, "release-artifacts");
 const packageDirectories = [
   join(projectDirectory, "packages", "ozon"),
+  join(projectDirectory, "packages", "wb"),
   join(projectDirectory, "packages", "seller-sdk"),
 ];
 

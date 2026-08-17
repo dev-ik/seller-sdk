@@ -75,6 +75,9 @@ const catalogByOperationId = new Map(
 );
 const specificationByOperationId =
   collectSpecificationOperations(specification);
+const sdkOperationByPath = createSdkOperationByPath(
+  endpointManifest.operations,
+);
 const groupedMethods = new Map();
 const allMethods = new Set();
 
@@ -290,7 +293,7 @@ function renderDomainApi(groups, aliases) {
         "     *",
         ...(deprecation === undefined
           ? []
-          : [`     * @deprecated ${deprecation}`, "     *"]),
+          : [...wrapDocText(`@deprecated ${deprecation}`, "    "), "     *"]),
         `     * @see [Ozon Seller API](${operation.manifest.documentation})`,
         "     */",
         `    readonly ${alias}: BoundOperationMethod<${JSON.stringify(operation.manifest.sdkMethod)}>;`,
@@ -386,7 +389,7 @@ function renderMethodDocumentation(operation, indentation) {
   if (deprecation) {
     lines.push(
       `${indentation} *`,
-      `${indentation} * @deprecated ${deprecation}`,
+      ...wrapDocText(`@deprecated ${deprecation}`, indentation),
     );
   }
   lines.push(
@@ -397,20 +400,55 @@ function renderMethodDocumentation(operation, indentation) {
   return lines;
 }
 
-function getDeprecation({ manifest, catalog: catalogOperation }) {
+function getDeprecation(operation) {
+  const notice = getOfficialDeprecation(operation);
+  if (notice === undefined) return undefined;
+
+  const replacementPaths = [
+    ...new Set(
+      [...notice.matchAll(/\/v\d+\/[a-z0-9_{}-]+(?:\/[a-z0-9_{}-]+)*/gi)].map(
+        (match) => match[0],
+      ),
+    ),
+  ];
+  if (replacementPaths.length === 0) {
+    throw new Error(
+      `Deprecated Ozon method ${operation.manifest.sdkMethod} has no documented replacement path.`,
+    );
+  }
+
+  const replacements = replacementPaths.map((path) => {
+    const replacement = sdkOperationByPath.get(path);
+    if (replacement === undefined) {
+      throw new Error(
+        `Replacement ${path} for deprecated Ozon method ${operation.manifest.sdkMethod} is not implemented in the SDK.`,
+      );
+    }
+    return replacement;
+  });
+  const sdkLabel = replacements.length === 1 ? "Замена в SDK" : "Замены в SDK";
+  const sdkMethods = replacements
+    .map(
+      ({ domainName, manifest }) =>
+        `\`ozon.${domainName}.${manifest.sdkMethod}(...)\` для \`${manifest.method} ${manifest.path}\``,
+    )
+    .join("; ");
+  return `${notice} ${sdkLabel}: ${sdkMethods}.`;
+}
+
+function getOfficialDeprecation({ catalog: catalogOperation, specification }) {
   const warningMatch = String(catalogOperation.description ?? "").match(
     /<aside[^>]*class=["']warning["'][^>]*>([\s\S]*?)<\/aside>/i,
   );
   const warning = warningMatch ? cleanText(warningMatch[1]) : "";
   if (warning && /(устар|отключ|deprecated|shut down)/i.test(warning)) {
-    return truncate(warning, 400);
+    return warning;
   }
 
-  const note = (manifest.notes ?? []).find((value) =>
-    /(устар|отключ|deprecated|shut down|disable)/i.test(value),
-  );
-  if (note) return truncate(cleanText(note), 400);
-  if (catalogOperation.deprecated === true) {
+  if (
+    specification.deprecated === true ||
+    catalogOperation.deprecated === true
+  ) {
     return "Ozon пометил метод как устаревший.";
   }
   return undefined;
@@ -433,8 +471,25 @@ function cleanText(value) {
       .replace(/&quot;/g, '"')
       .replace(/&amp;/g, "&")
       .replace(/\s+/g, " ")
+      .replace(/\s+([.,;:!?])/g, "$1")
       .trim(),
   );
+}
+
+function createSdkOperationByPath(manifestOperations) {
+  const result = new Map();
+  for (const manifest of manifestOperations) {
+    const sourceDomain = manifest.id.split(".")[1];
+    const domainName = domainNames[sourceDomain];
+    if (domainName === undefined) {
+      throw new Error(`No public domain name for Ozon domain: ${sourceDomain}`);
+    }
+    if (result.has(manifest.path)) {
+      throw new Error(`Duplicate Ozon operation path: ${manifest.path}`);
+    }
+    result.set(manifest.path, { domainName, manifest });
+  }
+  return result;
 }
 
 function wrapDocText(value, indentation) {

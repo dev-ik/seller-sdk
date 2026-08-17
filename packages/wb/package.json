@@ -1,0 +1,53 @@
+{
+  "name": "@seller-sdk/wb",
+  "version": "0.2.0",
+  "description": "Типобезопасный SDK для Wildberries API.",
+  "keywords": [
+    "wildberries",
+    "wb",
+    "marketplace",
+    "seller-api",
+    "sdk",
+    "typescript"
+  ],
+  "author": "dev-ik",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20.10"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "imports": {
+    "#internal-core": {
+      "types": "./dist/internal/core/index.d.ts",
+      "import": "./dist/internal/core/index.js"
+    }
+  },
+  "dependencies": {
+    "@safe-shape/core": "^1.0.1"
+  },
+  "scripts": {
+    "build": "tsc -p ../core/tsconfig.build.json --outDir ../wb/dist/internal/core && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-ik/seller-sdk.git",
+    "directory": "packages/wb"
+  }
+}

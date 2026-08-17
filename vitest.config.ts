@@ -10,6 +10,9 @@ export default defineConfig({
       "@seller-sdk/ozon": fileURLToPath(
         new URL("./packages/ozon/src/index.ts", import.meta.url),
       ),
+      "@seller-sdk/wb": fileURLToPath(
+        new URL("./packages/wb/src/index.ts", import.meta.url),
+      ),
       "seller-sdk": fileURLToPath(
         new URL("./packages/seller-sdk/src/index.ts", import.meta.url),
       ),

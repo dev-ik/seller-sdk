@@ -89,4 +89,35 @@ describe("generated Ozon documentation", () => {
     const documentedProperties = values.match(/^ {4}\/\*\* .* \*\/$/gm);
     expect(documentedProperties?.length).toBeGreaterThanOrEqual(800);
   });
+
+  it("does not lift a deprecated response field onto its operation", async () => {
+    const [domainApi, productInfoTypes] = await Promise.all([
+      readFile(
+        path.join(
+          projectDirectory,
+          "packages/ozon/src/domain-api.generated.ts",
+        ),
+        "utf8",
+      ),
+      readFile(
+        path.join(
+          projectDirectory,
+          "packages/ozon/src/endpoints/product/info/list/types.ts",
+        ),
+        "utf8",
+      ),
+    ]);
+    const methodPosition = domainApi.indexOf("readonly getProductInfoList:");
+    const documentationStart = domainApi.lastIndexOf("/**", methodPosition);
+    const methodDocumentation = domainApi.slice(
+      documentationStart,
+      methodPosition,
+    );
+
+    expect(methodPosition).toBeGreaterThan(0);
+    expect(methodDocumentation).not.toContain("@deprecated");
+    expect(productInfoTypes).toContain(
+      "@deprecated Поле помечено устаревшим в OpenAPI Ozon.",
+    );
+  });
 });

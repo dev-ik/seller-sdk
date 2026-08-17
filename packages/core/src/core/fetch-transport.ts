@@ -21,11 +21,16 @@ import { RateLimitError } from "../errors/rate-limit-error.js";
 import { SellerSdkError } from "../errors/seller-sdk-error.js";
 import { TimeoutError } from "../errors/timeout-error.js";
 
-const OZON_API_ORIGIN = "https://api-seller.ozon.ru";
+const DEFAULT_API_ORIGIN = "https://api-seller.ozon.ru";
+const DEFAULT_API_NAME = "Ozon API";
 const DEFAULT_TIMEOUT_MS = 30_000;
 const DEFAULT_DEADLINE_MS = 60_000;
 
 export interface FetchTransportOptions {
+  /** Fixed API origin. Requests can never escape this origin. */
+  readonly baseUrl?: string;
+  /** Marketplace API name used in safe error messages. */
+  readonly apiName?: string;
   readonly defaultHeaders?: Readonly<Record<string, string>>;
   readonly defaultTimeoutMs?: number;
   readonly defaultDeadlineMs?: number;
@@ -37,6 +42,8 @@ export interface FetchTransportOptions {
 }
 
 export class FetchTransport implements Transport {
+  readonly #apiOrigin: string;
+  readonly #apiName: string;
   readonly #defaultHeaders: Readonly<Record<string, string>>;
   readonly #fetch: typeof fetch;
   readonly #random: () => number;
@@ -49,6 +56,8 @@ export class FetchTransport implements Transport {
     | undefined;
 
   constructor(options: FetchTransportOptions = {}) {
+    this.#apiOrigin = parseApiOrigin(options.baseUrl ?? DEFAULT_API_ORIGIN);
+    this.#apiName = options.apiName ?? DEFAULT_API_NAME;
     this.#defaultHeaders = Object.freeze({ ...options.defaultHeaders });
     this.#fetch = options.fetchImplementation ?? globalThis.fetch;
     this.#random = options.random ?? Math.random;
@@ -60,7 +69,11 @@ export class FetchTransport implements Transport {
   }
 
   async request(request: TransportRequest): Promise<TransportResponse> {
-    const url = resolveOzonUrl(request.path);
+    const url = resolveFixedOriginUrl(
+      request.path,
+      this.#apiOrigin,
+      this.#apiName,
+    );
     const serializedBody = serializeRequestBody(request);
     const retry = normalizeRetryOptions(request.retrySafety, {
       ...this.#defaultRetry,
@@ -76,7 +89,7 @@ export class FetchTransport implements Transport {
 
       if (remainingMs <= 0) {
         throw new TimeoutError(
-          `Ozon API deadline exceeded for operation ${request.operationId}.`,
+          `${this.#apiName} deadline exceeded for operation ${request.operationId}.`,
           {
             operationId: request.operationId,
             timeoutMs: deadlineMs,
@@ -106,9 +119,13 @@ export class FetchTransport implements Transport {
           ),
         );
         const body =
-          response.ok && request.responseType === "array-buffer"
+          response.ok && shouldReadArrayBuffer(request, response)
             ? await response.arrayBuffer()
-            : await parseJsonResponse(response, request.operationId);
+            : await parseJsonResponse(
+                response,
+                request.operationId,
+                this.#apiName,
+              );
 
         if (response.ok) {
           const metadata = createResponseMetadata({
@@ -136,6 +153,7 @@ export class FetchTransport implements Transport {
           body,
           request.operationId,
           retryAfterMs,
+          this.#apiName,
         );
 
         const willRetry =
@@ -177,7 +195,7 @@ export class FetchTransport implements Transport {
 
         const error = requestSignal.didTimeout()
           ? new TimeoutError(
-              `Ozon API request timed out for operation ${request.operationId}.`,
+              `${this.#apiName} request timed out for operation ${request.operationId}.`,
               {
                 operationId: request.operationId,
                 timeoutMs: attemptTimeoutMs,
@@ -185,7 +203,7 @@ export class FetchTransport implements Transport {
               },
             )
           : new NetworkError(
-              `Ozon API network failure for operation ${request.operationId}.`,
+              `${this.#apiName} network failure for operation ${request.operationId}.`,
               {
                 operationId: request.operationId,
                 cause,
@@ -215,7 +233,7 @@ export class FetchTransport implements Transport {
     }
 
     throw new NetworkError(
-      `Ozon API request failed for operation ${request.operationId}.`,
+      `${this.#apiName} request failed for operation ${request.operationId}.`,
       {
         operationId: request.operationId,
       },
@@ -231,7 +249,7 @@ export class FetchTransport implements Transport {
     const remainingMs = deadlineMs - (this.#now() - startedAt);
     if (delayMs >= remainingMs) {
       throw new TimeoutError(
-        `Ozon API deadline exceeded for operation ${request.operationId}.`,
+        `${this.#apiName} deadline exceeded for operation ${request.operationId}.`,
         {
           operationId: request.operationId,
           timeoutMs: deadlineMs,
@@ -252,17 +270,29 @@ export class FetchTransport implements Transport {
   }
 }
 
-function resolveOzonUrl(path: string): URL {
+function parseApiOrigin(baseUrl: string): string {
+  const url = new URL(baseUrl);
+  if (url.pathname !== "/" || url.search.length > 0 || url.hash.length > 0) {
+    throw new ConfigurationError("API base URL must contain only an origin.");
+  }
+  return url.origin;
+}
+
+function resolveFixedOriginUrl(
+  path: string,
+  apiOrigin: string,
+  apiName: string,
+): URL {
   if (!path.startsWith("/") || path.startsWith("//")) {
     throw new ConfigurationError(
-      "Ozon endpoint path must be an absolute path on the fixed API origin.",
+      `${apiName} endpoint path must be an absolute path on the fixed API origin.`,
     );
   }
 
-  const url = new URL(path, OZON_API_ORIGIN);
-  if (url.origin !== OZON_API_ORIGIN) {
+  const url = new URL(path, apiOrigin);
+  if (url.origin !== apiOrigin) {
     throw new ConfigurationError(
-      "Ozon endpoint path resolved outside the fixed API origin.",
+      `${apiName} endpoint path resolved outside the fixed API origin.`,
     );
   }
 
@@ -295,6 +325,16 @@ function createFetchInit(
     signal,
     ...(hasBody ? { body: serializedBody } : {}),
   };
+}
+
+function shouldReadArrayBuffer(
+  request: TransportRequest,
+  response: Response,
+): boolean {
+  if (request.responseType === "array-buffer") return true;
+  if (request.responseType !== "auto") return false;
+  const contentType = response.headers.get("content-type")?.toLowerCase();
+  return contentType !== undefined && !contentType.includes("json");
 }
 
 function serializeRequestBody(request: TransportRequest): BodyInit | undefined {
@@ -330,11 +370,12 @@ function createApiError(
   body: unknown,
   operationId: string,
   retryAfterMs: number | undefined,
+  apiName: string,
 ): ApiError {
   const requestId = readRequestId(response.headers);
   const apiCode = readScalar(body, "code");
   const apiMessage = readApiMessage(body);
-  const message = `Ozon API rejected operation ${operationId} with HTTP ${response.status}${apiMessage === undefined ? "." : `: ${apiMessage}`}`;
+  const message = `${apiName} rejected operation ${operationId} with HTTP ${response.status}${apiMessage === undefined ? "." : `: ${apiMessage}`}`;
   const options = {
     status: response.status,
     operationId,
@@ -381,7 +422,10 @@ function readRequestId(headers: Headers): string | undefined {
 }
 
 function readApiMessage(body: unknown): string | undefined {
-  const message = readScalar(body, "message");
+  const message =
+    readScalar(body, "message") ??
+    readScalar(body, "detail") ??
+    readScalar(body, "title");
   if (message === undefined) return undefined;
   const normalized = message.replace(/[\r\n\t]+/g, " ").trim();
   if (normalized.length === 0) return undefined;

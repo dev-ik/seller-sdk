@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk-workspace",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Рабочее пространство типобезопасных SDK для API маркетплейсов.",
   "license": "MIT",
@@ -12,10 +12,11 @@
   "workspaces": [
     "packages/core",
     "packages/ozon",
+    "packages/wb",
     "packages/seller-sdk"
   ],
   "scripts": {
-    "build": "pnpm --filter @seller-sdk/ozon build && pnpm --filter seller-sdk build",
+    "build": "pnpm --filter @seller-sdk/ozon build && pnpm --filter @seller-sdk/wb build && pnpm --filter seller-sdk build",
     "format": "prettier --write \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
     "format:check": "prettier --check \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
     "lint": "eslint packages test test-d vitest.config.ts",
@@ -30,9 +31,11 @@
     "check:values": "node scripts/build-ozon-values.mjs --check",
     "update:request-docs": "node scripts/build-ozon-request-docs.mjs",
     "check:request-docs": "node scripts/build-ozon-request-docs.mjs --check",
+    "update:wb": "node scripts/build-wb-api.mjs",
+    "check:wb": "node scripts/build-wb-api.mjs --check",
     "update:docs": "pnpm update:domains && pnpm update:request-docs",
     "check:docs": "pnpm check:domains && pnpm check:request-docs",
-    "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm check:wb && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "pack:check": "node scripts/pack-check.mjs",
     "check:release": "node scripts/check-release.mjs",
     "release:check": "pnpm check:release && pnpm verify && pnpm pack:check && pnpm test:consumer",
@@ -46,7 +49,8 @@
     "prettier": "3.4.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.18.2",
-    "vitest": "2.1.8"
+    "vitest": "2.1.8",
+    "yaml": "2.8.1"
   },
   "repository": {
     "type": "git",
