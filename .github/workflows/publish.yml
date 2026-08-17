@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 concurrency:
@@ -42,3 +42,17 @@ jobs:
 
       - name: Publish umbrella package
         run: npm publish "./release-artifacts/seller-sdk-$(node -p \"require('./packages/seller-sdk/package.json').version\").tgz" --access public
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          gh release create "v${VERSION}" \
+            "./release-artifacts/seller-sdk-wb-${VERSION}.tgz" \
+            "./release-artifacts/seller-sdk-ozon-${VERSION}.tgz" \
+            "./release-artifacts/seller-sdk-${VERSION}.tgz" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --verify-tag \
+            --title "Seller SDK v${VERSION}" \
+            --generate-notes

@@ -134,3 +134,8 @@ try {
 Обработчик возвращает безопасный plain object со стабильным `code`,
 `operationId`, HTTP status, request ID и сообщением WB. Stack, cause, токен и
 authorization headers в результат не попадают.
+
+## Лицензия и товарные знаки
+
+[MIT](LICENSE). Проект не связан с Wildberries и не является официальным SDK
+Wildberries.
