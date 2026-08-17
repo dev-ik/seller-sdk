@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Единая точка входа для поддерживаемых Seller API маркетплейсов.",
   "keywords": [
     "marketplace",
