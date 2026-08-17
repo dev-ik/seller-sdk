@@ -170,4 +170,9 @@ console.log(response.data, response.lastResponse.requestId);
 
 ## Лицензия и товарные знаки
 
-[MIT](LICENSE). Проект не связан с Ozon и не является официальным SDK Ozon.
+[MIT](https://github.com/dev-ik/seller-sdk/blob/main/LICENSE) © Seller SDK
+contributors.
+
+`@seller-sdk/ozon` — независимый open-source проект. Он не связан с Ozon, не
+одобрен и не спонсируется Ozon. Название Ozon используется только для
+обозначения совместимости с Ozon Seller API.

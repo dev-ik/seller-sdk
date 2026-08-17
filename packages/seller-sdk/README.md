@@ -71,9 +71,19 @@ await wbSeller.wb.general.getPing();
 
 Устанавливать оба пакета одновременно не требуется.
 
-Документация: [github.com/dev-ik/seller-sdk](https://github.com/dev-ik/seller-sdk).
+## Документация
+
+- [Руководство по `@seller-sdk/ozon`](https://github.com/dev-ik/seller-sdk/blob/main/packages/ozon/README.md)
+- [Справочник методов Ozon](https://github.com/dev-ik/seller-sdk/blob/main/docs/ozon/API-REFERENCE.md)
+- [Руководство по `@seller-sdk/wb`](https://github.com/dev-ik/seller-sdk/blob/main/packages/wb/README.md)
+- [Справочник методов Wildberries](https://github.com/dev-ik/seller-sdk/blob/main/docs/wb/API-REFERENCE.md)
 
 ## Лицензия и товарные знаки
 
-[MIT](LICENSE). Проект не связан с Ozon, Wildberries или другими маркетплейсами
-и не является их официальным SDK.
+[MIT](https://github.com/dev-ik/seller-sdk/blob/main/LICENSE) © Seller SDK
+contributors.
+
+Seller SDK — независимый open-source проект. Он не связан с Ozon или
+Wildberries, не одобрен и не спонсируется ими либо другими маркетплейсами.
+Названия маркетплейсов используются только для обозначения совместимости с их
+API.

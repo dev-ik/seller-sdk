@@ -115,7 +115,7 @@ SDK разрешает запросы только на origin из официа
 закрытым union из документированных WB host'ов, а ответ не получает
 endpoint-specific runtime validation.
 
-Полный список методов: [`docs/wb/API-REFERENCE.md`](../../docs/wb/API-REFERENCE.md).
+Полный список методов: [справочник Wildberries SDK](https://github.com/dev-ik/seller-sdk/blob/main/docs/wb/API-REFERENCE.md).
 
 ## Обработка ошибок
 
@@ -137,5 +137,9 @@ authorization headers в результат не попадают.
 
 ## Лицензия и товарные знаки
 
-[MIT](LICENSE). Проект не связан с Wildberries и не является официальным SDK
-Wildberries.
+[MIT](https://github.com/dev-ik/seller-sdk/blob/main/LICENSE) © Seller SDK
+contributors.
+
+`@seller-sdk/wb` — независимый open-source проект. Он не связан с Wildberries,
+не одобрен и не спонсируется Wildberries. Название Wildberries используется
+только для обозначения совместимости с Wildberries API.
