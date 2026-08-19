@@ -205,8 +205,39 @@ await wb.general.getNews(
 `x-readonly-method`. Мутации не повторяются автоматически независимо от
 `maxRetries`.
 
+### Yandex Market
+
+```ts
+const ym = new YmClient(
+  { apiKey: process.env.YM_API_KEY! },
+  {
+    timeoutMs: 30_000,
+    deadlineMs: 60_000,
+    maxRetries: 2,
+    onResponse({ operationId, status, requestId, attempt, willRetry }) {
+      console.info({ operationId, status, requestId, attempt, willRetry });
+    },
+  },
+);
+
+await ym.orders.getBusinessOrders(
+  {
+    path: { businessId: 123456 },
+    body: { fake: true },
+  },
+  {
+    timeoutMs: 10_000,
+    deadlineMs: 30_000,
+    signal: abortController.signal,
+  },
+);
+```
+
 Yandex Market использует те же timeout/deadline/request options; автоматически
-повторяются только `GET`, а HTTP 420 возвращается как `RateLimitError`.
+повторяются только `GET`, а HTTP 420 возвращается как `RateLimitError`. Полное
+описание аутентификации, `businessId`/`campaignId`, всех 36 областей API,
+`YmValues`, пагинации, тестовых заказов, бинарных ответов и `rawRequest`
+находится в [README focused-пакета](packages/ym/README.md).
 
 ## Пагинация
 

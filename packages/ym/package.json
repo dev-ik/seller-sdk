@@ -1,6 +1,6 @@
 {
   "name": "@seller-sdk/ym",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Типобезопасный SDK для Yandex Market API.",
   "keywords": [
     "yandex-market",
