@@ -1,0 +1,94 @@
+post:
+  x-resource-id: 255
+  tags:
+    - orders
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: ORDERS
+    enabled: false
+  operationId: updateExternalOrderId
+  summary: Передача внешнего идентификатора заказа
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/updateExternalOrderId.md) %}
+
+
+    Передает Маркету идентификатор заказа в системе магазина.
+
+
+    Его нельзя передавать:
+
+
+    * больше одного раза;
+
+    * после перехода заказа в статус `PROCESSING` с подстатусом `READY_TO_SHIP`.
+
+
+    Этот идентификатор отражается в документах отгрузки: акте приема-передачи,
+    листе сборки и ярлыках.
+
+
+    {% note alert "В штрихкодах могут быть только символы ASCII" %}
+
+
+    Если во внешнем идентификаторе вы используете другие символы, на ярлыке в
+    штрихкоде будет отображаться идентификатор заказа Маркета.
+
+
+    {% endnote %}
+
+
+    {% include notitle
+    [limit](../../_auto/method_limits/updateExternalOrderId.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/OrderId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateExternalOrderIdRequest.yaml
+  responses:
+    '200':
+      description: Внешний идентификатор заказа успешно передан.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        заказами](../../concepts/error-codes#orders)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

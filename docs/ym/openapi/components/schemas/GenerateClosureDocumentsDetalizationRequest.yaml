@@ -1,0 +1,18 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - campaignId
+  - monthOfYear
+  - contractType
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  monthOfYear:
+    description: Месяц, за который сформированы необходимые закрывающие документы.
+    $ref: ./ClosureDocumentsMonthOfYearDTO.yaml
+  contractType:
+    description: >-
+      Тип договора, по которому нужно сгенерировать отчет по схождению с
+      закрывающими документами.
+    $ref: ./ClosureDocumentsContractType.yaml

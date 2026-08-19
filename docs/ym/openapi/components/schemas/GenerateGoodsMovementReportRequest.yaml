@@ -1,0 +1,15 @@
+description: Данные, необходимые для генерации отчета.
+type: object
+required:
+  - campaignId
+  - dateFrom
+  - dateTo
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml
+  shopSku:
+    $ref: ./ShopSku.yaml

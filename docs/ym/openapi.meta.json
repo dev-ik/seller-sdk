@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/yandex-market/yandex-market-partner-api",
+  "commit": "116389b48f28c26275d40f0a7cb7cecd5a196ca0",
+  "verifiedAt": "2026-08-19",
+  "format": "OpenAPI 3.0.3",
+  "license": "BSD-3-Clause",
+  "origin": "https://api.partner.market.yandex.ru"
+}

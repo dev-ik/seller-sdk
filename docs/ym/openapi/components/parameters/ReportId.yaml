@@ -1,0 +1,10 @@
+description: >
+  Идентификатор отчета или документа, который вы получили после запуска
+  генерации.
+name: reportId
+in: path
+required: true
+schema:
+  type: string
+  minLength: 1
+  maxLength: 255

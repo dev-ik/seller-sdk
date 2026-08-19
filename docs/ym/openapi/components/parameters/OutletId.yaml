@@ -1,0 +1,8 @@
+description: Идентификатор точки продаж.
+name: outletId
+in: path
+required: true
+schema:
+  type: integer
+  format: int64
+  minimum: 1

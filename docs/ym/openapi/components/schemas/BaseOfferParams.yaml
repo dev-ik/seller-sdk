@@ -1,0 +1,21 @@
+description: >
+  {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+
+  При передаче характеристик используйте `parameterValues`.
+
+
+  {% endnote %}
+
+
+  Характеристики, которые есть только у товаров конкретной категории — например,
+  диаметр колес велосипеда или материал подошвы обуви.
+type: array
+nullable: true
+minItems: 1
+deprecated: true
+x-deprecation-config:
+  shutdown-date: '2026-10-12'
+  replacement-field: parameterValues
+items:
+  $ref: ./OfferParamDTO.yaml

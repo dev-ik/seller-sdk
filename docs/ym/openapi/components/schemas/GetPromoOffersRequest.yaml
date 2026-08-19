@@ -1,0 +1,34 @@
+description: Получение списка товаров, которые участвуют или могут участвовать в акции.
+type: object
+required:
+  - promoId
+properties:
+  promoId:
+    description: Идентификатор акции.
+    type: string
+  statusType:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `statuses`.
+
+      {% endnote %}
+
+      Фильтр для товаров, которые добавлены в акцию вручную.
+
+      Если не передать параметр `statusType`, вернутся все товары.
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: statuses
+    $ref: ./PromoOfferParticipationStatusFilterType.yaml
+  statuses:
+    description: >-
+      Фильтр для товаров, которые могут участвовать в акции. Можно задать
+      несколько значений.
+    type: array
+    nullable: true
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: ./PromoOfferParticipationStatusMultiFilterType.yaml

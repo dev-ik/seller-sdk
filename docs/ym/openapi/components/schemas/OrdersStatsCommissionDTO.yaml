@@ -1,0 +1,13 @@
+description: Информация о стоимости услуг.
+type: object
+properties:
+  type:
+    description: Услуга.
+    $ref: ./OrdersStatsCommissionType.yaml
+  actual:
+    description: >
+      Сумма, которая была выставлена в момент создания заказа и которую нужно
+      оплатить.
+
+      Точность — два знака после запятой.
+    type: number

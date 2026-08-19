@@ -1,0 +1,203 @@
+get:
+  x-resource-id: 113
+  tags:
+    - outlet-licenses
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - settings-management
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: getOutletLicenses
+  summary: Информация о лицензиях для точек продаж
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getOutletLicenses.md)
+    %}
+
+
+    Возвращает информацию о лицензиях для точек продаж.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getOutletLicenses.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/OutletIds.yaml
+    - description: >
+        Список идентификаторов лицензий, информацию о которых нужно получить.
+
+
+        Идентификаторы указываются через запятую. Идентификатор лицензии
+        присваивается Маркетом. Не путайте его с номером, указанным на лицензии.
+
+
+        В запросе должен быть либо параметр `outletIds`, либо параметр `ids`.
+        Запрос с обоими параметрами или без них приведет к ошибке.
+      $ref: ../components/parameters/LicenseIds.yaml
+  responses:
+    '200':
+      description: Найденные лицензии собственных точек продаж.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetOutletLicensesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
+delete:
+  x-resource-id: 112
+  tags:
+    - outlet-licenses
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - settings-management
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: deleteOutletLicenses
+  summary: Удаление лицензий для точек продаж
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/deleteOutletLicenses.md) %}
+
+
+    Удаляет информацию о лицензиях для точек продаж.
+
+
+    {% include notitle
+    [limit](../../_auto/method_limits/deleteOutletLicenses.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - description: >
+        Список идентификаторов лицензий, информацию о которых нужно удалить.
+
+
+        Идентификаторы указываются через запятую. Идентификатор лицензии
+        присваивается Маркетом. Не путайте его с номером, указанным на лицензии.
+      $ref: ../components/parameters/DeleteLicenseIds.yaml
+  responses:
+    '200':
+      description: Пустой ответ.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
+post:
+  x-resource-id: 114
+  tags:
+    - outlet-licenses
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - settings-management
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: updateOutletLicenses
+  summary: Создание и изменение лицензий для точек продаж
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/updateOutletLicenses.md) %}
+
+
+    Передает информацию о новых и существующих лицензиях для точек продаж.
+    Поддерживаются только лицензии на розничную продажу алкоголя.
+
+
+    Чтобы размещать алкогольную продукцию на Маркете, надо также прислать
+    гарантийное письмо (если вы еще не делали этого раньше) и правильно оформить
+    предложения в прайс-листе. Далее информация о лицензиях проходит проверку.
+
+
+    {% include notitle
+    [limit](../../_auto/method_limits/updateOutletLicenses.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateOutletLicenseRequest.yaml
+  responses:
+    '200':
+      description: Пустой ответ.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

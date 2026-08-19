@@ -1,0 +1,7 @@
+type: object
+required:
+  - code
+properties:
+  code:
+    description: Код для подтверждения ЭАПП.
+    type: string

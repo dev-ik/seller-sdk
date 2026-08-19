@@ -1,0 +1,17 @@
+description: >
+  Тип кода подтверждения ЭАПП:
+
+
+  * `MERCHANT_TO_COURIER` (временно не возвращается) — продавец передает код
+  курьеру для получения невыкупа.
+
+
+  * `COURIER_TO_MERCHANT` — курьер передает код продавцу для получения заказа.
+
+
+  * `CHECKING_BY_MERCHANT` — продавец проверяет код на своей стороне.
+type: string
+enum:
+  - MERCHANT_TO_COURIER
+  - COURIER_TO_MERCHANT
+  - CHECKING_BY_MERCHANT

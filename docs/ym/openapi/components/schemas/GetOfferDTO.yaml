@@ -1,0 +1,56 @@
+description: Параметры товара.
+type: object
+allOf:
+  - $ref: ./BaseOfferResponseDTO.yaml
+  - properties:
+      basicPrice:
+        description: |
+          Цена.
+        $ref: ./GetPriceWithDiscountDTO.yaml
+      purchasePrice:
+        description: >
+          Себестоимость — затраты на самостоятельное производство товара или
+          закупку у производителя или поставщиков.
+        $ref: ./GetPriceDTO.yaml
+      additionalExpenses:
+        description: |
+          Дополнительные расходы на товар. Например, на доставку или упаковку.
+        $ref: ./GetPriceDTO.yaml
+      cardStatus:
+        description: |
+          Статус карточки товара.
+        $ref: ./OfferCardStatusType.yaml
+      campaigns:
+        description: |
+          Список магазинов, в которых размещен товар.
+        type: array
+        nullable: true
+        minItems: 1
+        items:
+          $ref: ./OfferCampaignStatusDTO.yaml
+      sellingPrograms:
+        description: |
+          Информация о том, какие для товара доступны модели размещения.
+        type: array
+        nullable: true
+        minItems: 1
+        items:
+          $ref: ./OfferSellingProgramDTO.yaml
+      mediaFiles:
+        $ref: ./OfferMediaFilesDTO.yaml
+      archived:
+        description: |
+          Товар помещен в архив.
+        type: boolean
+      groupId:
+        type: string
+        description: >
+          Идентификатор группы товаров.
+
+
+          У товаров, которые объединены в одну группу, будет одинаковый
+          идентификатор.
+
+
+          [Как объединить товары на
+          карточке](../../step-by-step/assortment-add-goods.md#combine-variants)

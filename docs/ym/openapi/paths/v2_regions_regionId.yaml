@@ -1,0 +1,71 @@
+get:
+  x-resource-id: 18
+  tags:
+    - regions
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - settings-management
+    - finance-and-accounting
+    - offers-and-cards-management
+    - offers-and-cards-management:read-only
+    - pricing
+    - pricing:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+    - promotion
+    - promotion:read-only
+    - communication
+    - supplies-management:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: BASE
+    enabled: false
+  operationId: searchRegionsById
+  summary: Информация о регионе
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/searchRegionsById.md)
+    %}
+
+
+    Возвращает информацию о регионе.
+
+
+    {% include notitle [limit](../../_auto/method_limits/searchRegionsById.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/RegionId.yaml
+  responses:
+    '200':
+      description: Найденный регион.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetRegionByIdResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

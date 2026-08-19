@@ -1,0 +1,18 @@
+description: Данные, необходимые для генерации отчета.
+type: object
+required:
+  - dateFrom
+  - dateTo
+  - businessId
+  - categoryId
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  categoryId:
+    description: Идентификатор категории.
+    type: integer
+    format: int64
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml

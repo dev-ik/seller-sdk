@@ -1,0 +1,20 @@
+description: Список складов с информацией об остатках на каждом из них.
+type: object
+required:
+  - warehouses
+properties:
+  paging:
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml
+  warehouses:
+    description: >
+      Страница списка складов.
+
+
+      **Для моделей FBY и LaaS:** может содержать несколько складов Маркета.
+
+
+      **Для модели FBS:** может содержать как партнерский склад, так и склад
+      возвратов Маркета.
+    type: array
+    items:
+      $ref: ./WarehouseOffersDTO.yaml

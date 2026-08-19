@@ -1,0 +1,17 @@
+description: >-
+  Параметр отображает одно грузовое место. Вложенные поля больше не
+  используются, передавайте параметр пустым.
+type: object
+properties:
+  fulfilmentId:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      Не используйте этот параметр.
+
+      {% endnote %}
+    type: string
+    pattern: ^[[a-zA-Z0-9]- ]*$
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'

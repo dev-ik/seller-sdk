@@ -1,0 +1,11 @@
+description: |
+  Тип договора:
+
+  * `INCOME` — договор на размещение.
+
+  * `OUTCOME` — договор на продвижение.
+type: string
+enum:
+  - INCOME
+  - OUTCOME
+  - MARKETING

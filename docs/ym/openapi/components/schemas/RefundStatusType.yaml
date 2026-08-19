@@ -1,0 +1,70 @@
+description: >
+  Статус возврата денег:
+
+
+  * `STARTED_BY_USER` — создан покупателем из личного кабинета.
+
+
+  * `REFUND_IN_PROGRESS` — ждет решение о возврате денег (на рассмотрении).
+
+
+  * `REFUNDED` — деньги возвращены.
+
+
+  * `FAILED` — невозможно провести возврат покупателю.
+
+
+  * `WAITING_FOR_DECISION` — ожидает решения (DBS).
+
+
+  * `DECISION_MADE` — по возврату принято решение (DBS).
+
+
+  * `REFUNDED_WITH_BONUSES` — возврат осуществлен баллами Плюса или промокодом.
+
+
+  * `REFUNDED_BY_SHOP` — магазин сделал самостоятельно возврат денег.
+
+
+  * `COMPLETE_WITHOUT_REFUND` — возврат денег не требуется.
+
+
+  * `CANCELLED` — возврат отменен.
+
+
+  * `REJECTED` — возврат отклонен модерацией или в ПВЗ.
+
+
+  * `PREMODERATION_DISPUTE` — по возврату открыт спор (FBY, FBS и Экспресс).
+
+
+  * `PREMODERATION_DECISION_WAITING` — ожидает решения (FBY, FBS и Экспресс).
+
+
+  * `PREMODERATION_DECISION_MADE` — по возврату принято решение (FBY, FBS и
+  Экспресс).
+
+
+  * `PREMODERATION_SELECT_DELIVERY` — пользователь выбирает способ доставки
+  (FBY, FBS и Экспресс).
+
+
+  * `UNKNOWN` — неизвестный статус, обратитесь в поддержку.
+type: string
+enum:
+  - STARTED_BY_USER
+  - REFUND_IN_PROGRESS
+  - REFUNDED
+  - FAILED
+  - WAITING_FOR_DECISION
+  - DECISION_MADE
+  - REFUNDED_WITH_BONUSES
+  - REFUNDED_BY_SHOP
+  - CANCELLED
+  - REJECTED
+  - COMPLETE_WITHOUT_REFUND
+  - PREMODERATION_DISPUTE
+  - PREMODERATION_DECISION_WAITING
+  - PREMODERATION_DECISION_MADE
+  - PREMODERATION_SELECT_DELIVERY
+  - UNKNOWN

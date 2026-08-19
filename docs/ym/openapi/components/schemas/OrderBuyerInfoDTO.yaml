@@ -1,0 +1,31 @@
+description: Информация о покупателе и его номере телефона.
+type: object
+allOf:
+  - $ref: ./OrderBuyerBasicInfoDTO.yaml
+  - properties:
+      phone:
+        description: >
+          Подменный номер телефона покупателя. Подробнее о таких номерах читайте
+          [в Справке Маркета для
+          продавцов](https://yandex.ru/support2/marketplace/ru/orders/dbs/call#fake-number).
+
+
+          Формат номера: `+<код_страны><код_региона><номер_телефона>`.
+        type: string
+      trusted:
+        description: >
+          Проверенный покупатель.
+
+
+          Если параметр `trusted` вернулся со значением `true`, Маркет уже
+          проверил покупателя — не звоните ему. Обработайте заказ как обычно и
+          передайте его курьеру или отвезите в ПВЗ.
+
+
+          При необходимости свяжитесь с покупателем в чате. [Как это
+          сделать](../../step-by-step/chats.md)
+
+
+          Подробнее о звонках покупателю читайте [в Справке Маркета для
+          продавцов](https://yandex.ru/support/marketplace/ru/orders/dbs/call).
+        type: boolean

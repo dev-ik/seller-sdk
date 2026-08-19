@@ -2,11 +2,12 @@
 
 ## Границы продукта
 
-Публикуются три пакета:
+Публикуются четыре пакета:
 
 ```text
 @seller-sdk/ozon
 @seller-sdk/wb
+@seller-sdk/ym
 seller-sdk
 ```
 
@@ -17,6 +18,7 @@ packages/
 ├── core/        # приватный общий исходный код
 ├── ozon/        # самостоятельный пакет Ozon
 ├── wb/          # самостоятельный пакет Wildberries
+├── ym/          # самостоятельный пакет Yandex Market
 └── seller-sdk/  # общий пакет
 ```
 
@@ -29,9 +31,13 @@ packages/
 ```text
 seller-sdk
     ├── @seller-sdk/ozon
-    └── @seller-sdk/wb
+    ├── @seller-sdk/wb
+    └── @seller-sdk/ym
 
 @seller-sdk/ozon
+    └── @safe-shape/core
+
+@seller-sdk/ym
     └── @safe-shape/core
 
 @seller-sdk/wb
@@ -39,7 +45,8 @@ seller-sdk
 
 packages/core
     ├── компилируется в @seller-sdk/ozon/dist/internal/core
-    └── компилируется в @seller-sdk/wb/dist/internal/core
+    ├── компилируется в @seller-sdk/wb/dist/internal/core
+    └── компилируется в @seller-sdk/ym/dist/internal/core
 ```
 
 Marketplace-пакеты не должны зависеть друг от друга.
@@ -137,7 +144,7 @@ cancellation и retry. Transport всегда имеет последнее сл
 
 ## Будущие маркетплейсы
 
-Новая площадка получает отдельный пакет, например `@seller-sdk/wb`, и запись в
+Новая площадка получает отдельный focused-пакет и запись в
 типизированном registry общего пакета. Добавление площадки не должно менять
 зависимости уже опубликованного `@seller-sdk/ozon`.
 
@@ -147,3 +154,9 @@ cancellation и retry. Transport всегда имеет последнее сл
 области соответствуют официальным разделам WB. Каждая операция закреплена за
 конкретным production origin и, когда он документирован, sandbox origin.
 Токен никогда не отправляется на произвольный host.
+
+## Yandex Market
+
+`@seller-sdk/ym` генерируется из официального snapshot в `docs/ym/openapi/`.
+Все 165 операций используют фиксированный origin Partner API, заголовок
+`Api-Key` и SafeShape 2 lazy contracts для рекурсивных схем.

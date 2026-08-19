@@ -1,0 +1,8 @@
+description: |
+  Тип денежного перевода:
+  - `PAYMENT` — оплата.
+  - `REFUND` — возврат.
+type: string
+enum:
+  - PAYMENT
+  - REFUND

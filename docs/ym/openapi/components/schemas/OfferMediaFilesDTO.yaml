@@ -1,0 +1,34 @@
+description: |
+  Информация о медиафайлах товара.
+type: object
+properties:
+  firstVideoAsCover:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+    description: "{% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nИспользовать первое видео в карточке как видеообложку.\n\nПередайте `true`, чтобы первое видео использовалось как видеообложка, или `false`, чтобы видеообложка не отображалась в карточке товара.\n"
+    type: boolean
+  videos:
+    description: |
+      Видеофайлы товара.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferMediaFileDTO.yaml
+  pictures:
+    description: |
+      Изображения товара.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferMediaFileDTO.yaml
+  manuals:
+    description: |
+      Руководства по использованию товара.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferMediaFileDTO.yaml

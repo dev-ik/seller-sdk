@@ -1,0 +1,96 @@
+description: Информация о доставке.
+type: object
+required:
+  - type
+  - serviceName
+  - deliveryPartnerType
+  - dates
+  - deliveryServiceId
+properties:
+  id:
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nИдентификатор доставки, присвоенный магазином.\n\nУказывается, только если магазин передал данный идентификатор в ответе на запрос методом `POST cart`.\n"
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    type: string
+  type:
+    description: |
+      Способ доставки заказа.
+    $ref: ./OrderDeliveryType.yaml
+  serviceName:
+    description: Название службы доставки.
+    type: string
+  price:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+      replacement-field: deliveryTotal
+    description: |
+      {% note warning "Параметр устарел и будет отключен 05.10.2026." %}
+
+      Стоимость доставки смотрите в параметре `deliveryTotal`.
+
+      {% endnote %}
+
+      Стоимость доставки в валюте заказа.
+    type: number
+  deliveryPartnerType:
+    description: Тип сотрудничества со службой доставки в рамках указанного заказа.
+    $ref: ./OrderDeliveryPartnerType.yaml
+  courier:
+    $ref: ./OrderCourierDTO.yaml
+  dates:
+    $ref: ./OrderDeliveryDatesDTO.yaml
+  region:
+    $ref: ./RegionDTO.yaml
+  address:
+    $ref: ./OrderDeliveryAddressDTO.yaml
+  vat:
+    $ref: ./OrderVatType.yaml
+  deliveryServiceId:
+    description: Идентификатор службы доставки.
+    type: integer
+    format: int64
+  liftType:
+    $ref: ./OrderLiftType.yaml
+  liftPrice:
+    description: Стоимость подъема на этаж.
+    type: number
+  outletCode:
+    description: Идентификатор пункта выдачи, присвоенный магазином.
+    type: string
+  outletStorageLimitDate:
+    description: "Дата, до которой заказ будет храниться в пункте выдачи. Возвращается, когда заказ переходит в статус `PICKUP`.\n\nОдин раз дату можно поменять с помощью метода [PUT\_v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit](../../reference/order-delivery/updateOrderStorageLimit.md).\n"
+    $ref: ./DateDdMmYyyy.yaml
+  dispatchType:
+    $ref: ./OrderDeliveryDispatchType.yaml
+  tracks:
+    description: Информация для отслеживания посылки.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderTrackDTO.yaml
+  shipments:
+    description: Информация о посылках.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderShipmentDTO.yaml
+  estimated:
+    description: Приблизительная ли дата доставки.
+    type: boolean
+  eacType:
+    description: Тип кода подтверждения ЭАПП.
+    $ref: ./OrderDeliveryEacType.yaml
+  eacCode:
+    description: |
+      Код подтверждения ЭАПП (для типа `MERCHANT_TO_COURIER`).
+    type: string
+  receiveCode:
+    description: |
+      **Только для модели LaaS**
+
+      Код получения заказа на ПВЗ.
+    type: string

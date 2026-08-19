@@ -1,0 +1,16 @@
+description: |
+  Способ доставки:
+
+  * `BUYER` — курьерская доставка покупателю.
+
+  * `MARKET_BRANDED_OUTLET` — доставка в пункт выдачи заказов Маркета.
+
+  * `SHOP_OUTLET` — доставка в пункт выдачи заказов магазина.
+
+  * `UNKNOWN` — неизвестный тип.
+type: string
+enum:
+  - UNKNOWN
+  - BUYER
+  - MARKET_BRANDED_OUTLET
+  - SHOP_OUTLET

@@ -1,0 +1,66 @@
+post:
+  x-resource-id: 177
+  tags:
+    - prices
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - pricing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: req.offers
+    none:
+      amount: 10000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: minutes
+      period-duration: 1
+  x-apphost:
+    domain: PROMO
+    enabled: false
+  operationId: updateBusinessPrices
+  summary: Установка цен на товары для всех магазинов
+  description: "{% include notitle [access](../../_auto/method_scopes/updateBusinessPrices.md) %}\n\nУстанавливает цены, которые действуют во всех магазинах. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST\_v2/businesses/{businessId}/offers/recommendations](../../reference/offers/getOfferRecommendations.md).\n\nПри необходимости передавайте НДС с помощью параметра `vat` в запросе [POST\_v2/campaigns/{campaignId}/offers/update](../../reference/offers/updateCampaignOffers.md).\n\n{% note info \"Данные в каталоге обновляются не мгновенно\" %}\n\nЭто занимает до нескольких минут.\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/updateBusinessPrices.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateBusinessPricesRequest.yaml
+  responses:
+    '200':
+      description: Маркет принял информацию о новых ценах.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        ценами](../../concepts/error-codes#prices)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '423':
+      $ref: ../components/responses/423.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

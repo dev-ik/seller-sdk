@@ -1,0 +1,9 @@
+description: Список заказов.
+type: object
+required:
+  - externalOrderId
+properties:
+  externalOrderId:
+    description: Внешний идентификатор заказа.
+    type: string
+    minLength: 1

@@ -1,0 +1,13 @@
+description: Невыкупы или возвраты.
+type: object
+required:
+  - returns
+properties:
+  paging:
+    description: Информация о страницах с результатами.
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml
+  returns:
+    description: Список невыкупов или возвратов.
+    type: array
+    items:
+      $ref: ./ReturnDTO.yaml

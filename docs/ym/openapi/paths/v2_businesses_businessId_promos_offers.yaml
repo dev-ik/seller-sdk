@@ -1,0 +1,81 @@
+post:
+  x-resource-id: 236
+  tags:
+    - promos
+    - fby
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - pricing
+    - pricing:read-only
+    - promotion
+    - promotion:read-only
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 5000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 5000
+      period: hours
+      period-duration: 1
+  x-allowed:
+    - seller
+  x-apphost:
+    domain: PROMO
+    enabled: false
+  operationId: getPromoOffers
+  summary: Получение списка товаров, которые участвуют или могут участвовать в акции
+  description: |
+    {% include notitle [access](../../_auto/method_scopes/getPromoOffers.md) %}
+
+    Возвращает список товаров, которые участвуют или могут участвовать в акции.
+
+    {% note warning "Условия участия в акциях могут меняться" %}
+
+    Например, `maxPromoPrice`.
+
+    Установленные цены меняться не будут — `price` и `promoPrice`.
+
+    {% endnote %}
+
+    {% include notitle [limit](../../_auto/method_limits/getPromoOffers.md) %}
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit500.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetPromoOffersRequest.yaml
+  responses:
+    '200':
+      description: Список товаров, которые участвуют или могут участвовать в акции.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetPromoOffersResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        акциями](../../concepts/error-codes#promos)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

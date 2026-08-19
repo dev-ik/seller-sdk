@@ -1,0 +1,13 @@
+description: Информация об индексе качества магазина.
+type: object
+required:
+  - campaignId
+  - ratings
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  ratings:
+    description: Список значений индекса качества.
+    type: array
+    items:
+      $ref: ./QualityRatingDTO.yaml

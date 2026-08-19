@@ -1,0 +1,78 @@
+post:
+  x-resource-id: 242
+  tags:
+    - hidden-offers
+    - fby
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - offers-and-cards-management
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: req.hiddenOffers
+    none:
+      amount: 5000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: minutes
+      period-duration: 1
+  x-apphost:
+    domain: OFFERS_CATALOG
+    enabled: false
+  operationId: deleteHiddenOffers
+  summary: Возобновление показа товаров
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/deleteHiddenOffers.md)
+    %}
+
+
+    Возобновляет показ скрытых вами товаров магазина на Маркете.
+
+
+    {% note info "Данные в каталоге обновляются не мгновенно" %}
+
+
+    Это занимает до нескольких минут.
+
+
+    {% endnote %}
+
+
+    {% include notitle [limit](../../_auto/method_limits/deleteHiddenOffers.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+  requestBody:
+    required: true
+    description: Запрос на возобновление показа оферов.
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DeleteHiddenOffersRequest.yaml
+  responses:
+    '200':
+      description: Показ товаров возобновлен.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '423':
+      $ref: ../components/responses/423.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

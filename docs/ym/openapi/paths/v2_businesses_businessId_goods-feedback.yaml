@@ -1,0 +1,93 @@
+post:
+  x-resource-id: 233
+  tags:
+    - goods-feedback
+    - fby
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - communication
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 5000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: UGC
+    enabled: false
+  operationId: getGoodsFeedbacks
+  summary: Получение отзывов о товарах продавца
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getGoodsFeedbacks.md)
+    %}
+
+
+    Возвращает отзывы о товарах продавца по указанным фильтрам. **Исключение:**
+    отзывы, которые удалили покупатели или Маркет.
+
+
+    {% note tip "Вы также можете настроить API-уведомления" %}
+
+
+    Маркет отправит вам
+    [запрос](../../push-notifications/reference/sendNotification.md), когда
+    появится новый отзыв. А полную информацию о нем можно получить с помощью
+    этого метода.
+
+
+    [{#T}](../../push-notifications/index.md)
+
+
+    {% endnote %}
+
+
+    Результаты возвращаются постранично.
+
+
+    Отзывы расположены в порядке публикации, поэтому вы можете передавать
+    определенный идентификатор страницы в `pageToken`, если вы получали его
+    ранее.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit50.yaml
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetGoodsFeedbackRequest.yaml
+  responses:
+    '200':
+      description: Список отзывов.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetGoodsFeedbackResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

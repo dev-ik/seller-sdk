@@ -1,0 +1,8 @@
+description: Информация о кабинете.
+type: object
+properties:
+  id:
+    $ref: ./BusinessId.yaml
+  name:
+    description: Название бизнеса.
+    type: string

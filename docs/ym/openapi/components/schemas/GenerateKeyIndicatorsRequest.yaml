@@ -1,0 +1,17 @@
+description: >
+  Данные, необходимые для генерации отчета.
+
+
+  В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не
+  оба сразу.
+type: object
+required:
+  - detalizationLevel
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  campaignId:
+    $ref: ./CampaignId.yaml
+  detalizationLevel:
+    description: За какой период нужна детализация.
+    $ref: ./KeyIndicatorsReportDetalizationLevelType.yaml

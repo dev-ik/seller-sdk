@@ -1,0 +1,61 @@
+post:
+  x-resource-id: 160
+  tags:
+    - returns
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: ORDERS
+    enabled: false
+  x-deprecation-config:
+    degradation-start-date: '2027-01-18'
+    shutdown-date: '2027-04-05'
+    replacement-operation-id: submitReturnDecision
+  operationId: setReturnDecision
+  summary: Принятие или изменение решения по возврату
+  description: "{% include notitle [access](../../_auto/method_scopes/setReturnDecision.md) %}\n\nВыбирает решение по возврату от покупателя. После этого для подтверждения решения нужно выполнить запрос [POST\_v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision/submit](../../reference/returns/submitReturnDecision.md).\n\n{% include notitle [limit](../../_auto/method_limits/setReturnDecision.md) %}\n"
+  deprecated: true
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/OrderId.yaml
+    - $ref: ../components/parameters/ReturnId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SetReturnDecisionRequest.yaml
+  responses:
+    '200':
+      description: Детали возврата.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

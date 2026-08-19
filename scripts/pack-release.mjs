@@ -8,6 +8,7 @@ const outputDirectory = join(projectDirectory, "release-artifacts");
 const packageDirectories = [
   join(projectDirectory, "packages", "ozon"),
   join(projectDirectory, "packages", "wb"),
+  join(projectDirectory, "packages", "ym"),
   join(projectDirectory, "packages", "seller-sdk"),
 ];
 

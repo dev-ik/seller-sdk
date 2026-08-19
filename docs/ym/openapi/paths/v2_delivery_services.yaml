@@ -1,0 +1,69 @@
+get:
+  x-resource-id: 55
+  tags:
+    - delivery-services
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - settings-management
+    - finance-and-accounting
+    - offers-and-cards-management
+    - offers-and-cards-management:read-only
+    - pricing
+    - pricing:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+    - promotion
+    - promotion:read-only
+    - communication
+    - supplies-management:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 5000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 5000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: getDeliveryServices
+  summary: Справочник служб доставки
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/getDeliveryServices.md) %}
+
+
+    Возвращает справочник служб доставки: идентификаторы и наименования.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getDeliveryServices.md)
+    %}
+  responses:
+    '200':
+      description: Информация о службах доставки.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetDeliveryServicesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

@@ -1,0 +1,45 @@
+description: |
+  Данные, необходимые для генерации файла.
+type: object
+required:
+  - campaignId
+  - barcodeFormat
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  barcodeFormat:
+    $ref: ./BarcodeFormatType.yaml
+  barcodeOfferInfos:
+    description: >
+      Список товаров.
+
+
+      Передайте этот параметр и уникальные `offerId`, чтобы вернуть файл со
+      штрихкодами конкретных товаров.
+
+
+      В запросе обязательно должен быть либо `barcodeOfferInfos`, либо
+      `supplyRequestId`, но не оба сразу.
+
+
+      Если передается информация о товаре, у которого несколько штрихкодов, все
+      штрихкоды будут добавлены в файл, их количество будет задано параметром
+      `barcodeCount`.
+    type: array
+    nullable: true
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./BarcodeOfferInfoDTO.yaml
+  supplyRequestId:
+    description: >
+      Идентификатор заявки на поставку.
+
+
+      Передайте этот параметр, чтобы вернуть файл со штрихкодами товаров в
+      указанной заявке на поставку. Вернутся штрихкоды каждого товара в заявке.
+
+
+      В запросе обязательно должен быть либо `barcodeOfferInfos`, либо
+      `supplyRequestId`, но не оба сразу.
+    $ref: ./SupplyRequestId.yaml

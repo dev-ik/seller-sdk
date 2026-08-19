@@ -1,0 +1,30 @@
+type: object
+required:
+  - region
+properties:
+  regions:
+    type: array
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: region
+    nullable: true
+    minItems: 1
+    maxItems: 1
+    description: >
+      Регион доставки.
+
+
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+
+      В массиве всегда возвращается один регион, используйте поле `region`
+      вместо него.
+
+
+      {% endnote %}
+    items:
+      $ref: ./RegionDTO.yaml
+  region:
+    description: Регион доставки.
+    $ref: ./RegionDTO.yaml

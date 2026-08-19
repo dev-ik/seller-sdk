@@ -1,0 +1,78 @@
+get:
+  x-resource-id: 17
+  tags:
+    - regions
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - settings-management
+    - finance-and-accounting
+    - offers-and-cards-management
+    - offers-and-cards-management:read-only
+    - pricing
+    - pricing:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+    - promotion
+    - promotion:read-only
+    - communication
+    - supplies-management:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp.regions
+    none:
+      amount: 50000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 50000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: BASE
+    enabled: false
+  operationId: searchRegionsByName
+  summary: Поиск регионов по их имени
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/searchRegionsByName.md) %}
+
+
+    Возвращает информацию о регионе, удовлетворяющем заданным в запросе условиям
+    поиска.
+
+
+    Если найдено несколько регионов, удовлетворяющих условиям поиска,
+    возвращается информация по каждому найденному региону (но не более десяти
+    регионов) для возможности определения нужного региона по родительским
+    регионам.
+
+
+    {% include notitle [limit](../../_auto/method_limits/searchRegionsByName.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/RegionName.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit20.yaml
+  responses:
+    '200':
+      description: Список найденных регионов.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetRegionsResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

@@ -1,0 +1,20 @@
+description: description.
+type: object
+properties:
+  skus:
+    description: >
+      Список товаров, для которых нужно получить значения ставок.
+
+
+      Если список не задан, постранично возвращаются все товары со ставками.
+
+
+      Если список задан, результаты возвращаются одной страницей, а параметры
+      `pageToken` и `limit` игнорируются.
+    type: array
+    minItems: 1
+    maxItems: 500
+    nullable: true
+    uniqueItems: true
+    items:
+      $ref: ./ShopSku.yaml

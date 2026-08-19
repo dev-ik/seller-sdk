@@ -1,0 +1,98 @@
+description: Информация о заказе.
+type: object
+required:
+  - items
+  - payments
+  - commissions
+  - currency
+properties:
+  id:
+    description: Идентификатор заказа.
+    type: integer
+    format: int64
+  creationDate:
+    description: |
+      Дата создания заказа.
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date
+  statusUpdateDate:
+    description: >
+      Дата и время, когда статус заказа был изменен в последний раз.
+
+
+      Формат даты и времени: ISO 8601. Например, `2017-11-21T00:00:00`. Часовой
+      пояс — UTC+03:00 (Москва).
+    type: string
+    format: date-time
+  status:
+    $ref: ./OrderStatsStatusType.yaml
+  partnerOrderId:
+    description: Идентификатор заказа в информационной системе магазина.
+    type: string
+  paymentType:
+    description: Тип оплаты заказа.
+    $ref: ./OrdersStatsOrderPaymentType.yaml
+  fake:
+    description: |
+      Тип заказа:
+
+      * `false` — настоящий заказ покупателя.
+
+      * `true` — [тестовый заказ](../../concepts/sandbox.md) Маркета.
+    type: boolean
+  deliveryRegion:
+    $ref: ./OrdersStatsDeliveryRegionDTO.yaml
+  items:
+    description: >
+      Список товаров в заказе после возможных изменений.
+
+
+      Информация о доставке заказа добавляется отдельным элементом в массиве
+      `items`— параметр `offerName` со значением `Доставка`.
+    type: array
+    items:
+      $ref: ./OrdersStatsItemDTO.yaml
+  initialItems:
+    description: |
+      Список товаров в заказе.
+
+      Возвращается, только если было изменение количества товаров.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrdersStatsItemDTO.yaml
+  payments:
+    description: >
+      Информация о расчетах по заказу.
+
+
+      Возвращается пустым, если заказ:
+        * только начали обрабатывать (даже если он оплачен);
+        * отменили до момента передачи в доставку.
+
+      Окончательная информация о расчетах по заказу вернется после его финальной
+      обработки (например, после перехода в статус `DELIVERED`).
+    type: array
+    items:
+      $ref: ./OrdersStatsPaymentDTO.yaml
+  commissions:
+    description: Информация о стоимости услуг.
+    type: array
+    items:
+      $ref: ./OrdersStatsCommissionDTO.yaml
+  subsidies:
+    description: >-
+      Начисление баллов, которые используются для уменьшения стоимости
+      размещения, и их списание в случае невыкупа или возврата.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrdersStatsSubsidyDTO.yaml
+  currency:
+    description: |
+      Валюта, в которой указаны цены в заказе.
+    $ref: ./CurrencyType.yaml

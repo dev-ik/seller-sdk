@@ -1,0 +1,17 @@
+description: Запрос на передачу ключей цифровых товаров.
+type: object
+required:
+  - items
+properties:
+  items:
+    description: >
+      Список проданных товаров.
+
+
+      Для товара с одинаковым `id` передавайте один элемент и массив `codes` по
+      количеству ключей.
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      $ref: ./OrderDigitalItemDTO.yaml

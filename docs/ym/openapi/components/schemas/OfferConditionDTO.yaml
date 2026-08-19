@@ -1,0 +1,17 @@
+description: |
+  Состояние уцененного товара.
+type: object
+properties:
+  type:
+    description: |
+      Тип уценки.
+    $ref: ./OfferConditionType.yaml
+  quality:
+    description: |
+      Внешний вид товара.
+    $ref: ./OfferConditionQualityType.yaml
+  reason:
+    description: >
+      Описание товара. Подробно опишите дефекты, насколько они заметны и где их
+      искать.
+    type: string

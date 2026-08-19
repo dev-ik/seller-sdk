@@ -1,0 +1,14 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - businessId
+  - dateFrom
+  - dateTo
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml

@@ -1,12 +1,15 @@
 {
   "name": "seller-sdk",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Единая точка входа для поддерживаемых Seller API маркетплейсов.",
   "keywords": [
     "marketplace",
     "ozon",
     "wildberries",
     "wb",
+    "yandex",
+    "yandex-market",
+    "ym",
     "seller-api",
     "sdk",
     "typescript"
@@ -34,9 +37,10 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^1.0.1",
+    "@safe-shape/core": "^2.0.0",
     "@seller-sdk/ozon": "workspace:*",
-    "@seller-sdk/wb": "workspace:*"
+    "@seller-sdk/wb": "workspace:*",
+    "@seller-sdk/ym": "workspace:*"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

@@ -1,0 +1,9 @@
+description: |
+  Тип лицензии:
+
+  * `ALCOHOL` — лицензия на розничную продажу алкогольной продукции.
+  * `UNKNOWN` — неизвестный тип лицензии.
+type: string
+enum:
+  - ALCOHOL
+  - UNKNOWN

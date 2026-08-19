@@ -1,0 +1,12 @@
+description: Список цен.
+type: object
+required:
+  - offers
+properties:
+  offers:
+    description: Страница списка цен.
+    type: array
+    items:
+      $ref: ./OfferPriceByOfferIdsResponseDTO.yaml
+  paging:
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml

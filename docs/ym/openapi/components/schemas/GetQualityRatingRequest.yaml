@@ -1,0 +1,32 @@
+description: Запрос информации по индексу качества.
+type: object
+required:
+  - campaignIds
+properties:
+  dateFrom:
+    description: |
+      Начало периода.
+
+      Формат даты: `ГГГГ‑ММ‑ДД`.
+
+      Не может быть раньше 30 дней от текущей даты.
+    type: string
+    format: date
+  dateTo:
+    description: |
+      Конец периода.
+
+      Формат даты: `ГГГГ‑ММ‑ДД`.
+
+      Не может быть позже текущей даты.
+    type: string
+    format: date
+  campaignIds:
+    description: |
+      Список идентификаторов кампаний магазинов.
+    type: array
+    minItems: 1
+    maxItems: 50
+    uniqueItems: true
+    items:
+      $ref: ./CampaignId.yaml

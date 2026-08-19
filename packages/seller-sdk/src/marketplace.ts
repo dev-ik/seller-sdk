@@ -4,10 +4,12 @@ import type {
   OzonCredentials,
 } from "@seller-sdk/ozon";
 import type { WbClient, WbClientConfig, WbCredentials } from "@seller-sdk/wb";
+import type { YmClient, YmClientConfig, YmCredentials } from "@seller-sdk/ym";
 
 export const Marketplace = {
   Ozon: "ozon",
   Wb: "wb",
+  Ym: "ym",
 } as const;
 
 export type Marketplace = (typeof Marketplace)[keyof typeof Marketplace];
@@ -22,6 +24,11 @@ export interface MarketplaceRegistry {
     readonly credentials: WbCredentials;
     readonly client: WbClient;
     readonly config: WbClientConfig;
+  };
+  readonly ym: {
+    readonly credentials: YmCredentials;
+    readonly client: YmClient;
+    readonly config: YmClientConfig;
   };
 }
 

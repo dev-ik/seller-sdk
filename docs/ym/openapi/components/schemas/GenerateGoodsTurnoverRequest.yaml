@@ -1,0 +1,17 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - campaignId
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  date:
+    description: >
+      Дата, за которую нужно рассчитать оборачиваемость. Если параметр не
+      указан, используется текущая дата.
+
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date

@@ -1,0 +1,75 @@
+post:
+  x-resource-id: 207
+  tags:
+    - chats
+    - dbs
+    - fbs
+    - fby
+    - express
+  x-auth-scopes:
+    - all-methods
+    - communication
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: BASE
+    enabled: false
+  operationId: createChat
+  summary: Создание нового чата с покупателем
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/createChat.md) %}
+
+
+    Создает новый чат с покупателем и возвращает информацию о нем или созданном
+    ранее.
+
+
+    Типы чатов, которые может начать продавец:
+
+
+    * по заказам;
+
+    * по возвратам (доступны только для FBY-, FBS- и Экспресс-магазинов).
+
+
+    {% include notitle [limit](../../_auto/method_limits/createChat.md) %}
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+  requestBody:
+    required: true
+    description: description
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/CreateChatRequest.yaml
+  responses:
+    '200':
+      description: |
+        Информация о новом или созданном ранее чате.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/CreateChatResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

@@ -12,6 +12,7 @@ import {
   type ValidationIssue,
 } from "@seller-sdk/ozon";
 import { WbClient, type WbCredentials } from "@seller-sdk/wb";
+import { YmClient, type YmCredentials } from "@seller-sdk/ym";
 import {
   Marketplace,
   type Marketplace as MarketplaceName,
@@ -33,6 +34,10 @@ const wbCredentialsSchema: Schema<WbCredentials> = object({
   token: nonEmptyString,
 });
 
+const ymCredentialsSchema: Schema<YmCredentials> = object({
+  apiKey: nonEmptyString,
+});
+
 const ozonSellerClientOptionsSchema = object({
   marketplace: literal(Marketplace.Ozon),
   credentials: ozonCredentialsSchema,
@@ -43,6 +48,11 @@ const wbSellerClientOptionsSchema = object({
   credentials: wbCredentialsSchema,
 });
 
+const ymSellerClientOptionsSchema = object({
+  marketplace: literal(Marketplace.Ym),
+  credentials: ymCredentialsSchema,
+});
+
 export class SellerClient<const M extends MarketplaceName = MarketplaceName> {
   readonly marketplace: M;
   readonly client: MarketplaceRegistry[M]["client"];
@@ -50,15 +60,13 @@ export class SellerClient<const M extends MarketplaceName = MarketplaceName> {
     ? OzonClient
     : undefined;
   declare readonly wb: M extends typeof Marketplace.Wb ? WbClient : undefined;
+  declare readonly ym: M extends typeof Marketplace.Ym ? YmClient : undefined;
 
   constructor(options: SellerClientOptions<M>) {
     const parsedOptions = parseSellerClientOptions(options);
     this.marketplace = parsedOptions.marketplace as M;
 
-    const client =
-      parsedOptions.marketplace === Marketplace.Ozon
-        ? new OzonClient(parsedOptions.credentials, parsedOptions.config)
-        : new WbClient(parsedOptions.credentials, parsedOptions.config);
+    const client = createMarketplaceClient(parsedOptions);
     this.client = client as MarketplaceRegistry[M]["client"];
     Object.defineProperties(this, {
       ozon: {
@@ -68,6 +76,10 @@ export class SellerClient<const M extends MarketplaceName = MarketplaceName> {
       wb: {
         value:
           parsedOptions.marketplace === Marketplace.Wb ? client : undefined,
+      },
+      ym: {
+        value:
+          parsedOptions.marketplace === Marketplace.Ym ? client : undefined,
       },
     });
   }
@@ -81,7 +93,9 @@ function parseSellerClientOptions(input: unknown): SellerClientOptions {
   const schema =
     record?.["marketplace"] === Marketplace.Wb
       ? wbSellerClientOptionsSchema
-      : ozonSellerClientOptionsSchema;
+      : record?.["marketplace"] === Marketplace.Ym
+        ? ymSellerClientOptionsSchema
+        : ozonSellerClientOptionsSchema;
   const result = schema.safeParse(
     record === undefined
       ? input
@@ -120,6 +134,17 @@ function parseSellerClientOptions(input: unknown): SellerClientOptions {
           }))
       : toValidationIssues(result.error),
   );
+}
+
+function createMarketplaceClient(options: SellerClientOptions) {
+  switch (options.marketplace) {
+    case Marketplace.Ozon:
+      return new OzonClient(options.credentials, options.config);
+    case Marketplace.Wb:
+      return new WbClient(options.credentials, options.config);
+    case Marketplace.Ym:
+      return new YmClient(options.credentials, options.config);
+  }
 }
 
 function toValidationIssues(

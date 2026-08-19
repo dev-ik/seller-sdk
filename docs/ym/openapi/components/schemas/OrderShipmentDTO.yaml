@@ -1,0 +1,52 @@
+description: |
+  Список посылок.
+
+  В параметре может указываться несколько посылок.
+type: object
+properties:
+  id:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nИдентификатор посылки, присвоенный Маркетом.\n"
+    type: integer
+    format: int64
+  shipmentDate:
+    description: "День, в который нужно отгрузить заказ службе доставки.\n\nФормат даты: `ДД-ММ-ГГГГ`.\n\nЕсли заказ сделан организацией, параметр не возвращается до согласования даты доставки.\n\n{% cut \"Иногда Маркет может перенести дату отгрузки\" %}\n\nУ таких заказов обновится параметр `updatedAt`. Чтобы найти их, в запросе [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) укажите параметры `updateDateFrom` и `updateDateTo`.\n\n{% endcut %}\n\n\_\n"
+    $ref: ./DateDdMmYyyy.yaml
+  shipmentTime:
+    description: >
+      **Только для модели Экспресс**
+
+
+      Время, к которому магазин должен упаковать заказ и перевести его в статус
+      `READY_TO_SHIP`. После смены статуса за заказом приедет курьер.
+
+
+      Поле может появиться не сразу. Запрашивайте информацию о заказе в течении
+      5–10 минут, пока оно не вернется.
+
+
+      Формат времени: 24-часовой, `ЧЧ:ММ`.
+
+
+      Если заказ сделан организацией, параметр не возвращается до согласования
+      даты доставки.
+    type: string
+  tracks:
+    description: |
+      **Только для модели DBS**
+
+      Информация для отслеживания посылки.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderTrackDTO.yaml
+  boxes:
+    description: Список грузовых мест.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderParcelBoxDTO.yaml

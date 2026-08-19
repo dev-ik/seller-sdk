@@ -1,0 +1,24 @@
+description: >
+  Штрихкод.
+
+
+  Указывайте в виде последовательности цифр. Подойдут коды :no-translate[EAN-13,
+  EAN-8, UPC-A, UPC-E] или :no-translate[Code 128]. Для книг —
+  :no-translate[ISBN].
+
+
+  Для товаров [определенных категорий и торговых
+  марок](https://yastatic.net/s3/doc-binary/src/support/market/ru/yandex-market-list-for-gtin.xlsx)
+  штрихкод должен быть действительным кодом :no-translate[GTIN]. Обратите
+  внимание: внутренние штрихкоды, начинающиеся на 2 или 02, и коды формата
+  :no-translate[Code 128] не являются :no-translate[GTIN].
+
+
+  [Что такое :no-translate[GTIN]](*gtin)
+type: array
+nullable: true
+minItems: 1
+uniqueItems: true
+items:
+  type: string
+  example: '46012300000000'

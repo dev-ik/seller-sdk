@@ -1,0 +1,11 @@
+description: >
+  Идентификатор кампании магазина.
+
+
+  Указывается, если нужно вернуть все склады Маркета, которые привязаны к
+  определенной кампании магазина.
+name: campaignId
+in: query
+required: false
+schema:
+  $ref: ../schemas/CampaignId.yaml

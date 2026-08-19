@@ -1,0 +1,40 @@
+description: Товар в карантине.
+type: object
+properties:
+  offerId:
+    $ref: ./ShopSku.yaml
+  currentPrice:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      Вместо него используйте `verdicts.params`.
+
+      {% endnote %}
+
+      Новая цена.
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: verdicts.params
+    $ref: ./BasePriceDTO.yaml
+  lastValidPrice:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      Вместо него используйте `verdicts.params`.
+
+      {% endnote %}
+
+      Последняя цена до попадания в карантин.
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: verdicts.params
+    $ref: ./BasePriceDTO.yaml
+  verdicts:
+    description: Причины попадания товара в карантин.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./PriceQuarantineVerdictDTO.yaml

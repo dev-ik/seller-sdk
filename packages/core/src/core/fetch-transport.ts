@@ -36,6 +36,11 @@ export interface FetchTransportOptions {
   readonly defaultDeadlineMs?: number;
   readonly defaultRetry?: RetryOptions;
   readonly onResponse?: (metadata: TransportResponseMetadata) => void;
+  readonly parseApiError?: (body: unknown) => {
+    readonly apiCode?: string;
+    readonly apiMessage?: string;
+  };
+  readonly rateLimitStatuses?: readonly number[];
   readonly fetchImplementation?: typeof fetch;
   readonly random?: () => number;
   readonly now?: () => number;
@@ -54,6 +59,8 @@ export class FetchTransport implements Transport {
   readonly #onResponse:
     | ((metadata: TransportResponseMetadata) => void)
     | undefined;
+  readonly #parseApiError: FetchTransportOptions["parseApiError"] | undefined;
+  readonly #rateLimitStatuses: ReadonlySet<number>;
 
   constructor(options: FetchTransportOptions = {}) {
     this.#apiOrigin = parseApiOrigin(options.baseUrl ?? DEFAULT_API_ORIGIN);
@@ -66,6 +73,8 @@ export class FetchTransport implements Transport {
     this.#defaultDeadlineMs = options.defaultDeadlineMs ?? DEFAULT_DEADLINE_MS;
     this.#defaultRetry = Object.freeze({ ...options.defaultRetry });
     this.#onResponse = options.onResponse;
+    this.#parseApiError = options.parseApiError;
+    this.#rateLimitStatuses = new Set(options.rateLimitStatuses ?? [429]);
   }
 
   async request(request: TransportRequest): Promise<TransportResponse> {
@@ -154,6 +163,8 @@ export class FetchTransport implements Transport {
           request.operationId,
           retryAfterMs,
           this.#apiName,
+          this.#parseApiError?.(body),
+          this.#rateLimitStatuses,
         );
 
         const willRetry =
@@ -371,10 +382,14 @@ function createApiError(
   operationId: string,
   retryAfterMs: number | undefined,
   apiName: string,
+  parsedError:
+    | { readonly apiCode?: string; readonly apiMessage?: string }
+    | undefined,
+  rateLimitStatuses: ReadonlySet<number>,
 ): ApiError {
   const requestId = readRequestId(response.headers);
-  const apiCode = readScalar(body, "code");
-  const apiMessage = readApiMessage(body);
+  const apiCode = parsedError?.apiCode ?? readScalar(body, "code");
+  const apiMessage = parsedError?.apiMessage ?? readApiMessage(body);
   const message = `${apiName} rejected operation ${operationId} with HTTP ${response.status}${apiMessage === undefined ? "." : `: ${apiMessage}`}`;
   const options = {
     status: response.status,
@@ -388,7 +403,7 @@ function createApiError(
   if (response.status === 401 || response.status === 403) {
     return new AuthenticationError(message, options);
   }
-  if (response.status === 429) {
+  if (rateLimitStatuses.has(response.status)) {
     return new RateLimitError(message, options);
   }
   return new ApiError(message, options);

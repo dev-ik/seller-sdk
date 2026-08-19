@@ -1,0 +1,13 @@
+description: >
+  В ответе Маркет возвращает переданный вами список грузовых мест. Не обращайте
+  на это поле внимания.
+type: object
+required:
+  - boxes
+properties:
+  boxes:
+    description: |
+      Список грузовых мест. По его длине Маркет определил количество мест.
+    type: array
+    items:
+      $ref: ./ParcelBoxDTO.yaml

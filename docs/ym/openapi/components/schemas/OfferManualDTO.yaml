@@ -1,0 +1,14 @@
+type: object
+required:
+  - url
+description: |
+  Инструкция по использованию товара.
+properties:
+  url:
+    description: Ссылка на инструкцию.
+    $ref: ./Url.yaml
+  title:
+    description: |
+      Название инструкции, которое будет отображаться на карточке товара.
+    type: string
+    maxLength: 500

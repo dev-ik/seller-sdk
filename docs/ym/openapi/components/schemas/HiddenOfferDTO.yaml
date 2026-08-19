@@ -1,0 +1,9 @@
+description: Информация о скрытии.
+type: object
+required:
+  - offerId
+properties:
+  offerId:
+    description: |
+      Идентификатор предложения из прайс-листа.
+    $ref: ./ShopSku.yaml

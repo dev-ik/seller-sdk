@@ -1,0 +1,12 @@
+description: |
+  Фильтрация заказов по типам:
+
+  * `false` — настоящий заказ покупателя.
+
+  * `true` — [тестовый заказ](../../concepts/sandbox.md) Маркета.
+name: fake
+in: query
+required: false
+schema:
+  type: boolean
+  default: false

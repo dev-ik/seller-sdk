@@ -1,0 +1,12 @@
+description: Запрос на установку цен на товары.
+type: object
+required:
+  - offers
+properties:
+  offers:
+    description: Список товаров.
+    type: array
+    minItems: 1
+    maxItems: 2000
+    items:
+      $ref: ./OfferPriceDTO.yaml

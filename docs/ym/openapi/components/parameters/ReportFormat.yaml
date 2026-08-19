@@ -1,0 +1,6 @@
+description: Формат отчета или документа.
+name: format
+in: query
+required: false
+schema:
+  $ref: ../schemas/ReportFormatType.yaml

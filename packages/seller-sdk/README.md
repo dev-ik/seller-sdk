@@ -2,8 +2,8 @@
 
 > Единая типобезопасная точка входа для Seller API поддерживаемых маркетплейсов.
 
-Доступны Ozon и Wildberries. Если приложению нужна одна площадка, установите
-focused package `@seller-sdk/ozon` или `@seller-sdk/wb`.
+Доступны Ozon, Wildberries и Yandex Market. Если приложению нужна одна
+площадка, установите соответствующий focused package.
 
 ## Установка
 
@@ -16,7 +16,12 @@ npm i seller-sdk
 ## Использование
 
 ```ts
-import { Marketplace, OzonValues, SellerClient } from "seller-sdk";
+import {
+  Marketplace,
+  OzonValues,
+  SellerClient,
+  YmValues,
+} from "seller-sdk";
 
 const seller = new SellerClient({
   marketplace: Marketplace.Ozon,
@@ -59,6 +64,20 @@ const wbSeller = new SellerClient({
 await wbSeller.wb.general.getPing();
 ```
 
+Yandex Market выбирается тем же registry:
+
+```ts
+const ymSeller = new SellerClient({
+  marketplace: Marketplace.Ym,
+  credentials: { apiKey: process.env.YM_API_KEY! },
+});
+
+await ymSeller.ym.orders.getBusinessOrders({
+  path: { businessId: 123456 },
+  body: { statuses: [YmValues.OrdersOrderStatusType.Processing] },
+});
+```
+
 Неизвестное имя маркетплейса отклоняется TypeScript и runtime-валидацией.
 `SellerClient` выбирает конкретный SDK, но не превращает разные маркетплейсы в
 искусственную универсальную модель.
@@ -68,6 +87,7 @@ await wbSeller.wb.general.getPing();
 - `seller-sdk` — единый пакет для приложения с несколькими маркетплейсами;
 - `@seller-sdk/ozon` — только Ozon;
 - `@seller-sdk/wb` — только Wildberries.
+- `@seller-sdk/ym` — только Yandex Market.
 
 Устанавливать оба пакета одновременно не требуется.
 
@@ -77,13 +97,15 @@ await wbSeller.wb.general.getPing();
 - [Справочник методов Ozon](https://github.com/dev-ik/seller-sdk/blob/main/docs/ozon/API-REFERENCE.md)
 - [Руководство по `@seller-sdk/wb`](https://github.com/dev-ik/seller-sdk/blob/main/packages/wb/README.md)
 - [Справочник методов Wildberries](https://github.com/dev-ik/seller-sdk/blob/main/docs/wb/API-REFERENCE.md)
+- [Руководство по `@seller-sdk/ym`](https://github.com/dev-ik/seller-sdk/blob/main/packages/ym/README.md)
+- [Справочник методов Yandex Market](https://github.com/dev-ik/seller-sdk/blob/main/docs/ym/API-REFERENCE.md)
 
 ## Лицензия и товарные знаки
 
 [MIT](https://github.com/dev-ik/seller-sdk/blob/main/LICENSE) © Seller SDK
 contributors.
 
-Seller SDK — независимый open-source проект. Он не связан с Ozon или
-Wildberries, не одобрен и не спонсируется ими либо другими маркетплейсами.
+Seller SDK — независимый open-source проект. Он не связан с Ozon, Wildberries
+или Яндексом, не одобрен и не спонсируется ими либо другими маркетплейсами.
 Названия маркетплейсов используются только для обозначения совместимости с их
 API.

@@ -1,0 +1,8 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - businessId
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml

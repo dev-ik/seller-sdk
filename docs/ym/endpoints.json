@@ -1,0 +1,4358 @@
+{
+  "marketplace": "ym",
+  "package": "@seller-sdk/ym",
+  "source": "https://github.com/yandex-market/yandex-market-partner-api",
+  "verifiedAt": "2026-08-19",
+  "operationCount": 165,
+  "aliasCount": 0,
+  "specifications": [
+    {
+      "directory": "openapi/",
+      "commit": "116389b48f28c26275d40f0a7cb7cecd5a196ca0",
+      "format": "OpenAPI 3.0.3",
+      "license": "BSD-3-Clause",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "sha256": "ef7cf849a7802c4bc929cd22fa428d1a49957309d1713935baf42fcdc8c81c67",
+      "operationCount": 165
+    }
+  ],
+  "operations": [
+    {
+      "domain": "auth",
+      "methodName": "getAuthTokenInfo",
+      "operationId": "getAuthTokenInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/auth/token",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 256,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "bids",
+      "methodName": "putBidsForBusiness",
+      "operationId": "putBidsForBusiness",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/businesses/{businessId}/bids",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 165,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "bids",
+      "methodName": "putBidsForCampaign",
+      "operationId": "putBidsForCampaign",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/bids",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 166,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "bids",
+      "methodName": "getBidsInfoForBusiness",
+      "operationId": "getBidsInfoForBusiness",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/bids/info",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 184,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "bids",
+      "methodName": "getBidsRecommendations",
+      "operationId": "getBidsRecommendations",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/bids/recommendations",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 187,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businesses",
+      "methodName": "getBusinessSettings",
+      "operationId": "getBusinessSettings",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/settings",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 218,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "deleteOffers",
+      "operationId": "deleteOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-mappings/delete",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 171,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "getOfferMappings",
+      "operationId": "getOfferMappings",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-mappings",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 169,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 600,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "updateOfferMappings",
+      "operationId": "updateOfferMappings",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-mappings/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 170,
+      "resourceLimit": {
+        "path": "req.offerMappings",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "addOffersToArchive",
+      "operationId": "addOffersToArchive",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-mappings/archive",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 205,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "deleteOffersFromArchive",
+      "operationId": "deleteOffersFromArchive",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-mappings/unarchive",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 204,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "businessOfferMappings",
+      "methodName": "generateOfferBarcodes",
+      "operationId": "generateOfferBarcodes",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/offer-mappings/barcodes/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 281,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "campaigns",
+      "methodName": "getCampaigns",
+      "operationId": "getCampaigns",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 1,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "campaigns",
+      "methodName": "getCampaign",
+      "operationId": "getCampaign",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 2,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "campaigns",
+      "methodName": "getCampaignSettings",
+      "operationId": "getCampaignSettings",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/settings",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 25,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "categories",
+      "methodName": "getCategoriesTree",
+      "operationId": "getCategoriesTree",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/categories/tree",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 222,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 50,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "categories",
+      "methodName": "getCategoriesMaxSaleQuantum",
+      "operationId": "getCategoriesMaxSaleQuantum",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/categories/max-sale-quantum",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "deprecated",
+      "resourceId": 225,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05"
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "createChat",
+      "operationId": "createChat",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/chats/new",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 207,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "getChats",
+      "operationId": "getChats",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/chats",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 208,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "getChat",
+      "operationId": "getChat",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/businesses/{businessId}/chat",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 249,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "sendFileToChat",
+      "operationId": "sendFileToChat",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/chats/file/send",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 209,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "sendMessageToChat",
+      "operationId": "sendMessageToChat",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/chats/message",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 210,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "getChatMessage",
+      "operationId": "getChatMessage",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/businesses/{businessId}/chats/message",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 248,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "chats",
+      "methodName": "getChatHistory",
+      "operationId": "getChatHistory",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/chats/history",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 211,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "content",
+      "methodName": "getCategoryContentParameters",
+      "operationId": "getCategoryContentParameters",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/category/{categoryId}/parameters",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 197,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "content",
+      "methodName": "getOfferCardsContentStatus",
+      "operationId": "getOfferCardsContentStatus",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-cards",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 198,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 600,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "content",
+      "methodName": "updateOfferContent",
+      "operationId": "updateOfferContent",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-cards/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 199,
+      "resourceLimit": {
+        "path": "req.offersContent",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "deliveryOptions",
+      "methodName": "getDeliveryOptions",
+      "operationId": "getDeliveryOptions",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/delivery-options",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 274,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 10,
+        "none": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "deliveryOptions",
+      "methodName": "getReturnDeliveryOptions",
+      "operationId": "getReturnDeliveryOptions",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/return-delivery-options",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 276,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "deliveryServices",
+      "methodName": "getDeliveryServices",
+      "operationId": "getDeliveryServices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/delivery/services",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 55,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "getGoodsFeedbacks",
+      "operationId": "getGoodsFeedbacks",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/goods-feedback",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 233,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "skipGoodsFeedbacksReaction",
+      "operationId": "skipGoodsFeedbacksReaction",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/goods-feedback/skip-reaction",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 234,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "updateGoodsFeedbackComment",
+      "operationId": "updateGoodsFeedbackComment",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/goods-feedback/comments/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 232,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "deleteGoodsFeedbackComment",
+      "operationId": "deleteGoodsFeedbackComment",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/goods-feedback/comments/delete",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 231,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "getGoodsFeedbackComments",
+      "operationId": "getGoodsFeedbackComments",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/goods-feedback/comments",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 230,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsFeedback",
+      "methodName": "getGoodsFeedbacksUrbanads",
+      "operationId": "getGoodsFeedbacksUrbanads",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/goods-feedback-advertiser",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 288,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsQuestions",
+      "methodName": "getGoodsQuestions",
+      "operationId": "getGoodsQuestions",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/goods-questions",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 285,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsQuestions",
+      "methodName": "getGoodsQuestionAnswers",
+      "operationId": "getGoodsQuestionAnswers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/goods-questions/answers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 286,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsQuestions",
+      "methodName": "updateGoodsQuestionTextEntity",
+      "operationId": "updateGoodsQuestionTextEntity",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/goods-questions/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 284,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "goodsStats",
+      "methodName": "getGoodsStats",
+      "operationId": "getGoodsStats",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/stats/skus",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 125,
+      "resourceLimit": {
+        "path": "resp.result.shopSkus",
+        "none": {
+          "amount": 2000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "hiddenOffers",
+      "methodName": "addHiddenOffers",
+      "operationId": "addHiddenOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/hidden-offers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 59,
+      "resourceLimit": {
+        "path": "req.hiddenOffers",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "hiddenOffers",
+      "methodName": "getHiddenOffers",
+      "operationId": "getHiddenOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/hidden-offers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 61,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "hiddenOffers",
+      "methodName": "deleteHiddenOffers",
+      "operationId": "deleteHiddenOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/hidden-offers/delete",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 242,
+      "resourceLimit": {
+        "path": "req.hiddenOffers",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "logisticPoints",
+      "methodName": "getLogisticPoints",
+      "operationId": "getLogisticPoints",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/logistics-points",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 277,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "offers",
+      "methodName": "getCampaignOffers",
+      "operationId": "getCampaignOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 181,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "offers",
+      "methodName": "updateCampaignOffers",
+      "operationId": "updateCampaignOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offers/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 183,
+      "resourceLimit": {
+        "path": "req.offers",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "offers",
+      "methodName": "deleteCampaignOffers",
+      "operationId": "deleteCampaignOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offers/delete",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 182,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "offers",
+      "methodName": "getOfferRecommendations",
+      "operationId": "getOfferRecommendations",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offers/recommendations",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 191,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 50,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "operations",
+      "methodName": "getOperations",
+      "operationId": "getOperations",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/operations",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 279,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderBusinessInformation",
+      "methodName": "getOrderBusinessBuyerInfo",
+      "operationId": "getOrderBusinessBuyerInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/business-buyer",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 214,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderBusinessInformation",
+      "methodName": "getOrderBusinessDocumentsInfo",
+      "operationId": "getOrderBusinessDocumentsInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/documents",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 215,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderDelivery",
+      "methodName": "setOrderDeliveryDate",
+      "operationId": "setOrderDeliveryDate",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/date",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 138,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderDelivery",
+      "methodName": "setOrderDeliveryTrackCode",
+      "operationId": "setOrderDeliveryTrackCode",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/track",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 136,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderDelivery",
+      "methodName": "getOrderBuyerInfo",
+      "operationId": "getOrderBuyerInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/buyer",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 130,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 3000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderDelivery",
+      "methodName": "verifyOrderEac",
+      "operationId": "verifyOrderEac",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/verifyEac",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 164,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderDelivery",
+      "methodName": "updateOrderStorageLimit",
+      "operationId": "updateOrderStorageLimit",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 154,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderLabels",
+      "methodName": "generateOrderLabel",
+      "operationId": "generateOrderLabel",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 118,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderLabels",
+      "methodName": "generateOrderLabels",
+      "operationId": "generateOrderLabels",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/labels",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 119,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orderLabels",
+      "methodName": "getOrderLabelsData",
+      "operationId": "getOrderLabelsData",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/labels/data",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 120,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "getOrder",
+      "operationId": "getOrder",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "deprecated",
+      "resourceId": 28,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 6,
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-12",
+        "replacement-operation-id": "getBusinessOrders"
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "getOrders",
+      "operationId": "getOrders",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "deprecated",
+      "resourceId": 27,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 6,
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-12",
+        "replacement-operation-id": "getBusinessOrders"
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "getBusinessOrders",
+      "operationId": "getBusinessOrders",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/orders",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 283,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 6,
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "provideOrderItemIdentifiers",
+      "operationId": "provideOrderItemIdentifiers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/identifiers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 179,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "updateOrderItems",
+      "operationId": "updateOrderItems",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/items",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 57,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 6,
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "updateOrderStatus",
+      "operationId": "updateOrderStatus",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/status",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 30,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "updateOrderStatuses",
+      "operationId": "updateOrderStatuses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/status-update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 117,
+      "resourceLimit": {
+        "path": "resp.result.orders",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "setOrderShipmentBoxes",
+      "operationId": "setOrderShipmentBoxes",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "deprecated",
+      "resourceId": 107,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05",
+        "replacement-operation-id": "setOrderBoxLayout"
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "acceptOrderCancellation",
+      "operationId": "acceptOrderCancellation",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/cancellation/accept",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 137,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "provideOrderDigitalCodes",
+      "operationId": "provideOrderDigitalCodes",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/deliverDigitalGoods",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 129,
+      "resourceLimit": {
+        "path": "resp",
+        "parallel-limit-value": 6,
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "setOrderBoxLayout",
+      "operationId": "setOrderBoxLayout",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/boxes",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 206,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "updateExternalOrderId",
+      "operationId": "updateExternalOrderId",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/external-id",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 255,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "getOrderIdentifiersStatus",
+      "operationId": "getOrderIdentifiersStatus",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/identifiers/status",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 259,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "createOrder",
+      "operationId": "createOrder",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/orders/create",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 269,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "updateOrder",
+      "operationId": "updateOrder",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/orders/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 273,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "orders",
+      "methodName": "getOrderUpdateOptions",
+      "operationId": "getOrderUpdateOptions",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/orders/update-options",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 280,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "ordersStats",
+      "methodName": "getOrdersStats",
+      "operationId": "getOrdersStats",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/stats/orders",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 124,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outletLicenses",
+      "methodName": "getOutletLicenses",
+      "operationId": "getOutletLicenses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/outlets/licenses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 113,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outletLicenses",
+      "methodName": "deleteOutletLicenses",
+      "operationId": "deleteOutletLicenses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "DELETE",
+      "path": "/v2/campaigns/{campaignId}/outlets/licenses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 112,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outletLicenses",
+      "methodName": "updateOutletLicenses",
+      "operationId": "updateOutletLicenses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/outlets/licenses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 114,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outlets",
+      "methodName": "createOutlet",
+      "operationId": "createOutlet",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/outlets",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 48,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 35000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outlets",
+      "methodName": "getOutlets",
+      "operationId": "getOutlets",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/outlets",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 32,
+      "resourceLimit": {
+        "path": "resp.outlets",
+        "none": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outlets",
+      "methodName": "updateOutlet",
+      "operationId": "updateOutlet",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/outlets/{outletId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 49,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 35000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outlets",
+      "methodName": "getOutlet",
+      "operationId": "getOutlet",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/outlets/{outletId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 33,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "outlets",
+      "methodName": "deleteOutlet",
+      "operationId": "deleteOutlet",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "DELETE",
+      "path": "/v2/campaigns/{campaignId}/outlets/{outletId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 47,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 35000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "priceQuarantine",
+      "methodName": "getBusinessQuarantineOffers",
+      "operationId": "getBusinessQuarantineOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/price-quarantine",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 172,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "priceQuarantine",
+      "methodName": "confirmBusinessPrices",
+      "operationId": "confirmBusinessPrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/price-quarantine/confirm",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 173,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "priceQuarantine",
+      "methodName": "getCampaignQuarantineOffers",
+      "operationId": "getCampaignQuarantineOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/price-quarantine",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 174,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "priceQuarantine",
+      "methodName": "confirmCampaignPrices",
+      "operationId": "confirmCampaignPrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/price-quarantine/confirm",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 175,
+      "resourceLimit": {
+        "path": "req.offerIds",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "prices",
+      "methodName": "updateBusinessPrices",
+      "operationId": "updateBusinessPrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-prices/updates",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 177,
+      "resourceLimit": {
+        "path": "req.offers",
+        "none": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "prices",
+      "methodName": "updatePrices",
+      "operationId": "updatePrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offer-prices/updates",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 64,
+      "resourceLimit": {
+        "path": "req.offers",
+        "parallel-limit-value": 12,
+        "none": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "prices",
+      "methodName": "getPrices",
+      "operationId": "getPrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/offer-prices",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "deprecated",
+      "resourceId": 63,
+      "resourceLimit": {
+        "path": "resp.result.offers",
+        "none": {
+          "amount": 150000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 150000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05",
+        "replacement-operation-id": "getPricesByOfferIds"
+      }
+    },
+    {
+      "domain": "prices",
+      "methodName": "getPricesByOfferIds",
+      "operationId": "getPricesByOfferIds",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offer-prices",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 176,
+      "resourceLimit": {
+        "path": "resp.result.offers",
+        "none": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "prices",
+      "methodName": "getDefaultPrices",
+      "operationId": "getDefaultPrices",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/offer-prices",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 261,
+      "resourceLimit": {
+        "path": "resp.result.offers",
+        "none": {
+          "amount": 5000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "promos",
+      "methodName": "getPromos",
+      "operationId": "getPromos",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/promos",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 235,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "promos",
+      "methodName": "getPromoOffers",
+      "operationId": "getPromoOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/promos/offers",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 236,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "promos",
+      "methodName": "updatePromoOffers",
+      "operationId": "updatePromoOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/promos/offers/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 237,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "promos",
+      "methodName": "deletePromoOffers",
+      "operationId": "deletePromoOffers",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/promos/offers/delete",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 238,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "ratings",
+      "methodName": "getQualityRatings",
+      "operationId": "getQualityRatings",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/ratings/quality",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 239,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 500,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "ratings",
+      "methodName": "getQualityRatingDetails",
+      "operationId": "getQualityRatingDetails",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/ratings/quality/details",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 240,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "regions",
+      "methodName": "searchRegionsByName",
+      "operationId": "searchRegionsByName",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/regions",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 17,
+      "resourceLimit": {
+        "path": "resp.regions",
+        "none": {
+          "amount": 50000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 50000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "regions",
+      "methodName": "searchRegionsById",
+      "operationId": "searchRegionsById",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/regions/{regionId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 18,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 10000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "regions",
+      "methodName": "searchRegionChildren",
+      "operationId": "searchRegionChildren",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/regions/{regionId}/children",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 31,
+      "resourceLimit": {
+        "path": "resp.regions.children",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "regions",
+      "methodName": "getRegionsCodes",
+      "operationId": "getRegionsCodes",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/regions/countries",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 254,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "getReportInfo",
+      "operationId": "getReportInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/reports/info/{reportId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 188,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateUnitedNettingReport",
+      "operationId": "generateUnitedNettingReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/united-netting/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 189,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateUnitedMarketplaceServicesReport",
+      "operationId": "generateUnitedMarketplaceServicesReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/united-marketplace-services/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 192,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateUnitedOrdersReport",
+      "operationId": "generateUnitedOrdersReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/united-orders/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 212,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateUnitedReturnsReport",
+      "operationId": "generateUnitedReturnsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/united-returns/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 244,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateGoodsRealizationReport",
+      "operationId": "generateGoodsRealizationReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/goods-realization/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 193,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateStocksOnWarehousesReport",
+      "operationId": "generateStocksOnWarehousesReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/stocks-on-warehouses/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 200,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateStocksReport",
+      "operationId": "generateStocksReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v3/businesses/{businessId}/reports/stocks/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 294,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateGoodsMovementReport",
+      "operationId": "generateGoodsMovementReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/goods-movement/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 196,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateShowsSalesReport",
+      "operationId": "generateShowsSalesReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/shows-sales/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 203,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 10
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 6
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateCompetitorsPositionReport",
+      "operationId": "generateCompetitorsPositionReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/competitors-position/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 229,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 10
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 6
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateGoodsPricesReport",
+      "operationId": "generateGoodsPricesReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/goods-prices/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 272,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateGoodsTurnoverReport",
+      "operationId": "generateGoodsTurnoverReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/goods-turnover/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 213,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateBoostConsolidatedReport",
+      "operationId": "generateBoostConsolidatedReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/boost-consolidated/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 217,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateShipmentListDocumentReport",
+      "operationId": "generateShipmentListDocumentReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/documents/shipment-list/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 223,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateShelfsStatisticsReport",
+      "operationId": "generateShelfsStatisticsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/shelf-statistics/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 226,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateMassOrderLabelsReport",
+      "operationId": "generateMassOrderLabelsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/documents/labels/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 227,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateGoodsFeedbackReport",
+      "operationId": "generateGoodsFeedbackReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/goods-feedback/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 241,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 10
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 6
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateShowsBoostReport",
+      "operationId": "generateShowsBoostReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/shows-boost/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 257,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateBannersStatisticsReport",
+      "operationId": "generateBannersStatisticsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/banners-statistics/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 258,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateClosureDocumentsReport",
+      "operationId": "generateClosureDocumentsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/closure-documents/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 260,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateJewelryFiscalReport",
+      "operationId": "generateJewelryFiscalReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/jewelry-fiscal/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 262,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateSalesGeographyReport",
+      "operationId": "generateSalesGeographyReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/sales-geography/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 263,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateKeyIndicatorsReport",
+      "operationId": "generateKeyIndicatorsReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/key-indicators/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 264,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateClosureDocumentsDetalizationReport",
+      "operationId": "generateClosureDocumentsDetalizationReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/reports/closure-documents/detalization/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 266,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateMarketingDetalizationReport",
+      "operationId": "generateMarketingDetalizationReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/reports/marketing-detalization/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 293,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 2
+        },
+        "medium": {
+          "amount": 1,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "reports",
+      "methodName": "generateBarcodesReport",
+      "operationId": "generateBarcodesReport",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/reports/documents/barcodes/generate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 282,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "getReturns",
+      "operationId": "getReturns",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/returns",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 148,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "getReturn",
+      "operationId": "getReturn",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 159,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 7000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 7000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "setReturnDecision",
+      "operationId": "setReturnDecision",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "deprecated",
+      "resourceId": 160,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05",
+        "replacement-operation-id": "submitReturnDecision"
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "submitReturnDecision",
+      "operationId": "submitReturnDecision",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision/submit",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 161,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "getReturnAvailableDecisions",
+      "operationId": "getReturnAvailableDecisions",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/businesses/{businessId}/returns/decisions",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 287,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "getReturnApplication",
+      "operationId": "getReturnApplication",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/application",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 162,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "getReturnPhoto",
+      "operationId": "getReturnPhoto",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision/{itemId}/image/{imageHash}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 163,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "createReturn",
+      "operationId": "createReturn",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/returns/create",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 270,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "returns",
+      "methodName": "cancelReturn",
+      "operationId": "cancelReturn",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v1/campaigns/{campaignId}/returns/cancel",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 271,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 5000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentReceptionTransferAct",
+      "operationId": "downloadShipmentReceptionTransferAct",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/shipments/reception-transfer-act",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 126,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "getShipment",
+      "operationId": "getShipment",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 133,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "getShipmentOrdersInfo",
+      "operationId": "getShipmentOrdersInfo",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/orders/info",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 139,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "confirmShipment",
+      "operationId": "confirmShipment",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/confirm",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 132,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentAct",
+      "operationId": "downloadShipmentAct",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/act",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 134,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentInboundAct",
+      "operationId": "downloadShipmentInboundAct",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/inbound-act",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 147,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentTransportationWaybill",
+      "operationId": "downloadShipmentTransportationWaybill",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/transportation-waybill",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 140,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentDiscrepancyAct",
+      "operationId": "downloadShipmentDiscrepancyAct",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/discrepancy-act",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 150,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "setShipmentPalletsCount",
+      "operationId": "setShipmentPalletsCount",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallets",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 178,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "downloadShipmentPalletLabels",
+      "operationId": "downloadShipmentPalletLabels",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallet/labels",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 180,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "searchShipments",
+      "operationId": "searchShipments",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 135,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "shipments",
+      "methodName": "transferOrdersFromShipment",
+      "operationId": "transferOrdersFromShipment",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/orders/transfer",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 185,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 200,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "stocks",
+      "methodName": "updateStocks",
+      "operationId": "updateStocks",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "PUT",
+      "path": "/v2/campaigns/{campaignId}/offers/stocks",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 141,
+      "resourceLimit": {
+        "path": "req.skus",
+        "none": {
+          "amount": 100000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "stocks",
+      "methodName": "getStocks",
+      "operationId": "getStocks",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/offers/stocks",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 201,
+      "resourceLimit": {
+        "path": "resp.result.warehouses.offers.offerId",
+        "none": {
+          "amount": 100000,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100000,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "stocks",
+      "methodName": "updateStocksOnPartnerWarehouses",
+      "operationId": "updateStocksOnPartnerWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v3/businesses/{businessId}/offers/stocks/update",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 295,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 50,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 50,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "stocks",
+      "methodName": "getStocksOnPartnerWarehouses",
+      "operationId": "getStocksOnPartnerWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v3/businesses/{businessId}/offers/stocks",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 298,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 500,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 500,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "supplyRequests",
+      "methodName": "getSupplyRequests",
+      "operationId": "getSupplyRequests",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/supply-requests",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 253,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "supplyRequests",
+      "methodName": "getSupplyRequestItems",
+      "operationId": "getSupplyRequestItems",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/supply-requests/items",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 252,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "supplyRequests",
+      "methodName": "getSupplyRequestDocuments",
+      "operationId": "getSupplyRequestDocuments",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/supply-requests/documents",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 251,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 1000,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "tariffs",
+      "methodName": "calculateTariffs",
+      "operationId": "calculateTariffs",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/tariffs/calculate",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 216,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "getWarehouses",
+      "operationId": "getWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/businesses/{businessId}/warehouses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "deprecated",
+      "resourceId": 194,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "minutes",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05",
+        "replacement-operation-id": "getPagedWarehouses"
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "getPagedWarehouses",
+      "operationId": "getPagedWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/businesses/{businessId}/warehouses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 243,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "getPartnerWarehouses",
+      "operationId": "getPartnerWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v3/businesses/{businessId}/warehouses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 299,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "getFulfillmentWarehouses",
+      "operationId": "getFulfillmentWarehouses",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "GET",
+      "path": "/v2/warehouses",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "safe",
+      "status": "implemented",
+      "resourceId": 202,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "updateWarehouseStatus",
+      "operationId": "updateWarehouseStatus",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v2/campaigns/{campaignId}/warehouse/status",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "deprecated",
+      "resourceId": 245,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      },
+      "deprecation": {
+        "degradation-start-date": "2027-01-18",
+        "shutdown-date": "2027-04-05",
+        "replacement-operation-id": "updateWarehouseModelStatus"
+      }
+    },
+    {
+      "domain": "warehouses",
+      "methodName": "updateWarehouseModelStatus",
+      "operationId": "updateWarehouseModelStatus",
+      "documentation": "https://yandex.ru/dev/market/partner-api/doc/ru/",
+      "verifiedAt": "2026-08-19",
+      "method": "POST",
+      "path": "/v3/businesses/{businessId}/warehouse/models/status",
+      "productionOrigin": "https://api.partner.market.yandex.ru",
+      "retrySafety": "unsafe",
+      "status": "implemented",
+      "resourceId": 297,
+      "resourceLimit": {
+        "path": "resp",
+        "none": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        },
+        "medium": {
+          "amount": 100,
+          "period": "hours",
+          "period-duration": 1
+        }
+      }
+    }
+  ],
+  "aliases": []
+}

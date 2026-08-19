@@ -1,0 +1,65 @@
+description: Параметры товара.
+type: object
+allOf:
+  - $ref: ./BaseOfferDTO.yaml
+  - properties:
+      parameterValues:
+        description: >
+          Список характеристик с их значениями.
+
+
+          {% note warning "Всегда передавайте вместе с `marketCategoryId`" %}
+
+
+          Если не передать `marketCategoryId` при изменении характеристик, они
+          обновятся, но в ответе придет предупреждение (параметр `warnings`).
+
+
+          Если не передать их оба, будет использована информация из устаревших
+          параметров `params` и `category`, а `marketCategoryId` будет определен
+          автоматически.
+
+
+          {% endnote %}
+
+
+          При **изменении** характеристик передавайте только те, значение
+          которых нужно обновить. Если в `marketCategoryId` вы меняете
+          категорию, значения общих характеристик для старой и новой категории
+          сохранятся, передавать их не нужно.
+
+
+          Подробнее читайте в [«Передача значений
+          характеристики»](../../step-by-step/parameter-values.md).
+        type: array
+        nullable: true
+        minItems: 1
+        maxItems: 300
+        items:
+          $ref: ./ParameterValueDTO.yaml
+      basicPrice:
+        description: |
+          Цена.
+        $ref: ./PriceWithDiscountDTO.yaml
+      purchasePrice:
+        description: >-
+          Себестоимость — затраты на самостоятельное производство товара или
+          закупку у производителя или поставщиков.
+        $ref: ./BasePriceDTO.yaml
+      additionalExpenses:
+        description: Дополнительные расходы на товар. Например, на доставку или упаковку.
+        $ref: ./BasePriceDTO.yaml
+      firstVideoAsCover:
+        deprecated: true
+        x-deprecation-config:
+          shutdown-date: '2026-10-12'
+        description: "{% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nИспользовать первое видео в карточке как видеообложку.\n\nПередайте `true`, чтобы первое видео использовалось как видеообложка, или `false`, чтобы видеообложка не отображалась в карточке товара.\n"
+        type: boolean
+      deleteParameters:
+        description: "Параметры, которые вы ранее передали в `UpdateOfferDTO`, а теперь хотите удалить.\n\nЕсли передать `adult`, `downloadable` и `firstVideoAsCover`, они не удалятся —\_их значение изменится на `false`.\n\nМожно передать сразу несколько значений.\n\nНе используйте вместе с соответствующим параметром в `UpdateOfferDTO`. Это приведет к ошибке `400`.\n"
+        type: array
+        nullable: true
+        minItems: 1
+        uniqueItems: true
+        items:
+          $ref: ./DeleteOfferParameterType.yaml

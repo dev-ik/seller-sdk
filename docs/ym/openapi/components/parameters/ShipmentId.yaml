@@ -1,0 +1,14 @@
+description: |
+  { % note warning "Параметр больше не используется" % }
+
+  Передайте любое число, чтобы получился корректный URL.
+
+  { % endnote % }
+
+  Идентификатор грузового места.
+name: shipmentId
+in: path
+required: true
+schema:
+  type: integer
+  format: int64

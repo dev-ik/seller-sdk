@@ -1,0 +1,64 @@
+get:
+  x-resource-id: 147
+  tags:
+    - shipments
+    - fbs
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 200
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 200
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: downloadShipmentInboundAct
+  summary: Получение фактического акта приема-передачи
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/downloadShipmentInboundAct.md) %}
+
+
+    Возвращает фактический акт приема-передачи для заданной отгрузки.
+
+
+    Такой акт становится доступен спустя несколько часов после завершения
+    отгрузки. Он может понадобиться, если после отгрузки обнаружатся
+    расхождения.
+
+
+    {% include notitle
+    [limit](../../_auto/method_limits/downloadShipmentInboundAct.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/ShipmentId-3.yaml
+  responses:
+    '200':
+      description: Акт в формате PDF.
+      content:
+        application/pdf:
+          schema:
+            type: string
+            format: binary
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

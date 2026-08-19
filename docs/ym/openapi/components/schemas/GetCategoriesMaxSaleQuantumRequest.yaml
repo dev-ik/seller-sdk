@@ -1,0 +1,16 @@
+description: >
+  Список категорий, для которых нужно вернуть лимит на установку кванта и
+  минимального количества товаров.
+type: object
+required:
+  - marketCategoryIds
+properties:
+  marketCategoryIds:
+    description: Идентификаторы [листовых категорий](*list-categories) на Маркете.
+    type: array
+    uniqueItems: true
+    minItems: 1
+    maxItems: 1500
+    items:
+      type: integer
+      format: int64

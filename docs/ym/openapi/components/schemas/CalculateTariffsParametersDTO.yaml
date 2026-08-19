@@ -1,0 +1,46 @@
+description: >-
+  Параметры для расчета стоимости услуг. Обязательно необходимо указать параметр
+  `campaignId` либо `sellingProgram`. Совместное использование параметров
+  приведет к ошибке.
+type: object
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  sellingProgram:
+    description: >
+      Модель работы.
+
+
+      **Для продавцов Market Yandex Go** недоступны модели DBS и Экспресс.
+
+
+      Обязательный параметр, если не указан параметр `campaignId`. Совместное
+      использование параметров приведет к ошибке.
+    $ref: ./SellingProgramType.yaml
+  frequency:
+    description: Частота выплат.
+    $ref: ./PaymentFrequencyType.yaml
+  paymentDelayWeeks:
+    description: >
+      Отсрочка выплат при еженедельном графике — сколько недель назад были
+      доставлены заказы, за которые приходит выплата.
+
+
+      Допустимые значения: 0, 1, 2 или 4.
+
+
+      Значения параметра `paymentDelayWeeks`, отличные от 0, допускаются только
+      вместе с параметром `frequency` равным 'WEEKLY'.
+
+      Использование других значений параметра `frequency` совместно с
+      `paymentDelayWeeks` приведет к ошибке.
+    type: integer
+    format: int32
+    minimum: 0
+    maximum: 4
+  currency:
+    description: |
+      Валюта, в которой рассчитывается услуга.
+
+      Значение по умолчанию: `RUR`.
+    $ref: ./CurrencyType.yaml

@@ -1,0 +1,56 @@
+description: |
+  Фильтры по чатам, которые нужно вернуть.
+type: object
+properties:
+  orderIds:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      Вместо него используйте `contexts`.
+
+      {% endnote %}
+
+      Фильтр по идентификаторам заказов на Маркете.
+    type: array
+    nullable: true
+    uniqueItems: true
+    items:
+      type: integer
+      format: int64
+    minItems: 1
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: contexts
+  contexts:
+    description: Фильтр по контексту чата.
+    type: array
+    nullable: true
+    uniqueItems: true
+    items:
+      $ref: ./ChatContextDTO.yaml
+    minItems: 1
+  contextTypes:
+    description: Фильтр по типу контекста чата.
+    type: array
+    nullable: true
+    uniqueItems: true
+    items:
+      $ref: ./ChatContextType.yaml
+    minItems: 1
+  types:
+    description: Фильтр по типам чатов.
+    type: array
+    nullable: true
+    uniqueItems: true
+    items:
+      $ref: ./ChatType.yaml
+    minItems: 1
+  statuses:
+    description: Фильтр по статусам чатов.
+    type: array
+    nullable: true
+    uniqueItems: true
+    items:
+      $ref: ./ChatStatusType.yaml
+    minItems: 1

@@ -1,0 +1,32 @@
+description: >
+  Статус заказа:
+
+
+  * `CANCELLED` — заказ отменен.
+
+
+  * `DELIVERED` — заказ получен покупателем.
+
+
+  * `DELIVERY` — заказ передан в службу доставки.
+
+
+  * `PICKUP` — заказ доставлен в пункт выдачи.
+
+
+  * `PROCESSING` — заказ находится в обработке.
+
+
+  * `UNPAID` — заказ оформлен, но еще не оплачен (если выбрана оплата при
+  оформлении).
+
+
+  * `RESERVED` — заказ оформлен, но ожидает подтвеждения от магазина (LaaS).
+name: status
+in: query
+required: false
+schema:
+  type: array
+  uniqueItems: true
+  items:
+    $ref: ../schemas/OrderStatusType.yaml

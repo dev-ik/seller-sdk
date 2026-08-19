@@ -17,6 +17,9 @@ import {
   WbApiHost,
   WbClient,
   WbValues,
+  type Ym,
+  YmClient,
+  YmValues,
   type GetAnalyticsStockOnWarehousesResponse,
   type GetAnalyticsStocksResponse,
   type GetAnalyticsStocksTurnoverResponse,
@@ -1449,3 +1452,37 @@ wb.general.getTariffConstructorOptions({ query: { locale: "de" } });
 
 // @ts-expect-error Raw requests only accept documented WB origins.
 wb.rawRequest("https://example.com", "GET", "/api/future");
+
+const ymCredentials = { apiKey: "test-ym-api-key" };
+const ym = new YmClient(ymCredentials);
+const ymSeller = new SellerClient({
+  marketplace: Marketplace.Ym,
+  credentials: ymCredentials,
+});
+const ymOrders: Promise<Ym.GetBusinessOrdersResponse> =
+  ymSeller.ym.orders.getBusinessOrders({
+    path: { businessId: 123456 },
+    body: { statuses: [YmValues.OrdersOrderStatusType.Processing] },
+  });
+const ymCategoryTree: Promise<Ym.GetCategoriesTreeResponse> =
+  ym.categories.getCategoriesTree({ body: {} });
+const registryYmCredentials: MarketplaceRegistry["ym"]["credentials"] =
+  ymCredentials;
+void ymOrders;
+void ymCategoryTree;
+void registryYmCredentials;
+
+new SellerClient({
+  marketplace: "ym",
+  // @ts-expect-error YM credentials require apiKey.
+  credentials: { token: "wrong-credential" },
+});
+
+// @ts-expect-error A required YM path parameter cannot be omitted.
+ym.orders.getBusinessOrders({ body: {} });
+
+ym.orders.getBusinessOrders({
+  path: { businessId: 123456 },
+  // @ts-expect-error Yandex Market enum fields remain closed unions.
+  body: { statuses: ["NOT_A_REAL_STATUS"] },
+});

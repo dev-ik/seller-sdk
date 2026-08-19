@@ -1,0 +1,22 @@
+description: Решения по товару в возврате.
+type: object
+required:
+  - returnItemId
+  - decisionType
+properties:
+  returnItemId:
+    $ref: ./ReturnItemId.yaml
+  decisionType:
+    description: Решение по товару в возврате.
+    $ref: ./ReturnRequestDecisionType.yaml
+  comment:
+    $ref: ./ReturnItemDecisionComment.yaml
+  compensation:
+    description: |
+      Сумма добровольной компенсации по позиции возврата.
+      Указывайте только при `decisionType` = `PARTIAL_MONEY_REFUND`.
+    $ref: ./BasePriceDTO.yaml
+example:
+  returnItemId: 1
+  decisionType: REFUND_MONEY_INCLUDING_SHIPMENT
+  comment: Вернуть 149 рублей за пересылку.

@@ -1,0 +1,77 @@
+post:
+  x-resource-id: 222
+  tags:
+    - categories
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - settings-management
+    - finance-and-accounting
+    - offers-and-cards-management
+    - offers-and-cards-management:read-only
+    - pricing
+    - pricing:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+    - promotion
+    - promotion:read-only
+    - communication
+    - supplies-management:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 50
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: OFFERS_CATALOG
+    enabled: false
+  operationId: getCategoriesTree
+  summary: Дерево категорий
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getCategoriesTree.md)
+    %}
+
+
+    Возвращает дерево категорий Маркета.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getCategoriesTree.md)
+    %}
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetCategoriesRequest.yaml
+  responses:
+    '200':
+      description: Категории Маркета.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetCategoriesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

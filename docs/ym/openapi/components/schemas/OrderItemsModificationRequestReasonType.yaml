@@ -1,0 +1,9 @@
+description: |
+  Причина, почему обновился состав заказа:
+
+  * `PARTNER_REQUESTED_REMOVE` — магазин удалил товар.
+  * `USER_REQUESTED_REMOVE` — покупатель попросил удалить товар.
+type: string
+enum:
+  - PARTNER_REQUESTED_REMOVE
+  - USER_REQUESTED_REMOVE

@@ -1,0 +1,55 @@
+description: Цифровой товар.
+type: object
+required:
+  - id
+  - slip
+  - activate_till
+properties:
+  id:
+    description: "Идентификатор товара в заказе.\n\nОн приходит в ответе метода [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр `id` в `items`.\n"
+    type: integer
+    format: int64
+  codes:
+    description: |
+      Ключи, относящиеся к товару.
+
+      Поле обязательно для заполнения.
+    type: array
+    items:
+      type: string
+      maxLength: 256
+    minItems: 1
+    maxItems: 5000
+    uniqueItems: true
+    nullable: true
+  slip:
+    description: >
+      Инструкция по активации.
+
+
+      Для форматирования текста можно использовать теги HTML:
+
+
+      * \<h>, \<h1>, \<h2> и так далее — для заголовков;
+
+      * \<br> и \<p> — для переноса строки;
+
+      * \<ol> — для нумерованного списка;
+
+      * \<ul> — для маркированного списка;
+
+      * \<li> — для создания элементов списка (должен находиться внутри \<ol>
+      или \<ul>);
+
+      * \<div> — поддерживается, но не влияет на отображение текста.
+    type: string
+    maxLength: 10000
+  activate_till:
+    description: >
+      Дата, до которой нужно активировать ключи. Если ключи действуют бессрочно,
+      укажите любую дату в отдаленном будущем.
+
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date

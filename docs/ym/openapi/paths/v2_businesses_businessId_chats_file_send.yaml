@@ -1,0 +1,64 @@
+post:
+  x-resource-id: 209
+  tags:
+    - chats
+    - dbs
+    - fbs
+    - fby
+    - express
+  x-auth-scopes:
+    - all-methods
+    - communication
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: BASE
+    enabled: false
+  operationId: sendFileToChat
+  summary: Отправка файла в чат
+  description: |
+    {% include notitle [access](../../_auto/method_scopes/sendFileToChat.md) %}
+
+    Отправляет файл в чат с покупателем.
+
+    {% include notitle [limit](../../_auto/method_limits/sendFileToChat.md) %}
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/ChatId.yaml
+  requestBody:
+    required: true
+    description: description
+    content:
+      multipart/form-data:
+        schema:
+          $ref: ../components/schemas/SendFileToChatRequest.yaml
+  responses:
+    '200':
+      description: Пустой ответ. Означает, что файл отправлен.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

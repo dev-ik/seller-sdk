@@ -1,0 +1,4 @@
+type: object
+allOf:
+  - $ref: ./ApiResponse.yaml
+  - $ref: ./GetCategoriesMaxSaleQuantumDTO.yaml

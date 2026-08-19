@@ -1,0 +1,16 @@
+description: Цена с указанием скидки, валюты и времени последнего обновления.
+type: object
+properties:
+  value:
+    description: Цена товара.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  discountBase:
+    $ref: ./DiscountBase.yaml
+  currencyId:
+    description: |
+      Валюта, в которой указана цена товара.
+    $ref: ./CurrencyType.yaml
+  vat:
+    $ref: ./VatType.yaml

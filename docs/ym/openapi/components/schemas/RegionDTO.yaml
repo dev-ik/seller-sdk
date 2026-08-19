@@ -1,0 +1,23 @@
+description: Регион доставки.
+type: object
+required:
+  - id
+  - name
+  - type
+properties:
+  id:
+    description: Идентификатор региона.
+    type: integer
+    format: int64
+  name:
+    description: Название региона.
+    type: string
+  type:
+    description: Тип региона.
+    $ref: ./RegionType.yaml
+  parent:
+    description: |
+      Информация о родительском регионе.
+
+      Указываются родительские регионы до уровня страны.
+    $ref: ./RegionDTO.yaml

@@ -1,0 +1,15 @@
+description: |
+  Модель работы:
+
+  * `FBY` — FBY.
+  * `FBS` — FBS.
+  * `DBS` — DBS.
+  * `EXPRESS` — Экспресс.
+  * `LAAS` — LaaS.
+type: string
+enum:
+  - FBY
+  - FBS
+  - DBS
+  - EXPRESS
+  - LAAS

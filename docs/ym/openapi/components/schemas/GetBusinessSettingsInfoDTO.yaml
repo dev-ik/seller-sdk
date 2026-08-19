@@ -1,0 +1,23 @@
+type: object
+description: Информация о кабинете и его настройках.
+properties:
+  info:
+    description: Базовая информация о кабинете.
+    $ref: ./BusinessDTO.yaml
+  settings:
+    description: Настройки на уровне кабинета.
+    $ref: ./BusinessSettingsDTO.yaml
+  subscriptionLevel:
+    description: >-
+      Уровень подписки кабинета. Подробнее о подписке для продавцов читайте [в
+      Справке Маркета для
+      продавцов](https://yandex.ru/support/marketplace/ru/marketing/subscription).
+    $ref: ./BusinessSubscriptionLevelType.yaml
+  traits:
+    description: Свойства кабинета.
+    type: array
+    nullable: true
+    uniqueItems: true
+    minItems: 1
+    items:
+      $ref: ./BusinessTraitType.yaml

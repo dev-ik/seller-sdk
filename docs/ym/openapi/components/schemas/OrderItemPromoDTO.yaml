@@ -1,0 +1,29 @@
+description: >-
+  Информация о вознаграждении продавцу за скидки на товар по промокодам, купонам
+  и акциям.
+type: object
+required:
+  - type
+  - subsidy
+properties:
+  type:
+    description: |
+      Тип скидки.
+    $ref: ./OrderPromoType.yaml
+  discount:
+    description: |
+      Размер пользовательской скидки в валюте покупателя.
+    type: number
+  subsidy:
+    description: |
+      Вознаграждение продавцу от Маркета за товар, проданный в рамках акции.
+    type: number
+  shopPromoId:
+    description: |
+      Идентификатор акции поставщика.
+    type: string
+  marketPromoId:
+    description: >
+      Идентификатор акции в рамках соглашения на оказание услуг по продвижению
+      сервиса между Маркетом и продавцом.
+    type: string

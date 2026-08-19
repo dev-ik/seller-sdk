@@ -12,8 +12,8 @@ importers:
         specifier: 9.17.0
         version: 9.17.0
       '@safe-shape/core':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
       '@types/node':
         specifier: 20.17.10
         version: 20.17.10
@@ -41,26 +41,35 @@ importers:
   packages/ozon:
     dependencies:
       '@safe-shape/core':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
 
   packages/seller-sdk:
     dependencies:
       '@safe-shape/core':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
       '@seller-sdk/ozon':
         specifier: workspace:*
         version: link:../ozon
       '@seller-sdk/wb':
         specifier: workspace:*
         version: link:../wb
+      '@seller-sdk/ym':
+        specifier: workspace:*
+        version: link:../ym
 
   packages/wb:
     dependencies:
       '@safe-shape/core':
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^2.0.0
+        version: 2.0.0
+
+  packages/ym:
+    dependencies:
+      '@safe-shape/core':
+        specifier: ^2.0.0
+        version: 2.0.0
 
 packages:
 
@@ -420,8 +429,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@safe-shape/core@1.0.1':
-    resolution: {integrity: sha512-Zfy342MBm4oETPlVZYC56GiGEAAq1DieElunT8aXGSaKktZYwdaPZCWKrFQO/Hy0Qy7Ee4jYjow3u23Y9KRviA==}
+  '@safe-shape/core@2.0.0':
+    resolution: {integrity: sha512-oGWVJ5/ldA1wDQDCi80yCJEs/YmdH8gIhfTHkY1chjyZHaf2hi9ibYes6NW+tgbqqG1+MsTphRmWLu81sBTxUg==}
     engines: {node: '>=20.10'}
 
   '@types/estree@1.0.9':
@@ -1272,7 +1281,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.62.4':
     optional: true
 
-  '@safe-shape/core@1.0.1': {}
+  '@safe-shape/core@2.0.0': {}
 
   '@types/estree@1.0.9': {}
 

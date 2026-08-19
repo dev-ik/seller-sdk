@@ -1,0 +1,12 @@
+type: object
+required:
+  - regions
+properties:
+  regions:
+    type: array
+    description: Регион доставки.
+    items:
+      $ref: ./RegionDTO.yaml
+  paging:
+    description: Идентификатор следующей страницы.
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml

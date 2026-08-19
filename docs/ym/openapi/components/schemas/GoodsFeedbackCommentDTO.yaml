@@ -1,0 +1,25 @@
+description: Комментарий к отзыву.
+type: object
+required:
+  - id
+  - text
+  - status
+  - feedbackId
+properties:
+  id:
+    $ref: ./GoodsFeedbackCommentId.yaml
+  text:
+    $ref: ./GoodsFeedbackCommentText.yaml
+  canModify:
+    description: Может ли продавец изменять комментарий или удалять его.
+    type: boolean
+  parentId:
+    description: Идентификатор родительского комментария.
+    type: integer
+    format: int64
+  author:
+    $ref: ./GoodsFeedbackCommentAuthorDTO.yaml
+  status:
+    $ref: ./GoodsFeedbackCommentStatusType.yaml
+  feedbackId:
+    $ref: ./GoodsFeedbackId.yaml

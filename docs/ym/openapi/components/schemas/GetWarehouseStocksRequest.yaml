@@ -1,0 +1,52 @@
+description: |
+  Фильтры для запроса остатков.
+type: object
+properties:
+  stocksWarehouseId:
+    description: "Идентификатор склада.\n\nЕсли параметр указан, возвращаются только товары на переданном складе.\n\n**Для моделей FBY и LaaS:** получить список складов Маркета можно с помощью метода [GET\_v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).\n"
+    type: integer
+    format: int64
+    minimum: 1
+  hasStocks:
+    description: >
+      **Только для моделей FBY и LaaS**
+
+
+      Фильтр по наличию товаров. Используйте только вместе со
+      `stocksWarehouseId`.
+
+
+      Передайте `false`, чтобы получить информацию о товарах, которых нет в
+      наличие. При значении `true` возвращаются данные о товарах, которые есть
+      на указанном складе.
+    type: boolean
+  withTurnover:
+    description: >
+      **Только для моделей FBY и LaaS**
+
+
+      Возвращать ли информацию по оборачиваемости.
+
+
+      Значение по умолчанию: `false`. Если информация нужна, передайте значение
+      `true`.
+    type: boolean
+    default: false
+  archived:
+    description: >
+      Фильтр по нахождению в архиве.
+
+
+      Передайте `true`, чтобы получить информацию об остатках товаров, которые
+      находятся в архиве. Если фильтр не заполнен или передано `false`, в ответе
+      возвращается информация о товарах, которые не находятся в архиве.
+    type: boolean
+  offerIds:
+    description: "Фильтр по вашим SKU товаров.\n\nВозвращается информация об остатках всех переданных SKU, включая товары в архиве.\n\n{% note warning \"Такой список возвращается только целиком\" %}\n\nЕсли вы запрашиваете информацию по конкретным SKU, не заполняйте:\n\n* `pageToken`\n* `limit`\n* `archived`\n* `stocksOnWarehouse`\n\n{% endnote %}\n\n\_\n"
+    type: array
+    uniqueItems: true
+    minItems: 1
+    maxItems: 500
+    nullable: true
+    items:
+      $ref: ./ShopSku.yaml

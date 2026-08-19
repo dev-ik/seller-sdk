@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk-workspace",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "description": "Рабочее пространство типобезопасных SDK для API маркетплейсов.",
   "license": "MIT",
@@ -13,10 +13,11 @@
     "packages/core",
     "packages/ozon",
     "packages/wb",
+    "packages/ym",
     "packages/seller-sdk"
   ],
   "scripts": {
-    "build": "pnpm --filter @seller-sdk/ozon build && pnpm --filter @seller-sdk/wb build && pnpm --filter seller-sdk build",
+    "build": "pnpm --filter @seller-sdk/ozon build && pnpm --filter @seller-sdk/wb build && pnpm --filter @seller-sdk/ym build && pnpm --filter seller-sdk build",
     "format": "prettier --write \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
     "format:check": "prettier --check \"packages/**/*.ts\" \"test/**/*.ts\" \"test-d/**/*.ts\" \"scripts/**/*.mjs\" package.json \"packages/*/package.json\" tsconfig.json tsconfig.base.json tsconfig.type-tests.json vitest.config.ts eslint.config.js pnpm-workspace.yaml",
     "lint": "eslint packages test test-d vitest.config.ts",
@@ -33,9 +34,11 @@
     "check:request-docs": "node scripts/build-ozon-request-docs.mjs --check",
     "update:wb": "node scripts/build-wb-api.mjs",
     "check:wb": "node scripts/build-wb-api.mjs --check",
+    "update:ym": "node scripts/build-ym-api.mjs",
+    "check:ym": "node scripts/build-ym-api.mjs --check",
     "update:docs": "pnpm update:domains && pnpm update:request-docs",
     "check:docs": "pnpm check:domains && pnpm check:request-docs",
-    "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm check:wb && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm check:wb && pnpm check:ym && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "pack:check": "node scripts/pack-check.mjs",
     "check:release": "node scripts/check-release.mjs",
     "release:check": "pnpm check:release && pnpm verify && pnpm pack:check && pnpm test:consumer",
@@ -43,7 +46,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",
-    "@safe-shape/core": "^1.0.1",
+    "@safe-shape/core": "^2.0.0",
     "@types/node": "20.17.10",
     "eslint": "9.17.0",
     "prettier": "3.4.2",

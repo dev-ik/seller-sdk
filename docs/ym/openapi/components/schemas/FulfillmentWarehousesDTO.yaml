@@ -1,0 +1,10 @@
+description: Список фулфилмент-складов Маркета.
+type: object
+required:
+  - warehouses
+properties:
+  warehouses:
+    description: Список фулфилмент-складов Маркета.
+    type: array
+    items:
+      $ref: ./FulfillmentWarehouseDTO.yaml

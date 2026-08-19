@@ -1,0 +1,18 @@
+description: Данные, необходимые для генерации отчета.
+type: object
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  categoryIds:
+    description: Фильтр по категориям на Маркете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: integer
+      format: int32
+      minimum: 0
+      exclusiveMinimum: true
+  campaignId:
+    $ref: ./CampaignId.yaml

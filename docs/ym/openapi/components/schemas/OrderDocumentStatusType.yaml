@@ -1,0 +1,9 @@
+description: |
+  Статус документа:
+
+  * `READY` — готов.
+  * `NOT_READY` — не готов.
+type: string
+enum:
+  - READY
+  - NOT_READY

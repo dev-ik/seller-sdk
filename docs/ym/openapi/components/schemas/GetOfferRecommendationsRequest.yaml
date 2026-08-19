@@ -1,0 +1,19 @@
+type: object
+properties:
+  offerIds:
+    description: >-
+      Идентификаторы товаров, информация о которых нужна. ⚠️ Не используйте это
+      поле одновременно с остальными фильтрами. Если вы хотите воспользоваться
+      фильтрами, оставьте поле пустым.
+    type: array
+    nullable: true
+    minItems: 1
+    maxItems: 200
+    uniqueItems: true
+    items:
+      $ref: ./ShopSku.yaml
+  competitivenessFilter:
+    description: >-
+      Фильтр, выводящий товары, с привлекательными, умеренными и
+      непривлекательными ценами.
+    $ref: ./PriceCompetitivenessType.yaml

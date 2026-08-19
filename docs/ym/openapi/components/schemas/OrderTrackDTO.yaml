@@ -1,0 +1,12 @@
+description: Информация о трек-номере посылки (DBS).
+type: object
+required:
+  - deliveryServiceId
+properties:
+  trackCode:
+    description: Трек‑номер посылки.
+    type: string
+  deliveryServiceId:
+    description: "Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET\_delivery/services](../../reference/delivery-services/getDeliveryServices.md)."
+    type: integer
+    format: int64

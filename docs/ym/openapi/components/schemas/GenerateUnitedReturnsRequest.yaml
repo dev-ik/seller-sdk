@@ -1,0 +1,37 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - businessId
+  - dateFrom
+  - dateTo
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml
+  campaignIds:
+    description: |
+      Список идентификаторов кампании тех магазинов, которые нужны в отчете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./CampaignId.yaml
+  returnType:
+    $ref: ./ReturnType.yaml
+    nullable: true
+  returnStatusTypes:
+    description: |
+      Статусы передачи возвратов, которые нужны в отчете.
+
+      Если их не указать, вернется информация по всем возвратам.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./ReturnShipmentStatusType.yaml

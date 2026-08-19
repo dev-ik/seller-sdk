@@ -1,6 +1,6 @@
 {
   "name": "@seller-sdk/wb",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Типобезопасный SDK для Wildberries API.",
   "keywords": [
     "wildberries",
@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^1.0.1"
+    "@safe-shape/core": "^2.0.0"
   },
   "scripts": {
     "build": "tsc -p ../core/tsconfig.build.json --outDir ../wb/dist/internal/core && tsc -p tsconfig.build.json",

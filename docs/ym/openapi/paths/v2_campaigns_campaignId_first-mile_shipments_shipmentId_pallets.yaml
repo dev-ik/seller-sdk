@@ -1,0 +1,57 @@
+put:
+  x-resource-id: 178
+  tags:
+    - shipments
+    - fbs
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 200
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 200
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: setShipmentPalletsCount
+  summary: Передача количества упаковок для доверительной приемки
+  description: "{% include notitle [access](../../_auto/method_scopes/setShipmentPalletsCount.md) %}\n\nПередает Маркету количество упаковок в отгрузке для доверительной приемки. Подробнее о таком виде приемки читайте в [Справке Маркета для продавцов](https://yandex.ru/support/marketplace/orders/fbs/process.html#acceptance).\n\n{% note info \"Как передавать упаковки\" %}\n\nПередавайте количество упаковок, которые вы везете в отгрузке, а не сумму грузомест по заказам.\n\n**Пример:** в отгрузке 2 заказа, в каждом по 5 грузомест. Если вы везете их в 2 палетах — передайте в запросе `2`, а не `10`.\n\n{% endnote %}\n\nПолучить PDF-файл с ярлыками для упаковок можно с помощью метода [GET\_v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallet/labels](../../reference/shipments/downloadShipmentPalletLabels.md).\n\n{% include notitle [limit](../../_auto/method_limits/setShipmentPalletsCount.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/ShipmentId-3.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SetShipmentPalletsCountRequest.yaml
+  responses:
+    '200':
+      description: >-
+        Имеет значение только тип ответа. Если ответ `ОК`, количество упаковок
+        записано.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

@@ -24,5 +24,6 @@ yarn-error.log*
 /NORTH_STAR.md
 /package-plan.json
 /prompts/
+/posts/
 /packages/prompts/
 /docs/ADR-*.md

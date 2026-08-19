@@ -34,6 +34,24 @@ const tariffOptions = await wb.general.getTariffConstructorOptions({
 Пакет включает все 286 операций из локального официального Swagger и не
 устанавливает Ozon или umbrella-пакет.
 
+## Пакет Yandex Market
+
+```bash
+npm i @seller-sdk/ym
+```
+
+```ts
+import { YmClient, YmValues } from "@seller-sdk/ym";
+
+const ym = new YmClient({ apiKey: process.env.YM_API_KEY! });
+await ym.orders.getBusinessOrders({
+  path: { businessId: 123456 },
+  body: { statuses: [YmValues.OrdersOrderStatusType.Processing] },
+});
+```
+
+Пакет содержит 165 операций официального Partner API snapshot.
+
 ## Общий пакет
 
 ```bash
@@ -55,10 +73,12 @@ const seller = new SellerClient({
 export const Marketplace = {
   Ozon: "ozon",
   Wb: "wb",
+  Ym: "ym",
 } as const;
 ```
 
-Литералы `"ozon"` и `"wb"` также допустимы. Произвольная строка не принимается.
+Литералы `"ozon"`, `"wb"` и `"ym"` также допустимы. Произвольная строка не
+принимается.
 
 ## Реестр маркетплейсов
 
@@ -73,6 +93,10 @@ export interface MarketplaceRegistry {
   wb: {
     credentials: WbCredentials;
     client: WbClient;
+  };
+  ym: {
+    credentials: YmCredentials;
+    client: YmClient;
   };
 }
 ```
@@ -125,6 +149,10 @@ await wb.general.getV2News(input);
 
 Алиас наследует `@deprecated`, если маркетплейс пометил выбранный endpoint
 устаревшим.
+
+У YM текущие официальные operationId уже не содержат `V1`/`V2`, поэтому
+`ym.orders.getBusinessOrders(...)` одновременно является точным и
+рекомендуемым именем. Версия сохраняется только в HTTP path.
 
 ## Конфигурация клиента
 

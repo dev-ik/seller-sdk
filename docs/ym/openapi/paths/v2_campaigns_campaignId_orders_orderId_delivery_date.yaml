@@ -1,0 +1,71 @@
+put:
+  x-resource-id: 138
+  tags:
+    - order-delivery
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: setOrderDeliveryDate
+  summary: Изменение даты доставки заказа
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/setOrderDeliveryDate.md) %}
+
+
+    Метод изменяет дату доставки заказа в статусе `PROCESSING` или `DELIVERY`.
+    Для заказов с другими статусами дату доставки изменить нельзя.
+
+
+    {% include notitle
+    [limit](../../_auto/method_limits/setOrderDeliveryDate.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/OrderId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/SetOrderDeliveryDateRequest.yaml
+  responses:
+    '200':
+      description: Успешное изменение даты доставки.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        заказами](../../concepts/error-codes#orders)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

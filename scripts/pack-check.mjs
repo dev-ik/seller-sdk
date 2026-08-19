@@ -18,6 +18,8 @@ try {
       "--workspace",
       "@seller-sdk/wb",
       "--workspace",
+      "@seller-sdk/ym",
+      "--workspace",
       "seller-sdk",
     ],
     {

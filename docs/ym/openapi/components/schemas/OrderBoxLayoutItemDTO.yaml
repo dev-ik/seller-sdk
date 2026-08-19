@@ -1,0 +1,34 @@
+description: Информация о товаре в коробке.
+type: object
+required:
+  - id
+properties:
+  id:
+    description: "Идентификатор товара в заказе.\n\nОн приходит в ответе метода [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр `id` в `items`.\n"
+    type: integer
+    format: int64
+  fullCount:
+    description: >
+      Количество единиц товара в коробке.
+
+
+      Используйте это поле, если в коробке поедут целые товары, не разделенные
+      на части. Не используйте это поле одновременно с `partialCount`.
+    type: integer
+    format: int32
+    minimum: 1
+  partialCount:
+    description: >
+      Информация о части товара в коробке.
+
+
+      Используйте это поле, если в коробке поедет часть большого товара. Не
+      используйте это поле одновременно с `fullCount`.
+    $ref: ./OrderBoxLayoutPartialCountDTO.yaml
+  instances:
+    description: Переданные коды маркировки.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./BriefOrderItemInstanceDTO.yaml

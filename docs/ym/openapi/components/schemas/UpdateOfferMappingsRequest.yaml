@@ -1,0 +1,19 @@
+type: object
+required:
+  - offerMappings
+properties:
+  offerMappings:
+    description: "Список товаров, которые нужно добавить или обновить.\n\n{% note warning \"Скоро мы уменьшим максимальное количество товаров в запросе\" %}\n\nУже сейчас не передавайте больше 100.\n\n{% endnote %}\n\n\_\n"
+    type: array
+    minItems: 1
+    maxItems: 500
+    items:
+      $ref: ./UpdateOfferMappingDTO.yaml
+  onlyPartnerMediaContent:
+    description: >
+      Будут ли использоваться только переданные вами данные о товарах.
+
+
+      Значение по умолчанию: `false`. Чтобы удалить данные, которые добавил
+      Маркет, передайте значение `true`.
+    type: boolean

@@ -1,0 +1,39 @@
+description: Информация о сообщении.
+type: object
+required:
+  - messageId
+  - createdAt
+  - sender
+properties:
+  messageId:
+    description: Идентификатор сообщения.
+    type: integer
+    format: int64
+    minimum: 1
+  createdAt:
+    description: |
+      Дата и время создания сообщения.
+
+      Формат даты: ISO 8601 со смещением относительно UTC.
+    type: string
+    format: date-time
+    example: '2017-11-21T00:00:00+03:00'
+  sender:
+    description: Отправитель.
+    $ref: ./ChatMessageSenderType.yaml
+  message:
+    description: |
+      Текст сообщения.
+
+      Необязательный параметр, если возвращается параметр `payload`.
+    type: string
+  payload:
+    description: |
+      Информация о приложенных к сообщению файлах.
+
+      Необязательный параметр, если возвращается параметр `message`.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./ChatMessagePayloadDTO.yaml

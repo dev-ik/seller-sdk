@@ -1,0 +1,25 @@
+description: >
+  Предупреждение, которое появилось при добавлении товара:
+
+
+  * `DEEP_DISCOUNT_OFFER` — большая разница с ценой в каталоге. Проверьте, нет
+  ли ошибки.
+
+
+  * `CATALOG_PRICE_IS_LOWER_THAN_PROMO` — цена, которая действует во всех
+  магазинах, ниже цены по акции. У товара не будет отображаться цена по акции.
+
+
+  * `SHOP_PRICES_ARE_LOWER_THAN_PROMO` — цена в отдельном магазине ниже цены по
+  акции. У товара в акции будет отображаться цена в магазине. Для остальных
+  магазинов будет действовать цена по акции.
+
+
+  * `SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO` — товар в отдельном магазине не подходит
+  под условия акции.
+type: string
+enum:
+  - DEEP_DISCOUNT_OFFER
+  - CATALOG_PRICE_IS_LOWER_THAN_PROMO
+  - SHOP_PRICES_ARE_LOWER_THAN_PROMO
+  - SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO

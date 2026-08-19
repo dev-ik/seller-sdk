@@ -1,0 +1,25 @@
+description: Информация о покупателе с базовыми полями.
+type: object
+required:
+  - type
+properties:
+  id:
+    description: Идентификатор покупателя.
+    type: string
+  lastName:
+    description: Фамилия.
+    type: string
+  firstName:
+    description: Имя.
+    type: string
+  middleName:
+    description: Отчество.
+    type: string
+  type:
+    description: >
+      Тип покупателя: физическое лицо или организация.
+
+
+      Только для FBS- и FBY-магазинов, которые размещают товары на витрине
+      [business.market.yandex.ru](https://business.market.yandex.ru).
+    $ref: ./OrderBuyerType.yaml

@@ -1,0 +1,62 @@
+post:
+  x-resource-id: 227
+  tags:
+    - reports
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: generateMassOrderLabelsReport
+  summary: Готовые ярлыки‑наклейки на все коробки в нескольких заказах
+  description: "{% include notitle [access](../../_auto/method_scopes/generateMassOrderLabelsReport.md) %}\n\nЗапускает генерацию PDF-файла с ярлыками для переданных заказов. Подробно о том, зачем они нужны и как выглядят, рассказано [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/orders/fbs/packaging/marking.html).\n\nЧтобы на ярлыке отображался внешний идентификатор заказа, передайте его в методе [POST\_v2/campaigns/{campaignId}/orders/{orderId}/external-id](../../reference/orders/updateExternalOrderId.md).\n\nУзнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [limit](../../_auto/method_limits/generateMassOrderLabelsReport.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/MassOrderLabelsGenerationPageFormat.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GenerateMassOrderLabelsRequest.yaml
+  responses:
+    '200':
+      description: >
+        В ответ приходит идентификатор, который позволяет узнавать статус
+        генерации и скачать готовый файл.
+
+
+        Если при генерации не удалось найти часть заказов, в ответе на запрос
+        получения готового файла вернется подстатус `RESOURCE_NOT_FOUND`.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GenerateReportResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

@@ -1,4 +1,5 @@
-import { array, number, object, string } from "@safe-shape/core";
+import { array, number, object, string, type Schema } from "@safe-shape/core";
+import type { OzonSearchQueriesResponse } from "./types.js";
 
 export const searchQueryAnalyticsSchema = object({
   add_to_cart: number().optional(),
@@ -10,8 +11,9 @@ export const searchQueryAnalyticsSchema = object({
   sellers_count: number().optional(),
 });
 
-export const searchQueriesResponseShape = {
-  offset: string().optional(),
-  search_queries: array(searchQueryAnalyticsSchema).optional(),
-  total: string().optional(),
-};
+export const searchQueriesResponseSchema: Schema<OzonSearchQueriesResponse> =
+  object({
+    offset: string().optional(),
+    search_queries: array(searchQueryAnalyticsSchema).optional(),
+    total: string().optional(),
+  });

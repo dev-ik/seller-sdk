@@ -1,0 +1,119 @@
+post:
+  x-resource-id: 117
+  tags:
+    - orders
+    - fbs
+    - dbs
+    - laas
+    - express
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp.result.orders
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: ORDERS
+    enabled: false
+  operationId: updateOrderStatuses
+  summary: Изменение статусов нескольких заказов
+  description: >
+    {% include notitle
+    [access](../../_auto/method_scopes/updateOrderStatuses.md) %}
+
+
+    Изменяет статусы нескольких заказов.
+
+
+    Возможные изменения статусов:
+
+
+    * Если магазин подтвердил и подготовил заказ к отправке, то заказ из статуса
+    `"status": "PROCESSING"`и этапа обработки `"substatus": "STARTED"` нужно
+    перевести в статус `"status": "PROCESSING"` и этап обработки `"substatus":
+    "READY_TO_SHIP"`.
+
+    * Если магазин подтвердил заказ, но не может его выполнить (например, товар
+    числится в базе, но отсутствует на складе или нет нужного цвета), то заказ
+    из статуса `"status": "PROCESSING"` и этапа обработки `"substatus":
+    "STARTED"` нужно перевести в статус `"status": "CANCELLED"` с причиной
+    отмены заказа `"substatus": "SHOP_FAILED"`.
+
+    * Если магазин подготовил заказ к отгрузке, но не может его выполнить
+    (например, последний товар был поврежден или оказался с браком), то заказ из
+    статуса `"status": "PROCESSING"` и этапа обработки `"substatus":
+    "READY_TO_SHIP"` нужно перевести в статус `"status": "CANCELLED"` с причиной
+    отмены заказа `"substatus": "SHOP_FAILED"`.
+
+
+    Полная информация о статусной модели DBS-заказов: [Как изменяются статусы
+    заказов](../../concepts/dbs-order-status-model.md).
+
+
+    {% cut "**Как подтвердить LaaS-заказ**" %}
+
+
+    Для подтверждения черновика заказа передайте статус `"status": "PROCESSING"`
+    с подстатусом `"substatus": "STARTED"`.
+
+
+    Подтверждение заказа, созданного с параметром `draft` равным `false`, не
+    требуется.
+
+
+    {% endcut %}
+
+
+    {% cut "**Как отменить LaaS-заказ**" %}
+
+
+    Передайте статус `"status": "CANCELLED"` с причиной отмены заказа
+    `"substatus": "SHOP_FAILED"`.
+
+
+    При успешном выполнении запроса отмена произойдет через некоторое время.
+    [Как проверить статус операции](../../reference/operations/getOperations.md)
+
+
+    {% endcut %}
+
+
+    {% include notitle [limit](../../_auto/method_limits/updateOrderStatuses.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateOrderStatusesRequest.yaml
+  responses:
+    '200':
+      description: Возвращается информация об обновленных статусах заказов.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UpdateOrderStatusesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

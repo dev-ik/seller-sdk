@@ -1,0 +1,128 @@
+get:
+  x-resource-id: 194
+  tags:
+    - warehouses
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 100
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 100
+      period: minutes
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  x-deprecation-config:
+    degradation-start-date: '2027-01-18'
+    shutdown-date: '2027-04-05'
+    replacement-operation-id: getPagedWarehouses
+  operationId: getWarehouses
+  summary: Список складов и групп складов
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getWarehouses.md) %}
+
+
+    Возвращает список складов и, если склады объединены, список групп складов.
+    [Что такое группы складов и зачем они
+    нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks)
+
+
+    Среди прочего запрос позволяет определить идентификатор, который нужно
+    использовать при передаче остатков для группы складов.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getWarehouses.md) %}
+  deprecated: true
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+  responses:
+    '200':
+      description: Список складов и групп складов.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetWarehousesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
+post:
+  x-resource-id: 243
+  tags:
+    - warehouses
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 100
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: getPagedWarehouses
+  summary: Список складов
+  description: "{% include notitle [access](../../_auto/method_scopes/getPagedWarehouses.md) %}\n\nВозвращает список складов и информацию о них.\n\n{% note warning \"Когда использовать этот метод\" %}\n\nМетод актуален для кабинетов с группами складов. Если в кабинете нет групп складов, используйте метод [POST\_v3/businesses/{businessId}/warehouses](../../reference/warehouses/getPartnerWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getPagedWarehouses.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit30.yaml
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetPagedWarehousesRequest.yaml
+  responses:
+    '200':
+      description: Список складов и их свойства, которые вы запрашивали.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetPagedWarehousesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

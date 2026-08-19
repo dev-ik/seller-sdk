@@ -1,0 +1,14 @@
+description: Информация по заказу.
+type: object
+required:
+  - id
+  - status
+properties:
+  id:
+    description: Идентификатор заказа.
+    type: integer
+    format: int64
+  status:
+    $ref: ./OrderStatusType.yaml
+  substatus:
+    $ref: ./OrderSubstatusType.yaml

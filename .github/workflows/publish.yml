@@ -45,6 +45,9 @@ jobs:
       - name: Publish focused Wildberries package
         run: npm publish "./release-artifacts/seller-sdk-wb-${VERSION}.tgz" --access public
 
+      - name: Publish focused Yandex Market package
+        run: npm publish "./release-artifacts/seller-sdk-ym-${VERSION}.tgz" --access public
+
       - name: Publish umbrella package
         run: npm publish "./release-artifacts/seller-sdk-${VERSION}.tgz" --access public
 
@@ -55,6 +58,7 @@ jobs:
           gh release create "v${VERSION}" \
             "./release-artifacts/seller-sdk-wb-${VERSION}.tgz" \
             "./release-artifacts/seller-sdk-ozon-${VERSION}.tgz" \
+            "./release-artifacts/seller-sdk-ym-${VERSION}.tgz" \
             "./release-artifacts/seller-sdk-${VERSION}.tgz" \
             --repo "${GITHUB_REPOSITORY}" \
             --verify-tag \

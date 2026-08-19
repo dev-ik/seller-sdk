@@ -1,0 +1,21 @@
+description: >
+  {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+
+  Вместо него используйте `commodityCodes` с типом `CUSTOMS_COMMODITY_CODE`.
+
+
+  {% endnote %}
+
+
+  Код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН
+  ВЭД) — 10 или 14 цифр без пробелов.
+
+
+  Обязательно укажите, если он есть.
+deprecated: true
+x-deprecation-config:
+  shutdown-date: '2026-10-12'
+  replacement-field: commodityCodes
+example: '8517610008'
+type: string

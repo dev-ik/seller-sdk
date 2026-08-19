@@ -1,0 +1,10 @@
+description: |
+  Тип скидки или цена товара:
+  - `BUYER` — цена товара с учетом скидок, в том числе купонов.
+  - `CASHBACK` — баллы Плюса.
+  - `MARKETPLACE` — купоны.
+type: string
+enum:
+  - BUYER
+  - CASHBACK
+  - MARKETPLACE

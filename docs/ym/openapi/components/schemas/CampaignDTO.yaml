@@ -1,0 +1,21 @@
+description: Информация о магазине.
+type: object
+properties:
+  domain:
+    description: Название магазина.
+    type: string
+  id:
+    $ref: ./CampaignId.yaml
+  clientId:
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nИдентификатор плательщика в Яндекс Балансе.\n"
+    type: integer
+    format: int64
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+  business:
+    $ref: ./BusinessDTO.yaml
+  placementType:
+    $ref: ./PlacementType.yaml
+  apiAvailability:
+    $ref: ./ApiAvailabilityStatusType.yaml

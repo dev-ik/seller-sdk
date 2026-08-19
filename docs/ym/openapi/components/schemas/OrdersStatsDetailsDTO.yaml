@@ -1,0 +1,27 @@
+description: Информация об удалении товара из заказа.
+type: object
+properties:
+  itemStatus:
+    description: Статус товара.
+    $ref: ./OrdersStatsItemStatusType.yaml
+  itemCount:
+    description: Количество товара со статусом, указанном в параметре `itemStatus`.
+    type: integer
+    format: int64
+  updateDate:
+    description: |
+      **Только для модели FBY**
+
+      Дата, когда возврат был обработан на складе Маркета.
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date
+  stockType:
+    description: |
+      **Только для модели FBY**
+
+      Тип товара.
+
+      Возвращается только после обработки возврата на складе Маркета.
+    $ref: ./OrdersStatsStockType.yaml

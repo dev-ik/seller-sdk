@@ -1,0 +1,18 @@
+description: |
+  Общее вознаграждение продавцу за DBS-доставку и все скидки на товар:
+
+  * по промокодам, купонам и акциям;
+  * по баллам Плюса;
+  * по доставке (DBS).
+
+  Включает НДС.
+type: object
+required:
+  - type
+  - amount
+properties:
+  type:
+    $ref: ./OrderSubsidyType.yaml
+  amount:
+    description: Сумма субсидии.
+    type: number

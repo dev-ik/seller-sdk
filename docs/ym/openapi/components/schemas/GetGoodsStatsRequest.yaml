@@ -1,0 +1,14 @@
+description: Запрос отчета по товарам.
+type: object
+required:
+  - shopSkus
+properties:
+  shopSkus:
+    description: |
+      Список ваших идентификаторов SKU.
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./ShopSku.yaml
+    minItems: 1
+    maxItems: 500

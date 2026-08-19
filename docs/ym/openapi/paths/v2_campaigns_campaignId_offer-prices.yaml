@@ -1,0 +1,141 @@
+get:
+  x-resource-id: 63
+  tags:
+    - prices
+    - fby
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - pricing
+    - pricing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp.result.offers
+    none:
+      amount: 150000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 150000
+      period: minutes
+      period-duration: 1
+  x-apphost:
+    domain: PROMO
+    enabled: false
+  x-deprecation-config:
+    degradation-start-date: '2027-01-18'
+    shutdown-date: '2027-04-05'
+    replacement-operation-id: getPricesByOfferIds
+  operationId: getPrices
+  summary: Список цен
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getPrices.md) %}
+
+
+    Возвращает список цен, установленных вами на товары любым способом:
+    например, через API или в файле с каталогом.
+
+
+    Способы установки цен описаны [в Справке Маркета для
+    продавцов](https://yandex.ru/support/marketplace/assortment/operations/prices.html).
+
+
+    {% include notitle [limit](../../_auto/method_limits/getPrices.md) %}
+  deprecated: true
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit500Truncate.yaml
+    - description: Фильтр по нахождению в архиве.
+      in: query
+      name: archived
+      required: false
+      schema:
+        type: boolean
+        default: false
+  responses:
+    '200':
+      description: Список всех товаров с установленными ценами.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetPricesResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
+post:
+  x-resource-id: 176
+  tags:
+    - prices
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - pricing
+    - pricing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp.result.offers
+    none:
+      amount: 10000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: minutes
+      period-duration: 1
+  x-apphost:
+    domain: PROMO
+    enabled: false
+  operationId: getPricesByOfferIds
+  summary: Просмотр цен на указанные товары в конкретном магазине
+  description: "{% include notitle [access](../../_auto/method_scopes/getPricesByOfferIds.md) %}\n\nВозвращает список цен на указанные товары в магазине.\n\n{% note warning \"Метод только для отдельных магазинов\" %}\n\nИспользуйте этот метод, только если в кабинете установлены уникальные цены в отдельных магазинах.\n\nДля просмотра цен, которые действуют во всех магазинах, используйте [POST\_v2/businesses/{businessId}/offer-mappings](../../reference/business-offer-mappings/getOfferMappings.md).\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getPricesByOfferIds.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit500Truncate.yaml
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetPricesByOfferIdsRequest.yaml
+  responses:
+    '200':
+      description: Список товаров с установленными для заданного магазина ценами.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetPricesByOfferIdsResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

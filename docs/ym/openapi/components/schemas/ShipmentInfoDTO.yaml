@@ -1,0 +1,19 @@
+description: Список с информацией об отгрузках.
+type: object
+allOf:
+  - $ref: ./BaseShipmentDTO.yaml
+  - properties:
+      status:
+        description: Статус отгрузки.
+        $ref: ./ShipmentStatusType.yaml
+      statusDescription:
+        description: Описание статуса отгрузки.
+        type: string
+      statusUpdateTime:
+        description: |
+          Время последнего изменения статуса отгрузки
+
+          Формат даты: ISO 8601 со смещением относительно UTC.
+        format: date-time
+        type: string
+        example: '2017-11-21T00:00:00+03:00'

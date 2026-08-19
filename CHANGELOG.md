@@ -6,6 +6,27 @@
 
 ## Не выпущено
 
+## 0.3.0 — 2026-08-19
+
+### Добавлено
+
+- Самостоятельный пакет `@seller-sdk/ym` со всеми 165 операциями официального
+  Yandex Market Partner API snapshot.
+- `Marketplace.Ym`, литерал `"ym"` и строго типизированный `seller.ym` в
+  umbrella-пакете.
+- Генерируемые YM types, SafeShape-контракты, `YmValues`, API reference и
+  metadata deprecation/rate limits.
+
+### Улучшено
+
+- `@safe-shape/core` обновлён до 2.0.0 во всех marketplace-пакетах.
+- Рекурсивные YM-контракты `RegionDTO` и `CategoryDTO` используют SafeShape
+  `lazy` без ограничения глубины.
+- Transport поддерживает marketplace-specific разбор вложенных API-ошибок и
+  YM rate-limit status 420.
+- Ключи `YmValues` нормализованы в PascalCase, JSDoc очищен от внутренних
+  шаблонных директив, а поведение методов без суффиксов версии явно описано.
+
 ## 0.2.1 — 2026-08-17
 
 ### Улучшено

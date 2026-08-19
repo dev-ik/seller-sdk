@@ -1,0 +1,17 @@
+description: |
+  Общее вознаграждение продавцу за все скидки на товар:
+
+  * по промокодам, купонам и акциям;
+  * по баллам Плюса.
+
+  Включает НДС.
+type: object
+required:
+  - type
+  - amount
+properties:
+  type:
+    $ref: ./OrderItemSubsidyType.yaml
+  amount:
+    description: Сумма субсидии.
+    type: number

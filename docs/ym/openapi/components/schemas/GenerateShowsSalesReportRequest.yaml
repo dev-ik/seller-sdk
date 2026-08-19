@@ -1,0 +1,23 @@
+description: >
+  Данные, необходимые для генерации отчета.
+
+
+  В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не
+  оба сразу.
+type: object
+required:
+  - dateFrom
+  - dateTo
+  - grouping
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  campaignId:
+    $ref: ./CampaignId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml
+  grouping:
+    description: Группировка данных отчета.
+    $ref: ./ShowsSalesGroupingType.yaml

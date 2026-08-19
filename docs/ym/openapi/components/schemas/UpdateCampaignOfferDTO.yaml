@@ -1,0 +1,7 @@
+description: Параметры размещения товара в магазине.
+type: object
+allOf:
+  - $ref: ./BaseCampaignOfferDTO.yaml
+  - properties:
+      vat:
+        $ref: ./VatType.yaml

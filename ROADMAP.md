@@ -43,3 +43,16 @@
 - [x] umbrella-интеграция без универсальной бизнес-модели.
 
 Перед публикацией нужно настроить Trusted Publisher для `@seller-sdk/wb`.
+
+## Yandex Market
+
+Готово в v0.3.0:
+
+- [x] самостоятельный `@seller-sdk/ym`;
+- [x] 165 операций официального Partner API snapshot;
+- [x] SafeShape 2 lazy contracts для рекурсивных схем;
+- [x] `Marketplace.Ym`, `"ym"` и `seller.ym`;
+- [x] JSON, binary и multipart responses;
+- [x] nested API errors и rate-limit HTTP 420.
+
+Перед публикацией нужно настроить Trusted Publisher для `@seller-sdk/ym`.

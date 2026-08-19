@@ -1,0 +1,40 @@
+description: >
+  Список товаров в заказе.
+
+
+  Если магазин не передал информацию о товаре во входных данных, он будет удален
+  из заказа.
+
+
+  Обязательный параметр.
+type: object
+properties:
+  id:
+    description: "Идентификатор товара в рамках заказа.\n\nПолучить идентификатор можно с помощью метода:\n\n* [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md).\n\nОбязательный параметр.\n"
+    type: integer
+    format: int64
+  count:
+    description: Новое количество товара.
+    type: integer
+    format: int32
+    minimum: 0
+  instances:
+    description: >
+      Информация о маркировке единиц товара.
+
+
+      Передавайте в запросе все единицы товара, который подлежит маркировке.
+
+
+      Обязательный параметр, если в заказе от бизнеса есть товары, подлежащие
+      маркировке в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL
+      BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market
+      Yandex Go]).
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./BriefOrderItemInstanceDTO.yaml
+required:
+  - id
+  - count

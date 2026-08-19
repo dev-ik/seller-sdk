@@ -1,0 +1,18 @@
+description: Логистическая информация по возврату.
+type: object
+properties:
+  stockType:
+    description: Тип остатка на складе.
+    $ref: ./ReturnInstanceStockType.yaml
+  status:
+    description: Логистический статус конкретного товара.
+    $ref: ./ReturnInstanceStatusType.yaml
+  cis:
+    description: >-
+      Код идентификации единицы товара в системе [«Честный
+      ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz)
+      (для продавцов :no-translate[Market Yandex Go]).
+    type: string
+  imei:
+    description: Международный идентификатор мобильного оборудования.
+    type: string

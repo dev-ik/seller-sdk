@@ -1,0 +1,10 @@
+description: |
+  Информация о состоянии цен и рекомендации.
+type: object
+properties:
+  offer:
+    description: Информация о состоянии цен.
+    $ref: ./OfferForRecommendationDTO.yaml
+  recommendation:
+    description: Рекомендации.
+    $ref: ./OfferRecommendationInfoDTO.yaml

@@ -1,0 +1,5 @@
+description: Информация об отгрузке.
+type: object
+allOf:
+  - $ref: ./BaseShipmentDTO.yaml
+  - $ref: ./ExtensionShipmentDTO.yaml

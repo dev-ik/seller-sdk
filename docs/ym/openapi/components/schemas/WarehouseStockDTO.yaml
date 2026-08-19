@@ -1,0 +1,13 @@
+description: Информация об остатках товара.
+type: object
+required:
+  - type
+  - count
+properties:
+  type:
+    description: Тип остатков.
+    $ref: ./WarehouseStockType.yaml
+  count:
+    description: Значение остатков.
+    type: integer
+    format: int64

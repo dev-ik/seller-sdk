@@ -1,0 +1,12 @@
+description: |
+  Тип фильтрации:
+
+  * `UNREDEEMED` — невыкупы.
+
+  * `RETURN` — возвраты.
+
+  Если не указывать, в ответе будут и невыкупы, и возвраты.
+type: string
+enum:
+  - UNREDEEMED
+  - RETURN

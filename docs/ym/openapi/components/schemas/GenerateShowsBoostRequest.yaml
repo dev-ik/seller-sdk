@@ -1,0 +1,18 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - businessId
+  - dateFrom
+  - dateTo
+  - attributionType
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    $ref: ./PeriodDateTo.yaml
+  attributionType:
+    description: Тип атрибуции.
+    $ref: ./StatisticsAttributionType.yaml

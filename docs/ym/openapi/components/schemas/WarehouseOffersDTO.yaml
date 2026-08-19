@@ -1,0 +1,23 @@
+description: Информация об остатках товаров на складе.
+type: object
+required:
+  - warehouseId
+  - offers
+properties:
+  warehouseId:
+    description: >
+      Идентификатор склада.
+
+
+      **Для моделей FBY и LaaS:** возвращается идентификатор склада Маркета.
+
+
+      **Для модели FBS:** может возвращаться идентификатор как партнерского
+      склада, так и склада возвратов Маркета.
+    type: integer
+    format: int64
+  offers:
+    description: Информация об остатках.
+    type: array
+    items:
+      $ref: ./WarehouseOfferDTO.yaml

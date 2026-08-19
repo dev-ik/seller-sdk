@@ -1,0 +1,31 @@
+description: |
+  Данные, необходимые для генерации отчета.
+type: object
+required:
+  - businessId
+  - dateFrom
+  - dateTo
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    description: |
+      Конец периода, включительно. Максимальный период — 1 год.
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    format: date
+    type: string
+  campaignIds:
+    description: |
+      Список идентификаторов кампании тех магазинов, которые нужны в отчете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./CampaignId.yaml
+  promoId:
+    description: Идентификатор акции, товары из которой нужны в отчете.
+    type: string

@@ -1,0 +1,65 @@
+post:
+  x-resource-id: 184
+  tags:
+    - bids
+    - dbs
+    - fbs
+    - fby
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - pricing
+    - pricing:read-only
+    - promotion
+    - promotion:read-only
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 500
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: minutes
+      period-duration: 1
+  x-allowed:
+    - seller
+  x-apphost:
+    domain: MONETIZATION
+    enabled: true
+  operationId: getBidsInfoForBusiness
+  summary: Информация об установленных ставках
+  description: "{% include notitle [access](../../_auto/method_scopes/getBidsInfoForBusiness.md) %}\n\nВозвращает значения ставок для заданных товаров.\n\n{% note warning \"Получить информацию по кампаниям, созданным в кабинете, не получится\" %}\n\nВ ответе возвращаются значения только тех ставок, которые вы установили через запрос [PUT\_v2/businesses/{businessId}/bids](../../reference/bids/putBidsForBusiness.md).\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getBidsInfoForBusiness.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit500Truncate.yaml
+  requestBody:
+    required: false
+    description: description
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetBidsInfoRequest.yaml
+  responses:
+    '200':
+      description: >-
+        Значения ставок для заданных товаров. В ответ попадают только товары, на
+        которые установлены ставки.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetBidsInfoResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

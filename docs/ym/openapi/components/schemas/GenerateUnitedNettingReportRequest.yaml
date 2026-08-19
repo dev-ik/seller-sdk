@@ -1,0 +1,84 @@
+description: >
+  Данные, необходимые для генерации отчета: идентификатор кампании, период, за
+  который нужен отчет, а также фильтры.
+type: object
+required:
+  - businessId
+properties:
+  businessId:
+    $ref: ./BusinessId.yaml
+  dateTimeFrom:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `dateFrom`.
+
+      {% endnote %}
+
+      Начало периода, включительно.
+    format: date-time
+    type: string
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: dateFrom
+  dateTimeTo:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `dateTo`.
+
+      {% endnote %}
+
+      Конец периода, включительно. Максимальный период — 3 месяца.
+    format: date-time
+    type: string
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: dateTo
+  dateFrom:
+    $ref: ./PeriodDateFrom.yaml
+  dateTo:
+    description: |
+      Конец периода, включительно. Максимальный период — 3 месяца.
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    format: date
+    type: string
+  bankOrderId:
+    description: Номер платежного поручения.
+    format: int64
+    type: integer
+  bankOrderDateTime:
+    description: Дата платежного поручения.
+    format: date-time
+    type: string
+  monthOfYear:
+    $ref: ./MonthOfYearDTO.yaml
+  placementPrograms:
+    description: |
+      Список моделей, которые нужны в отчете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./PlacementType.yaml
+  inns:
+    description: Список ИНН, которые нужны в отчете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+  campaignIds:
+    description: |
+      Список идентификаторов кампании тех магазинов, которые нужны в отчете.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./CampaignId.yaml

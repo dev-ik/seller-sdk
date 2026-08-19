@@ -13,6 +13,9 @@ export default defineConfig({
       "@seller-sdk/wb": fileURLToPath(
         new URL("./packages/wb/src/index.ts", import.meta.url),
       ),
+      "@seller-sdk/ym": fileURLToPath(
+        new URL("./packages/ym/src/index.ts", import.meta.url),
+      ),
       "seller-sdk": fileURLToPath(
         new URL("./packages/seller-sdk/src/index.ts", import.meta.url),
       ),

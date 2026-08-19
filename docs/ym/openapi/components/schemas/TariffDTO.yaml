@@ -1,0 +1,36 @@
+description: Информация о тарифах, по которым нужно заплатить за услуги Маркета.
+type: object
+required:
+  - type
+  - amount
+  - currency
+  - parameters
+properties:
+  type:
+    description: Услуга Маркета, за которую начисляется тариф.
+    $ref: ./TariffType.yaml
+  percent:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `amount`.
+
+      {% endnote %}
+
+      Значение тарифа в процентах.
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: amount
+    type: number
+  amount:
+    description: Значение тарифа.
+    type: number
+  currency:
+    description: Валюта, в которой указано значение тарифа.
+    $ref: ./CurrencyType.yaml
+  parameters:
+    description: Параметры расчета тарифа.
+    type: array
+    items:
+      $ref: ./TariffParameterDTO.yaml

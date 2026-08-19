@@ -1,0 +1,29 @@
+description: Информация о заказе или возврате, по которому начат чат.
+type: object
+required:
+  - type
+properties:
+  type:
+    $ref: ./ChatContextType.yaml
+  customer:
+    description: Информация о покупателе.
+    $ref: ./ChatCustomerDTO.yaml
+  campaignId:
+    description: Возвращается для заказов и возвратов.
+    $ref: ./CampaignId.yaml
+  orderId:
+    description: |
+      Идентификатор заказа.
+
+      Возвращается для заказов и возвратов.
+    type: integer
+    format: int64
+    minimum: 1
+  returnId:
+    description: |
+      Идентификатор возврата.
+
+      Возвращается только для возвратов.
+    type: integer
+    format: int64
+    minimum: 1

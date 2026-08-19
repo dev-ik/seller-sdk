@@ -1,0 +1,64 @@
+description: Решения по возвратам.
+type: object
+properties:
+  returnItemId:
+    description: Идентификатор товара в возврате.
+    type: integer
+    format: int64
+  count:
+    description: Количество единиц товара.
+    type: integer
+    format: int32
+  comment:
+    description: Комментарий.
+    type: string
+  reasonType:
+    $ref: ./ReturnDecisionReasonType.yaml
+  subreasonType:
+    $ref: ./ReturnDecisionSubreasonType.yaml
+  decisionType:
+    $ref: ./ReturnDecisionType.yaml
+  refundAmount:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `amount`.
+
+      {% endnote %}
+
+      Сумма возврата в копейках.
+    type: integer
+    format: int64
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: amount
+  amount:
+    description: Сумма возврата.
+    $ref: ./CurrencyValueDTO.yaml
+  partnerCompensation:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `partnerCompensationAmount`.
+
+      {% endnote %}
+
+      Компенсация за обратную доставку в копейках.
+    type: integer
+    format: int64
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: partnerCompensationAmount
+  partnerCompensationAmount:
+    description: Компенсация за обратную доставку.
+    $ref: ./CurrencyValueDTO.yaml
+  images:
+    description: Список хеш-кодов фотографий товара от покупателя.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string

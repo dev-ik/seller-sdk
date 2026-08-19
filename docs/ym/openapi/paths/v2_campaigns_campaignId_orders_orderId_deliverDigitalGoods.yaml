@@ -1,0 +1,61 @@
+post:
+  x-resource-id: 129
+  tags:
+    - orders
+    - dbs
+  x-auth-scopes:
+    - all-methods
+    - inventory-and-order-processing
+  x-resource-limit-config:
+    path: resp
+    parallel-limit-value: 6
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
+  x-allowed:
+    - seller
+  x-apphost:
+    domain: ORDERS
+    enabled: false
+  operationId: provideOrderDigitalCodes
+  summary: Передача ключей цифровых товаров
+  description: "{% include notitle [access](../../_auto/method_scopes/provideOrderDigitalCodes.md) %}\n\nПередает ключи цифровых товаров, которые покупатель заказал и оплатил. После выполнения запроса Маркет отправит ему письмо с ключами и инструкциями по активации. Если письмо будет доставлено, Маркет переведет заказ в финальный статус `DELIVERED`.\n\n{% note tip \"После передачи кода покупателю статус заказа изменится не сразу\" %}\n\nПодключите API-уведомления — Маркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда заказ перейдет в статус `DELIVERED`.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\nКлюч нужно передать в течение 30 минут после перехода заказа в статус `PROCESSING`.\n\nЕсли в один заказ входят несколько ключей, передавайте их все в одном запросе.\n\nКаждый товар с уникальным `id` передавайте в виде отдельного элемента в массиве `items`, а ключи товара — в массиве `codes`.\n\n{% cut \"Пример\" %}\n\n```json translate=no\n{\n  \"items\": [\n    {\n      \"id\": 1,\n      \"codes\": [\n        \"code1\", \"code2\", \"code3\"\n      ],\n      \"slip\": \"slip\",\n      \"activate_till\": \"2025-02-18\"\n    },\n    {\n      \"id\": 2,\n      \"codes\": [\n        \"code4\", \"code5\", \"code6\"\n      ],\n      \"slip\": \"slip\",\n      \"activate_till\": \"2025-02-18\"\n    }\n  ]\n}\n```\n{% endcut %}\n\n{% include notitle [limit](../../_auto/method_limits/provideOrderDigitalCodes.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/OrderId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ProvideOrderDigitalCodesRequest.yaml
+  responses:
+    '200':
+      description: "Пустой ответ.\n\n{% note warning \"Ответ `200` сам по себе не значит, что ключи переданы покупателю\" %}\n\nЕсли письмо с ключами удалось доставить, Маркет переведет заказ в финальный статус `DELIVERED`.\n\nСтатус заказа можно узнать с помощью метода [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md).\n\n{% endnote %}\n"
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        заказами](../../concepts/error-codes#orders)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

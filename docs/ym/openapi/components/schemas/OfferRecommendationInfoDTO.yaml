@@ -1,0 +1,10 @@
+description: Рекомендации, касающиеся цены на товар.
+type: object
+properties:
+  offerId:
+    $ref: ./ShopSku.yaml
+  competitivenessThresholds:
+    description: >-
+      Максимальные значения цены, при которых она является привлекательной или
+      умеренной.
+    $ref: ./PriceCompetitivenessThresholdsDTO.yaml

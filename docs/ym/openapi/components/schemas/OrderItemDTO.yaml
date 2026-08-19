@@ -1,0 +1,151 @@
+description: Список товаров в заказе.
+type: object
+required:
+  - id
+  - offerId
+  - offerName
+  - price
+  - buyerPrice
+  - buyerPriceBeforeDiscount
+  - count
+properties:
+  id:
+    description: |
+      Идентификатор товара в заказе.
+
+      Позволяет идентифицировать товар в рамках заказа.
+    type: integer
+    format: int64
+  offerId:
+    description: >-
+      Идентификатор вашего товарного предложения для определенного товара.
+      [Описание поля в Справке Маркета для
+      продавцов](https://yandex.ru/support/marketplace/assortment/fields/index.html#sku)
+    $ref: ./ShopSku.yaml
+  offerName:
+    description: Название товара.
+    type: string
+  price:
+    description: >
+      Цена товара в валюте заказа без учета вознаграждения продавцу за скидки по
+      промокодам, купонам и акциям (параметр `subsidies`).
+
+
+      Включает НДС.
+    type: number
+  buyerPrice:
+    description: |
+      Цена товара в валюте покупателя. В цене уже учтены скидки по:
+
+      * акциям;
+      * купонам;
+      * промокодам.
+    type: number
+  buyerPriceBeforeDiscount:
+    description: >
+      Стоимость товара в валюте покупателя до применения скидок по:
+
+
+      * акциям;
+
+      * купонам;
+
+      * промокодам.
+
+
+      Это зачеркнутая цена, которая отображается покупателю на карточке товара
+      до применения скидок.
+    type: number
+  priceBeforeDiscount:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nСтоимость товара в валюте магазина до применения скидок.\n"
+    type: number
+  count:
+    description: Количество единиц товара.
+    type: integer
+  vat:
+    description: НДС на товар.
+    $ref: ./OrderVatType.yaml
+  shopSku:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+      replacement-field: offerId
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\nВместо него используйте `offerId`.\n\n{% endnote %}\n\nВаш SKU —\_идентификатор товара в вашей системе.\n"
+    $ref: ./ShopSku.yaml
+  subsidy:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+      replacement-field: subsidies
+    description: |
+      {% note warning "Параметр устарел и будет отключен 05.10.2026." %}
+
+      Вместо него используйте `subsidies`.
+
+      {% endnote %}
+
+      Общее вознаграждение продавцу за DBS-доставку и все скидки на товар:
+
+      * по промокодам;
+      * по купонам;
+      * по баллам Плюса;
+      * по акциям.
+    type: number
+  partnerWarehouseId:
+    description: |
+      **Только для моделей FBY и LaaS**
+
+      Идентификатор склада, на который сформирован заказ.
+    type: string
+  promos:
+    description: >-
+      Информация о вознаграждении продавцу за скидки на товар по промокодам,
+      купонам и акциям.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderItemPromoDTO.yaml
+  instances:
+    description: "Информация о маркировке единиц товара.\n\nВозвращаются данные для маркировки, переданные в запросе:\n\n* Для DBS — [PUT\_v2/campaigns/{campaignId}/orders/{orderId}/identifiers](../../reference/orders/provideOrderItemIdentifiers.md) или [PUT\_v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md).\n* Для FBS и EXPRESS — [PUT\_v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md).\n\nДля FBY возвращаются коды маркировки, переданные во время поставки.\n\nЕсли магазин еще не передавал коды для этого заказа, `instances` отсутствует.\n"
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderItemInstanceDTO.yaml
+  details:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\nДля получения информации о невыкупах и возвратах используйте [GET\_v2/campaigns/{campaignId}/returns](../../reference/returns/getReturns.md).\n\n{% endnote %}\n\nИнформация о невыкупленных или возвращенных товарах в заказе.\n"
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderItemDetailDTO.yaml
+  subsidies:
+    description: Список субсидий по типам.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderItemSubsidyDTO.yaml
+  requiredInstanceTypes:
+    description: Список необходимых маркировок товара.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./OrderItemInstanceType.yaml
+  tags:
+    description: Признаки товара.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./OrderItemTagType.yaml

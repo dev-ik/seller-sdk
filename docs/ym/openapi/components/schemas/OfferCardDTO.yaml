@@ -1,0 +1,88 @@
+description: >
+  Информация о состоянии карточки товара.
+
+
+  Если поле `mapping` отсутствует в ответе, Маркет еще не успел обработать
+  информацию о товаре. Чтобы определить категорию такого товара, повторите
+  запрос через несколько минут.
+type: object
+required:
+  - offerId
+properties:
+  offerId:
+    $ref: ./ShopSku.yaml
+  mapping:
+    description: Основная информация о карточке товара.
+    $ref: ./GetMappingDTO.yaml
+  parameterValues:
+    description: |
+      Список характеристик с их значениями.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./ParameterValueDTO.yaml
+  cardStatus:
+    description: Статус карточки.
+    $ref: ./OfferCardStatusType.yaml
+  contentRating:
+    description: Рейтинг карточки.
+    type: integer
+    format: int32
+  averageContentRating:
+    description: >
+      Средний рейтинг карточки у товаров той категории, которая указана в
+      `marketCategoryId`.
+
+
+      Возвращается, только если параметр `withRecommendations` имеет значение
+      `true`.
+    type: integer
+    format: int32
+  contentRatingStatus:
+    description: Статус вычисления рейтинга карточки и рекомендаций.
+    $ref: ./OfferCardContentStatusType.yaml
+  recommendations:
+    description: >
+      Список рекомендаций к заполнению карточки.
+
+
+      Возвращается, только если параметр `withRecommendations` имеет значение
+      `true`.
+
+
+      Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям
+      было проще найти ваш товар и решиться на покупку.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferCardRecommendationDTO.yaml
+  groupId:
+    type: string
+    description: >
+      Идентификатор группы товаров.
+
+
+      У товаров, которые объединены в одну группу, будет одинаковый
+      идентификатор.
+
+
+      [Как объединить товары на
+      карточке](../../step-by-step/assortment-add-goods.md#combine-variants)
+  errors:
+    description: Ошибки в контенте, препятствующие размещению товара на витрине.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferErrorDTO.yaml
+  warnings:
+    description: >-
+      Связанные с контентом предупреждения, не препятствующие размещению товара
+      на витрине.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferErrorDTO.yaml

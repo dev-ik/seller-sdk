@@ -1,0 +1,32 @@
+description: Информация о сообщениях.
+type: object
+required:
+  - context
+  - messages
+properties:
+  orderId:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `context`.
+
+      {% endnote %}
+
+      Идентификатор заказа.
+    type: integer
+    format: int64
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: context
+  context:
+    description: Информация о заказе или возврате, по которому начат чат.
+    $ref: ./ChatFullContextDTO.yaml
+  messages:
+    description: Информация о сообщениях.
+    type: array
+    items:
+      $ref: ./ChatMessageDTO.yaml
+  paging:
+    description: Информация о страницах с результатами.
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml

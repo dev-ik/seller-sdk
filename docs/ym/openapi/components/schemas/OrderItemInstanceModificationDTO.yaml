@@ -1,0 +1,16 @@
+description: Позиция в корзине, требующая маркировки.
+type: object
+required:
+  - id
+  - instances
+properties:
+  id:
+    description: "Идентификатор товара в заказе.\n\nОн приходит в ответе метода [POST\_v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр `id` в `items`.\n"
+    type: integer
+    format: int64
+  instances:
+    description: |
+      Список кодов маркировки единиц товара.
+    type: array
+    items:
+      $ref: ./BriefOrderItemInstanceDTO.yaml

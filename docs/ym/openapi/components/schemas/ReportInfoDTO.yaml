@@ -1,0 +1,43 @@
+description: Статус генерации и ссылка на готовый отчет или документ.
+type: object
+required:
+  - status
+  - generationRequestedAt
+properties:
+  status:
+    $ref: ./ReportStatusType.yaml
+  subStatus:
+    $ref: ./ReportSubStatusType.yaml
+  generationRequestedAt:
+    description: Дата и время запроса на генерацию.
+    type: string
+    format: date-time
+  generationFinishedAt:
+    description: Дата и время завершения генерации.
+    type: string
+    format: date-time
+  file:
+    description: >
+      Ссылка на готовый отчет или документ.
+
+
+      {% note warning "Срок действия ссылки" %}
+
+
+      Ссылка актуальна **60 минут** с момента получения ответа. При каждом
+      запросе `GET /v2/reports/info/{reportId}` генерируется новая ссылка, срок
+      действия которой ограничен.
+
+
+      **Рекомендация для интеграций:** сразу после получения ссылки скачайте
+      отчет и сохраните его у себя. Не сохраняйте ссылку для последующего
+      использования — она станет недействительной через после истечения срока
+      действия.
+
+
+      {% endnote %}
+    type: string
+  estimatedGenerationTime:
+    description: Ожидаемая продолжительность генерации в миллисекундах.
+    type: integer
+    format: int64

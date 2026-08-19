@@ -1,0 +1,13 @@
+description: Статус проверки и :no-translate[УИН].
+type: object
+required:
+  - value
+  - status
+properties:
+  value:
+    type: string
+    description: УИН товара.
+  status:
+    $ref: ./UinStatusType.yaml
+  substatus:
+    $ref: ./UinSubstatusType.yaml

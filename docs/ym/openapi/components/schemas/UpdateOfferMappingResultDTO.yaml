@@ -1,0 +1,29 @@
+description: Ошибки и предупреждения, которые появились из-за переданных характеристик.
+type: object
+properties:
+  offerId:
+    $ref: ./ShopSku.yaml
+  errors:
+    description: >
+      Ошибки.
+
+
+      Если хотя бы по одному товару есть ошибка, информация в каталоге не
+      обновится по всем переданным товарам.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferMappingErrorDTO.yaml
+  warnings:
+    description: |
+      Предупреждения.
+
+      Информация в каталоге обновится.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OfferMappingErrorDTO.yaml
+required:
+  - offerId

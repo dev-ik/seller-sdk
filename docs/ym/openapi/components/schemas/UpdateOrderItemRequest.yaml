@@ -1,0 +1,21 @@
+description: Запрос на обновление состава заказа.
+type: object
+required:
+  - items
+properties:
+  items:
+    description: >
+      Список товаров в заказе.
+
+
+      Если магазин не передал информацию о товаре во входных данных, он будет
+      удален из заказа.
+
+
+      Обязательный параметр.
+    type: array
+    minItems: 1
+    items:
+      $ref: ./OrderItemModificationDTO.yaml
+  reason:
+    $ref: ./OrderItemsModificationRequestReasonType.yaml

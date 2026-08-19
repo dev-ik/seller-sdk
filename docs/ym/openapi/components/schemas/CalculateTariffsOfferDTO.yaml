@@ -1,0 +1,47 @@
+description: Параметры товара, для которого нужно рассчитать стоимость услуг.
+type: object
+required:
+  - categoryId
+  - price
+  - length
+  - width
+  - height
+  - weight
+properties:
+  categoryId:
+    description: "Идентификатор категории товара на Маркете.\n\nДля расчета стоимости услуг необходимо указать идентификатор [листовой категории](*list-category) товара.\n\nЧтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST\_v2/categories/tree](../../reference/categories/getCategoriesTree.md).\n"
+    type: integer
+    format: int64
+    minimum: 0
+    exclusiveMinimum: true
+  price:
+    description: Цена товара в рублях.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  length:
+    description: Длина товара в сантиметрах.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  width:
+    description: Ширина товара в сантиметрах.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  height:
+    description: Высота товара в сантиметрах.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  weight:
+    description: Вес товара в килограммах.
+    type: number
+    minimum: 0
+    exclusiveMinimum: true
+  quantity:
+    description: Квант продажи — количество единиц товара в одном товарном предложении.
+    type: integer
+    format: int32
+    minimum: 1
+    default: 1

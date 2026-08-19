@@ -1,0 +1,46 @@
+type: object
+description: Информация о точке продаж.
+required:
+  - id
+allOf:
+  - $ref: ./OutletDTO.yaml
+  - properties:
+      id:
+        description: Идентификатор точки продаж, присвоенный Маркетом.
+        type: integer
+        format: int64
+      status:
+        $ref: ./OutletStatusType.yaml
+      region:
+        $ref: ./RegionDTO.yaml
+      shopOutletId:
+        description: |
+          {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+          Вместо него используйте `shopOutletCode`.
+
+          {% endnote %}
+
+          Идентификатор точки продаж, заданный магазином.
+        type: string
+        deprecated: true
+        x-deprecation-config:
+          shutdown-date: '2026-10-19'
+          replacement-field: shopOutletCode
+      workingTime:
+        description: |
+          {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+          Вместо него используйте `workingSchedule`.
+
+          {% endnote %}
+
+          Рабочее время.
+        type: string
+        deprecated: true
+        x-deprecation-config:
+          shutdown-date: '2026-10-19'
+          replacement-field: workingSchedule
+      moderationReason:
+        description: Статус модерации.
+        type: string

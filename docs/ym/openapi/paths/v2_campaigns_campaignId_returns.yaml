@@ -1,0 +1,180 @@
+get:
+  x-resource-id: 148
+  tags:
+    - returns
+    - fbs
+    - dbs
+    - express
+    - fby
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 5000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 5000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: ORDERS
+    enabled: false
+  operationId: getReturns
+  summary: Список невыкупов и возвратов
+  description: "{% include notitle [access](../../_auto/method_scopes/getReturns.md) %}\n\nПолучает список невыкупов и возвратов.\n\nЧтобы получить информацию по одному невыкупу или возврату, выполните запрос [GET\_v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}](../../reference/returns/getReturn.md).\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый невыкуп или возврат.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getReturns.md) %}\n"
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit100Truncate.yaml
+    - description: |
+        Идентификаторы заказов — для фильтрации результатов.
+
+        Несколько идентификаторов перечисляются через запятую без пробела.
+      in: query
+      name: orderIds
+      required: false
+      schema:
+        type: array
+        maxItems: 50
+        uniqueItems: true
+        items:
+          type: integer
+          format: int64
+          example: 123543
+    - description: |
+        Фильтр по статусам возврата денег за возвраты.
+
+        Несколько статусов перечисляются через запятую.
+      in: query
+      name: statuses
+      required: false
+      example:
+        - STARTED_BY_USER
+        - WAITING_FOR_DECISION
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: ../components/schemas/RefundStatusType.yaml
+    - description: |
+        Фильтр по логистическим статусам невыкупов и возвратов.
+
+        Несколько статусов перечисляются через запятую.
+      in: query
+      name: shipmentStatuses
+      required: false
+      example:
+        - READY_FOR_PICKUP
+        - IN_TRANSIT
+      schema:
+        type: array
+        uniqueItems: true
+        items:
+          $ref: ../components/schemas/ReturnShipmentStatusType.yaml
+    - description: |
+        Тип заказа для фильтрации:
+
+        * `UNREDEEMED` — невыкуп.
+
+        * `RETURN` — возврат.
+
+        Если не указать, в ответе будут и невыкупы, и возвраты.
+      in: query
+      name: type
+      required: false
+      schema:
+        $ref: ../components/schemas/ReturnType.yaml
+    - description: >
+        Начальная дата для фильтрации невыкупов или возвратов по дате
+        обновления.
+
+
+        Формат: `ГГГГ-ММ-ДД`.
+      in: query
+      name: fromDate
+      required: false
+      example: '2022-10-31'
+      schema:
+        type: string
+        format: date
+    - description: |
+        Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
+
+        Формат: `ГГГГ-ММ-ДД`.
+      in: query
+      name: toDate
+      required: false
+      example: '2022-11-30'
+      schema:
+        type: string
+        format: date
+    - description: >
+        {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+
+        Вместо него используйте `fromDate`.
+
+
+        {% endnote %}
+
+
+        Начальная дата для фильтрации невыкупов или возвратов по дате
+        обновления.
+      deprecated: true
+      x-deprecation-config:
+        shutdown-date: '2026-10-12'
+        replacement-field: fromDate
+      in: query
+      name: from_date
+      required: false
+      example: '2022-10-31'
+      schema:
+        type: string
+        format: date
+    - description: |
+        {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+        Вместо него используйте `toDate`.
+
+        {% endnote %}
+
+        Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
+      deprecated: true
+      x-deprecation-config:
+        shutdown-date: '2026-10-12'
+        replacement-field: toDate
+      in: query
+      name: to_date
+      required: false
+      example: '2022-11-30'
+      schema:
+        type: string
+        format: date
+  responses:
+    '200':
+      description: Постраничные невыкупы или возвраты магазина.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetReturnsResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

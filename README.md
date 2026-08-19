@@ -12,13 +12,14 @@
   <a href="https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/dev-ik/seller-sdk/ci.yml?branch=main&amp;style=flat-square&amp;label=CI&amp;logo=github" alt="Статус CI"></a>
   <a href="./docs/ozon/API-REFERENCE.md"><img src="https://img.shields.io/badge/Ozon_Seller_API-461_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-005BFF?style=flat-square" alt="Ozon Seller API: 461 операция"></a>
   <a href="./docs/wb/API-REFERENCE.md"><img src="https://img.shields.io/badge/WB_API-286_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9-7B2CBF?style=flat-square" alt="Wildberries API: 286 операций"></a>
+  <a href="./docs/ym/API-REFERENCE.md"><img src="https://img.shields.io/badge/Yandex_Market_API-165_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9-FFCC00?style=flat-square" alt="Yandex Market API: 165 операций"></a>
   <a href="./package.json"><img src="https://img.shields.io/badge/Node.js-%E2%89%A520.10-339933?style=flat-square&amp;logo=nodedotjs&amp;logoColor=white" alt="Node.js 20.10 или новее"></a>
   <a href="./tsconfig.base.json"><img src="https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white" alt="TypeScript strict"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-2E3440?style=flat-square" alt="Лицензия MIT"></a>
 </p>
 
-SDK поддерживает Ozon Seller API и Wildberries API. Можно установить только
-нужную площадку или использовать общий пакет для multi-marketplace приложения.
+SDK поддерживает Ozon Seller API, Wildberries API и Yandex Market Partner API.
+Можно установить только нужную площадку или использовать общий пакет.
 
 ## Документация пакетов
 
@@ -26,6 +27,8 @@ SDK поддерживает Ozon Seller API и Wildberries API. Можно ус
   примеры Ozon; [полный API Reference](./docs/ozon/API-REFERENCE.md).
 - [`@seller-sdk/wb`](./packages/wb/README.md) — установка, настройка и примеры
   Wildberries; [полный API Reference](./docs/wb/API-REFERENCE.md).
+- [`@seller-sdk/ym`](./packages/ym/README.md) — установка, настройка и примеры
+  Яндекс Маркета; [полный API Reference](./docs/ym/API-REFERENCE.md).
 
 ## Быстрый старт
 
@@ -67,6 +70,24 @@ const tariffs = await wb.general.getTariffConstructorOptions({
 });
 ```
 
+Для проекта, который работает только с Яндекс Маркетом:
+
+```bash
+npm i @seller-sdk/ym
+```
+
+```ts
+import { YmClient, YmValues } from "@seller-sdk/ym";
+
+const ym = new YmClient({ apiKey: process.env.YM_API_KEY! });
+const orders = await ym.orders.getBusinessOrders({
+  path: { businessId: 123456 },
+  body: {
+    statuses: [YmValues.OrdersOrderStatusType.Processing],
+  },
+});
+```
+
 Для приложения, которому нужна единая точка входа:
 
 ```bash
@@ -93,6 +114,7 @@ const roles = await seller.ozon.access.getRoles();
 
 - Все 461 операция Ozon распределены по предметным областям.
 - Все 286 операций WB распределены по 13 официальным разделам.
+- Все 165 операций Yandex Market распределены по официальным предметным tags.
 - TypeScript подсказывает обязательные поля, ограничения и закрытые наборы
   значений.
 - Ответы проверяются во время выполнения через SafeShape.
@@ -119,13 +141,17 @@ await ozon.warehouses.listWarehousesV2({ limit: 100 });
 await wb.general.getV2News({ query: { from: "2026-08-01" } });
 ```
 
+В Yandex Market официальные operationId текущего snapshot уже не содержат
+суффиксов версии. Например, `/v1/businesses/{businessId}/orders` вызывается как
+`ym.orders.getBusinessOrders(...)`; отдельный versionless alias не требуется.
+
 Если Ozon пометил контракт устаревшим, IDE зачеркнёт и версионный метод, и его
 алиас. Например, `listFinanceTransactions` устаревает 8 сентября 2026 года;
 для нового кода используйте `finance.accruals`.
 
 ## Конфигурация запросов
 
-Оба клиента поддерживают одинаковые настройки тайм-аутов, общего дедлайна,
+Все клиенты поддерживают одинаковые настройки тайм-аутов, общего дедлайна,
 повторов, отмены и наблюдения за ответами.
 
 ### Ozon
@@ -179,6 +205,9 @@ await wb.general.getNews(
 `x-readonly-method`. Мутации не повторяются автоматически независимо от
 `maxRetries`.
 
+Yandex Market использует те же timeout/deadline/request options; автоматически
+повторяются только `GET`, а HTTP 420 возвращается как `RateLimitError`.
+
 ## Пагинация
 
 ```ts
@@ -205,7 +234,8 @@ try {
 }
 ```
 
-`toSellerSdkErrorDetails()` одинаково работает для Ozon, WB и umbrella-пакета.
+`toSellerSdkErrorDetails()` одинаково работает для Ozon, WB, YM и
+umbrella-пакета.
 Результат содержит стабильные `code`, `message`, `operationId`, HTTP status,
 request ID, API code/message и validation issues, когда они доступны. В него не
 включаются stack, cause, ключ API, `Client-Id` и заголовки авторизации.
@@ -224,6 +254,9 @@ request ID, API code/message и validation issues, когда они досту�
 
 - [Публичный API](PUBLIC_API.md)
 - [Полный справочник Ozon](docs/ozon/API-REFERENCE.md)
+- [Полный справочник Wildberries](docs/wb/API-REFERENCE.md)
+- [Полный справочник Yandex Market](docs/ym/API-REFERENCE.md)
+- [Источник контрактов Yandex Market](docs/YM-SOURCE-OF-TRUTH.md)
 - [Архитектура](ARCHITECTURE.md)
 - [Источник контрактов Ozon](docs/OZON-SOURCE-OF-TRUTH.md)
 - [Процесс добавления endpoint](docs/ENDPOINT-WORKFLOW.md)
@@ -244,7 +277,7 @@ TypeScript, тесты, сборку, состав tarball и установку
 
 [MIT](LICENSE) © Seller SDK contributors.
 
-Seller SDK — независимый open-source проект. Он не связан с Ozon или
-Wildberries, не одобрен и не спонсируется ими либо другими маркетплейсами.
+Seller SDK — независимый open-source проект. Он не связан с Ozon, Wildberries
+или Яндексом, не одобрен и не спонсируется ими либо другими маркетплейсами.
 Названия маркетплейсов используются только для обозначения совместимости с их
 API.

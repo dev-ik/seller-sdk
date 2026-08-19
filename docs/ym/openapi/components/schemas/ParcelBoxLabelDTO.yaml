@@ -1,0 +1,71 @@
+description: Информация о ярлыке для коробки.
+type: object
+required:
+  - url
+  - supplierName
+  - deliveryServiceName
+  - orderId
+  - orderNum
+  - recipientName
+  - boxId
+  - fulfilmentId
+  - place
+  - weight
+  - deliveryServiceId
+properties:
+  url:
+    description: "Соответствует URL, по которому выполняется запрос [GET\_v2/campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label](../../reference/order-labels/generateOrderLabel.md).\n"
+    $ref: ./Url.yaml
+  supplierName:
+    description: Юридическое название магазина.
+    type: string
+  deliveryServiceName:
+    description: Юридическое название службы доставки.
+    type: string
+  orderId:
+    description: Идентификатор заказа в системе Маркета.
+    type: integer
+    format: int64
+  orderNum:
+    description: >
+      Идентификатор заказа в информационной системе магазина.
+
+
+      Совпадает с `orderId`, если Маркету неизвестен номер заказа в системе
+      магазина.
+    type: string
+  recipientName:
+    description: Фамилия и инициалы получателя заказа.
+    type: string
+  boxId:
+    description: Идентификатор коробки.
+    type: integer
+    format: int64
+  fulfilmentId:
+    description: >
+      Идентификатор коробки в информационной системе магазина.
+
+
+      Возвращается в формате: `номер заказа на Маркете-номер коробки`. Например,
+      `7206821‑1`, `7206821‑2` и т. д.
+    type: string
+  place:
+    description: >
+      Номер коробки в заказе. Возвращается в формате: `номер места/общее
+      количество мест`.
+    type: string
+  weight:
+    description: "{% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nОбщая масса всех товаров в заказе.\n\nВозвращается в формате `weight кг`.\n"
+    type: string
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+  deliveryServiceId:
+    description: "Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET\_delivery/services](../../reference/delivery-services/getDeliveryServices.md)."
+    type: string
+  deliveryAddress:
+    description: Адрес получателя.
+    type: string
+  shipmentDate:
+    description: Дата отгрузки в формате `dd.MM.yyyy`.
+    type: string

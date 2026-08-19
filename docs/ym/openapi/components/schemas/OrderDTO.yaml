@@ -1,0 +1,144 @@
+description: Заказ.
+type: object
+required:
+  - id
+  - status
+  - substatus
+  - creationDate
+  - currency
+  - itemsTotal
+  - deliveryTotal
+  - buyerItemsTotalBeforeDiscount
+  - paymentType
+  - paymentMethod
+  - fake
+  - items
+  - delivery
+  - buyer
+  - taxSystem
+properties:
+  id:
+    description: Идентификатор заказа.
+    type: integer
+    format: int64
+  externalOrderId:
+    $ref: ./ExternalOrderId.yaml
+  status:
+    $ref: ./OrderStatusType.yaml
+  substatus:
+    $ref: ./OrderSubstatusType.yaml
+  creationDate:
+    description: >
+      Дата и время оформления заказа.
+
+
+      Формат даты и времени: `ДД-ММ-ГГГГ ЧЧ:ММ:СС`. Часовой пояс — UTC+03:00
+      (Москва).
+    $ref: ./DateDdMmYyyyHhMmSs.yaml
+  updatedAt:
+    description: >
+      Дата и время последнего обновления заказа.
+
+
+      Формат даты и времени: `ДД-ММ-ГГГГ ЧЧ:ММ:СС`. Часовой пояс — UTC+03:00
+      (Москва).
+    $ref: ./DateDdMmYyyyHhMmSs.yaml
+  currency:
+    description: |
+      Валюта, в которой указаны цены на товары в заказе.
+    $ref: ./CurrencyType.yaml
+  itemsTotal:
+    description: |
+      Платеж покупателя.
+    type: number
+  deliveryTotal:
+    description: |
+      Стоимость доставки.
+    type: number
+  buyerItemsTotal:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+      replacement-field: itemsTotal
+    description: >
+      {% note warning "Параметр устарел и будет отключен 05.10.2026." %}
+
+
+      Вместо него используйте `itemsTotal`.
+
+
+      {% endnote %}
+
+
+      Стоимость всех товаров в заказе в валюте покупателя после применения
+      скидок и без учета стоимости доставки.
+    type: number
+  buyerTotal:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nСтоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.\n"
+    type: number
+  buyerItemsTotalBeforeDiscount:
+    description: >
+      Стоимость всех товаров в заказе в валюте покупателя без учета стоимости
+      доставки и до применения скидок по:
+
+
+      * акциям;
+
+      * купонам;
+
+      * промокодам.
+    type: number
+  buyerTotalBeforeDiscount:
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nСтоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость доставки).\n"
+    type: number
+  paymentType:
+    $ref: ./OrderPaymentType.yaml
+  paymentMethod:
+    $ref: ./OrderPaymentMethodType.yaml
+  fake:
+    description: |
+      Тип заказа:
+
+      * `false` — настоящий заказ покупателя.
+
+      * `true` — [тестовый заказ](../../concepts/sandbox.md) Маркета.
+    type: boolean
+  items:
+    description: Список товаров в заказе.
+    type: array
+    items:
+      $ref: ./OrderItemDTO.yaml
+  subsidies:
+    description: Список субсидий по типам.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderSubsidyDTO.yaml
+  delivery:
+    $ref: ./OrderDeliveryDTO.yaml
+  buyer:
+    $ref: ./OrderBuyerDTO.yaml
+  notes:
+    description: Комментарий к заказу.
+    type: string
+  taxSystem:
+    $ref: ./OrderTaxSystemType.yaml
+  cancelRequested:
+    description: |
+      **Только для модели DBS**
+
+      Запрошена ли отмена.
+    type: boolean
+  expiryDate:
+    description: |
+      Дата, после которой заказ будет отменен, если не сменит статус.
+
+      Формат даты: `ДД-ММ-ГГГГ`.
+    $ref: ./DateDdMmYyyyHhMmSs.yaml

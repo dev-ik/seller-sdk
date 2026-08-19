@@ -1,0 +1,88 @@
+description: "Невыкуп или возврат в заказе.\n\nПараметров `logisticPickupPoint`, `shipmentRecipientType` и\_`shipmentStatus` может не быть в случае возврата:\n  * С опцией **Быстрый возврат денег за дешевый брак**, когда товар остается у покупателя (`fastReturn=true`).\n  * По заказу от бизнеса, если:\n    * статус возврата `STARTED_BY_USER` или `WAITING_FOR_DECISION`;\n    * возврат отменен до передачи товара.\n\nСтатус возврата денег `refundStatus` актуален только для `returnType=RETURN`.\n"
+type: object
+required:
+  - id
+  - orderId
+  - items
+  - returnType
+properties:
+  id:
+    description: Идентификатор невыкупа или возврата.
+    format: int64
+    type: integer
+  orderId:
+    description: Номер заказа.
+    format: int64
+    type: integer
+  creationDate:
+    description: |
+      Дата создания невыкупа или возврата.
+
+      Формат даты: ISO 8601 со смещением относительно UTC.
+    type: string
+    format: date-time
+    example: '2020-02-02T14:30:30+03:00'
+  updateDate:
+    description: |
+      Дата обновления невыкупа или возврата.
+
+      Формат даты: ISO 8601 со смещением относительно UTC.
+    type: string
+    format: date-time
+    example: '2020-02-02T14:30:30+03:00'
+  refundStatus:
+    $ref: ./RefundStatusType.yaml
+  logisticPickupPoint:
+    description: Пункт вывоза.
+    $ref: ./LogisticPickupPointDTO.yaml
+  pickupTillDate:
+    description: >
+      Дата, до которой можно забрать товар.
+
+
+      Только для невыкупов и возвратов в логистическом статусе
+      `READY_FOR_PICKUP`.
+
+
+      Формат даты: ISO 8601 со смещением относительно UTC.
+    type: string
+    format: date-time
+    example: '2020-02-02T14:30:30+03:00'
+  shipmentRecipientType:
+    description: Способ возврата товара покупателем.
+    $ref: ./RecipientType.yaml
+  shipmentStatus:
+    description: Статус передачи возврата.
+    $ref: ./ReturnShipmentStatusType.yaml
+  refundAmount:
+    description: |
+      {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+      Вместо него используйте `amount`.
+
+      {% endnote %}
+
+      Сумма возврата в копейках.
+    type: integer
+    format: int64
+    deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-12'
+      replacement-field: amount
+  amount:
+    description: Сумма возврата.
+    $ref: ./CurrencyValueDTO.yaml
+  items:
+    description: Список товаров в невыкупе или возврате.
+    type: array
+    items:
+      $ref: ./ReturnItemDTO.yaml
+  returnType:
+    description: Тип возврата.
+    $ref: ./ReturnType.yaml
+  fastReturn:
+    description: |
+      Используется ли опция **Быстрый возврат денег за дешевый брак**.
+
+      Актуально только для `returnType=RETURN`.
+    type: boolean

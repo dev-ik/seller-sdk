@@ -1,0 +1,88 @@
+post:
+  x-resource-id: 285
+  tags:
+    - goods-questions
+    - fby
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - communication
+  x-allowed:
+    - seller
+    - market-yandex-go
+  x-resource-limit-config:
+    path: resp
+    none:
+      amount: 1000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 5000
+      period: hours
+      period-duration: 1
+  x-apphost:
+    domain: UGC
+    enabled: false
+  operationId: getGoodsQuestions
+  summary: Получение вопросов о товарах продавца
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/getGoodsQuestions.md)
+    %}
+
+
+    Возвращает вопросы о товарах продавца по указанным фильтрам.
+
+
+    {% note tip "Вы также можете настроить API-уведомления" %}
+
+
+    Маркет отправит вам
+    [запрос](../../push-notifications/reference/sendNotification.md), когда
+    появится новый вопрос. А полную информацию о нем можно получить с помощью
+    этого метода.
+
+
+    [{#T}](../../push-notifications/index.md)
+
+
+    {% endnote %}
+
+
+    Результаты возвращаются постранично, одна страница содержит не более 50
+    вопросов.
+
+
+    {% include notitle [limit](../../_auto/method_limits/getGoodsQuestions.md)
+    %}
+  parameters:
+    - $ref: ../components/parameters/BusinessId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit50.yaml
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetQuestionsRequest.yaml
+  responses:
+    '200':
+      description: Список вопросов.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetQuestionsResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml

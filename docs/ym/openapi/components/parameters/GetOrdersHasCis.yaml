@@ -1,0 +1,21 @@
+description: >
+  Фильтр для получения заказов, в которых есть хотя бы один товар с кодом
+  идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL
+  BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex
+  Go]):
+
+
+  * `true` — да.
+
+
+  * `false` — нет.
+
+
+  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к
+  определенным категориям.
+name: hasCis
+in: query
+required: false
+schema:
+  type: boolean
+  default: false

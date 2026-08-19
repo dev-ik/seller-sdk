@@ -1,0 +1,68 @@
+description: >
+  Данные, необходимые для генерации отчета. Передавайте либо `businessId`, либо
+  `campaignId`/`campaignIds`, но не все сразу.
+type: object
+properties:
+  campaignId:
+    description: >
+      {% note warning "Для моделей DBS, FBS и Экспресс параметр скоро станет
+      недоступен" %}
+
+
+      Для получения информации об остатках на складе магазина передайте
+      `businessId` и идентификатор нужного магазина в `campaignIds`.
+
+
+      {% endnote %}
+    $ref: ./CampaignId.yaml
+  businessId:
+    description: >
+      **Только для моделей DBS, FBS и Экспресс**
+
+
+      Идентификатор кабинета, по магазинам которого нужно сформировать отчет
+      (кроме моделей FBY и LaaS).
+    $ref: ./BusinessId.yaml
+  warehouseIds:
+    description: "Фильтр по идентификаторам складов (только модели FBY и LaaS). Чтобы узнать идентификатор, воспользуйтесь запросом [GET\_v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md)."
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: integer
+      format: int64
+  reportDate:
+    description: >
+      Фильтр по дате (для моделей FBY и LaaS). В отчет попадут данные за
+      **предшествующий** дате день.
+
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date
+  categoryIds:
+    description: Фильтр по категориям на Маркете (кроме моделей FBY и LaaS).
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: integer
+      format: int32
+      minimum: 0
+      exclusiveMinimum: true
+  hasStocks:
+    description: Фильтр по наличию остатков (кроме моделей FBY и LaaS).
+    type: boolean
+  campaignIds:
+    description: |
+      Фильтр по магазинам для отчета по кабинету (кроме моделей FBY и LaaS).
+
+      Передавайте вместе с `businessId`.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      $ref: ./CampaignId.yaml

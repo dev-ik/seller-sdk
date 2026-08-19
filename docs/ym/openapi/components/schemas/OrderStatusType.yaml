@@ -1,0 +1,42 @@
+description: |
+  Статус заказа:
+
+  * `PLACING` — оформляется, подготовка к резервированию.
+
+  * `RESERVED` — зарезервирован, но недооформлен (только для LaaS).
+
+  * `UNPAID` — оформлен, но еще не оплачен (если выбрана оплата при оформлении).
+
+  * `PROCESSING` — находится в обработке.
+
+  * `DELIVERY` — передан в службу доставки.
+
+  * `PICKUP` — доставлен в пункт выдачи.
+
+  * `DELIVERED` — получен покупателем.
+
+  * `CANCELLED` — отменен.
+
+  * `PENDING` — ожидает обработки со стороны продавца.
+
+  * `PARTIALLY_RETURNED` — возвращен частично.
+
+  * `RETURNED` — возвращен полностью.
+
+  * `UNKNOWN` — неизвестный статус.
+
+  Также могут возвращаться другие значения. Обрабатывать их не нужно.
+type: string
+enum:
+  - PLACING
+  - RESERVED
+  - UNPAID
+  - PROCESSING
+  - DELIVERY
+  - PICKUP
+  - DELIVERED
+  - CANCELLED
+  - PENDING
+  - PARTIALLY_RETURNED
+  - RETURNED
+  - UNKNOWN

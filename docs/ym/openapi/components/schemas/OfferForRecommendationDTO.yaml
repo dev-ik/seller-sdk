@@ -1,0 +1,15 @@
+description: Информация о состоянии цены на товар.
+type: object
+properties:
+  offerId:
+    $ref: ./ShopSku.yaml
+  price:
+    description: Цена товара в каталоге.
+    $ref: ./BasePriceDTO.yaml
+  competitiveness:
+    description: Привлекательность цены на товар.
+    $ref: ./PriceCompetitivenessType.yaml
+  shows:
+    description: Количество показов карточки товара за последние 7 дней.
+    type: integer
+    format: int64

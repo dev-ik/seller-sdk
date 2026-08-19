@@ -1,0 +1,12 @@
+description: Список товаров в карантине.
+type: object
+required:
+  - offers
+properties:
+  paging:
+    $ref: ./PackagingForwardScrollingPagerDTO.yaml
+  offers:
+    description: Страница списка товаров в карантине.
+    type: array
+    items:
+      $ref: ./QuarantineOfferDTO.yaml

@@ -1,0 +1,52 @@
+description: Расписание работы точки продаж.
+type: object
+required:
+  - startDay
+  - endDay
+  - startTime
+  - endTime
+properties:
+  startDay:
+    description: |
+      Точка продаж работает с указанного дня недели.
+
+      Возможные значения:
+
+      * `MONDAY` — понедельник.
+      * `TUESDAY` — вторник.
+      * `WEDNESDAY` — среда.
+      * `THURSDAY` — четверг.
+      * `FRIDAY` — пятница.
+      * `SATURDAY` — суббота.
+      * `SUNDAY` — воскресенье.
+    $ref: ./DayOfWeekType.yaml
+  endDay:
+    description: |
+      Точка продаж работает до указанного дня недели.
+
+      Возможные значения:
+
+      * `MONDAY` — понедельник.
+      * `TUESDAY` — вторник.
+      * `WEDNESDAY` — среда.
+      * `THURSDAY` — четверг.
+      * `FRIDAY` — пятница.
+      * `SATURDAY` — суббота.
+      * `SUNDAY` — воскресенье.
+    $ref: ./DayOfWeekType.yaml
+  startTime:
+    description: |
+      Точка продаж работает c указанного часа.
+
+      Формат: `ЧЧ:ММ`.
+    type: string
+    pattern: ^([0-1][0-9]|2[0-3]):[0-5][0-9]$
+    example: '09:59'
+  endTime:
+    description: |
+      Точка продаж работает до указанного часа.
+
+      Формат: `ЧЧ:ММ`.
+    type: string
+    pattern: ^([0-1][0-9]|2[0-3]):[0-5][0-9]$
+    example: '23:59'

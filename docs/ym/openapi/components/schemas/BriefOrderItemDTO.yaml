@@ -1,0 +1,35 @@
+description: Информация о маркированном товаре.
+type: object
+properties:
+  id:
+    description: |
+      Идентификатор товара в заказе.
+
+      Позволяет идентифицировать товар в рамках заказа.
+    type: integer
+    format: int64
+  vat:
+    description: Налог на добавленную стоимость (НДС) на услугу доставки заказа.
+    $ref: ./OrderVatType.yaml
+  count:
+    description: Количество единиц товара.
+    type: integer
+    format: int32
+  price:
+    description: >
+      Цена товара. Указана в той валюте, которая была задана в каталоге.
+      Разделитель целой и дробной части — точка.
+    type: number
+  offerName:
+    description: Название товара.
+    type: string
+  offerId:
+    description: Ваш идентификатор товара.
+    $ref: ./ShopSku.yaml
+  instances:
+    description: Переданные коды маркировки.
+    type: array
+    nullable: true
+    minItems: 1
+    items:
+      $ref: ./OrderItemInstanceDTO.yaml

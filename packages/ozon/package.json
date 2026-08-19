@@ -1,6 +1,6 @@
 {
   "name": "@seller-sdk/ozon",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Типобезопасный SDK для Ozon Seller API.",
   "keywords": [
     "ozon",
@@ -38,7 +38,7 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^1.0.1"
+    "@safe-shape/core": "^2.0.0"
   },
   "scripts": {
     "build": "tsc -p ../core/tsconfig.build.json --outDir ../ozon/dist/internal/core && tsc -p tsconfig.build.json",

@@ -29,6 +29,12 @@ const wbVersion = JSON.parse(
     "utf8",
   ),
 ).version;
+const ymVersion = JSON.parse(
+  readFileSync(
+    join(projectDirectory, "packages", "ym", "package.json"),
+    "utf8",
+  ),
+).version;
 const umbrellaVersion = JSON.parse(
   readFileSync(
     join(projectDirectory, "packages", "seller-sdk", "package.json"),
@@ -45,6 +51,10 @@ try {
     {
       directory: join(projectDirectory, "packages", "wb"),
       tarball: `seller-sdk-wb-${wbVersion}.tgz`,
+    },
+    {
+      directory: join(projectDirectory, "packages", "ym"),
+      tarball: `seller-sdk-ym-${ymVersion}.tgz`,
     },
     {
       directory: join(projectDirectory, "packages", "seller-sdk"),
@@ -127,6 +137,76 @@ try {
     throw new Error(
       "Focused Ozon install must not install seller-sdk or @seller-sdk/core.",
     );
+  }
+
+  const ymFocusedConsumerDirectory = join(
+    temporaryDirectory,
+    "ym-focused-consumer",
+  );
+  mkdirSync(ymFocusedConsumerDirectory, { recursive: true });
+  writeFileSync(
+    join(ymFocusedConsumerDirectory, "package.json"),
+    JSON.stringify(
+      {
+        name: "seller-sdk-ym-focused-consumer-smoke",
+        private: true,
+        type: "module",
+      },
+      null,
+      2,
+    ),
+  );
+  execFileSync(
+    "npm",
+    ["install", "--ignore-scripts", "--no-audit", "--no-fund", tarballs[2]],
+    { cwd: ymFocusedConsumerDirectory, stdio: "pipe", env: npmEnvironment },
+  );
+  const ymFocusedRuntimeFile = join(ymFocusedConsumerDirectory, "smoke.mjs");
+  writeFileSync(
+    ymFocusedRuntimeFile,
+    [
+      'import { toSellerSdkErrorDetails, YmClient, YmValues, YM_OPERATION_METADATA } from "@seller-sdk/ym";',
+      "const ym = new YmClient({ apiKey: 'test-ym-api-key' });",
+      "if (!(ym instanceof YmClient) || typeof toSellerSdkErrorDetails !== 'function' || YM_OPERATION_METADATA.length !== 165 || YmValues.OrdersOrderStatusType.Processing !== 'PROCESSING' || typeof ym.orders.getBusinessOrders !== 'function' || typeof ym.categories.getCategoriesTree !== 'function' || typeof ym.rawRequest !== 'function') throw new Error('Focused YM smoke failed');",
+      "console.log('standalone @seller-sdk/ym consumer smoke passed');",
+    ].join("\n"),
+  );
+  const ymFocusedRuntimeOutput = execFileSync(
+    process.execPath,
+    [ymFocusedRuntimeFile],
+    { cwd: ymFocusedConsumerDirectory, encoding: "utf8" },
+  );
+  if (!ymFocusedRuntimeOutput.includes("standalone @seller-sdk/ym")) {
+    throw new Error("Focused YM runtime smoke did not report success.");
+  }
+  for (const forbiddenPackage of ["ozon", "wb", "core"]) {
+    if (
+      existsSync(
+        join(
+          ymFocusedConsumerDirectory,
+          "node_modules",
+          "@seller-sdk",
+          forbiddenPackage,
+          "package.json",
+        ),
+      )
+    ) {
+      throw new Error(
+        `Focused YM install must not install @seller-sdk/${forbiddenPackage}.`,
+      );
+    }
+  }
+  if (
+    existsSync(
+      join(
+        ymFocusedConsumerDirectory,
+        "node_modules",
+        "seller-sdk",
+        "package.json",
+      ),
+    )
+  ) {
+    throw new Error("Focused YM install must not install seller-sdk.");
   }
 
   const wbFocusedConsumerDirectory = join(
@@ -232,16 +312,22 @@ try {
       'import type { CreateSupplyCargoesResponse, CreateSupplyCargoLabelsResponse, DeleteSupplyCargoesResponse, GetSupplyCargoesCreateInfoResponse, GetSupplyCargoesDeleteStatusResponse, GetSupplyCargoesResponse, GetSupplyCargoesRulesResponse, GetSupplyCargoLabelsResponse, GetSupplyDraftInfoResponse, GetSupplyDraftTimeslotsResponse } from "seller-sdk";',
       'import type { ApproveFbsCarriageResponse, CancelFbsCarriageResponse, CancelSupplyOrderResponse, CreateFbsActResponse, CreateFbsCarriageResponse, CreateOrGetFbsPostingProductExemplarsV6Response, CreateSupplyOrderFromDraftResponse, GetFbsActBarcodeResponse, GetFbsActBarcodeTextResponse, GetFbsActContainerLabelsResponse, GetFbsCarriageResponse, GetFbsPostingProductExemplarStatusV5Response, GetSupplyCargoLabelFileResponse, GetSupplyOrderCancelStatusResponse, GetSupplyOrderContentUpdateStatusResponse, GetSupplyOrderFromDraftStatusResponse, ListAvailableFbsCarriagesResponse, ListFboSellerWarehousesResponse, ListFbsActPostingsResponse, ListFbsCarriageDeliveriesV1Response, ListFbsCarriageDeliveriesV2Response, SetFbsCarriagePostingsResponse, ShipFbsPostingPackageV4Response, ShipFbsPostingV4Response, SplitFbsPostingResponse, UpdateSupplyOrderContentResponse, ValidateFbsPostingProductExemplarsV5Response, ValidateSupplyOrderContentResponse } from "seller-sdk";',
       'import type { GetFbsActPdfResponse, GetFbsActStatusResponse, GetFbsCarriageDiscrepancyActResponse, GetFbsCarriageEttnStatusResponse, GetFbsDigitalActPdfResponse, GetFbsDigitalActStatusResponse, GetFbsTraceableAttributesResponse, ListFbsActsResponse, ListFbsAssemblyCarriagePostingsResponse, SplitTraceableFbsPostingResponse } from "seller-sdk";',
+      'import { YmValues } from "seller-sdk";',
       'import { OzonClient } from "@seller-sdk/ozon";',
       'import { WbClient, type GetPingResponse as WbGetPingResponse } from "@seller-sdk/wb";',
+      'import { YmClient, type GetBusinessOrdersResponse as YmGetBusinessOrdersResponse } from "@seller-sdk/ym";',
       "const credentials = { clientId: 'test-client-id', apiKey: 'test-api-key' };",
       "const wbCredentials = { token: 'test-wb-token' };",
+      "const ymCredentials = { apiKey: 'test-ym-api-key' };",
       "const seller = new SellerClient({ marketplace: Marketplace.Ozon, credentials });",
       "const wbSeller = new SellerClient({ marketplace: Marketplace.Wb, credentials: wbCredentials });",
+      "const ymSeller = new SellerClient({ marketplace: Marketplace.Ym, credentials: ymCredentials });",
       "const ozon = new OzonClient(credentials, { maxRetries: 1, timeoutMs: 10_000 });",
       "const wb = new WbClient(wbCredentials);",
+      "const ym = new YmClient(ymCredentials);",
       "const wbPing: Promise<WbGetPingResponse> = wb.general.getPing();",
       "const rootWbPing: Promise<WbGetPingResponse> = wbSeller.wb.general.getPing();",
+      "const ymOrders: Promise<YmGetBusinessOrdersResponse> = ymSeller.ym.orders.getBusinessOrders({ path: { businessId: 1 }, body: { statuses: [YmValues.OrdersOrderStatusType.Processing] } });",
       "const directRoles: Promise<GetRolesResponse> = ozon.access.getRoles();",
       "const domainRoles: Promise<GetRolesResponse> = ozon.access.getRoles();",
       "const domainProducts: Promise<ListProductsResponse> = ozon.products.list({ filter: { visibility: OzonValues.ProductListVisibility.All }, limit: 100 });",
@@ -600,17 +686,22 @@ try {
   writeFileSync(
     runtimeFile,
     [
-      'import { Marketplace, SellerClient } from "seller-sdk";',
+      'import { Marketplace, SellerClient, YmValues } from "seller-sdk";',
       'import { OzonClient } from "@seller-sdk/ozon";',
       'import { WbClient } from "@seller-sdk/wb";',
+      'import { YmClient } from "@seller-sdk/ym";',
       "const credentials = { clientId: 'test-client-id', apiKey: 'test-api-key' };",
       "const seller = new SellerClient({ marketplace: Marketplace.Ozon, credentials });",
       "const ozon = new OzonClient(credentials, { maxRetries: 1 });",
       "const wbCredentials = { token: 'test-wb-token' };",
       "const wb = new WbClient(wbCredentials);",
       "const wbSeller = new SellerClient({ marketplace: Marketplace.Wb, credentials: wbCredentials });",
+      "const ymCredentials = { apiKey: 'test-ym-api-key' };",
+      "const ym = new YmClient(ymCredentials);",
+      "const ymSeller = new SellerClient({ marketplace: Marketplace.Ym, credentials: ymCredentials });",
       "if (seller.marketplace !== 'ozon' || !(ozon instanceof OzonClient) || typeof seller.ozon.products.list !== 'function' || typeof ozon.finance.listFinanceTransactions !== 'function' || typeof ozon.finance.listFinanceTransactionsV3 !== 'function' || typeof ozon.warehouses.listWarehouses !== 'function' || typeof ozon.products.listAll !== 'function' || typeof ozon.rawRequest !== 'function' || typeof seller.ozon.finance.accruals.byDay !== 'function' || typeof seller.ozon.finance.accruals.byPostings !== 'function' || typeof seller.ozon.finance.accruals.types !== 'function' || 'listProducts' in seller.ozon) throw new Error('Smoke failed');",
       "if (!(wb instanceof WbClient) || wbSeller.marketplace !== 'wb' || typeof wbSeller.wb.general.getPing !== 'function' || typeof wbSeller.wb.general.getNews !== 'function' || typeof wb.general.getV2News !== 'function' || typeof wb.items.getContentObjectParentAll !== 'function' || typeof wb.items.getContentV2ObjectParentAll !== 'function') throw new Error('WB smoke failed');",
+      "if (!(ym instanceof YmClient) || ymSeller.marketplace !== 'ym' || YmValues.OrdersOrderStatusType.Processing !== 'PROCESSING' || typeof ymSeller.ym.orders.getBusinessOrders !== 'function' || typeof ym.categories.getCategoriesTree !== 'function') throw new Error('YM smoke failed');",
       "console.log('seller-sdk consumer smoke passed');",
     ].join("\n"),
   );
@@ -670,6 +761,25 @@ try {
     throw new Error("Packed WB package must not depend on @seller-sdk/core.");
   }
 
+  const installedYmPackageJson = JSON.parse(
+    readFileSync(
+      join(
+        consumerDirectory,
+        "node_modules",
+        "@seller-sdk",
+        "ym",
+        "package.json",
+      ),
+      "utf8",
+    ),
+  );
+  if (installedYmPackageJson.name !== "@seller-sdk/ym") {
+    throw new Error("Packed YM package name is incorrect.");
+  }
+  if ("@seller-sdk/core" in (installedYmPackageJson.dependencies ?? {})) {
+    throw new Error("Packed YM package must not depend on @seller-sdk/core.");
+  }
+
   if (
     existsSync(
       join(
@@ -685,7 +795,7 @@ try {
   }
 
   console.log(
-    "seller-sdk plus standalone @seller-sdk/ozon and @seller-sdk/wb tarballs, runtime imports, type imports, and dependency isolation passed",
+    "seller-sdk plus standalone @seller-sdk/ozon, @seller-sdk/wb, and @seller-sdk/ym tarballs, runtime imports, type imports, and dependency isolation passed",
   );
 } finally {
   rmSync(temporaryDirectory, { recursive: true, force: true });

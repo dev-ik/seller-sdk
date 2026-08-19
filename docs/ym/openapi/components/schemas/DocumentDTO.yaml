@@ -1,0 +1,16 @@
+description: Информация о документе.
+type: object
+properties:
+  status:
+    description: Статус документа.
+    $ref: ./OrderDocumentStatusType.yaml
+  number:
+    description: Номер документа.
+    type: string
+  date:
+    description: |
+      Дата создания документа.
+
+      Формат даты: `ГГГГ-ММ-ДД`.
+    type: string
+    format: date

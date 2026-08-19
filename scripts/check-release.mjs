@@ -6,12 +6,14 @@ const projectDirectory = dirname(dirname(fileURLToPath(import.meta.url)));
 const rootPackage = readJson("package.json");
 const ozonPackage = readJson("packages/ozon/package.json");
 const wbPackage = readJson("packages/wb/package.json");
+const ymPackage = readJson("packages/ym/package.json");
 const umbrellaPackage = readJson("packages/seller-sdk/package.json");
-const publishedPackages = [ozonPackage, wbPackage, umbrellaPackage];
+const publishedPackages = [ozonPackage, wbPackage, ymPackage, umbrellaPackage];
 const versions = new Set([
   rootPackage.version,
   ozonPackage.version,
   wbPackage.version,
+  ymPackage.version,
   umbrellaPackage.version,
 ]);
 

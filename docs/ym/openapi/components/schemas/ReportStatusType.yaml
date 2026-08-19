@@ -1,0 +1,13 @@
+description: |
+  Статус генерации:
+
+  * `PENDING` — ожидает генерации.
+  * `PROCESSING` — генерируется.
+  * `FAILED` — во время генерации произошла ошибка.
+  * `DONE` — отчет или документ готов.
+type: string
+enum:
+  - PENDING
+  - PROCESSING
+  - FAILED
+  - DONE

@@ -1,0 +1,15 @@
+description: >
+  Данные, необходимые для генерации отчета: идентификатор кампании и период, за
+  который нужен отчет.
+type: object
+required:
+  - campaignId
+  - year
+  - month
+properties:
+  campaignId:
+    $ref: ./CampaignId.yaml
+  year:
+    $ref: ./Year.yaml
+  month:
+    $ref: ./Month.yaml

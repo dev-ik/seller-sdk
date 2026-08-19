@@ -1,0 +1,19 @@
+description: Фотографии и видео.
+type: object
+properties:
+  photos:
+    description: Ссылки на фотографии.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+  videos:
+    description: Ссылки на видео.
+    type: array
+    nullable: true
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
