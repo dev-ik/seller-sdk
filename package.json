@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk-workspace",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "Рабочее пространство типобезопасных SDK для API маркетплейсов.",
   "license": "MIT",
@@ -41,12 +41,13 @@
     "verify": "pnpm format:check && pnpm check:endpoints && pnpm check:domains && pnpm check:values && pnpm check:request-docs && pnpm check:wb && pnpm check:ym && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
     "pack:check": "node scripts/pack-check.mjs",
     "check:release": "node scripts/check-release.mjs",
-    "release:check": "pnpm check:release && pnpm verify && pnpm pack:check && pnpm test:consumer",
-    "prepare:release": "pnpm release:check && node scripts/pack-release.mjs"
+    "release:check": "pnpm check:release --unpublished && pnpm verify && pnpm pack:check && pnpm test:consumer",
+    "prepare:release": "pnpm release:check && node scripts/pack-release.mjs",
+    "ci:check": "pnpm check:release && pnpm verify && pnpm pack:check && pnpm test:consumer"
   },
   "devDependencies": {
     "@eslint/js": "9.17.0",
-    "@safe-shape/core": "^2.0.0",
+    "@safe-shape/core": "^3.0.0",
     "@types/node": "20.17.10",
     "eslint": "9.17.0",
     "prettier": "3.4.2",

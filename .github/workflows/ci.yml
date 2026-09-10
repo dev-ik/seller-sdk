@@ -24,4 +24,22 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm release:check
+      - run: pnpm ci:check
+
+  minimum-safe-shape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.34.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20.10.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install minimum supported SafeShape
+        run: node scripts/install-minimum-safe-shape.mjs
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build

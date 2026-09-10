@@ -117,6 +117,11 @@ packages/ozon/src/endpoints/<domain>/<operation>/
 
 Эта политика относится только к ответам. Запросы остаются строгими.
 
+Используется `@safe-shape/core@^3.0.0`; миграция следует
+[официальному руководству 2.x → 3.0](https://github.com/dev-ik/safe_shape/blob/main/docs/migration-2-to-3.md).
+Native diagnostics преобразуются в собственный `ValidationIssue` SDK без
+добавления `severity` и `ruleId` в публичный тип. Контракты остаются синхронными.
+
 ## API предметных областей
 
 `OzonOperations` содержит внутренние wrappers всех операций. Генератор строит
@@ -159,4 +164,4 @@ cancellation и retry. Transport всегда имеет последнее сл
 
 `@seller-sdk/ym` генерируется из официального snapshot в `docs/ym/openapi/`.
 Все 165 операций используют фиксированный origin Partner API, заголовок
-`Api-Key` и SafeShape 2 lazy contracts для рекурсивных схем.
+`Api-Key` и SafeShape 3 lazy contracts для рекурсивных схем.

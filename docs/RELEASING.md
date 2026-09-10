@@ -21,38 +21,22 @@ pnpm prepare:release
 
 ```bash
 git add -A
-git commit -m "release: v0.2.0"
+git commit -m "release: v0.3.2"
 git push origin main
-git tag -a v0.2.0 -m "Release v0.2.0"
-git push origin v0.2.0
+git tag -a v0.3.2 -m "Release v0.3.2"
+git push origin v0.3.2
 ```
-
-## Первая публикация Wildberries
-
-`@seller-sdk/wb` ещё не может использовать trusted publishing, пока пакет не
-создан в npm. Для релиза `0.2.0` войдите в npm локально и опубликуйте три
-подготовленных архива:
-
-```bash
-npm login
-npm whoami
-npm publish ./release-artifacts/seller-sdk-wb-0.2.0.tgz --access public
-npm publish ./release-artifacts/seller-sdk-ozon-0.2.0.tgz --access public
-npm publish ./release-artifacts/seller-sdk-0.2.0.tgz --access public
-```
-
-Если один из focused-пакетов уже опубликован, не повторяйте его команду.
-Проверить состояние можно через `npm view <package>@0.2.0 version`.
 
 ## Проверка публикации
 
 ```bash
-npm view @seller-sdk/ozon@0.2.0 version
-npm view @seller-sdk/wb@0.2.0 version
-npm view seller-sdk@0.2.0 version
+npm view @seller-sdk/ozon@0.3.2 version
+npm view @seller-sdk/wb@0.3.2 version
+npm view @seller-sdk/ym@0.3.2 version
+npm view seller-sdk@0.3.2 version
 ```
 
-## Следующие релизы через GitHub Actions
+## Публикация через GitHub Actions
 
 После первой публикации настройте для каждого пакета trusted publisher:
 
@@ -65,3 +49,14 @@ Allowed action: npm publish
 
 Workflow `Publish npm packages` запускается вручную на ref с релизным тегом.
 Его имя должно совпадать с `v<version>`, иначе проверка остановит публикацию.
+
+Дождитесь успешного CI для релизного коммита, затем запустите workflow:
+
+```bash
+gh workflow run publish.yml --ref v0.3.2
+```
+
+Workflow публикует все четыре пакета и создаёт GitHub Release с tarball.
+Обычный `pnpm ci:check` не проверяет занятость версии в npm, поэтому CI
+продолжает работать после публикации. `pnpm release:check` и
+`pnpm prepare:release` сохраняют эту проверку.

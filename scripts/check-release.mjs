@@ -59,11 +59,13 @@ if (process.env["REQUIRE_RELEASE_TAG"] === "true" && tag !== `v${version}`) {
   throw new Error(`Тег ${tag} не соответствует версии v${version}.`);
 }
 
-await Promise.all(
-  publishedPackages.map((packageJson) =>
-    assertVersionIsNotPublished(packageJson.name, version),
-  ),
-);
+if (process.argv.includes("--unpublished")) {
+  await Promise.all(
+    publishedPackages.map((packageJson) =>
+      assertVersionIsNotPublished(packageJson.name, version),
+    ),
+  );
+}
 
 console.log(`Метаданные релиза v${version} согласованы.`);
 

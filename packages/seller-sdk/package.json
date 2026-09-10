@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Единая точка входа для поддерживаемых Seller API маркетплейсов.",
   "keywords": [
     "marketplace",
@@ -37,7 +37,7 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^2.0.0",
+    "@safe-shape/core": "^3.0.0",
     "@seller-sdk/ozon": "workspace:*",
     "@seller-sdk/wb": "workspace:*",
     "@seller-sdk/ym": "workspace:*"

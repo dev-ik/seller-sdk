@@ -151,10 +151,11 @@ function isRecord(input: unknown): input is Record<string, unknown> {
 }
 
 function createIssue(
-  input: Omit<Issue, "received"> & { readonly received: unknown },
+  input: Omit<Issue, "received" | "severity"> & { readonly received: unknown },
 ): Issue {
   return Object.freeze({
     ...input,
+    severity: "error",
     received: describeReceived(input.received),
   });
 }

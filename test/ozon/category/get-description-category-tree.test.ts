@@ -93,6 +93,42 @@ describe("OzonClient.categories.getDescriptionCategoryTree", () => {
     });
   });
 
+  it.each([
+    { body: "invalid-root", path: [], expected: "object", received: "string" },
+    {
+      body: { result: {} },
+      path: ["result"],
+      expected: "array",
+      received: "object",
+    },
+    {
+      body: { result: [42] },
+      path: ["result", 0],
+      expected: "object",
+      received: "number",
+    },
+    {
+      body: { result: [{ children: "invalid-children" }] },
+      path: ["result", 0, "children"],
+      expected: "array",
+      received: "string",
+    },
+  ])(
+    "rejects malformed tree structure at $path",
+    async ({ body, path, expected, received }) => {
+      const transport = new MockTransport();
+      transport.enqueueResponse({ status: 200, headers: new Headers(), body });
+
+      await expect(
+        executeGetDescriptionCategoryTree(transport, {}),
+      ).rejects.toMatchObject({
+        name: ResponseValidationError.name,
+        operationId: GET_DESCRIPTION_CATEGORY_TREE_OPERATION_ID,
+        issues: [{ code: "invalid_type", path, expected, received }],
+      });
+    },
+  );
+
   it("normalizes compatible changes in the recursive response", async () => {
     const transport = new MockTransport();
     transport.enqueueResponse({

@@ -298,11 +298,13 @@ request ID, API code/message и validation issues, когда они досту�
 
 ```bash
 pnpm install
-pnpm release:check
+pnpm ci:check
 ```
 
-`release:check` проверяет форматирование, сгенерированные файлы, lint,
+`ci:check` проверяет метаданные, форматирование, сгенерированные файлы, lint,
 TypeScript, тесты, сборку, состав tarball и установку в чистый consumer-проект.
+Перед публикацией используйте `pnpm release:check`: он дополнительно проверяет,
+что выбранная версия ещё не опубликована в npm.
 
 ## Лицензия и товарные знаки
 
