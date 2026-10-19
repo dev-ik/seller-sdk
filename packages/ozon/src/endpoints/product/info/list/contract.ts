@@ -128,6 +128,10 @@ const visibilityDetails = object({
 });
 
 const item = object({
+  declared_price: object({
+    amount: string().optional(),
+    currency: string().optional(),
+  }).optional(),
   availabilities: array(availability).optional(),
   barcodes: array(string()).optional(),
   color_image: array(string()).optional(),

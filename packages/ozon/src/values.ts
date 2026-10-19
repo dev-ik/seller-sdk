@@ -357,7 +357,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonCarriageContainerSortDirection`. */
   CarriageContainerSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -370,12 +369,6 @@ export const OzonValues = {
     Eaeu: "EAEU",
     /** Национальный стандарт сертификации. */
     National: "NATIONAL",
-    /** Технический регламент Российской Федерации. */
-    TechnicalRegulationsRf: "TECHNICAL_REGULATIONS_RF",
-    /** Технический регламент Таможенного союза. */
-    TechnicalRegulationsCu: "TECHNICAL_REGULATIONS_CU",
-    /** ГОСТ. */
-    Gost: "GOST",
     /** Паспорт безопасности химической продукции. */
     ChemicalProducts: "CHEMICAL_PRODUCTS",
     /** Паспорт безопасности. */
@@ -514,7 +507,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonDeliveryMethodSortDirection`. */
   DeliveryMethodSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -642,14 +634,12 @@ export const OzonValues = {
   },
   /** Значения для `OzonDigitalPostingSortDirection`. */
   DigitalPostingSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
   },
   /** Значения для `OzonDigitalPostingV2SortDirection`. */
   DigitalPostingV2SortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -837,7 +827,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonFboPostingSortDirectionV2`, `OzonFboPostingSortDirectionV3`. */
   FboPostingSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -1191,7 +1180,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonFbpPostingSortDirection`. */
   FbpPostingSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -1207,7 +1195,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonFbsAssemblySortDirection`. */
   FbsAssemblySortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -1234,7 +1221,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonFbsPostingSortDirectionV4`. */
   FbsPostingSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -1449,6 +1435,8 @@ export const OzonValues = {
     SeasonalAutoArchived: "SEASONAL_AUTO_ARCHIVED",
     /** Товары с остатками на FBO, которые видят покупатели. */
     VisibleWithFboStock: "VISIBLE_WITH_FBO_STOCK",
+    /** Товары, которые видны на витрине Ozon Селект. */
+    ShowcaseSelectActive: "SHOWCASE_SELECT_ACTIVE",
   },
   /** Значения для `OzonProductImportPromotionOperation`. */
   ProductImportPromotionOperation: {
@@ -1564,6 +1552,8 @@ export const OzonValues = {
     SeasonalAutoArchived: "SEASONAL_AUTO_ARCHIVED",
     /** Товары с остатками на FBO, которые видят покупатели. */
     VisibleWithFboStock: "VISIBLE_WITH_FBO_STOCK",
+    /** Товары, которые видны на витрине Ozon Селект. */
+    ShowcaseSelectActive: "SHOWCASE_SELECT_ACTIVE",
   },
   /** Значения для `OzonProductOperationLimitType`. */
   ProductOperationLimitType: {
@@ -1621,11 +1611,8 @@ export const OzonValues = {
   },
   /** Значения для `OzonProductPriceToggle`. */
   ProductPriceToggle: {
-    /** Выключить. */
     Disabled: "DISABLED",
-    /** Ничего не менять, передаётся по умолчанию. */
     Unknown: "UNKNOWN",
-    /** Включить. */
     Enabled: "ENABLED",
   },
   /** Значения для `OzonProductPriceVisibility`. */
@@ -1784,51 +1771,28 @@ export const OzonValues = {
   },
   /** Значения для `OzonQuantProductVisibility`. */
   QuantProductVisibility: {
-    /** Все товары, кроме архивных. */
     All: "ALL",
-    /** Товары, которые видны покупателям. */
     Visible: "VISIBLE",
-    /** Товары, которые не видны покупателям. */
     Invisible: "INVISIBLE",
-    /** Товары, которых нет в наличии. */
     EmptyStock: "EMPTY_STOCK",
-    /** Товары, которые не прошли модерацию. */
     NotModerated: "NOT_MODERATED",
-    /** Товары, которые прошли модерацию. */
     Moderated: "MODERATED",
-    /** Товары, которые видны покупателям, но недоступны к покупке. */
     Disabled: "DISABLED",
-    /** Товары, создание которых завершилось ошибкой. */
     StateFailed: "STATE_FAILED",
-    /** Товары, готовые к поставке. */
     ReadyToSupply: "READY_TO_SUPPLY",
-    /** Товары, которые проходят проверку валидатором на премодерации. */
     ValidationStatePending: "VALIDATION_STATE_PENDING",
-    /** Товары, которые не прошли проверку валидатором на премодерации. */
     ValidationStateFail: "VALIDATION_STATE_FAIL",
-    /** Товары, которые прошли проверку валидатором на премодерации. */
     ValidationStateSuccess: "VALIDATION_STATE_SUCCESS",
-    /** Товары, готовые к продаже. */
     ToSupply: "TO_SUPPLY",
-    /** Товары в продаже. */
     InSale: "IN_SALE",
-    /** Товары, скрытые от покупателей. */
     RemovedFromSale: "REMOVED_FROM_SALE",
-    /** Превышение цены. */
     Overpriced: "OVERPRICED",
-    /** Критическое превышение цены. */
     CriticallyOverpriced: "CRITICALLY_OVERPRICED",
-    /** Пустой штрихкод. */
     EmptyBarcode: "EMPTY_BARCODE",
-    /** Штрихкод указан. */
     BarcodeExists: "BARCODE_EXISTS",
-    /** Товар в карантине после изменения цены на 50% и больше. */
     Quarantine: "QUARANTINE",
-    /** Товары в архиве. */
     Archived: "ARCHIVED",
-    /** Товары в продаже, цена которых выше, чем у конкурентов. */
     OverpricedWithStock: "OVERPRICED_WITH_STOCK",
-    /** Товары в продаже, у которых пустое или неполное описание. */
     PartialApproved: "PARTIAL_APPROVED",
   },
   /** Значения для `OzonQuestionAnswerPublicationStatus`. */
@@ -1970,7 +1934,6 @@ export const OzonValues = {
   },
   /** Значения для `SearchQueriesSortDirection`. */
   SearchQueriesSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",
@@ -2329,6 +2292,11 @@ export const OzonValues = {
     PickupIsNotAvailable: "PICKUP_IS_NOT_AVAILABLE",
     /** Точка отгрузки несовместима с самовывозом. */
     DropOffNotCompatibleWithPickup: "DROP_OFF_NOT_COMPATIBLE_WITH_PICKUP",
+    /** Товарный состав превышает ограничение из-за плохого рейтинга. */
+    LimitExceededAccordingToShipmentDiscipline:
+      "LIMIT_EXCEEDED_ACCORDING_TO_SHIPMENT_DISCIPLINE",
+    /** Кластер недоступен из-за плохого рейтинга, резервная поставка уже использована. */
+    BackupSupplyAlreadyUsed: "BACKUP_SUPPLY_ALREADY_USED",
   },
   /** Значения для `OzonSupplyDraftErrorReason`. */
   SupplyDraftErrorReason: {
@@ -2580,7 +2548,6 @@ export const OzonValues = {
   },
   /** Значения для `OzonSupplyOrderListSortDirection`. */
   SupplyOrderListSortDirection: {
-    /** По возрастанию. */
     Asc: "ASC",
     /** По убыванию. */
     Desc: "DESC",

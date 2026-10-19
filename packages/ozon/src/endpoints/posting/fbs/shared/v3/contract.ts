@@ -156,6 +156,7 @@ const productExemplarSchema = object({
 });
 
 export const fbsPostingDetailV3Schema = object({
+  scanit: string().optional(),
   ...fbsPostingV3Shape,
   additional_data: array(
     object({ key: string().optional(), value: string().optional() }),

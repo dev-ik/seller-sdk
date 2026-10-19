@@ -76,6 +76,7 @@ describe("Ozon chat, report and finance API", () => {
     await executeCreatePostingsReportV1(postings, {
       filter: {
         processed_at_from: "2026-08-01T00:00:00Z",
+        delivery_schema: ["FBS"],
         processed_at_to: "2026-08-15T00:00:00Z",
       },
     });

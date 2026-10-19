@@ -18,8 +18,8 @@ npm i @seller-sdk/ozon
 import { OzonClient, OzonValues } from "@seller-sdk/ozon";
 
 const ozon = new OzonClient({
-  clientId: process.env.OZON_CLIENT_ID!,
-  apiKey: process.env.OZON_API_KEY!,
+  clientId: process.env["OZON_CLIENT_ID"]!,
+  apiKey: process.env["OZON_API_KEY"]!,
 });
 
 const products = await ozon.products.list({
@@ -32,6 +32,21 @@ const products = await ozon.products.list({
 
 Все операции доступны только через типизированные области: `products`,
 `postings`, `finance`, `analytics`, `warehouses` и другие.
+
+## Переход с 0.3.x на 0.4.0
+
+Обновлены методы этикеток, акций и загрузки изображений. Алиасы этикеток,
+автодобавления в акции и `products.pictures.import` используют новые версии.
+Ответы сохраняют структуру Ozon, включая `status.code`, `tasks` и денежные
+объекты `{ amount, currency }`. Для количества товаров используйте `total_items`.
+
+Перед обновлением проверьте [руководство по переходу](https://github.com/dev-ik/seller-sdk/blob/main/docs/ozon/MIGRATION-2026-10.md):
+у новых версий изменились формы запросов и ответов. Старые явные методы сохранены
+с предупреждениями; это не гарантирует их доступность на стороне Ozon.
+
+SDK содержит 472 метода: 470 из текущего snapshot и 2 архивные операции `quant`.
+13 новых операций и часть новых полей ответов остаются вне этой миграции;
+подробности приведены в руководстве.
 
 ## Подсказки TypeScript
 
@@ -71,21 +86,16 @@ const page = await ozon.finance.accruals.byDay(request);
 
 ```ts
 await ozon.warehouses.listWarehouses({ limit: 100 }); // сейчас v2
-await ozon.finance.listFinanceTransactions({
-  filter: {
-    date: {
-      from: "2026-08-01T00:00:00Z",
-      to: "2026-08-15T00:00:00Z",
-    },
-    transaction_type: OzonValues.FinanceTransactionType.All,
-  },
-  page: 1,
-  page_size: 100,
+await ozon.postings.createFbsPackageLabelBatch({
+  posting_numbers: ["TEST-POSTING-1"],
 }); // сейчас v3
 ```
 
 Методы вроде `listWarehousesV2` остаются доступны для явной фиксации контракта.
 Если исходный endpoint устарел, его алиас также помечается `@deprecated`.
+Для акций используйте `promotions.listPromotionCandidatesV2` и
+`promotions.listPromotionProductsV2`: их старые имена без версии сохранены
+с прежним контрактом и предупреждением об устаревании.
 
 ## Настройки клиента и запроса
 

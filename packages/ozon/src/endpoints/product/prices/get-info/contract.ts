@@ -41,6 +41,10 @@ const marketingActions = object({
   ozon_actions_exist: boolean().optional(),
 });
 const price = object({
+  declared_price: object({
+    amount: string().optional(),
+    currency: string().optional(),
+  }).optional(),
   auto_action_enabled: boolean().optional(),
   auto_add_to_ozon_actions_list_enabled: boolean().optional(),
   currency_code: string().optional(),
@@ -86,4 +90,5 @@ export const getProductPricesResponseSchema: Schema<GetProductPricesResponse> =
     cursor: string().optional(),
     items: array(item).optional(),
     total: integerSchema.optional(),
+    total_items: integerSchema.optional(),
   });

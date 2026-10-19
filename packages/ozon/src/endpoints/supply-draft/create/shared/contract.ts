@@ -25,6 +25,8 @@ const message = union([
   literal("CAN_NOT_START_CALCULATION"),
   literal("PICKUP_IS_NOT_AVAILABLE"),
   literal("DROP_OFF_NOT_COMPATIBLE_WITH_PICKUP"),
+  literal("LIMIT_EXCEEDED_ACCORDING_TO_SHIPMENT_DISCIPLINE"),
+  literal("BACKUP_SUPPLY_ALREADY_USED"),
   literal("UNDEFINED"),
 ]);
 const errorReason = union([
@@ -73,6 +75,8 @@ const rejectedItem = object({
   sku: integerSchema.optional(),
 });
 const validation = object({
+  limit: integerSchema.optional(),
+  supply_id: integerSchema.optional(),
   macrolocal_cluster_id: integerSchema.optional(),
   rejected_items: array(rejectedItem).optional(),
 });

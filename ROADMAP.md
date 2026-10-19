@@ -9,7 +9,7 @@
 - [x] Node.js 20+, strict TypeScript, ESM, pnpm и Vitest;
 - [x] native fetch, timeout, abort, deadline и безопасные retries;
 - [x] SafeShape runtime boundary;
-- [x] 461 операция Ozon;
+- [x] 470 операций текущего Ozon snapshot и 2 архивные операции для совместимости;
 - [x] domain API и алиасы без версий;
 - [x] IntelliSense и закрытые каталоги `OzonValues`;
 - [x] метаданные ответов, pagination и `rawRequest`;

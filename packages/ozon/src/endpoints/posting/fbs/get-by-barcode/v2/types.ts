@@ -2,11 +2,11 @@ import type { OzonFbsBarcodes } from "../../shared/common/types.js";
 
 export interface GetFbsPostingByBarcodeV2Request {
   /**
-   * Штрихкод отправления. Можно получить с помощью методов:
+   * Штрихкод отправления. Можно получить с помощью методов
    * [/v3/posting/fbs/get](#operation/PostingAPI_GetFbsPostingV3),
-   * [/v3/posting/fbs/list](#operation/PostingAPI_GetFbsPostingListV3) и
-   * [/v3/posting/fbs/unfulfilled/list](#operation/PostingAPI_GetFbsPostingUnfulfilledList) в массиве
-   * `barcodes`.
+   * [/v4/posting/fbs/list](#operation/PostingFbsList) и
+   * [/v4/posting/fbs/unfulfilled/list](#operation/PostingFbsUnfulfilledList) в массиве `barcodes`
+   * или параметре `scanit`.
    *
    * <!-- seller-sdk:ozon-openapi -->
    */

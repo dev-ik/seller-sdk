@@ -4,7 +4,7 @@
 
 Все методы доступны на `OzonClient` через перечисленные ниже области. Наведите курсор на метод или поле запроса в TypeScript-редакторе, чтобы увидеть описание, ограничения, пример и предупреждение об устаревании.
 
-Покрытие: 461 методов в 38 областях.
+Покрытие: 472 методов в 38 областях.
 
 ## `access`
 
@@ -22,10 +22,10 @@
 
 Рекомендуемые алиасы без версии:
 
-- `deleteAutoAddProducts` → `deleteAutoAddProductsV1`
-- `listAutoAddProductCandidates` → `listAutoAddProductCandidatesV1`
-- `listAutoAddProducts` → `listAutoAddProductsV1`
-- `updateAutoAddProducts` → `updateAutoAddProductsV1`
+- `deleteAutoAddProducts` → `deleteAutoAddProductsV2`
+- `listAutoAddProductCandidates` → `listAutoAddProductCandidatesV2`
+- `listAutoAddProducts` → `listAutoAddProductsV2`
+- `updateAutoAddProducts` → `updateAutoAddProductsV2`
 
 ### `deleteAutoAddProductsV1`
 
@@ -35,7 +35,21 @@
 
 `await ozon.actions.deleteAutoAddProductsV1(input)`
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/auto-add/products/delete. Замена в SDK: `ozon.actions.deleteAutoAddProductsV2(...)` для `POST /v2/actions/auto-add/products/delete`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDelete)
+
+### `deleteAutoAddProductsV2`
+
+Удалить товары из автодобавления в акцию
+
+`POST /v2/actions/auto-add/products/delete`
+
+`await ozon.actions.deleteAutoAddProductsV2(input)`
+
+Обязательные поля запроса: `action_id`, `auto_add_date`, `product_ids`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDeleteV2)
 
 ### `listAutoAddProductCandidatesV1`
 
@@ -47,7 +61,21 @@
 
 Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/auto-add/products/candidates. Замена в SDK: `ozon.actions.listAutoAddProductCandidatesV2(...)` для `POST /v2/actions/auto-add/products/candidates`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidates)
+
+### `listAutoAddProductCandidatesV2`
+
+Получить список доступных товаров для автодобавления в акцию
+
+`POST /v2/actions/auto-add/products/candidates`
+
+`await ozon.actions.listAutoAddProductCandidatesV2(input)`
+
+Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidatesV2)
 
 ### `listAutoAddProductsV1`
 
@@ -59,7 +87,21 @@
 
 Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/auto-add/products/list. Замена в SDK: `ozon.actions.listAutoAddProductsV2(...)` для `POST /v2/actions/auto-add/products/list`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsList)
+
+### `listAutoAddProductsV2`
+
+Получить список товаров из автодобавления в акцию
+
+`POST /v2/actions/auto-add/products/list`
+
+`await ozon.actions.listAutoAddProductsV2(input)`
+
+Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsListV2)
 
 ### `updateAutoAddProductsV1`
 
@@ -69,7 +111,21 @@
 
 `await ozon.actions.updateAutoAddProductsV1(input)`
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/auto-add/products/update. Замена в SDK: `ozon.actions.updateAutoAddProductsV2(...)` для `POST /v2/actions/auto-add/products/update`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdate)
+
+### `updateAutoAddProductsV2`
+
+Добавить или обновить товары в автодобавлении в акцию
+
+`POST /v2/actions/auto-add/products/update`
+
+`await ozon.actions.updateAutoAddProductsV2(input)`
+
+Обязательные поля запроса: `action_id`, `auto_add_date`, `products`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdateV2)
 
 ## `analytics`
 
@@ -1994,7 +2050,7 @@ Cоздать задание на генерацию этикеток
 
 `POST /v1/notification/list`
 
-`await ozon.notifications.listNotificationsV1()`
+`await ozon.notifications.listNotificationsV1(input)`
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/NotificationList)
 
@@ -2261,12 +2317,12 @@ Cоздать задание на генерацию этикеток
 
 - `cancelFbsPosting` → `cancelFbsPostingV2`
 - `cancelFbsPostingProducts` → `cancelFbsPostingProductsV2`
-- `createFbsPackageLabelBatch` → `createFbsPackageLabelBatchV2`
+- `createFbsPackageLabelBatch` → `createFbsPackageLabelBatchV3`
 - `createOrGetFbsPostingProductExemplars` → `createOrGetFbsPostingProductExemplarsV6`
 - `getEtgbDeclarations` → `getEtgbDeclarationsV1`
 - `getFboPosting` → `getFboPostingV2`
 - `getFbpPosting` → `getFbpPostingV1`
-- `getFbsPackageLabelBatch` → `getFbsPackageLabelBatchV1`
+- `getFbsPackageLabelBatch` → `getFbsPackageLabelBatchV2`
 - `getFbsPosting` → `getFbsPostingV3`
 - `getFbsPostingByBarcode` → `getFbsPostingByBarcodeV2`
 - `getFbsPostingCancelReasons` → `getFbsPostingCancelReasonsV1`
@@ -2280,7 +2336,7 @@ Cоздать задание на генерацию этикеток
 - `listUnfulfilledFbsPostings` → `listUnfulfilledFbsPostingsV4`
 - `listUnpaidLegalProducts` → `listUnpaidLegalProductsV1`
 - `openFbsPostingArbitration` → `openFbsPostingArbitrationV2`
-- `printFbsPackageLabels` → `printFbsPackageLabelsV2`
+- `printFbsPackageLabels` → `printFbsPackageLabelsV2` — устарел: C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS. Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён. Переключитесь на /v3/posting/fbs/package-label/create и /v2/posting/fbs/package-label/get. Если вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в Базе знаний продавца. Замены в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST /v3/posting/fbs/package-label/create`; `ozon.postings.getFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/get`.
 - `setFbsPostingMultiboxQuantity` → `setFbsPostingMultiboxQuantityV3`
 - `setFbsPostingProductCountry` → `setFbsPostingProductCountryV2`
 - `setFbsPostingProductExemplars` → `setFbsPostingProductExemplarsV6`
@@ -2350,7 +2406,7 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `posting_number`.
 
-> Устарел: В будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на /v2/posting/fbs/package-label/create. Замена в SDK: `ozon.postings.createFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/create`.
+> Устарел: C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS. Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён. Переключитесь на /v3/posting/fbs/package-label/create. Замена в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST /v3/posting/fbs/package-label/create`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatch)
 
@@ -2364,7 +2420,21 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `posting_number`.
 
+> Устарел: C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS. Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён. Переключитесь на /v3/posting/fbs/package-label/create. Если вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в Базе знаний продавца. Замена в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST /v3/posting/fbs/package-label/create`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatchV2)
+
+### `createFbsPackageLabelBatchV3`
+
+Создать задание на формирование этикеток
+
+`POST /v3/posting/fbs/package-label/create`
+
+`await ozon.postings.createFbsPackageLabelBatchV3(input)`
+
+Обязательные поля запроса: `posting_numbers`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelCreate)
 
 ### `createOrGetFbsPostingProductExemplarsV6`
 
@@ -2532,7 +2602,21 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `task_id`.
 
+> Устарел: C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS. Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён. Переключитесь на /v2/posting/fbs/package-label/get. Замена в SDK: `ozon.postings.getFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/get`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetLabelBatch)
+
+### `getFbsPackageLabelBatchV2`
+
+Получить файл с этикетками
+
+`POST /v2/posting/fbs/package-label/get`
+
+`await ozon.postings.getFbsPackageLabelBatchV2(input)`
+
+Обязательные поля запроса: `task_id`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelGet)
 
 ### `getFbsPostingByBarcodeV2`
 
@@ -2789,6 +2873,8 @@ Cоздать задание на генерацию этикеток
 `await ozon.postings.printFbsPackageLabelsV2(input)`
 
 Обязательные поля запроса: `posting_number`.
+
+> Устарел: C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS. Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён. Переключитесь на /v3/posting/fbs/package-label/create и /v2/posting/fbs/package-label/get. Если вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в Базе знаний продавца. Замены в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST /v3/posting/fbs/package-label/create`; `ozon.postings.getFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/get`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSPackageLabel)
 
@@ -3484,6 +3570,8 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `quant_code`.
 
+> Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости; доступность на стороне Ozon не подтверждена.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/QuantGetInfo)
 
 ### `getRelatedProductSkus`
@@ -3508,7 +3596,19 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `product_id`.
 
+> Устарел: С 1 октября 2026 года метод будет отключён. Переключитесь на /v2/product/pictures/import. Замена в SDK: `ozon.products.importProductPicturesV2(...)` для `POST /v2/product/pictures/import`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductImportPictures)
+
+### `importProductPicturesV2`
+
+Загрузить или обновить изображения товара
+
+`POST /v2/product/pictures/import`
+
+`await ozon.products.importProductPicturesV2(input)`
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ProductImportPicturesV2)
 
 ### `importProducts`
 
@@ -3696,6 +3796,8 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `limit`.
 
+> Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости; доступность на стороне Ozon не подтверждена.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/QuantProductList)
 
 ### `setProductStairwayDiscountByQuantityV1`
@@ -3820,6 +3922,10 @@ Cоздать задание на генерацию этикеток
 
 ## `promotions`
 
+Рекомендуемые алиасы без версии:
+
+- `updatePromotionProducts` → `updatePromotionProductsV1`
+
 ### `activatePromotionProducts`
 
 Добавить товар в акцию
@@ -3829,6 +3935,8 @@ Cоздать задание на генерацию этикеток
 `await ozon.promotions.activatePromotionProducts(input)`
 
 Обязательные поля запроса: `action_id`, `products`, `products[].product_id`, `products[].action_price`.
+
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v1/actions/products/update. Замена в SDK: `ozon.promotions.updatePromotionProductsV1(...)` для `POST /v1/actions/products/update`.
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PromosProductsActivate)
 
@@ -3854,7 +3962,21 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `action_id`, `product_ids`.
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/products/deactivate. Замена в SDK: `ozon.promotions.deactivatePromotionProductsV2(...)` для `POST /v2/actions/products/deactivate`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PromosProductsDeactivate)
+
+### `deactivatePromotionProductsV2`
+
+Удалить товары из акции «Промокоды»
+
+`POST /v2/actions/products/deactivate`
+
+`await ozon.promotions.deactivatePromotionProductsV2(input)`
+
+Обязательные поля запроса: `action_id`, `product_ids`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsProductsDeactivate)
 
 ### `declineDiscountTasks`
 
@@ -3902,7 +4024,19 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `action_id`.
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/candidates. Замена в SDK: `ozon.promotions.listPromotionCandidatesV2(...)` для `POST /v2/actions/candidates`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PromosCandidates)
+
+### `listPromotionCandidatesV2`
+
+Получить список товаров, которые могут участвовать в акции
+
+`POST /v2/actions/candidates`
+
+`await ozon.promotions.listPromotionCandidatesV2(input)`
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsCandidates)
 
 ### `listPromotionProducts`
 
@@ -3914,7 +4048,21 @@ Cоздать задание на генерацию этикеток
 
 Обязательные поля запроса: `action_id`.
 
+> Устарел: 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/products. Замена в SDK: `ozon.promotions.listPromotionProductsV2(...)` для `POST /v2/actions/products`.
+
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/PromosProducts)
+
+### `listPromotionProductsV2`
+
+Получить список товаров, которые участвуют в акции
+
+`POST /v2/actions/products`
+
+`await ozon.promotions.listPromotionProductsV2(input)`
+
+Обязательные поля запроса: `action_id`, `limit`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsProducts)
 
 ### `listPromotions`
 
@@ -3925,6 +4073,18 @@ Cоздать задание на генерацию этикеток
 `await ozon.promotions.listPromotions()`
 
 [Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/Promos)
+
+### `updatePromotionProductsV1`
+
+Добавить или обновить товар в акции
+
+`POST /v1/actions/products/update`
+
+`await ozon.promotions.updatePromotionProductsV1(input)`
+
+Обязательные поля запроса: `action_id`, `products`.
+
+[Официальная документация Ozon](https://docs.ozon.ru/api/seller/#operation/ActionsProductsUpdate)
 
 ## `questions`
 

@@ -1,10 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { format } from "prettier";
+import { readOzonSpecification } from "./ozon-specification.mjs";
 
 const projectDirectory = new URL("../", import.meta.url);
 const endpointsUrl = new URL("docs/ozon/endpoints.json", projectDirectory);
 const catalogUrl = new URL("docs/ozon/catalog.json", projectDirectory);
-const specificationUrl = new URL("docs/ozon/swagger.json", projectDirectory);
 const operationsUrl = new URL(
   "packages/ozon/src/operations.ts",
   projectDirectory,
@@ -68,7 +68,7 @@ const domainNames = {
 
 const endpointManifest = JSON.parse(await readFile(endpointsUrl, "utf8"));
 const catalog = JSON.parse(await readFile(catalogUrl, "utf8"));
-const specification = JSON.parse(await readFile(specificationUrl, "utf8"));
+const specification = await readOzonSpecification();
 const operationsSource = await readFile(operationsUrl, "utf8");
 const catalogByOperationId = new Map(
   catalog.operations.map((operation) => [operation.operationId, operation]),
@@ -217,6 +217,12 @@ function renderApiReference(groups, aliases) {
       if (deprecation) {
         lines.push(`> Устарел: ${deprecation}`, "");
       }
+      if (catalogOperation.archived) {
+        lines.push(
+          "> Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости; доступность на стороне Ozon не подтверждена.",
+          "",
+        );
+      }
       lines.push(
         `[Официальная документация Ozon](${manifest.documentation})`,
         "",
@@ -358,6 +364,15 @@ function renderMethodDocumentation(operation, indentation) {
   if (details && details !== summary) {
     lines.push(`${indentation} *`, ...wrapDocText(details, indentation));
   }
+  if (catalogOperation.archived) {
+    lines.push(
+      `${indentation} *`,
+      ...wrapDocText(
+        "Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости; доступность на стороне Ozon не подтверждена.",
+        indentation,
+      ),
+    );
+  }
   if (requiredFields.length > 0) {
     lines.push(
       `${indentation} *`,
@@ -441,7 +456,14 @@ function getOfficialDeprecation({ catalog: catalogOperation, specification }) {
     /<aside[^>]*class=["']warning["'][^>]*>([\s\S]*?)<\/aside>/i,
   );
   const warning = warningMatch ? cleanText(warningMatch[1]) : "";
-  if (warning && /(устар|отключ|deprecated|shut down)/i.test(warning)) {
+  // A field retirement (e.g. total -> total_items) does not retire the method.
+  const methodNotice =
+    /(?:^|\s)метод(?:ы)?\s+[^.!?]{0,80}(?:устар|отключ)/iu.test(warning) ||
+    /отключ\p{L}*\s+метод(?:ы)?(?:\s|[.!?]|$)/iu.test(warning) ||
+    /(?:method|endpoint|operation)\s+(?:is\s+)?(?:deprecated|obsolete)/i.test(
+      warning,
+    );
+  if (warning && (methodNotice || specification.deprecated === true)) {
     return warning;
   }
 

@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
+import { readOzonSpecification } from "./ozon-specification.mjs";
 
 const projectDirectory = new URL("../", import.meta.url);
 const specificationUrl = new URL("docs/ozon/swagger.json", projectDirectory);
@@ -9,7 +10,8 @@ const checkOnly = process.argv.includes("--check");
 const httpMethods = new Set(["get", "post", "put", "patch", "delete"]);
 
 const specificationText = await readFile(specificationUrl, "utf8");
-const specification = JSON.parse(specificationText);
+const specification = await readOzonSpecification();
+const currentPaths = new Set(Object.keys(JSON.parse(specificationText).paths));
 const metadata = JSON.parse(await readFile(metadataUrl, "utf8"));
 const actualSha256 = createHash("sha256")
   .update(specificationText)
@@ -31,6 +33,7 @@ for (const [path, pathItem] of Object.entries(specification.paths ?? {})) {
       operationId: operation.operationId,
       method: method.toUpperCase(),
       path,
+      ...(!currentPaths.has(path) ? { archived: true } : {}),
       tags: operation.tags ?? [],
       summary: operation.summary ?? "",
       ...(operation.description === undefined
@@ -61,6 +64,7 @@ const catalog = {
     sha256: metadata.sha256,
     openapiVersion: specification.openapi,
     documentVersion: String(specification.info?.version ?? ""),
+    legacyOperations: "legacy-operations.json",
   },
   operationCount: operations.length,
   operations,

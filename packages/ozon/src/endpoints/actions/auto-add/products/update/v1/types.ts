@@ -25,7 +25,7 @@ export interface UpdateAutoAddProductsV1Request {
    */
   readonly to_update?: readonly {
     /**
-     * Цена товара по акции.
+     * Цена товара по акции. Если передаёте нецелое число, цена округлится в большую сторону.
      *
      * Формат: `double`.
      *

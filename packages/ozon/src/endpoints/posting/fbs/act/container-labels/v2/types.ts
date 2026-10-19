@@ -1,7 +1,6 @@
 export interface GetFbsActContainerLabelsRequest {
   /**
-   * Номер задания на формирование документов (также идентификатор перевозки) из метода [POST
-   * /v2/posting/fbs/act/create](#operation/PostingAPI_PostingFBSActCreate).
+   * Идентификатор перевозки из метода [/v1/carriage/create](#operation/CarriageAPI_CarriageCreate).
    *
    * Формат: `int64`.
    *

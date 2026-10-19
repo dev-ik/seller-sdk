@@ -12,6 +12,34 @@ export type OzonFbsWarehouseWorkingDay =
 
 export interface CreateFbsWarehouseV1Request {
   /**
+   * Информация о возврате на склад для курьера.
+   *
+   * <!-- seller-sdk:ozon-openapi -->
+   */
+  readonly courier_return_warehouse_info?: {
+    /**
+     * Комментарий для курьера.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly comment?: string;
+    /**
+     * Идентификатор пункта возврата из метода
+     * [/v1/warehouse/fbs/create/return-point/list](#operation/WarehouseFBSCreateReturnPointList).
+     *
+     * Формат: `int64`.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly courier_return_warehouse_id?: number;
+    /**
+     * `true`, чтобы созданный склад стал возвратным.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly is_courier_return_warehouse_match?: boolean;
+  };
+  /**
    * Координаты адреса склада.
    *
    * <!-- seller-sdk:ozon-openapi -->

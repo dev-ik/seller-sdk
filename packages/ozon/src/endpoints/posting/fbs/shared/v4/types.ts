@@ -137,6 +137,7 @@ export interface OzonFbsPostingV4 {
   readonly order_number?: string | null;
   readonly parent_posting_number?: string | null;
   readonly pickup_code_verified_at?: string | null;
+  readonly scanit?: string;
   readonly posting_number?: string | null;
   readonly products?: readonly OzonFbsPostingProductV4[] | null;
   readonly prr_option?: string | null;

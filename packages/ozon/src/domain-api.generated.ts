@@ -43,9 +43,32 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v2/actions/auto-add/products/delete. Замена в SDK:
+     * `ozon.actions.deleteAutoAddProductsV2(...)` для `POST /v2/actions/auto-add/products/delete`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDelete)
      */
     readonly deleteAutoAddProductsV1: BoundOperationMethod<"deleteAutoAddProductsV1">;
+    /**
+     * Удалить товары из автодобавления в акцию
+     *
+     * Обязательные поля запроса: `action_id`, `auto_add_date`, `product_ids`.
+     *
+     * @example
+     * ```ts
+     * await ozon.actions.deleteAutoAddProductsV2({
+     *   "action_id": 250204,
+     *   "product_ids": [
+     *     88888
+     *   ],
+     *   "auto_add_date": "2025-01-01T00:00:00Z"
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDeleteV2)
+     */
+    readonly deleteAutoAddProductsV2: BoundOperationMethod<"deleteAutoAddProductsV2">;
     /**
      * Получить список доступных товаров для автодобавления в акцию
      *
@@ -65,9 +88,32 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v2/actions/auto-add/products/candidates. Замена в SDK:
+     * `ozon.actions.listAutoAddProductCandidatesV2(...)` для `POST
+     * /v2/actions/auto-add/products/candidates`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidates)
      */
     readonly listAutoAddProductCandidatesV1: BoundOperationMethod<"listAutoAddProductCandidatesV1">;
+    /**
+     * Получить список доступных товаров для автодобавления в акцию
+     *
+     * Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
+     *
+     * @example
+     * ```ts
+     * await ozon.actions.listAutoAddProductCandidatesV2({
+     *   "action_id": 250204,
+     *   "auto_add_date": "2025-01-01T00:00:00Z",
+     *   "offset": 5,
+     *   "limit": 100
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidatesV2)
+     */
+    readonly listAutoAddProductCandidatesV2: BoundOperationMethod<"listAutoAddProductCandidatesV2">;
     /**
      * Получить список товаров из автодобавления в акцию
      *
@@ -87,9 +133,31 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v2/actions/auto-add/products/list. Замена в SDK: `ozon.actions.listAutoAddProductsV2(...)`
+     * для `POST /v2/actions/auto-add/products/list`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsList)
      */
     readonly listAutoAddProductsV1: BoundOperationMethod<"listAutoAddProductsV1">;
+    /**
+     * Получить список товаров из автодобавления в акцию
+     *
+     * Обязательные поля запроса: `action_id`, `auto_add_date`, `limit`.
+     *
+     * @example
+     * ```ts
+     * await ozon.actions.listAutoAddProductsV2({
+     *   "action_id": 0,
+     *   "auto_add_date": "2025-01-01T00:00:00Z",
+     *   "offset": 0,
+     *   "limit": 0
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsListV2)
+     */
+    readonly listAutoAddProductsV2: BoundOperationMethod<"listAutoAddProductsV2">;
     /**
      * Добавить или обновить товары в автодобавлении в акцию
      *
@@ -113,33 +181,63 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v2/actions/auto-add/products/update. Замена в SDK:
+     * `ozon.actions.updateAutoAddProductsV2(...)` для `POST /v2/actions/auto-add/products/update`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdate)
      */
     readonly updateAutoAddProductsV1: BoundOperationMethod<"updateAutoAddProductsV1">;
     /**
-     * Рекомендуемый метод без версии; использует `deleteAutoAddProductsV1` (POST /v1/actions/auto-add/products/delete).
+     * Добавить или обновить товары в автодобавлении в акцию
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDelete)
+     * Обязательные поля запроса: `action_id`, `auto_add_date`, `products`.
+     *
+     * @example
+     * ```ts
+     * await ozon.actions.updateAutoAddProductsV2({
+     *   "action_id": 250204,
+     *   "auto_add_date": "2026-09-22T11:37:38.940Z",
+     *   "products": [
+     *     {
+     *       "action_price": {
+     *         "amount": "1000",
+     *         "currency": "RUB"
+     *       },
+     *       "id": 88888,
+     *       "stock": 10
+     *     }
+     *   ]
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdateV2)
      */
-    readonly deleteAutoAddProducts: BoundOperationMethod<"deleteAutoAddProductsV1">;
+    readonly updateAutoAddProductsV2: BoundOperationMethod<"updateAutoAddProductsV2">;
     /**
-     * Рекомендуемый метод без версии; использует `listAutoAddProductCandidatesV1` (POST /v1/actions/auto-add/products/candidates).
+     * Рекомендуемый метод без версии; использует `deleteAutoAddProductsV2` (POST /v2/actions/auto-add/products/delete).
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidates)
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDeleteV2)
      */
-    readonly listAutoAddProductCandidates: BoundOperationMethod<"listAutoAddProductCandidatesV1">;
+    readonly deleteAutoAddProducts: BoundOperationMethod<"deleteAutoAddProductsV2">;
     /**
-     * Рекомендуемый метод без версии; использует `listAutoAddProductsV1` (POST /v1/actions/auto-add/products/list).
+     * Рекомендуемый метод без версии; использует `listAutoAddProductCandidatesV2` (POST /v2/actions/auto-add/products/candidates).
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsList)
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidatesV2)
      */
-    readonly listAutoAddProducts: BoundOperationMethod<"listAutoAddProductsV1">;
+    readonly listAutoAddProductCandidates: BoundOperationMethod<"listAutoAddProductCandidatesV2">;
     /**
-     * Рекомендуемый метод без версии; использует `updateAutoAddProductsV1` (POST /v1/actions/auto-add/products/update).
+     * Рекомендуемый метод без версии; использует `listAutoAddProductsV2` (POST /v2/actions/auto-add/products/list).
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdate)
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsListV2)
      */
-    readonly updateAutoAddProducts: BoundOperationMethod<"updateAutoAddProductsV1">;
+    readonly listAutoAddProducts: BoundOperationMethod<"listAutoAddProductsV2">;
+    /**
+     * Рекомендуемый метод без версии; использует `updateAutoAddProductsV2` (POST /v2/actions/auto-add/products/update).
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdateV2)
+     */
+    readonly updateAutoAddProducts: BoundOperationMethod<"updateAutoAddProductsV2">;
   };
   readonly analytics: {
     /**
@@ -148,10 +246,8 @@ export interface GeneratedOzonDomainApi {
      * Уĸажите период и метриĸи, ĸоторые нужно посчитать. В ответе будет аналитиĸа, сгруппированная
      * по параметру `dimensions`. Для продавцов без подписки [Premium
      * Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus): -
-     * доступны данные за последние 3 месяца, - есть ограничения по способам группировки данных и
-     * метрикам. Для продавцов с подпиской [Premium
-     * Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) или
-     * [Premium…
+     * доступны данные за последние 3 месяца; - есть ограничения по способам группировки данных и
+     * метрикам; - есть лимит на 50 запросов в сутки. Для продавцов с подпиской [Premium…
      *
      * Обязательные поля запроса: `date_from`, `date_to`, `dimension`, `metrics`, `limit`.
      *
@@ -253,11 +349,11 @@ export interface GeneratedOzonDomainApi {
     /**
      * Получить аналитику по остаткам
      *
-     * Используйте метод, чтобы получить аналитику по остаткам товаров на складах. Метод
-     * соответствует разделу [**FBO → Управление
-     * остатками**](https://seller.ozon.ru/app/fbo-stocks/stocks-management/) в личном кабинете.
-     * Аналитика обновляется два раза в день: примерно в 07:00 и 16:00 по UTC. В запросе используйте
-     * только одно из полей: `cluster_ids` или `macrolocal_cluster_ids`, иначе вернётся ошибка.
+     * Используйте метод, чтобы получить аналитику по остаткам товаров на складах в реальном
+     * времени. Метод соответствует разделу [**FBO → Управление
+     * остатками**](https://seller.ozon.ru/app/fbo-stocks/stocks-management/) в личном кабинете. В
+     * запросе используйте только одно из полей: `cluster_ids` или `macrolocal_cluster_ids`, иначе
+     * вернётся ошибка.
      *
      * Обязательные поля запроса: `skus`.
      *
@@ -3054,11 +3150,6 @@ export interface GeneratedOzonDomainApi {
      * [комментариях](https://dev.ozon.ru/community/1978-Novye-beta-metody-dlia-upravleniia-podkliucheniiami-PUSH-uvedomlenii/)
      * в сообществе разработчиков Ozon for dev.
      *
-     * @example
-     * ```ts
-     * await ozon.notifications.listNotificationsV1();
-     * ```
-     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/NotificationList)
      */
     readonly listNotificationsV1: BoundOperationMethod<"listNotificationsV1">;
@@ -3580,10 +3671,11 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
-     * @deprecated В будущем метод будет отключён. Мы предупредим вас об этом за месяц.
-     * Переключитесь на /v2/posting/fbs/package-label/create. Замена в SDK:
-     * `ozon.postings.createFbsPackageLabelBatchV2(...)` для `POST
-     * /v2/posting/fbs/package-label/create`.
+     * @deprecated C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.
+     * Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён.
+     * Переключитесь на /v3/posting/fbs/package-label/create. Замена в SDK:
+     * `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST
+     * /v3/posting/fbs/package-label/create`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatch)
      */
@@ -3609,9 +3701,29 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.
+     * Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён.
+     * Переключитесь на /v3/posting/fbs/package-label/create. Если вы работаете по схеме rFBS или
+     * rFBS Express, изучите процесс печати этикетки в Базе знаний продавца. Замена в SDK:
+     * `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST
+     * /v3/posting/fbs/package-label/create`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatchV2)
      */
     readonly createFbsPackageLabelBatchV2: BoundOperationMethod<"createFbsPackageLabelBatchV2">;
+    /**
+     * Создать задание на формирование этикеток
+     *
+     * Создаёт задания на асинхронное формирование этикеток для отправлений в статусе «Ожидает
+     * отгрузки» — `awaiting_deliver`. Рекомендуем запрашивать этикетки через 45–60 секунд после
+     * сборки заказа. Чтобы получить созданные этикетки, используйте
+     * [/v2/posting/fbs/package-label/get](#operation/PostingFbsPackageLabelGet).
+     *
+     * Обязательные поля запроса: `posting_numbers`.
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelCreate)
+     */
+    readonly createFbsPackageLabelBatchV3: BoundOperationMethod<"createFbsPackageLabelBatchV3">;
     /**
      * Получить данные созданных экземпляров
      *
@@ -3841,9 +3953,22 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.
+     * Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён.
+     * Переключитесь на /v2/posting/fbs/package-label/get. Замена в SDK:
+     * `ozon.postings.getFbsPackageLabelBatchV2(...)` для `POST /v2/posting/fbs/package-label/get`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetLabelBatch)
      */
     readonly getFbsPackageLabelBatchV1: BoundOperationMethod<"getFbsPackageLabelBatchV1">;
+    /**
+     * Получить файл с этикетками
+     *
+     * Обязательные поля запроса: `task_id`.
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelGet)
+     */
+    readonly getFbsPackageLabelBatchV2: BoundOperationMethod<"getFbsPackageLabelBatchV2">;
     /**
      * Получить информацию об отправлении по штрихкоду
      *
@@ -4388,6 +4513,14 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.
+     * Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён.
+     * Переключитесь на /v3/posting/fbs/package-label/create и /v2/posting/fbs/package-label/get.
+     * Если вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в Базе
+     * знаний продавца. Замены в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST
+     * /v3/posting/fbs/package-label/create`; `ozon.postings.getFbsPackageLabelBatchV2(...)` для
+     * `POST /v2/posting/fbs/package-label/get`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSPackageLabel)
      */
     readonly printFbsPackageLabelsV2: BoundOperationMethod<"printFbsPackageLabelsV2">;
@@ -4702,11 +4835,11 @@ export interface GeneratedOzonDomainApi {
      */
     readonly cancelFbsPostingProducts: BoundOperationMethod<"cancelFbsPostingProductsV2">;
     /**
-     * Рекомендуемый метод без версии; использует `createFbsPackageLabelBatchV2` (POST /v2/posting/fbs/package-label/create).
+     * Рекомендуемый метод без версии; использует `createFbsPackageLabelBatchV3` (POST /v3/posting/fbs/package-label/create).
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_CreateLabelBatchV2)
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelCreate)
      */
-    readonly createFbsPackageLabelBatch: BoundOperationMethod<"createFbsPackageLabelBatchV2">;
+    readonly createFbsPackageLabelBatch: BoundOperationMethod<"createFbsPackageLabelBatchV3">;
     /**
      * Рекомендуемый метод без версии; использует `createOrGetFbsPostingProductExemplarsV6` (POST /v6/fbs/posting/product/exemplar/create-or-get).
      *
@@ -4732,11 +4865,11 @@ export interface GeneratedOzonDomainApi {
      */
     readonly getFbpPosting: BoundOperationMethod<"getFbpPostingV1">;
     /**
-     * Рекомендуемый метод без версии; использует `getFbsPackageLabelBatchV1` (POST /v1/posting/fbs/package-label/get).
+     * Рекомендуемый метод без версии; использует `getFbsPackageLabelBatchV2` (POST /v2/posting/fbs/package-label/get).
      *
-     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_GetLabelBatch)
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelGet)
      */
-    readonly getFbsPackageLabelBatch: BoundOperationMethod<"getFbsPackageLabelBatchV1">;
+    readonly getFbsPackageLabelBatch: BoundOperationMethod<"getFbsPackageLabelBatchV2">;
     /**
      * Рекомендуемый метод без версии; использует `getFbsPostingV3` (POST /v3/posting/fbs/get).
      *
@@ -4817,6 +4950,14 @@ export interface GeneratedOzonDomainApi {
     readonly openFbsPostingArbitration: BoundOperationMethod<"openFbsPostingArbitrationV2">;
     /**
      * Рекомендуемый метод без версии; использует `printFbsPackageLabelsV2` (POST /v2/posting/fbs/package-label).
+     *
+     * @deprecated C 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.
+     * Подробнее о новых этикетках в Базе знаний продавца С 2 ноября 2026 года метод будет отключён.
+     * Переключитесь на /v3/posting/fbs/package-label/create и /v2/posting/fbs/package-label/get.
+     * Если вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в Базе
+     * знаний продавца. Замены в SDK: `ozon.postings.createFbsPackageLabelBatchV3(...)` для `POST
+     * /v3/posting/fbs/package-label/create`; `ozon.postings.getFbsPackageLabelBatchV2(...)` для
+     * `POST /v2/posting/fbs/package-label/get`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PostingAPI_PostingFBSPackageLabel)
      */
@@ -5178,9 +5319,38 @@ export interface GeneratedOzonDomainApi {
     /**
      * Создать сертификат качества
      *
-     * Вы можете оставить обратную связь о работе метода в
-     * [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/)
-     * в сообществе разработчиков Ozon for dev.
+     * @example
+     * ```ts
+     * await ozon.products.createProductCertificateV2({
+     *   "params": {
+     *     "accordance_type": "SAFETY_DATA_SHEET",
+     *     "certificate_country": "RU",
+     *     "certificate_type": "SAFETY_DATA_SHEET",
+     *     "expired_date": {
+     *       "date": {
+     *         "day": 1,
+     *         "month": 1,
+     *         "year": 2027
+     *       },
+     *       "infinite": false
+     *     },
+     *     "files": [
+     *       {
+     *         "file_content": "string",
+     *         "name": "file.pdf"
+     *       }
+     *     ],
+     *     "issue_date": "2019-08-24T14:15:22Z",
+     *     "link_to_registry": "string",
+     *     "name": "string",
+     *     "number": "string",
+     *     "product_type": "UNKNOWN",
+     *     "skus": [
+     *       "string"
+     *     ]
+     *   }
+     * });
+     * ```
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductCertificateCreate)
      */
@@ -5282,10 +5452,40 @@ export interface GeneratedOzonDomainApi {
      * Получить обязательные параметры для создания сертификата качества
      *
      * Используйте информацию о параметрах в запросе метода
-     * [/v2/product/certificate/create](#operation/ProductCertificateCreate). Вы можете оставить
-     * обратную связь о работе метода в
-     * [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/)
-     * в сообществе разработчиков Ozon for dev.
+     * [/v2/product/certificate/create](#operation/ProductCertificateCreate).
+     *
+     * @example
+     * ```ts
+     * await ozon.products.getProductCertificateParamsV2({
+     *   "params": {
+     *     "accordance_type": "SAFETY_DATA_SHEET",
+     *     "certificate_country": "RU",
+     *     "certificate_type": "SAFETY_DATA_SHEET",
+     *     "expired_date": {
+     *       "date": {
+     *         "day": 1,
+     *         "month": 1,
+     *         "year": 2027
+     *       },
+     *       "infinite": false
+     *     },
+     *     "files": [
+     *       {
+     *         "file_content": "string",
+     *         "name": "file.pdf"
+     *       }
+     *     ],
+     *     "issue_date": "2019-08-24T14:15:22Z",
+     *     "link_to_registry": "string",
+     *     "name": "string",
+     *     "number": "string",
+     *     "product_type": "UNKNOWN",
+     *     "skus": [
+     *       "string"
+     *     ]
+     *   }
+     * });
+     * ```
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductCertificateParams)
      */
@@ -5461,9 +5661,10 @@ export interface GeneratedOzonDomainApi {
     /**
      * Информация о количестве товаров
      *
-     * Возвращает информацию о ĸоличестве товаров по схемам FBS, rFBS и FBP: - сĸольĸо единиц есть в
-     * наличии, - сĸольĸо зарезервировано поĸупателями. Чтобы получить информацию об остатках по
-     * схеме FBO, используйте метод [/v1/analytics/stocks](#operation/AnalyticsAPI_AnalyticsStocks).
+     * Возвращает информацию о ĸоличестве товаров по схемам FBO, FBS, rFBS и FBP: - сĸольĸо единиц
+     * есть в наличии, - сĸольĸо зарезервировано поĸупателями. Чтобы получить аналитику по остаткам
+     * по схеме FBO, используйте метод
+     * [/v1/analytics/stocks](#operation/AnalyticsAPI_AnalyticsStocks).
      *
      * Обязательные поля запроса: `filter`, `limit`.
      *
@@ -5588,6 +5789,9 @@ export interface GeneratedOzonDomainApi {
      * [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе
      * разработчиков Ozon for dev.
      *
+     * Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости;
+     * доступность на стороне Ozon не подтверждена.
+     *
      * Обязательные поля запроса: `quant_code`.
      *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/QuantGetInfo)
@@ -5641,9 +5845,40 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated С 1 октября 2026 года метод будет отключён. Переключитесь на
+     * /v2/product/pictures/import. Замена в SDK: `ozon.products.importProductPicturesV2(...)` для
+     * `POST /v2/product/pictures/import`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductAPI_ProductImportPictures)
      */
     readonly importProductPictures: BoundOperationMethod<"importProductPictures">;
+    /**
+     * Загрузить или обновить изображения товара
+     *
+     * При каждом вызове метода передавайте все изображения, которые должны быть на карточке товара.
+     * Например, если вы вызвали метод и загрузили 10 изображений, а затем вызвали метод второй раз
+     * и загрузили ещё одно, то все 10 предыдущих сотрутся. Для загрузки передайте адрес ссылки на
+     * изображение в общедоступном облачном хранилище. Формат изображения по ссылке — JPG или PNG.
+     * Изображения в массиве `items.images` располагайте в соответствии с желаемым порядком на
+     * сайте. Главным будет первое изображение…
+     *
+     * @example
+     * ```ts
+     * await ozon.products.importProductPicturesV2({
+     *   "items": [
+     *     {
+     *       "offer_id": "PROD-2023-001",
+     *       "primary_image": "https://example.com/cloud-storage/images/main-image-front.jpg",
+     *       "color_image": "",
+     *       "images": []
+     *     }
+     *   ]
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ProductImportPicturesV2)
+     */
+    readonly importProductPicturesV2: BoundOperationMethod<"importProductPicturesV2">;
     /**
      * Создать или обновить товар
      *
@@ -5827,10 +6062,7 @@ export interface GeneratedOzonDomainApi {
      * Получить параметры для создания сертификата качества
      *
      * Используйте информацию о параметрах в запросе метода
-     * [/v2/product/certification/params](#operation/ProductCertificateParams). Вы можете оставить
-     * обратную связь о работе метода в
-     * [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/)
-     * в сообществе разработчиков Ozon for dev.
+     * [/v2/product/certification/params](#operation/ProductCertificateParams).
      *
      * @example
      * ```ts
@@ -5918,6 +6150,9 @@ export interface GeneratedOzonDomainApi {
      * Вы можете оставить обратную связь по этому методу в комментариях к
      * [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе
      * разработчиков Ozon for dev.
+     *
+     * Метод отсутствует в текущем OpenAPI. Сохранён по архивному snapshot для совместимости;
+     * доступность на стороне Ozon не подтверждена.
      *
      * Обязательные поля запроса: `limit`.
      *
@@ -6145,6 +6380,7 @@ export interface GeneratedOzonDomainApi {
      *       "auto_action_enabled": "UNKNOWN",
      *       "auto_add_to_ozon_actions_list_enabled": "UNKNOWN",
      *       "currency_code": "RUB",
+     *       "declared_price": "1000",
      *       "manage_elastic_boosting_through_price": true,
      *       "min_price": "800",
      *       "min_price_for_auto_actions_enabled": true,
@@ -6282,6 +6518,10 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v1/actions/products/update. Замена в SDK: `ozon.promotions.updatePromotionProductsV1(...)`
+     * для `POST /v1/actions/products/update`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PromosProductsActivate)
      */
     readonly activatePromotionProducts: BoundOperationMethod<"activatePromotionProducts">;
@@ -6327,9 +6567,36 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на
+     * /v2/actions/products/deactivate. Замена в SDK:
+     * `ozon.promotions.deactivatePromotionProductsV2(...)` для `POST
+     * /v2/actions/products/deactivate`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PromosProductsDeactivate)
      */
     readonly deactivatePromotionProducts: BoundOperationMethod<"deactivatePromotionProducts">;
+    /**
+     * Удалить товары из акции «Промокоды»
+     *
+     * Чтобы удалить товары из акций «Эластичный бустинг» или «Максимальный бустинг», используйте
+     * метод [/v1/actions/products/update](#operation/ActionsProductsUpdate) и измените цену товара
+     * `action_price` на значение больше или равное лимиту акции.
+     *
+     * Обязательные поля запроса: `action_id`, `product_ids`.
+     *
+     * @example
+     * ```ts
+     * await ozon.promotions.deactivatePromotionProductsV2({
+     *   "action_id": 213139,
+     *   "product_ids": [
+     *     999999
+     *   ]
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsProductsDeactivate)
+     */
+    readonly deactivatePromotionProductsV2: BoundOperationMethod<"deactivatePromotionProductsV2">;
     /**
      * Отклонить заявку на скидку
      *
@@ -6402,9 +6669,28 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/candidates.
+     * Замена в SDK: `ozon.promotions.listPromotionCandidatesV2(...)` для `POST
+     * /v2/actions/candidates`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PromosCandidates)
      */
     readonly listPromotionCandidates: BoundOperationMethod<"listPromotionCandidates">;
+    /**
+     * Получить список товаров, которые могут участвовать в акции
+     *
+     * @example
+     * ```ts
+     * await ozon.promotions.listPromotionCandidatesV2({
+     *   "action_id": 258568,
+     *   "last_id": "80698",
+     *   "limit": 100
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsCandidates)
+     */
+    readonly listPromotionCandidatesV2: BoundOperationMethod<"listPromotionCandidatesV2">;
     /**
      * Список участвующих в акции товаров
      *
@@ -6421,9 +6707,29 @@ export interface GeneratedOzonDomainApi {
      * });
      * ```
      *
+     * @deprecated 13 октября 2026 года отключим метод. Переключитесь на /v2/actions/products.
+     * Замена в SDK: `ozon.promotions.listPromotionProductsV2(...)` для `POST /v2/actions/products`.
+     *
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/PromosProducts)
      */
     readonly listPromotionProducts: BoundOperationMethod<"listPromotionProducts">;
+    /**
+     * Получить список товаров, которые участвуют в акции
+     *
+     * Обязательные поля запроса: `action_id`, `limit`.
+     *
+     * @example
+     * ```ts
+     * await ozon.promotions.listPromotionProductsV2({
+     *   "action_id": 213139,
+     *   "last_id": "3262247282",
+     *   "limit": 100
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsProducts)
+     */
+    readonly listPromotionProductsV2: BoundOperationMethod<"listPromotionProductsV2">;
     /**
      * Список акций
      *
@@ -6438,6 +6744,37 @@ export interface GeneratedOzonDomainApi {
      * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/Promos)
      */
     readonly listPromotions: BoundOperationMethod<"listPromotions">;
+    /**
+     * Добавить или обновить товар в акции
+     *
+     * Обязательные поля запроса: `action_id`, `products`.
+     *
+     * @example
+     * ```ts
+     * await ozon.promotions.updatePromotionProductsV1({
+     *   "action_id": 258568,
+     *   "products": [
+     *     {
+     *       "action_price": {
+     *         "amount": "88",
+     *         "currency": "RUB"
+     *       },
+     *       "product_id": 88888,
+     *       "stock": "8"
+     *     }
+     *   ]
+     * });
+     * ```
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsProductsUpdate)
+     */
+    readonly updatePromotionProductsV1: BoundOperationMethod<"updatePromotionProductsV1">;
+    /**
+     * Рекомендуемый метод без версии; использует `updatePromotionProductsV1` (POST /v1/actions/products/update).
+     *
+     * @see [Ozon Seller API](https://docs.ozon.ru/api/seller/#operation/ActionsProductsUpdate)
+     */
+    readonly updatePromotionProducts: BoundOperationMethod<"updatePromotionProductsV1">;
   };
   readonly questions: {
     /**
@@ -7535,8 +7872,8 @@ export interface GeneratedOzonDomainApi {
      *     "sku": [
      *       0
      *     ],
-     *     "order_status": "NEW",
-     *     "status": "DELIVERED",
+     *     "order_status": "DELIVERED",
+     *     "status": "NEW",
      *     "published_from": "2026-03-10T14:08:00.257Z",
      *     "published_to": "2026-03-10T14:08:00.257Z"
      *   },
@@ -8728,6 +9065,11 @@ export interface GeneratedOzonDomainApi {
      *     "latitude": 55.69626,
      *     "longitude": 37.42686
      *   },
+     *   "courier_return_warehouse_info": {
+     *     "comment": "Комментарий",
+     *     "courier_return_warehouse_id": 0,
+     *     "is_courier_return_warehouse_match": false
+     *   },
      *   "first_mile_type": "DROP_OFF",
      *   "drop_off_point_id": 1020002487458000,
      *   "cut_in_time": 0,
@@ -9103,6 +9445,11 @@ export interface GeneratedOzonDomainApi {
      * @example
      * ```ts
      * await ozon.warehouses.updateFbsWarehouseFirstMileV1({
+     *   "courier_return_warehouse_info": {
+     *     "comment": "Комментарий",
+     *     "courier_return_warehouse_id": 0,
+     *     "is_courier_return_warehouse_match": false
+     *   },
      *   "first_mile_type": "DROP_OFF",
      *   "drop_off_point_id": 0,
      *   "cut_in_time": 0,

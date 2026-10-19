@@ -22,6 +22,7 @@ const result = object({
   items: array(item).optional(),
   last_id: string().optional(),
   total: integerSchema.optional(),
+  total_items: integerSchema.optional(),
 });
 
 export const listProductsResponseSchema: Schema<ListProductsResponse> = object({

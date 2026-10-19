@@ -19,8 +19,8 @@ export interface AddSellerActionProductsV1Request {
    */
   readonly products: readonly {
     /**
-     * Валюта: - `RUB` — российский рубль, - `BYN` — белорусский рубль, - `KZT` — тенге, - `EUR` —
-     * евро, - `USD` — доллар США, - `CNY` — юань.
+     * Валюта: - `RUB` — российский рубль; - `BYN` — белорусский рубль; - `KZT` — тенге; - `EUR` —
+     * евро; - `USD` — доллар США; - `CNY` — юань.
      *
      * Пример: `RUB`.
      *
@@ -29,9 +29,19 @@ export interface AddSellerActionProductsV1Request {
     readonly currency?: OzonSellerActionCurrency;
 
     /**
-     * Размер скидки в процентах. Передайте параметр, если механика акции «Скидка».
+     * Цена товара по акции. Если передаёте нецелое число, цена округлится в большую сторону.
      *
-     * Формат: `float`.
+     * Формат: `double`.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly action_price?: number;
+    /**
+     * Размер скидки в процентах. Передайте параметр, если выбрали механику акции «Скидка» или «Скидка
+     * по промокоду» и получили `actions.action_parameters.discount_type = PERCENT` в методе
+     * [/v1/seller-actions/list](#operation/SellerActionsList).
+     *
+     * Формат: `double`.
      *
      * <!-- seller-sdk:ozon-openapi -->
      */

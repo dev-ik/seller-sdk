@@ -1398,3 +1398,60 @@ export type * from "./endpoints/delivery/checkout/v2/types.js";
 export type * from "./endpoints/delivery/map/v1/types.js";
 export type * from "./endpoints/delivery/point/info/v1/types.js";
 export type * from "./endpoints/delivery/point/list/v1/types.js";
+
+export type {
+  CreateFbsPackageLabelBatchV3Request,
+  CreateFbsPackageLabelBatchV3Response,
+} from "./endpoints/posting/fbs/package-label/create/v3/types.js";
+
+export type {
+  GetFbsPackageLabelBatchV2Request,
+  GetFbsPackageLabelBatchV2Response,
+} from "./endpoints/posting/fbs/package-label/get/v2/types.js";
+
+export type {
+  ListPromotionCandidatesV2Request,
+  ListPromotionCandidatesV2Response,
+} from "./endpoints/promotion/candidates/v2/types.js";
+
+export type {
+  ListPromotionProductsV2Request,
+  ListPromotionProductsV2Response,
+} from "./endpoints/promotion/products/v2/types.js";
+
+export type {
+  UpdatePromotionProductsV1Request,
+  UpdatePromotionProductsV1Response,
+} from "./endpoints/promotion/products/update/v1/types.js";
+
+export type {
+  DeactivatePromotionProductsV2Request,
+  DeactivatePromotionProductsV2Response,
+} from "./endpoints/promotion/products/deactivate/v2/types.js";
+
+export type {
+  ListAutoAddProductsV2Request,
+  ListAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/list/v2/types.js";
+
+export type {
+  ListAutoAddProductCandidatesV2Request,
+  ListAutoAddProductCandidatesV2Response,
+} from "./endpoints/actions/auto-add/products/candidates/v2/types.js";
+
+export type {
+  DeleteAutoAddProductsV2Request,
+  DeleteAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/delete/v2/types.js";
+
+export type {
+  UpdateAutoAddProductsV2Request,
+  UpdateAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/update/v2/types.js";
+
+export type {
+  ImportProductPicturesV2Request,
+  ImportProductPicturesV2Response,
+} from "./endpoints/product/pictures/import/v2/types.js";
+
+export type { ListNotificationsV1Request } from "./endpoints/notification/list/v1/types.js";

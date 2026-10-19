@@ -109,6 +109,10 @@ export interface OzonProductMarketingActions {
 }
 
 export interface OzonProductPrice {
+  readonly declared_price?: {
+    readonly amount?: string;
+    readonly currency?: string;
+  };
   readonly auto_action_enabled?: boolean;
   readonly auto_add_to_ozon_actions_list_enabled?: boolean;
   readonly currency_code?: string;
@@ -155,5 +159,7 @@ export interface OzonProductPriceInfo {
 export interface GetProductPricesResponse {
   readonly cursor?: string;
   readonly items?: readonly OzonProductPriceInfo[];
+  /** @deprecated Use total_items. */
   readonly total?: number;
+  readonly total_items?: number;
 }

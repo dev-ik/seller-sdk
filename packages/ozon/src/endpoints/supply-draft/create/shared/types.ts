@@ -112,6 +112,8 @@ export type OzonSupplyDraftErrorMessage =
   | "CAN_NOT_START_CALCULATION"
   | "PICKUP_IS_NOT_AVAILABLE"
   | "DROP_OFF_NOT_COMPATIBLE_WITH_PICKUP"
+  | "LIMIT_EXCEEDED_ACCORDING_TO_SHIPMENT_DISCIPLINE"
+  | "BACKUP_SUPPLY_ALREADY_USED"
   | "UNDEFINED";
 export type OzonSupplyDraftErrorReason =
   | "UNSPECIFIED"
@@ -157,6 +159,8 @@ export interface OzonSupplyDraftRejectedItem {
   readonly sku?: number;
 }
 export interface OzonSupplyDraftItemsValidation {
+  readonly limit?: number;
+  readonly supply_id?: number;
   readonly macrolocal_cluster_id?: number;
   readonly rejected_items?: readonly OzonSupplyDraftRejectedItem[];
 }

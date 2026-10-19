@@ -68,7 +68,7 @@ export type OzonProductsApi = BaseOzonDomainApi["products"] & {
     /** Получить изображения товаров. */
     readonly get: BoundOperationMethod<"getProductPictures">;
     /** Загрузить или обновить изображения товара. */
-    readonly import: BoundOperationMethod<"importProductPictures">;
+    readonly import: BoundOperationMethod<"importProductPicturesV2">;
   };
   /** Цены товаров. */
   readonly prices: {
@@ -250,7 +250,7 @@ export function createOzonDomainApi(operations: OzonOperations): OzonDomainApi {
       },
       pictures: {
         get: baseApi.products.getProductPictures,
-        import: baseApi.products.importProductPictures,
+        import: baseApi.products.importProductPicturesV2,
       },
       prices: {
         get: baseApi.products.getProductPrices,

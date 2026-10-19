@@ -35,4 +35,5 @@ export const getProductStocksResponseSchema: Schema<GetProductStocksResponse> =
     cursor: string().optional(),
     items: array(item).optional(),
     total: integerSchema.optional(),
+    total_items: integerSchema.optional(),
   });

@@ -45,10 +45,10 @@ describe("Ozon endpoint manifest", () => {
     );
     expect(manifest.localSpecification).toBe("./swagger.json");
     expect(manifest.specificationSha256).toBe(
-      "56e0ff0c64710918107ab83b574d209762fc559dbc9c80198ae31708b3881830",
+      "4c5756ae6b68177eae367786656f1b4ebdc00f2ca76c0311cf312a011ad1f9e4",
     );
     expect(manifest.verification.status).toBe("verified");
-    expect(manifest.verification.checkedAt).toBe("2026-08-14");
+    expect(manifest.verification.checkedAt).toBe("2026-10-19");
     expect(manifest.verification.openapiVersion).toBe("3.0.0");
     expect(manifest.verification.documentVersion).toBe("2.1");
     expect(manifest.operations).toEqual(

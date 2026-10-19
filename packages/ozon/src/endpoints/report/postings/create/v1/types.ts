@@ -30,7 +30,7 @@ export interface CreatePostingsReportV1Request {
      *
      * <!-- seller-sdk:ozon-openapi -->
      */
-    readonly delivery_schema?: readonly string[];
+    readonly delivery_schema: readonly string[];
 
     /**
      * Экспресс-доставка: - `true` — только отправления с доставкой Ozon Express; - `false` — только

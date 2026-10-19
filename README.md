@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/dev-ik/seller-sdk/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/dev-ik/seller-sdk/ci.yml?branch=main&amp;style=flat-square&amp;label=CI&amp;logo=github" alt="Статус CI"></a>
-  <a href="./docs/ozon/API-REFERENCE.md"><img src="https://img.shields.io/badge/Ozon_Seller_API-461_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-005BFF?style=flat-square" alt="Ozon Seller API: 461 операция"></a>
+  <a href="./docs/ozon/API-REFERENCE.md"><img src="https://img.shields.io/badge/Ozon_Seller_API-472_%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D0%B0-005BFF?style=flat-square" alt="Ozon Seller API: 472 метода"></a>
   <a href="./docs/wb/API-REFERENCE.md"><img src="https://img.shields.io/badge/WB_API-286_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9-7B2CBF?style=flat-square" alt="Wildberries API: 286 операций"></a>
   <a href="./docs/ym/API-REFERENCE.md"><img src="https://img.shields.io/badge/Yandex_Market_API-165_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B9-FFCC00?style=flat-square" alt="Yandex Market API: 165 операций"></a>
   <a href="./package.json"><img src="https://img.shields.io/badge/Node.js-%E2%89%A520.10-339933?style=flat-square&amp;logo=nodedotjs&amp;logoColor=white" alt="Node.js 20.10 или новее"></a>
@@ -30,6 +30,13 @@ SDK поддерживает Ozon Seller API, Wildberries API и Yandex Market P
 - [`@seller-sdk/ym`](./packages/ym/README.md) — установка, настройка и примеры
   Яндекс Маркета; [полный API Reference](./docs/ym/API-REFERENCE.md).
 
+## Обновление до 0.4.0
+
+В этом выпуске обновлены методы Ozon для этикеток, акций и изображений.
+Некоторые алиасы используют новые формы запросов и ответов. Перед переходом
+с `0.3.x` выполните шаги из [руководства по миграции](./docs/ozon/MIGRATION-2026-10.md).
+Контракты Wildberries и Yandex Market не менялись.
+
 ## Быстрый старт
 
 Для проекта, который работает только с Ozon:
@@ -42,8 +49,8 @@ npm i @seller-sdk/ozon
 import { OzonClient, OzonValues } from "@seller-sdk/ozon";
 
 const ozon = new OzonClient({
-  clientId: process.env.OZON_CLIENT_ID!,
-  apiKey: process.env.OZON_API_KEY!,
+  clientId: process.env["OZON_CLIENT_ID"]!,
+  apiKey: process.env["OZON_API_KEY"]!,
 });
 
 const products = await ozon.products.list({
@@ -63,7 +70,7 @@ npm i @seller-sdk/wb
 ```ts
 import { WbClient, WbValues } from "@seller-sdk/wb";
 
-const wb = new WbClient({ token: process.env.WB_API_TOKEN! });
+const wb = new WbClient({ token: process.env["WB_API_TOKEN"]! });
 const connection = await wb.general.getPing();
 const tariffs = await wb.general.getTariffConstructorOptions({
   query: { locale: WbValues.GetV1TariffConstructorOptionsLocale.Ru },
@@ -79,7 +86,7 @@ npm i @seller-sdk/ym
 ```ts
 import { YmClient, YmValues } from "@seller-sdk/ym";
 
-const ym = new YmClient({ apiKey: process.env.YM_API_KEY! });
+const ym = new YmClient({ apiKey: process.env["YM_API_KEY"]! });
 const orders = await ym.orders.getBusinessOrders({
   path: { businessId: 123456 },
   body: {
@@ -100,8 +107,8 @@ import { Marketplace, SellerClient } from "seller-sdk";
 const seller = new SellerClient({
   marketplace: Marketplace.Ozon,
   credentials: {
-    clientId: process.env.OZON_CLIENT_ID!,
-    apiKey: process.env.OZON_API_KEY!,
+    clientId: process.env["OZON_CLIENT_ID"]!,
+    apiKey: process.env["OZON_API_KEY"]!,
   },
 });
 
@@ -112,7 +119,7 @@ const roles = await seller.ozon.access.getRoles();
 
 ## Почему SDK удобно использовать
 
-- Все 461 операция Ozon распределены по предметным областям.
+- 472 метода Ozon распределены по предметным областям: 470 операций текущего snapshot и 2 архивные операции для совместимости.
 - Все 286 операций WB распределены по 13 официальным разделам.
 - Все 165 операций Yandex Market распределены по официальным предметным tags.
 - TypeScript подсказывает обязательные поля, ограничения и закрытые наборы
@@ -130,7 +137,9 @@ const roles = await seller.ozon.access.getRoles();
 
 ```ts
 await ozon.warehouses.listWarehouses({ limit: 100 }); // сейчас v2
-await ozon.finance.listFinanceTransactions(input); // сейчас v3
+await ozon.postings.createFbsPackageLabelBatch({
+  posting_numbers: ["TEST-POSTING-1"],
+}); // сейчас v3
 await wb.general.getNews({ query: { from: "2026-08-01" } }); // сейчас v2
 ```
 
@@ -146,8 +155,12 @@ await wb.general.getV2News({ query: { from: "2026-08-01" } });
 `ym.orders.getBusinessOrders(...)`; отдельный versionless alias не требуется.
 
 Если Ozon пометил контракт устаревшим, IDE зачеркнёт и версионный метод, и его
-алиас. Например, `listFinanceTransactions` устаревает 8 сентября 2026 года;
+алиас. Например, `listFinanceTransactions` помечен устаревшим;
 для нового кода используйте `finance.accruals`.
+
+Старые методы акций `promotions.listPromotionCandidates` и
+`promotions.listPromotionProducts` сохранены как deprecated: для новых
+контрактов используйте явные методы с суффиксом `V2`.
 
 ## Конфигурация запросов
 
@@ -177,7 +190,7 @@ await ozon.products.list(input, {
 
 ```ts
 const wb = new WbClient(
-  { token: process.env.WB_API_TOKEN! },
+  { token: process.env["WB_API_TOKEN"]! },
   {
     environment: "production",
     timeoutMs: 30_000,
@@ -209,7 +222,7 @@ await wb.general.getNews(
 
 ```ts
 const ym = new YmClient(
-  { apiKey: process.env.YM_API_KEY! },
+  { apiKey: process.env["YM_API_KEY"]! },
   {
     timeoutMs: 30_000,
     deadlineMs: 60_000,

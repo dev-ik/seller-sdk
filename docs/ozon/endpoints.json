@@ -4,10 +4,10 @@
   "source": "https://docs.ozon.ru/api/seller/",
   "specification": "https://docs.ozon.ru/api/seller/swagger.json",
   "localSpecification": "./swagger.json",
-  "specificationSha256": "56e0ff0c64710918107ab83b574d209762fc559dbc9c80198ae31708b3881830",
+  "specificationSha256": "4c5756ae6b68177eae367786656f1b4ebdc00f2ca76c0311cf312a011ad1f9e4",
   "verification": {
     "status": "verified",
-    "checkedAt": "2026-08-14",
+    "checkedAt": "2026-10-19",
     "openapiVersion": "3.0.0",
     "documentVersion": "2.1"
   },
@@ -773,8 +773,13 @@
       "path": "/v1/product/quant/list",
       "request": {
         "body": "#/components/schemas/ProductV1QuantListRequest",
-        "required": ["limit"],
-        "headers": ["Client-Id", "Api-Key"]
+        "required": [
+          "limit"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
@@ -794,8 +799,10 @@
         "products and nested quants define items but omit type: array. The SDK treats them as arrays based on their descriptions and item schemas.",
         "The total_items description says warehouse stock count, which conflicts with the field name and list context. The SDK preserves the numeric field without reinterpreting it.",
         "OpenAPI does not mark response properties as required; runtime and public types preserve that optionality.",
-        "No endpoint-specific rate limit is documented in the local OpenAPI snapshot."
-      ]
+        "No endpoint-specific rate limit is documented in the local OpenAPI snapshot.",
+        "Absent from the 2026-10-19 official snapshot; retained from 2026-08-14 for public API compatibility. Live availability is unverified."
+      ],
+      "sourceSnapshot": "./legacy-operations.json"
     },
     {
       "id": "ozon.product.quant.info.get",
@@ -808,9 +815,19 @@
       "path": "/v1/product/quant/info",
       "request": {
         "body": "#/components/schemas/ProductV1QuantInfoRequest",
-        "required": ["quant_code"],
-        "constraints": { "quant_code": { "minItems": 1, "maxItems": 1000 } },
-        "headers": ["Client-Id", "Api-Key"]
+        "required": [
+          "quant_code"
+        ],
+        "constraints": {
+          "quant_code": {
+            "minItems": 1,
+            "maxItems": 1000
+          }
+        },
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
@@ -826,8 +843,10 @@
         "quant_code declares minItems/maxItems and items but omits type: array. The SDK models it as a string array.",
         "Nested quants and barcodes_extended define items but omit type: array. The SDK treats them as arrays based on their descriptions and item schemas.",
         "The wire schema spells the quant size field quant_sice. The SDK preserves this exact property name rather than silently normalizing it.",
-        "OpenAPI does not mark response properties as required; runtime and public types preserve that optionality."
-      ]
+        "OpenAPI does not mark response properties as required; runtime and public types preserve that optionality.",
+        "Absent from the 2026-10-19 official snapshot; retained from 2026-08-14 for public API compatibility. Live availability is unverified."
+      ],
+      "sourceSnapshot": "./legacy-operations.json"
     },
     {
       "id": "ozon.cancellation.conditional.list",
@@ -1726,7 +1745,7 @@
       "operationId": "ProductAPI_GetProductList",
       "sdkMethod": "listProducts",
       "status": "implemented",
-      "verifiedAt": "2026-08-14",
+      "verifiedAt": "2026-10-19",
       "documentation": "https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductList",
       "method": "POST",
       "path": "/v3/product/list",
@@ -1734,8 +1753,14 @@
         "body": "#/components/schemas/productv3GetProductListRequest",
         "required": [],
         "identifierFilterLimit": 1000,
-        "pageLimit": { "minimum": 1, "maximum": 1000 },
-        "headers": ["Client-Id", "Api-Key"]
+        "pageLimit": {
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
@@ -2314,15 +2339,24 @@
       "operationId": "ProductAPI_GetProductInfoStocks",
       "sdkMethod": "getProductStocks",
       "status": "implemented",
-      "verifiedAt": "2026-08-14",
+      "verifiedAt": "2026-10-19",
       "documentation": "https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoStocks",
       "method": "POST",
       "path": "/v4/product/info/stocks",
       "request": {
         "body": "#/components/schemas/v4GetProductInfoStocksRequest",
-        "required": ["filter", "limit"],
-        "limitRange": [1, 1000],
-        "headers": ["Client-Id", "Api-Key"]
+        "required": [
+          "filter",
+          "limit"
+        ],
+        "limitRange": [
+          1,
+          1000
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
@@ -2568,15 +2602,24 @@
       "operationId": "ProductAPI_GetProductInfoPrices",
       "sdkMethod": "getProductPrices",
       "status": "implemented",
-      "verifiedAt": "2026-08-14",
+      "verifiedAt": "2026-10-19",
       "documentation": "https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductInfoPrices",
       "method": "POST",
       "path": "/v5/product/info/prices",
       "request": {
         "body": "#/components/schemas/productv5GetProductInfoPricesV5Request",
-        "required": ["filter", "limit"],
-        "limit": { "minimum": 1, "maximum": 1000 },
-        "headers": ["Client-Id", "Api-Key"]
+        "required": [
+          "filter",
+          "limit"
+        ],
+        "limit": {
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
@@ -10201,25 +10244,35 @@
       "operationId": "NotificationList",
       "sdkMethod": "listNotificationsV1",
       "status": "implemented",
-      "verifiedAt": "2026-08-15",
+      "verifiedAt": "2026-10-19",
       "documentation": "https://docs.ozon.ru/api/seller/#operation/NotificationList",
       "method": "POST",
       "path": "/v1/notification/list",
       "request": {
-        "body": "none",
+        "body": "#/components/schemas/notification.v1.NotificationListRequest",
         "required": [],
-        "headers": ["Client-Id", "Api-Key"]
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
       },
       "response": {
         "contentType": "application/json",
         "schema": "#/components/schemas/notification.v1.NotificationListResponse",
-        "required": ["urls"]
+        "required": [
+          "urls",
+          "total_count",
+          "availability_status_thresholds"
+        ]
       },
-      "pagination": "none",
+      "pagination": "offset/limit",
       "retrySafety": "safe",
-      "errors": { "400|403|404|409|500": "#/components/schemas/rpcStatus" },
+      "errors": {
+        "400|403|404|409|500": "#/components/schemas/rpcStatus"
+      },
       "notes": [
-        "Read-only list of registered webhook URLs and notification types."
+        "Read-only list of registered webhook URLs and notification types.",
+        "The request body now supports availability filters and pagination. The options-only SDK call is retained for compatibility."
       ]
     },
     {
@@ -12575,6 +12628,433 @@
       "notes": [
         "Read-only coordinates for every pickup point without clustering."
       ]
+    },
+    {
+      "id": "ozon.posting.createFbsPackageLabelBatchV3",
+      "operationId": "PostingFbsPackageLabelCreate",
+      "sdkMethod": "createFbsPackageLabelBatchV3",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelCreate",
+      "method": "POST",
+      "path": "/v3/posting/fbs/package-label/create",
+      "request": {
+        "body": "#/components/schemas/posting.v3.PostingFbsPackageLabelCreateRequest",
+        "required": [
+          "posting_numbers"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/posting.v3.PostingFbsPackageLabelCreateResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.posting.getFbsPackageLabelBatchV2",
+      "operationId": "PostingFbsPackageLabelGet",
+      "sdkMethod": "getFbsPackageLabelBatchV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelGet",
+      "method": "POST",
+      "path": "/v2/posting/fbs/package-label/get",
+      "request": {
+        "body": "#/components/schemas/posting.v2.PostingFbsPackageLabelGetRequest",
+        "required": [
+          "task_id"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/posting.v2.PostingFbsPackageLabelGetResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "safe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.promotion.listPromotionCandidatesV2",
+      "operationId": "ActionsCandidates",
+      "sdkMethod": "listPromotionCandidatesV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsCandidates",
+      "method": "POST",
+      "path": "/v2/actions/candidates",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsCandidatesRequest",
+        "required": [],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsCandidatesResponse",
+        "required": []
+      },
+      "pagination": "cursor: last_id",
+      "retrySafety": "safe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.promotion.listPromotionProductsV2",
+      "operationId": "ActionsProducts",
+      "sdkMethod": "listPromotionProductsV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsProducts",
+      "method": "POST",
+      "path": "/v2/actions/products",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsProductsRequest",
+        "required": [
+          "action_id",
+          "limit"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsProductsResponse",
+        "required": []
+      },
+      "pagination": "cursor: last_id",
+      "retrySafety": "safe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.promotion.updatePromotionProductsV1",
+      "operationId": "ActionsProductsUpdate",
+      "sdkMethod": "updatePromotionProductsV1",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsProductsUpdate",
+      "method": "POST",
+      "path": "/v1/actions/products/update",
+      "request": {
+        "body": "#/components/schemas/actions.v1.ActionsProductsUpdateRequest",
+        "required": [
+          "action_id",
+          "products"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v1.ActionsProductsUpdateResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.promotion.deactivatePromotionProductsV2",
+      "operationId": "ActionsProductsDeactivate",
+      "sdkMethod": "deactivatePromotionProductsV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsProductsDeactivate",
+      "method": "POST",
+      "path": "/v2/actions/products/deactivate",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsProductsDeactivateRequest",
+        "required": [
+          "action_id",
+          "product_ids"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsProductsDeactivateResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.actions.listAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsListV2",
+      "sdkMethod": "listAutoAddProductsV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsListV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/list",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsAutoAddProductsListRequest",
+        "required": [
+          "action_id",
+          "auto_add_date",
+          "limit"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsAutoAddProductsListResponse",
+        "required": []
+      },
+      "pagination": "offset/limit",
+      "retrySafety": "safe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.actions.listAutoAddProductCandidatesV2",
+      "operationId": "ActionsAutoAddProductsCandidatesV2",
+      "sdkMethod": "listAutoAddProductCandidatesV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsCandidatesV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/candidates",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsAutoAddProductsCandidatesRequest",
+        "required": [
+          "action_id",
+          "auto_add_date",
+          "limit"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsAutoAddProductsCandidatesResponse",
+        "required": []
+      },
+      "pagination": "offset/limit",
+      "retrySafety": "safe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.actions.deleteAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsDeleteV2",
+      "sdkMethod": "deleteAutoAddProductsV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsDeleteV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/delete",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsAutoAddProductsDeleteRequest",
+        "required": [
+          "action_id",
+          "auto_add_date",
+          "product_ids"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsAutoAddProductsDeleteResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.actions.updateAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsUpdateV2",
+      "sdkMethod": "updateAutoAddProductsV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ActionsAutoAddProductsUpdateV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/update",
+      "request": {
+        "body": "#/components/schemas/actions.v2.ActionsAutoAddProductsUpdateRequest",
+        "required": [
+          "action_id",
+          "auto_add_date",
+          "products"
+        ],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/actions.v2.ActionsAutoAddProductsUpdateResponse",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "No endpoint-specific numeric rate limit is documented; mutations are not retried."
+      ]
+    },
+    {
+      "id": "ozon.product.importProductPicturesV2",
+      "operationId": "ProductImportPicturesV2",
+      "sdkMethod": "importProductPicturesV2",
+      "status": "implemented",
+      "verifiedAt": "2026-10-19",
+      "documentation": "https://docs.ozon.ru/api/seller/#operation/ProductImportPicturesV2",
+      "method": "POST",
+      "path": "/v2/product/pictures/import",
+      "request": {
+        "body": "#/components/schemas/product.v2.ProductImportPicturesV2Request",
+        "required": [],
+        "headers": [
+          "Client-Id",
+          "Api-Key"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "schema": "#/components/schemas/product.v2.ProductInfoPicturesV2Response",
+        "required": []
+      },
+      "pagination": "none",
+      "retrySafety": "unsafe",
+      "errors": {
+        "400": "#/components/schemas/rpcStatus",
+        "403": "#/components/schemas/rpcStatus",
+        "404": "#/components/schemas/rpcStatus",
+        "409": "#/components/schemas/rpcStatus",
+        "429": "#/components/schemas/rpcStatus",
+        "500": "#/components/schemas/rpcStatus"
+      },
+      "notes": [
+        "Verified against the user-supplied official 2026-10-19 OpenAPI snapshot.",
+        "Ozon documents item rate limits with HTTP 429, Item-Retry-After (minutes), and Item-Rate-Limit-Remaining; this mutation is not retried."
+      ]
     }
-  ]
+  ],
+  "legacyOperations": "./legacy-operations.json"
 }

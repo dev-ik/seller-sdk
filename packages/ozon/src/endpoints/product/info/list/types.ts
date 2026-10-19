@@ -190,6 +190,10 @@ export interface OzonProductInfoItem {
   readonly name?: string;
   readonly offer_id?: string;
   readonly old_price?: string;
+  readonly declared_price?: {
+    readonly amount?: string;
+    readonly currency?: string;
+  };
   readonly price?: string;
   readonly price_indexes?: OzonProductInfoPriceIndexes;
   readonly primary_image?: readonly string[];

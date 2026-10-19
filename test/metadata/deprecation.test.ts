@@ -73,7 +73,7 @@ describe("marketplace method deprecations", () => {
     );
     const generatedTags = readOzonDomainDeprecatedTags(domainApi);
 
-    expect(deprecated).toHaveLength(27);
+    expect(deprecated).toHaveLength(39);
     for (const operation of manifest.operations) {
       const domainName = findOzonDomain(operation.sdkMethod);
       const tag = generatedTags.get(`${domainName}.${operation.sdkMethod}`);
@@ -172,9 +172,11 @@ function collectDeprecatedOzonOperations(specification: OpenApiDocument) {
     Object.entries(pathItem).flatMap(([method, operation]) => {
       if (!HTTP_METHODS.has(method)) return [];
       const warning = readWarning(operation.description);
+      const fieldRetirement = /отключим параметры?\s/i.test(warning);
       if (
         operation.deprecated !== true &&
-        !/(устар|отключ|deprecated|shut down)/i.test(warning)
+        (fieldRetirement ||
+          !/(устар|отключ|deprecated|shut down)/i.test(warning))
       ) {
         return [];
       }

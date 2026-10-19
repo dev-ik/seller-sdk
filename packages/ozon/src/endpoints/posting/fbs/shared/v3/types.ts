@@ -228,6 +228,7 @@ export interface OzonFbsPostingRelatedPostingsV3 {
 
 export interface OzonFbsPostingDetailV3
   extends Omit<OzonFbsPostingV3, "addressee" | "products" | "prr_option"> {
+  readonly scanit?: string;
   readonly additional_data?: readonly OzonFbsPostingAdditionalDataV3[];
   readonly addressee?: OzonFbsPostingDetailAddresseeV3;
   readonly courier?: OzonFbsPostingCourierV3;

@@ -77,7 +77,17 @@ export interface CreateErfbsAggregatorWarehouseV1Request
      *
      * <!-- seller-sdk:ozon-openapi -->
      */
-    readonly return_settings: OzonErfbsReturnSettings;
+    readonly return_settings: OzonErfbsReturnSettings & {
+      /**
+       * Идентификатор пункта возврата. Получите значение параметра методом
+       * [/v1/warehouse/rfbs/return-point/list](#operation/WarehouseRfbsReturnPointList).
+       *
+       * Формат: `int64`.
+       *
+       * <!-- seller-sdk:ozon-openapi -->
+       */
+      readonly return_point_id?: number;
+    };
   };
 }
 

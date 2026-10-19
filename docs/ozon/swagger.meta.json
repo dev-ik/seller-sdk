@@ -1,11 +1,12 @@
 {
   "source": "https://docs.ozon.ru/api/seller/swagger.json",
-  "retrievedAt": "2026-08-14",
-  "sha256": "56e0ff0c64710918107ab83b574d209762fc559dbc9c80198ae31708b3881830",
-  "bytes": 3913746,
+  "retrievedAt": "2026-10-19",
+  "acquisition": "User-supplied official swagger.json; direct download was unavailable due to redirects.",
+  "sha256": "4c5756ae6b68177eae367786656f1b4ebdc00f2ca76c0311cf312a011ad1f9e4",
+  "bytes": 4234584,
   "openapiVersion": "3.0.0",
   "documentVersion": "2.1",
-  "paths": 461,
-  "operations": 461,
-  "schemas": 2132
+  "paths": 483,
+  "operations": 483,
+  "schemas": 2307
 }

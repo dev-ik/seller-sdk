@@ -121,5 +121,7 @@ export interface OzonProductStocksItem {
 export interface GetProductStocksResponse {
   readonly cursor?: string;
   readonly items?: readonly OzonProductStocksItem[];
+  /** @deprecated Use total_items. */
   readonly total?: number;
+  readonly total_items?: number;
 }

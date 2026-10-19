@@ -84,8 +84,15 @@ describe("Ozon auto-add products and notification API", () => {
     calls.push([enable, "/v1/notification/enable", "unsafe"]);
 
     const notifications = transportWith({
+      total_count: 1,
+      availability_status_thresholds: [],
       urls: [
         {
+          availability_status: "GREEN",
+          availability_status_date: "2026-10-19T00:00:00Z",
+          disable_reason: "",
+          problematic_type: "",
+          reason_details: "",
           created_at: "2026-08-15T10:00:00Z",
           enable: true,
           id: 1,
@@ -106,8 +113,15 @@ describe("Ozon auto-add products and notification API", () => {
     await expect(
       executeListNotificationsV1(
         transportWith({
+          total_count: 1,
+          availability_status_thresholds: [],
           urls: [
             {
+              availability_status: "GREEN",
+              availability_status_date: "2026-10-19T00:00:00Z",
+              disable_reason: "",
+              problematic_type: "",
+              reason_details: "",
               created_at: "2026-08-15T10:00:00Z",
               enable: true,
               id: 1,

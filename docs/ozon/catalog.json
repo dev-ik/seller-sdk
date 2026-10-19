@@ -4,13 +4,138 @@
   "source": {
     "file": "swagger.json",
     "url": "https://docs.ozon.ru/api/seller/swagger.json",
-    "retrievedAt": "2026-08-14",
-    "sha256": "56e0ff0c64710918107ab83b574d209762fc559dbc9c80198ae31708b3881830",
+    "retrievedAt": "2026-10-19",
+    "sha256": "4c5756ae6b68177eae367786656f1b4ebdc00f2ca76c0311cf312a011ad1f9e4",
     "openapiVersion": "3.0.0",
-    "documentVersion": "2.1"
+    "documentVersion": "2.1",
+    "legacyOperations": "legacy-operations.json"
   },
-  "operationCount": 461,
+  "operationCount": 485,
   "operations": [
+    {
+      "operationId": "QuantProductList",
+      "method": "POST",
+      "path": "/v1/product/quant/list",
+      "archived": true,
+      "tags": [
+        "Quants"
+      ],
+      "summary": "Список эконом-товаров",
+      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/ProductV1QuantListRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Эконом-товары",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/ProductV1QuantListResponse"
+              ]
+            }
+          }
+        },
+        "default": {
+          "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "QuantGetInfo",
+      "method": "POST",
+      "path": "/v1/product/quant/info",
+      "archived": true,
+      "tags": [
+        "Quants"
+      ],
+      "summary": "Информация об эконом-товаре",
+      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/ProductV1QuantInfoRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация об эконом-товаре",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/ProductV1QuantInfoResponse"
+              ]
+            }
+          }
+        },
+        "default": {
+          "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
     {
       "operationId": "AccessAPI_RolesByToken",
       "method": "POST",
@@ -461,7 +586,7 @@
         "ProductAPI"
       ],
       "summary": "Создать или обновить товар",
-      "description": "\nМетод для создания товаров и обновления информации о них.\n\nВ сутки можно создать или обновить определённое количество товаров. Чтобы узнать лимит, используйте\n[/v4/product/info/limit](#operation/ProductAPI_GetUploadQuota). Если количество загрузок и обновлений товаров\nпревысит лимит, появится ошибка `item_limit_exceeded`.\n\nУ метода есть лимит на количество операций c товарами в минуту. Если вы превысите лимит, вернётся ошибка `429` с описанием в поле `message` и заголовками:\n- `Item-Retry-After` — время в минутах до обновления лимита. Для суточного лимита — время до 03:00 по московскому времени.\n- `Item-Rate-Limit-Remaining` — остаток операций до следующего сброса лимита.\n\nВ одном запросе можно передать до 100 товаров. Каждый товар — это отдельный элемент в массиве `items`. Укажите\nвсю информацию о товаре: его характеристики, штрихкод, изображения, габариты, цену и валюту цены.\n\nПри обновлении товара передайте в запросе всю информацию о нём.\n\nУказанная валюта должна совпадать с той, которая установлена в настройках личного кабинета. По умолчанию передаётся `RUB` — российский рубль.\nНапример, если у вас установлена валюта юань, передавайте значение `CNY`, иначе вернётся ошибка.\n\nТовар не будет создан или обновлён, если вы заполните неправильно или не укажете:\n   - **Обязательные характеристики**: характеристики отличаются для разных категорий — их можно посмотреть в [Базе знаний продавца](https://global-help.ozon.com/products/requirements/product-info/product-characteristics/#обязательные-характеристики) или получить методом [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes).\n   - **Реальные объёмно-весовые характеристики**: `depth`, `width`, `height`, `dimension_unit`, `weight`, `weight_unit`. Не пропускайте эти параметры в запросе и не указывайте 0.\n\nДля некоторых характеристик можно использовать HTML-теги.\n\nПолучите статус модерации созданного или обновлённого товара в параметре `items.statuses.moderate_status` метода [/v3/product/info/list](#operation/ProductAPI_GetProductInfoList).\nПосле модерации товар появится в вашем личном кабинете, но не будет виден пользователям, пока вы не выставите его\nна продажу.\n\nКаждый товар в запросе — отдельный элемент массива `items`.\n\nЧтобы объединить две карточки, для каждой передайте `9048` в массиве `attributes`. Все атрибуты в этих карточках, кроме размера или цвета, должны совпадать.\n\n## Загрузка изображений\n\nДля загрузки передайте в запросе ссылки на изображения в общедоступном облачном хранилище.\nФормат изображения по ссылке — JPG или PNG.\n\nИзображения в массиве `images` располагайте в соответствии с желаемым порядком на сайте. Для загрузки главного\nизображения товара используйте параметр `primary_image`. Если не передать значение `primary_image`, главным будет\nпервое изображение в массиве `images`.\n\nЧтобы загрузить главное изображение для Ozon Селект:\n1. Проверьте, что в ответе метода [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes) возвращается характеристика с `result.id = 23500`.\n2. Передайте ссылку на изображение в параметре `items.attributes.values.value` с `id = 23500`.\n\nДля каждого товара вы можете загрузить до 30 изображений, включая главное.\nЕсли передать значение `primary_image`, максимальное количество изображений в `images` — 29.\nЕсли параметр `primary_image` пустой, то в `images` можно передать до 30 изображений.\n\nДля загрузки маркетингового цвета используйте поле `color_image`.\n\n[Подробнее о требованиях к фото в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какие-общие-требования-есть-для-фотографии-товара)\n\nЕсли вы хотите изменить состав или порядок изображений, получите информацию с помощью метода\n[/v3/product/info/list](#operation/ProductAPI_GetProductInfoList) — в нём отображается текущий порядок и\nсостав изображений. Скопируйте данные полей `images` и `color_image`, измените и дополните состав или\nпорядок в соответствии с необходимостью.\n\n## Загрузка видео\n\nДля загрузки передайте в запросе ссылки на видео длительностью от 8 секунд до 5 минут. Формат видео по ссылке — MP4, MOV. \n\n[Подробнее о требованиях к видео в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#каким-должно-быть-видео)\n\nДля этого в параметре `complex_attributes` передайте объект. В нём в массиве `attributes` передайте 2 объекта с `complex_id = 100001`:\n\n- В первом укажите `id = 21841` и в массиве `values` передайте объект с ссылкой на видео.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21841,\n    \"values\": [\n      {\n        \"value\": \"https://www.youtube.com/watch?v=ZwM0iBn03dY\"\n      }\n    ]\n  }\n  ```\n\n- Во втором укажите значение `id = 21837` и в массиве `values` передайте объект с названием видео.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21837,\n    \"values\": [\n      {\n        \"value\": \"videoName_1\"\n      }\n    ]\n  }\n  ```\n\nЕсли вы хотите загрузить несколько видео, передавайте значения для каждого видео в разных объектах массива `values`. Объекты в массиве располагайте в соответствии с желаемым порядком на сайте. Максимальное количество видео — 5.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21837,\n    \"values\": [\n      {\n        \"value\": \"videoName_1\"\n      },\n      {\n        \"value\": \"videoName_2\"\n      }\n    ]\n  },\n  {\n    \"complex_id\": 100001,\n    \"id\": 21841,\n    \"values\": [\n      {\n        \"value\": \"https://www.youtube.com/watch?v=ZwM0iBn03dY\"\n      },\n      {\n        \"value\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"\n      }\n    ]\n  }\n```\n\n## Загрузка видеообложки\n\nВы можете загрузить видеообложку через `complex_attributes`.\n\n[Подробнее о требованиях к видеообложкам в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какои-должна-быть-видеообложка)\n\n__Пример__:\n\n```\n\"complex_attributes\": [\n  {\n    \"attributes\": [\n      {\n        \"id\": 21845,\n        \"complex_id\": 100002,\n        \"values\": [\n          {\n          \"dictionary_value_id\": 0,\n          \"value\": \"https://v.ozone.ru/vod/video-10/01GFATWQVCDE7G5B721421P1231Q7/asset_1.mp4\"\n          }\n        ]\n      }\n    ]\n  }\n]\n```\n\n[Подробнее о видеообложке в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/zagruzka-tovarov/zagruzka-media/videooblozhka)\n\n## Загрузка таблицы размеров\nВы можете добавить в карточку товара таблицу размеров, созданную с помощью [конструктора](https://table-constructor.ozon.ru/visual-editor). Передайте её в массиве `attributes` в формате JSON как Rich-контент `id = 13164`. <br><br>\n[Конструктор в формате JSON](https://table-constructor.ozon.ru/schema.json)<br>\n[Подробнее о конструкторе в Базе знаний продавца](https://global-help.ozon.com/products/requirements/size-table-constructor/)\n",
+      "description": "\nМетод для создания товаров и обновления информации о них.\n\nВ сутки можно создать или обновить определённое количество товаров. Чтобы узнать лимит, используйте\n[/v4/product/info/limit](#operation/ProductAPI_GetUploadQuota). Если количество загрузок и обновлений товаров\nпревысит лимит, появится ошибка `item_limit_exceeded`.\n\nУ метода есть лимит на количество операций c товарами в минуту. Если вы превысите лимит, вернётся ошибка `429` с описанием в поле `message` и заголовками:\n- `Item-Retry-After` — время в минутах до обновления лимита. Для суточного лимита — время до 03:00 по московскому времени.\n- `Item-Rate-Limit-Remaining` — остаток операций до следующего сброса лимита.\n\nВ одном запросе можно передать до 100 товаров. Каждый товар — это отдельный элемент в массиве `items`. Укажите\nвсю информацию о товаре: его характеристики, штрихкод, изображения, габариты, цену и валюту цены.\n\nПри обновлении товара передайте в запросе всю информацию о нём.\n\nУказанная валюта должна совпадать с той, которая установлена в настройках личного кабинета. По умолчанию передаётся `RUB` — российский рубль.\nНапример, если у вас установлена валюта юань, передавайте значение `CNY`, иначе вернётся ошибка.\n\nТовар не будет создан или обновлён, если вы заполните неправильно или не укажете:\n   - **Обязательные характеристики**: характеристики отличаются для разных категорий — их можно посмотреть в [Базе знаний продавца](https://global-help.ozon.com/products/requirements/product-info/product-characteristics/#обязательные-характеристики) или получить методом [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes).\n   - **Реальные объёмно-весовые характеристики**: `depth`, `width`, `height`, `dimension_unit`, `weight`, `weight_unit`. Не пропускайте эти параметры в запросе и не указывайте 0.\n\nДля некоторых характеристик можно использовать HTML-теги.\n\nПолучите статус модерации созданного или обновлённого товара в параметре `items.statuses.moderate_status` метода [/v3/product/info/list](#operation/ProductAPI_GetProductInfoList).\nПосле модерации товар появится в вашем личном кабинете, но не будет виден пользователям, пока вы не выставите его\nна продажу.\n\nКаждый товар в запросе — отдельный элемент массива `items`.\n\nЧтобы объединить две карточки, для каждой передайте `9048` в массиве `attributes`. Все атрибуты в этих карточках, кроме размера или цвета, должны совпадать.\n\n## Загрузка изображений\n\nДля загрузки передайте в запросе ссылки на изображения в общедоступном облачном хранилище.\nФормат изображения по ссылке — JPG или PNG.\n\nИзображения в массиве `images` располагайте в соответствии с желаемым порядком на сайте. Для загрузки главного\nизображения товара используйте параметр `primary_image`. Если не передать значение `primary_image`, главным будет\nпервое изображение в массиве `images`.\n\nЧтобы загрузить главное изображение для Ozon Селект:\n1. Проверьте, что в ответе метода [/v1/description-category/attribute](#operation/DescriptionCategoryAPI_GetAttributes) возвращается характеристика с `result.id = 23500`.\n2. Передайте ссылку на изображение в параметре `items.attributes.values.value` с `id = 23500`.\n\nДля каждого товара вы можете загрузить до 50 изображений, включая главное.\nЕсли передать значение `primary_image`, максимальное количество изображений в `images` — 49.\nЕсли параметр `primary_image` пустой, то в `images` можно передать до 50 изображений.\n\nДля загрузки маркетингового цвета используйте поле `color_image`.\n\n[Подробнее о требованиях к фото в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какие-общие-требования-есть-для-фотографии-товара)\n\nЕсли вы хотите изменить состав или порядок изображений, получите информацию с помощью метода\n[/v3/product/info/list](#operation/ProductAPI_GetProductInfoList) — в нём отображается текущий порядок и\nсостав изображений. Скопируйте данные полей `images` и `color_image`, измените и дополните состав или\nпорядок в соответствии с необходимостью.\n\n## Загрузка видео\n\nДля загрузки передайте в запросе ссылки на видео длительностью от 8 секунд до 5 минут. Формат видео по ссылке — MP4, MOV. \n\n[Подробнее о требованиях к видео в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#каким-должно-быть-видео)\n\nДля этого в параметре `complex_attributes` передайте объект. В нём в массиве `attributes` передайте 2 объекта с `complex_id = 100001`:\n\n- В первом укажите `id = 21841` и в массиве `values` передайте объект с ссылкой на видео.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21841,\n    \"values\": [\n      {\n        \"value\": \"https://www.youtube.com/watch?v=ZwM0iBn03dY\"\n      }\n    ]\n  }\n  ```\n\n- Во втором укажите значение `id = 21837` и в массиве `values` передайте объект с названием видео.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21837,\n    \"values\": [\n      {\n        \"value\": \"videoName_1\"\n      }\n    ]\n  }\n  ```\n\nЕсли вы хотите загрузить несколько видео, передавайте значения для каждого видео в разных объектах массива `values`. Объекты в массиве располагайте в соответствии с желаемым порядком на сайте. Максимальное количество видео — 5.\n\n  __Пример__:\n\n  ```\n  {\n    \"complex_id\": 100001,\n    \"id\": 21837,\n    \"values\": [\n      {\n        \"value\": \"videoName_1\"\n      },\n      {\n        \"value\": \"videoName_2\"\n      }\n    ]\n  },\n  {\n    \"complex_id\": 100001,\n    \"id\": 21841,\n    \"values\": [\n      {\n        \"value\": \"https://www.youtube.com/watch?v=ZwM0iBn03dY\"\n      },\n      {\n        \"value\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"\n      }\n    ]\n  }\n```\n\n## Загрузка видеообложки\n\nВы можете загрузить видеообложку через `complex_attributes`.\n\n[Подробнее о требованиях к видеообложкам в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какои-должна-быть-видеообложка)\n\n__Пример__:\n\n```\n\"complex_attributes\": [\n  {\n    \"attributes\": [\n      {\n        \"id\": 21845,\n        \"complex_id\": 100002,\n        \"values\": [\n          {\n          \"dictionary_value_id\": 0,\n          \"value\": \"https://v.ozone.ru/vod/video-10/01GFATWQVCDE7G5B721421P1231Q7/asset_1.mp4\"\n          }\n        ]\n      }\n    ]\n  }\n]\n```\n\n[Подробнее о видеообложке в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/zagruzka-tovarov/zagruzka-media/videooblozhka)\n\n## Загрузка таблицы размеров\nВы можете добавить в карточку товара таблицу размеров, созданную с помощью [конструктора](https://table-constructor.ozon.ru/visual-editor). Передайте её в массиве `attributes` в формате JSON как Rich-контент `id = 13164`. <br><br>\n[Конструктор в формате JSON](https://table-constructor.ozon.ru/schema.json)<br>\n[Подробнее о конструкторе в Базе знаний продавца](https://global-help.ozon.com/products/requirements/size-table-constructor/)\n",
       "deprecated": false,
       "parameters": [
         {
@@ -895,8 +1020,8 @@
         "ProductAPI"
       ],
       "summary": "Загрузить или обновить изображения товара",
-      "description": "Метод для загрузки или обновления изображений товара.\n\nПри каждом вызове метода передавайте все изображения, которые должны быть на карточке товара. Например, если вы вызвали метод и загрузили 10 изображений, а затем вызвали метод второй раз и загрузили ещё одно,\nто все 10 предыдущих сотрутся.\n\nДля загрузки передайте адрес ссылки на изображение в общедоступном облачном хранилище.\nФормат изображения по ссылке — JPG или PNG.\n\nИзображения в массиве `images` располагайте в соответствии с желаемым порядком на сайте. Главным будет\nпервое изображение в массиве.\n\nДля каждого товара вы можете загрузить до 30 изображений.\n\nДля загрузки маркетингового цвета используйте поле `color_image`.\n\n[Подробнее о требованиях к фото в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какие-общие-требования-есть-для-фотографии-товара)\n\nЕсли вы хотите изменить состав или порядок изображений, получите информацию с помощью метода\n[/v3/product/info/list](#operation/ProductAPI_GetProductInfoList) — в нём отображается текущий порядок и\nсостав изображений. Скопируйте данные полей `images` и `color_image`, измените и дополните состав или\nпорядок в соответствии с необходимостью.\n\nЕсли вы обновили изображение по ссылке, но ссылка не изменилась, в методе [/v1/product/import/info](#operation/ProductAPI_GetImportProductsInfo) для изображения в параметре `result.items.status` вернётся `skipped`.\n\nУ метода есть лимит на количество операций c товарами в минуту и в сутки. Если вы превысите лимит, вернётся ошибка `429` с описанием в поле `message` и заголовками:\n- `Item-Retry-After` — время в минутах до обновления лимита. Для суточного лимита — время до 03:00 по московскому времени.\n- `Item-Rate-Limit-Remaining` — остаток операций до следующего сброса лимита.\n\nЧтобы узнать лимит, используйте [/v4/product/info/limit](#operation/ProductAPI_GetUploadQuota).\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\nС 1 октября 2026 года метод будет отключён. Переключитесь на <a href=\"#operation/ProductImportPicturesV2\">/v2/product/pictures/import</a>.\n</aside>\n\nМетод для загрузки или обновления изображений товара.\n\nПри каждом вызове метода передавайте все изображения, которые должны быть на карточке товара. Например, если вы вызвали метод и загрузили 10 изображений, а затем вызвали метод второй раз и загрузили ещё одно,\nто все 10 предыдущих сотрутся.\n\nДля загрузки передайте адрес ссылки на изображение в общедоступном облачном хранилище.\nФормат изображения по ссылке — JPG или PNG.\n\nИзображения в массиве `images` располагайте в соответствии с желаемым порядком на сайте. Главным будет\nпервое изображение в массиве.\n\nДля каждого товара вы можете загрузить до 50 изображений.\n\nДля загрузки маркетингового цвета используйте поле `color_image`.\n\n[Подробнее о требованиях к фото в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какие-общие-требования-есть-для-фотографии-товара)\n\nЕсли вы хотите изменить состав или порядок изображений, получите информацию с помощью метода\n[/v3/product/info/list](#operation/ProductAPI_GetProductInfoList) — в нём отображается текущий порядок и\nсостав изображений. Скопируйте данные полей `images` и `color_image`, измените и дополните состав или\nпорядок в соответствии с необходимостью.\n\nЕсли вы обновили изображение по ссылке, но ссылка не изменилась, в методе [/v1/product/import/info](#operation/ProductAPI_GetImportProductsInfo) для изображения в параметре `result.items.status` вернётся `skipped`.\n\nУ метода есть лимит на количество операций c товарами в минуту и в сутки. Если вы превысите лимит, вернётся ошибка `429` с описанием в поле `message` и заголовками:\n- `Item-Retry-After` — время в минутах до обновления лимита. Для суточного лимита — время до 03:00 по московскому времени.\n- `Item-Rate-Limit-Remaining` — остаток операций до следующего сброса лимита.\n\nЧтобы узнать лимит, используйте [/v4/product/info/limit](#operation/ProductAPI_GetUploadQuota).\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -999,6 +1124,117 @@
       }
     },
     {
+      "operationId": "ProductImportPicturesV2",
+      "method": "POST",
+      "path": "/v2/product/pictures/import",
+      "tags": [
+        "ProductAPI"
+      ],
+      "summary": "Загрузить или обновить изображения товара",
+      "description": "При каждом вызове метода передавайте все изображения, которые должны быть на карточке товара. Например, если вы вызвали метод и загрузили 10 изображений, а затем вызвали метод второй раз и загрузили ещё одно,\nто все 10 предыдущих сотрутся.\n\nДля загрузки передайте адрес ссылки на изображение в общедоступном облачном хранилище.\nФормат изображения по ссылке — JPG или PNG.\n\nИзображения в массиве `items.images` располагайте в соответствии с желаемым порядком на сайте. Главным будет\nпервое изображение в массиве.\n\nДля каждого товара вы можете загрузить до 50 изображений.\n\nДля загрузки маркетингового цвета используйте поле `items.color_image`.\n\n[Подробнее о требованиях к фото в Базе знаний продавца](https://seller-edu.ozon.ru/libra/work-with-goods/trebovaniya-k-kartochkam-tovarov/media/foto-i-video-tovara#какие-общие-требования-есть-для-фотографии-товара)\n\nЕсли вы хотите изменить состав или порядок изображений, получите информацию с помощью метода\n[/v3/product/info/list](#operation/ProductAPI_GetProductInfoList) — в нём отображается текущий порядок и\nсостав изображений. Скопируйте данные полей `items.images` и `items.color_image`, измените и дополните состав или\nпорядок при необходимости.\n\nУ метода есть лимит на количество операций c товарами в минуту и в сутки. Если вы превысите лимит, вернётся ошибка `429` с описанием в поле `message` и заголовками:\n- `Item-Retry-After` — время в минутах до обновления лимита. Для суточного лимита — время до 03:00 по московскому времени.\n- `Item-Rate-Limit-Remaining` — остаток операций до следующего сброса лимита.\n\nЧтобы узнать лимит, используйте метод [/v4/product/info/limit](#operation/ProductAPI_GetUploadQuota).\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/product.v2.ProductImportPicturesV2Request"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Изображения загружены или обновлены",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/product.v2.ProductInfoPicturesV2Response"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "429": {
+          "description": "Слишком много запросов",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "ProductAPI_GetProductList",
       "method": "POST",
       "path": "/v3/product/list",
@@ -1006,7 +1242,7 @@
         "ProductAPI"
       ],
       "summary": "Список товаров",
-      "description": "Метод для получения списка всех товаров.\n\nЕсли вы используете фильтр по идентификатору `offer_id` или `product_id`, остальные параметры заполнять не обязательно.\nВернутся все товары с указанными идентификаторами, независимо от видимости.\nЗа один раз вы можете использовать только одну группу идентификаторов, не больше 1000 товаров.\n\nЕсли вы не используете для отображения идентификаторы, укажите `limit` и `last_id` в следующих запросах.\n",
+      "description": "<aside class=\"warning\">\n  23 ноября 2026 года отключим параметр <code>result.total</code> в ответе метода. Переключитесь на <code>result.total_items</code>.\n</aside> \n\nМетод для получения списка всех товаров.\n\nЕсли вы используете фильтр по идентификатору `offer_id` или `product_id`, остальные параметры заполнять не обязательно.\nВернутся все товары с указанными идентификаторами, независимо от видимости.\nЗа один раз вы можете использовать только одну группу идентификаторов, не больше 1000 товаров.\n\nЕсли вы не используете для отображения идентификаторы, укажите `limit` и `last_id` в следующих запросах.\n",
       "deprecated": false,
       "parameters": [
         {
@@ -2329,6 +2565,107 @@
       }
     },
     {
+      "operationId": "BarcodeDelete",
+      "method": "POST",
+      "path": "/v1/barcode/delete",
+      "tags": [
+        "BarcodeAPI"
+      ],
+      "summary": "Отвязать штрихкод от товара",
+      "description": "Не получится отвязать штрихкод, если на складе есть остатки товара с таким штрихкодом или после продажи остатков прошло меньше 6 месяцев.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/barcode.v1.BarcodeDeleteRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Штрихкод отвязан от товара",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/barcode.v1.BarcodeDeleteResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "generate-barcode",
       "method": "POST",
       "path": "/v1/barcode/generate",
@@ -2481,7 +2818,7 @@
         "Prices&StocksAPI"
       ],
       "summary": "Информация о количестве товаров",
-      "description": "Возвращает информацию о ĸоличестве товаров по схемам FBS, rFBS и FBP:\n  - сĸольĸо единиц есть в наличии,\n  - сĸольĸо зарезервировано поĸупателями.\n\nЧтобы получить информацию об остатках по схеме FBO, используйте метод [/v1/analytics/stocks](#operation/AnalyticsAPI_AnalyticsStocks).\n",
+      "description": "<aside class=\"warning\">\n  23 ноября 2026 года отключим параметр <code>total</code> в ответе метода. Переключитесь на <code>total_items</code>.\n</aside> \n\nВозвращает информацию о ĸоличестве товаров по схемам FBO, FBS, rFBS и FBP:\n  - сĸольĸо единиц есть в наличии,\n  - сĸольĸо зарезервировано поĸупателями.\n\nЧтобы получить аналитику по остаткам по схеме FBO, используйте метод [/v1/analytics/stocks](#operation/AnalyticsAPI_AnalyticsStocks).\n",
       "deprecated": false,
       "parameters": [
         {
@@ -3003,7 +3340,7 @@
         "Prices&StocksAPI"
       ],
       "summary": "Получить информацию о цене товара",
-      "description": "<aside class=\"warning\">\n Вы можете посмотреть историю обновления цен только в личном кабинете продавца.<br> <a href=\"https://seller-edu.ozon.ru/libra/ceny-i-akcii/rabota-s-cenami/price-control#как-посмотреть-историю-обновления-цен\">Подробнее об истории обновления цен в Базе знаний продавца</a>\n</aside>\n",
+      "description": "<aside class=\"warning\">\n23 ноября 2026 года отключим параметр <code>total</code> в ответе метода. Переключитесь на <code>total_items</code>.\n\nВы можете посмотреть историю обновления цен только в личном кабинете продавца.<br> <a href=\"https://seller-edu.ozon.ru/libra/ceny-i-akcii/rabota-s-cenami/price-control#как-посмотреть-историю-обновления-цен\">Подробнее об истории обновления цен в Базе знаний продавца</a>\n</aside>\n",
       "deprecated": false,
       "parameters": [
         {
@@ -3341,8 +3678,8 @@
         "Promos"
       ],
       "summary": "Список доступных для акции товаров",
-      "description": "Метод для получения списка товаров, которые могут участвовать в акции, по её идентификатору.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsCandidates\">/v2/actions/candidates</a>.\n</aside>\n\nМетод для получения списка товаров, которые могут участвовать в акции, по её идентификатору.\n",
+      "deprecated": true,
       "parameters": [],
       "requestBody": {
         "required": false,
@@ -3367,6 +3704,107 @@
         },
         "default": {
           "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsCandidates",
+      "method": "POST",
+      "path": "/v2/actions/candidates",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Получить список товаров, которые могут участвовать в акции",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/PromosCandidates\">/v1/actions/candidates</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsCandidatesRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Список товаров, которые могут участвовать в акции",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsCandidatesResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
           "content": {
             "application/json": {
               "schemaReferences": [
@@ -3385,8 +3823,8 @@
         "Promos"
       ],
       "summary": "Список участвующих в акции товаров",
-      "description": "Метод для получения списка товаров, участвующих в акции, по её идентификатору.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsProducts\">/v2/actions/products</a>.\n</aside>\n\nМетод для получения списка товаров, участвующих в акции, по её идентификатору.\n",
+      "deprecated": true,
       "parameters": [],
       "requestBody": {
         "required": false,
@@ -3422,6 +3860,107 @@
       }
     },
     {
+      "operationId": "ActionsProducts",
+      "method": "POST",
+      "path": "/v2/actions/products",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Получить список товаров, которые участвуют в акции",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/PromosProducts\">/v1/actions/products</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsProductsRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Список товаров, которые участвуют в акции",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsProductsResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "PromosProductsActivate",
       "method": "POST",
       "path": "/v1/actions/products/activate",
@@ -3429,8 +3968,8 @@
         "Promos"
       ],
       "summary": "Добавить товар в акцию",
-      "description": "Метод для добавления товаров в доступную акцию.",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsProductsUpdate\">/v1/actions/products/update</a>.\n</aside>\n\nМетод для добавления товаров в доступную акцию.\n",
+      "deprecated": true,
       "parameters": [],
       "requestBody": {
         "required": true,
@@ -3466,6 +4005,107 @@
       }
     },
     {
+      "operationId": "ActionsProductsUpdate",
+      "method": "POST",
+      "path": "/v1/actions/products/update",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Добавить или обновить товар в акции",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/PromosProductsActivate\">/v1/actions/products/activate</a>, изменить цену на карточке товара с помощью метода не получится.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v1.ActionsProductsUpdateRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Товары добавлены или обновлены",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v1.ActionsProductsUpdateResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "PromosProductsDeactivate",
       "method": "POST",
       "path": "/v1/actions/products/deactivate",
@@ -3473,8 +4113,8 @@
         "Promos"
       ],
       "summary": "Удалить товары из акции",
-      "description": "Метод для удаления товаров из акции.",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsProductsDeactivate\">/v2/actions/products/deactivate</a>.\n</aside>\n\nМетод для удаления товаров из акции.\n",
+      "deprecated": true,
       "parameters": [],
       "requestBody": {
         "required": true,
@@ -3499,6 +4139,107 @@
         },
         "default": {
           "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsProductsDeactivate",
+      "method": "POST",
+      "path": "/v2/actions/products/deactivate",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Удалить товары из акции «Промокоды»",
+      "description": "Чтобы удалить товары из акций «Эластичный бустинг» или «Максимальный бустинг», используйте метод [/v1/actions/products/update](#operation/ActionsProductsUpdate) и измените цену товара `action_price` на значение больше или равное лимиту акции.\n\n<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/PromosProductsDeactivate\">/v1/actions/products/deactivate</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsProductsDeactivateRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Товары удалены из акции",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsProductsDeactivateResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
           "content": {
             "application/json": {
               "schemaReferences": [
@@ -3631,6 +4372,410 @@
         },
         "default": {
           "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsAutoAddProductsListV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/list",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Получить список товаров из автодобавления в акцию",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/ActionsAutoAddProductsList\">/v1/actions/auto-add/products/list</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsAutoAddProductsListRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Список товаров с автодобавлением",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsAutoAddProductsListResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsAutoAddProductsCandidatesV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/candidates",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Получить список доступных товаров для автодобавления в акцию",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/ActionsAutoAddProductsCandidates\">/v1/actions/auto-add/products/candidates</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsAutoAddProductsCandidatesRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Список доступных товаров для автодобавления в акцию",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsAutoAddProductsCandidatesResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsAutoAddProductsDeleteV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/delete",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Удалить товары из автодобавления в акцию",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/ActionsAutoAddProductsDelete\">/v1/actions/auto-add/products/delete</a>.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsAutoAddProductsDeleteRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Товары удалены из автодобавления",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsAutoAddProductsDeleteResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ActionsAutoAddProductsUpdateV2",
+      "method": "POST",
+      "path": "/v2/actions/auto-add/products/update",
+      "tags": [
+        "Promos"
+      ],
+      "summary": "Добавить или обновить товары в автодобавлении в акцию",
+      "description": "<aside class=\"warning\">\nДо 13 октября 2026 года метод работает аналогично <a href=\"#operation/ActionsAutoAddProductsUpdate\">/v1/actions/auto-add/products/update</a>, изменить цену на карточке товара с помощью метода не получится.\n</aside>\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/actions.v2.ActionsAutoAddProductsUpdateRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Товары добавлены или обновлены в автодобавлении",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/actions.v2.ActionsAutoAddProductsUpdateResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
           "content": {
             "application/json": {
               "schemaReferences": [
@@ -5046,6 +6191,199 @@
       }
     },
     {
+      "operationId": "ProductCertificateOptions",
+      "method": "POST",
+      "path": "/v2/product/certification/options",
+      "tags": [
+        "CertificationAPI"
+      ],
+      "summary": "Получить параметры для создания сертификата качества",
+      "description": "Используйте информацию о параметрах в запросе метода [/v2/product/certification/params](#operation/ProductCertificateParams).\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": null,
+      "responses": {
+        "200": {
+          "description": "Параметры для создания сертификата",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/certification.v2.ProductCertificateOptionsResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ProductCertificateParams",
+      "method": "POST",
+      "path": "/v2/product/certification/params",
+      "tags": [
+        "CertificationAPI"
+      ],
+      "summary": "Получить обязательные параметры для создания сертификата качества",
+      "description": "Используйте информацию о параметрах в запросе метода [/v2/product/certificate/create](#operation/ProductCertificateCreate).\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/certification.v2.ProductCertificateParamsRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Обязательные параметры для создания сертификата",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/certification.v2.ProductCertificateParamsResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "ProductAPI_ProductCertificateCreate",
       "method": "POST",
       "path": "/v1/product/certificate/create",
@@ -5087,6 +6425,106 @@
           "content": {
             "application/json": {
               "schemaReferences": []
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "ProductCertificateCreate",
+      "method": "POST",
+      "path": "/v2/product/certificate/create",
+      "tags": [
+        "CertificationAPI"
+      ],
+      "summary": "Создать сертификат качества",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/certification.v2.ProductCertificateCreateRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Сертификат создан",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/certification.v2.ProductCertificateCreateResponse"
+              ]
             }
           }
         },
@@ -5466,6 +6904,7 @@
         "CertificationAPI"
       ],
       "summary": "Список товаров, привязанных к сертификату",
+      "description": "<aside class=\"warning\"> 28 сентября 2026 года отключим параметры <code>page</code> и <code>page_size</code> в запросе метода. Используйте параметры <code>last_id</code> и <code>limit</code>. </aside>",
       "deprecated": false,
       "parameters": [
         {
@@ -9567,7 +11006,7 @@
         "DeliveryFBS"
       ],
       "summary": "Создание отгрузки",
-      "description": "\n<aside class=\"warning\">\nЕсли вы продавец не из России, обратите внимание на доступность <a href=\"https://seller-edu.ozon.ru/fbs/ozon-logistika/sobrat-zakazy#шаг-2-сформируите-отгрузку\">рекомендованного времени</a> в личном кабинете.\nЕсли вам не доступен этот функционал, создайте отгрузку через метод <a href=\"#operation/PostingAPI_PostingFBSActCreate\">/v2/posting/fbs/act/create</a>. \nПодтверждать отгрузку, которую создали через этот метод, не нужно. Вы не сможете отредактировать состав отгрузки.\n\n</aside>\n\nИспользуйте метод для создания первой FBS отгрузки. В неё попадут все отправления со статусом «Готов к отгрузке». Созданная отгрузка получит статус `new`.\n\nДля отгрузки в статусе `new` можно перезаписать состав отправлений методом [/v1/carriage/set-postings](#operation/CarriageAPI_SetPostings). Если из отгрузки исключить часть отправлений, они могут попасть в следующую отгрузку. \n\nЧтобы получить список отправлений в отгрузке, используйте метод [/v2/posting/fbs/act/get-postings](#operation/PostingAPI_ActPostingList).\n",
+      "description": "<aside class=\"warning\">\nПеред началом работы проверьте возможность создания отгрузки методом <a href=\"#operation/CarriageAPI_CarriageDeliveryListV2\">/v2/carriage/delivery/list</a>. <br> Если <code>methods.carriages.available_actions = create</code>, вы можете создать отгрузку.  \n\nЕсли вы продавец не из России, обратите внимание на доступность <a href=\"https://seller-edu.ozon.ru/fbs/ozon-logistika/sobrat-zakazy#шаг-2-сформируите-отгрузку\">рекомендованного времени</a> в личном кабинете.\n</aside>\n\nИспользуйте метод для создания первой FBS отгрузки. В неё попадут все отправления со статусом «Готов к отгрузке». Созданная отгрузка получит статус `new`.\n\nДля отгрузки в статусе `new` можно перезаписать состав отправлений методом [/v1/carriage/set-postings](#operation/CarriageAPI_SetPostings). Если из отгрузки исключить часть отправлений, они могут попасть в следующую отгрузку. \n\nЧтобы получить список отправлений в отгрузке, используйте метод [/v2/posting/fbs/act/get-postings](#operation/PostingAPI_ActPostingList).\n",
       "deprecated": false,
       "parameters": [
         {
@@ -10399,6 +11838,202 @@
         },
         "default": {
           "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "CarriageCourierContactSet",
+      "method": "POST",
+      "path": "/v1/carriage/courier-contact/set",
+      "tags": [
+        "DeliveryFBS"
+      ],
+      "summary": "Добавить или обновить контактные данные продавца для курьера",
+      "description": "Используйте метод, чтобы добавить или обновить контактные данные продавца, которые передаются курьеру для перевозок с `first_mile_type = pickup` и `integration_type = ozon_outsourced`.\nПолучите значения параметров `first_mile_type` и `integration_type` в ответе метода [/v1/carriage/get](#operation/CarriageGet).\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/v1CarriageCourierContactSetRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Контактные данные добавлены или обновлены",
+          "content": {}
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "CarriageCourierContactGet",
+      "method": "POST",
+      "path": "/v1/carriage/courier-contact/get",
+      "tags": [
+        "DeliveryFBS"
+      ],
+      "summary": "Получить контактные данные продавца для курьера",
+      "description": "Возвращает контактные данные продавца, которые добавили или обновили методом [/v1/carriage/courier-contact/set](#operation/CarriageCourierContactSet).",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/v1CarriageCourierContactGetRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Контактные данные продавца для курьера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/v1CarriageCourierContactGetResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
           "content": {
             "application/json": {
               "schemaReferences": [
@@ -13446,8 +15081,8 @@
         "FBS"
       ],
       "summary": "Напечатать этикетку",
-      "description": "<aside class=\"warning\">\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nГенерирует PDF-файл с этикетками для указанных отправлений в статусе «Ожидает отгрузки» — `awaiting_deliver`. В одном запросе можно передать не больше 20 идентификаторов. Если хотя бы для одного отправления возникнет ошибка, этикетки не будут подготовлены для всех отправлений в запросе.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nОшибка `The next postings aren't ready` означает, что этикетки ещё не готовы, повторите запрос позднее.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\nC 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.<br>\n<a href=\"https://seller-edu.ozon.ru/libra/fbs/logistics-settings/metody#тестовыи-формат-этикетки\">Подробнее о новых этикетках в Базе знаний продавца</a>\n\nС 2 ноября 2026 года метод будет отключён. Переключитесь на <a href=\"#operation/PostingFbsPackageLabelCreate\">/v3/posting/fbs/package-label/create</a> и <a href=\"#operation/PostingFbsPackageLabelGet\">/v2/posting/fbs/package-label/get</a>.\n\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nГенерирует PDF-файл с этикетками для указанных отправлений в статусе «Ожидает отгрузки» — `awaiting_deliver`. В одном запросе можно передать не больше 20 идентификаторов. Если хотя бы для одного отправления возникнет ошибка, этикетки не будут подготовлены для всех отправлений в запросе.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nОшибка `The next postings aren't ready` означает, что этикетки ещё не готовы, повторите запрос позднее.\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -13547,8 +15182,8 @@
         "FBS"
       ],
       "summary": "Создать задание на выгрузку этикеток",
-      "description": "<aside class=\"warning\">\nВ будущем метод будет отключён. Мы предупредим вас об этом за месяц. Переключитесь на <a href=\"#operation/PostingAPI_CreateLabelBatchV2\">/v2/posting/fbs/package-label/create</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток.\n\nДля получения этикеток, созданных в результате вызова метода, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\nC 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.<br>\n<a href=\"https://seller-edu.ozon.ru/libra/fbs/logistics-settings/metody#тестовыи-формат-этикетки\">Подробнее о новых этикетках в Базе знаний продавца</a>\n\nС 2 ноября 2026 года метод будет отключён. Переключитесь на <a href=\"#operation/PostingFbsPackageLabelCreate\">/v3/posting/fbs/package-label/create</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток.\n\nДля получения этикеток, созданных в результате вызова метода, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -13648,8 +15283,8 @@
         "FBS"
       ],
       "summary": "Создать задание на формирование этикеток",
-      "description": "<aside class=\"warning\">\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток для отправлений в статусе «Ожидает отгрузки» — `awaiting_deliver`.\nМетод может вернуть несколько заданий: на формирование маленькой и большой этикетки.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nЧтобы получить созданные этикетки, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\nC 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.<br>\n<a href=\"https://seller-edu.ozon.ru/libra/fbs/logistics-settings/metody#тестовыи-формат-этикетки\">Подробнее о новых этикетках в Базе знаний продавца</a>\n\nС 2 ноября 2026 года метод будет отключён. Переключитесь на <a href=\"#operation/PostingFbsPackageLabelCreate\">/v3/posting/fbs/package-label/create</a>.\n\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nМетод для создания задания на асинхронное формирование этикеток для отправлений в статусе «Ожидает отгрузки» — `awaiting_deliver`.\nМетод может вернуть несколько заданий: на формирование маленькой и большой этикетки.\n\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nЧтобы получить созданные этикетки, используйте [/v1/posting/fbs/package-label/get](#operation/PostingAPI_GetLabelBatch).\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -13742,6 +15377,107 @@
       }
     },
     {
+      "operationId": "PostingFbsPackageLabelCreate",
+      "method": "POST",
+      "path": "/v3/posting/fbs/package-label/create",
+      "tags": [
+        "FBS"
+      ],
+      "summary": "Создать задание на формирование этикеток",
+      "description": "<aside class=\"warning\">\nЕсли вы работаете по схеме rFBS или rFBS Express, изучите процесс печати этикетки в <a href=\"https://seller-edu.ozon.ru/rfbs/scheme-of-work\">Базе знаний продавца</a>.\n</aside>\n\nСоздаёт задания на асинхронное формирование этикеток для отправлений в статусе «Ожидает отгрузки» — `awaiting_deliver`.\nРекомендуем запрашивать этикетки через 45–60 секунд после сборки заказа.\n\nЧтобы получить созданные этикетки, используйте [/v2/posting/fbs/package-label/get](#operation/PostingFbsPackageLabelGet).\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/posting.v3.PostingFbsPackageLabelCreateRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Задания на формирование этикеток",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/posting.v3.PostingFbsPackageLabelCreateResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "PostingAPI_GetLabelBatch",
       "method": "POST",
       "path": "/v1/posting/fbs/package-label/get",
@@ -13749,8 +15485,8 @@
         "FBS"
       ],
       "summary": "Получить файл с этикетками",
-      "description": "Метод для получения этикеток после вызова [/v1/posting/fbs/package-label/create](#operation/PostingAPI_CreateLabelBatch).",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\nC 5 октября 2026 года метод возвращает новые этикетки для отправлений FBS.<br>\n<a href=\"https://seller-edu.ozon.ru/libra/fbs/logistics-settings/metody#тестовыи-формат-этикетки\">Подробнее о новых этикетках в Базе знаний продавца</a>\n\nС 2 ноября 2026 года метод будет отключён. Переключитесь на <a href=\"#operation/PostingFbsPackageLabelGet\">/v2/posting/fbs/package-label/get</a>.\n</aside>\n\nМетод для получения этикеток после вызова [/v1/posting/fbs/package-label/create](#operation/PostingAPI_CreateLabelBatch).\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -13786,6 +15522,106 @@
             "application/json": {
               "schemaReferences": [
                 "#/components/schemas/v1GetLabelBatchResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "PostingFbsPackageLabelGet",
+      "method": "POST",
+      "path": "/v2/posting/fbs/package-label/get",
+      "tags": [
+        "FBS"
+      ],
+      "summary": "Получить файл с этикетками",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/posting.v2.PostingFbsPackageLabelGetRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Статус формирования этикеток или файл с ними",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/posting.v2.PostingFbsPackageLabelGetResponse"
               ]
             }
           }
@@ -17443,7 +19279,7 @@
         "AnalyticsAPI"
       ],
       "summary": "Получить аналитику по остаткам",
-      "description": "<aside class=\"warning\">\nС 17 августа 2026 года метод возвращает информацию об остатках в реальном времени.\n</aside>\n\nИспользуйте метод, чтобы получить аналитику по остаткам товаров на складах. Метод соответствует разделу [**FBO → Управление остатками**](https://seller.ozon.ru/app/fbo-stocks/stocks-management/) в личном кабинете. Аналитика обновляется два раза в день: примерно в 07:00 и 16:00 по UTC.\n\nВ запросе используйте только одно из полей: `cluster_ids` или `macrolocal_cluster_ids`, иначе вернётся ошибка.\n",
+      "description": "Используйте метод, чтобы получить аналитику по остаткам товаров на складах в реальном времени. Метод соответствует разделу [**FBO → Управление остатками**](https://seller.ozon.ru/app/fbo-stocks/stocks-management/) в личном кабинете. \n\nВ запросе используйте только одно из полей: `cluster_ids` или `macrolocal_cluster_ids`, иначе вернётся ошибка.\n",
       "deprecated": false,
       "parameters": [
         {
@@ -20126,6 +21962,168 @@
       }
     },
     {
+      "operationId": "AnalyticsDecommissionedGoods",
+      "method": "POST",
+      "path": "/v1/analytics/decommissioned-goods",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить отчёт о списанных товарах",
+      "description": "Соответствует разделу **FBO → Списанные товары** в личном кабинете.\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2287-Novyi-metod-dlia-polucheniia-Otcheta-spisannye-tovary/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/analytics.v1.AnalyticsDecommissionedGoodsRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Отчёт о списанных товарах",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/analytics.v1.AnalyticsDecommissionedGoodsResponse"
+              ]
+            }
+          }
+        },
+        "default": {
+          "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsCategoryComparison",
+      "method": "POST",
+      "path": "/v1/analytics/category/comparison",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить информацию о сравнении категорий",
+      "description": "Соответствует разделу [**Аналитика → Категории**](https://seller.ozon.ru/app/analytics/what-to-sell/categories-comparison) в личном кабинете.\n\nМетод доступен продавцам с подпиской [Premium Pro](https://seller-edu.ozon.ru/libra/seller-rating/podpiska-premium-pro).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2347-Novyi-metod-dlia-polucheniia-otcheta-Sravnenie-kategorii/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/analytics.v1.AnalyticsCategoryComparisonRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация о сравнении категорий",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/analytics.v1.AnalyticsCategoryComparisonResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "GetSupplyReturnsSummaryReport",
       "method": "POST",
       "path": "/v1/removal/from-supply/list",
@@ -21080,14 +23078,620 @@
       }
     },
     {
-      "operationId": "ProductCertificateOptions",
+      "operationId": "DescriptionCategoryDependentAttributes",
       "method": "POST",
-      "path": "/v2/product/certification/options",
+      "path": "/v1/description-category/dependent-attributes",
       "tags": [
         "BetaMethod"
       ],
-      "summary": "Получить параметры для создания сертификата качества",
-      "description": "Используйте информацию о параметрах в запросе метода [/v2/product/certification/params](#operation/ProductCertificateParams).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/) в сообществе разработчиков Ozon for dev.\n",
+      "summary": "Получить зависимые характеристики",
+      "description": "Возвращает пары идентификаторов родительской и дочерней характеристик. Получите возможные значения дочерней характеристики для значений родительской методом [/v1/description-category/dependent-attributes/values](#operation/DescriptionCategoryDependentAttributesValues).\n\nХарактеристика с `parent_attribute_id = 8229` — это идентификатор типа товара `type_id`. Не указывайте её в параметре `items.attributes.id` в запросах к методам [/v3/product/import](#operation/ProductAPI_ImportProductsV3) и [/v1/product/attributes/update](#operation/ProductAPI_ProductUpdateAttributes).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2296-Novye-metody-zavisimykh-atributov/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/category.description.v1.DescriptionCategoryDependentAttributesRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Зависимые характеристики",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/category.description.v1.DescriptionCategoryDependentAttributesResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "DescriptionCategoryDependentAttributesValues",
+      "method": "POST",
+      "path": "/v1/description-category/dependent-attributes/values",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить возможные значения дочерней характеристики",
+      "description": "Возвращает возможные значения дочерней характеристики для значений родительской.\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2296-Novye-metody-zavisimykh-atributov/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/category.description.v1.DescriptionCategoryDependentAttributesValuesRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Возможные значения дочерней характеристики",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/category.description.v1.DescriptionCategoryDependentAttributesValuesResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsLocalSaleTotal",
+      "method": "POST",
+      "path": "/v1/analytics/local-sale/total",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить общую информацию о локальности продаж",
+      "description": "Метод соответствует разделу [**Аналитика → Планирование поставок → Локальность продаж**](https://seller.ozon.ru/app/analytics/sales-geography/local-packaging).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2335-Novye-beta-metody-dlia-polucheniia-lokalnosti-prodazh/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/analytics.v1.AnalyticsLocalSaleTotalRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация о локальности продаж",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/analytics.v1.AnalyticsLocalSaleTotalResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsLocalSaleClustersItemsInfo",
+      "method": "POST",
+      "path": "/v1/analytics/local-sale/clusters-items/info",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить информацию о локальности продаж по кластерам",
+      "description": "Метод соответствует разделу [**Аналитика → Планирование поставок → Локальность продаж**](https://seller.ozon.ru/app/analytics/sales-geography/local-packaging).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2335-Novye-beta-metody-dlia-polucheniia-lokalnosti-prodazh/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/analytics.v1.AnalyticsLocalSaleClustersItemsInfoRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация о локальности продаж по кластерам",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/analytics.v1.AnalyticsLocalSaleClustersItemsInfoResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "AnalyticsLocalSaleItemsClustersInfo",
+      "method": "POST",
+      "path": "/v1/analytics/local-sale/items-clusters/info",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить информацию о локальности продаж товара по кластерам",
+      "description": "Метод соответствует разделу [**Аналитика → Планирование поставок → Локальность продаж**](https://seller.ozon.ru/app/analytics/sales-geography/local-packaging).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2335-Novye-beta-metody-dlia-polucheniia-lokalnosti-prodazh/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/analytics.v1.AnalyticsLocalSaleItemsClustersInfoRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация о локальности продаж товара",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/analytics.v1.AnalyticsLocalSaleItemsClustersInfoResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "WarehouseRfbsReturnPointList",
+      "method": "POST",
+      "path": "/v1/warehouse/rfbs/return-point/list",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить список пунктов возврата для склада rFBS",
+      "description": "Используйте метод при создании и обновлении складов rFBS и rFBS Express.\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2369-Novyi-beta-metod-dlia-polucheniia-vozvratnykh-tochek-dlia-rfbs-ekspress/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/v1WarehouseRfbsReturnPointListRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Список пунктов возврата",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/v1WarehouseRfbsReturnPointListResponse"
+              ]
+            }
+          }
+        },
+        "400": {
+          "description": "Неверный параметр",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "403": {
+          "description": "Доступ запрещён",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "404": {
+          "description": "Ответ не найден",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "409": {
+          "description": "Конфликт запроса",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        },
+        "500": {
+          "description": "Внутренняя ошибка сервера",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/rpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "operationId": "SupplyOrderShipmentPlanComplianceGet",
+      "method": "POST",
+      "path": "/v1/supply-order/shipment-plan-compliance/get",
+      "tags": [
+        "BetaMethod"
+      ],
+      "summary": "Получить информацию о выполнении плана отгрузок",
+      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2383-Novyi-metod-dlia-polucheniia-informatsii-o-sobliudenii-plana-otgruzok/) в сообществе разработчиков Ozon for dev.\n",
       "deprecated": false,
       "parameters": [
         {
@@ -21110,213 +23714,11 @@
       "requestBody": null,
       "responses": {
         "200": {
-          "description": "Параметры для создания сертификата",
+          "description": "Информация о выполнении плана отгрузок",
           "content": {
             "application/json": {
               "schemaReferences": [
-                "#/components/schemas/certification.v2.ProductCertificateOptionsResponse"
-              ]
-            }
-          }
-        },
-        "400": {
-          "description": "Неверный параметр",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "403": {
-          "description": "Доступ запрещён",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "404": {
-          "description": "Ответ не найден",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "409": {
-          "description": "Конфликт запроса",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "500": {
-          "description": "Внутренняя ошибка сервера",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "operationId": "ProductCertificateParams",
-      "method": "POST",
-      "path": "/v2/product/certification/params",
-      "tags": [
-        "BetaMethod"
-      ],
-      "summary": "Получить обязательные параметры для создания сертификата качества",
-      "description": "Используйте информацию о параметрах в запросе метода [/v2/product/certificate/create](#operation/ProductCertificateCreate).\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
-      "parameters": [
-        {
-          "reference": "#/components/parameters/Client-Id",
-          "name": "Client-Id",
-          "in": "header",
-          "required": true,
-          "description": "Идентификатор клиента.",
-          "schemaReferences": []
-        },
-        {
-          "reference": "#/components/parameters/Api-Key",
-          "name": "Api-Key",
-          "in": "header",
-          "required": true,
-          "description": "API-ключ.",
-          "schemaReferences": []
-        }
-      ],
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schemaReferences": [
-              "#/components/schemas/certification.v2.ProductCertificateParamsRequest"
-            ]
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Обязательные параметры для создания сертификата",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/certification.v2.ProductCertificateParamsResponse"
-              ]
-            }
-          }
-        },
-        "400": {
-          "description": "Неверный параметр",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "403": {
-          "description": "Доступ запрещён",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "404": {
-          "description": "Ответ не найден",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "409": {
-          "description": "Конфликт запроса",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        },
-        "500": {
-          "description": "Внутренняя ошибка сервера",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "operationId": "ProductCertificateCreate",
-      "method": "POST",
-      "path": "/v2/product/certificate/create",
-      "tags": [
-        "BetaMethod"
-      ],
-      "summary": "Создать сертификат качества",
-      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2278-Novye-beta-metody-dlia-dobavleniia-sertifikatov-kachestva/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
-      "parameters": [
-        {
-          "reference": "#/components/parameters/Client-Id",
-          "name": "Client-Id",
-          "in": "header",
-          "required": true,
-          "description": "Идентификатор клиента.",
-          "schemaReferences": []
-        },
-        {
-          "reference": "#/components/parameters/Api-Key",
-          "name": "Api-Key",
-          "in": "header",
-          "required": true,
-          "description": "API-ключ.",
-          "schemaReferences": []
-        }
-      ],
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schemaReferences": [
-              "#/components/schemas/certification.v2.ProductCertificateCreateRequest"
-            ]
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Сертификат создан",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/certification.v2.ProductCertificateCreateResponse"
+                "#/components/schemas/supply_order.v1.SupplyOrderShipmentPlanComplianceGetResponse"
               ]
             }
           }
@@ -23560,128 +25962,6 @@
       }
     },
     {
-      "operationId": "QuantProductList",
-      "method": "POST",
-      "path": "/v1/product/quant/list",
-      "tags": [
-        "Quants"
-      ],
-      "summary": "Список эконом-товаров",
-      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
-      "parameters": [
-        {
-          "reference": "#/components/parameters/Client-Id",
-          "name": "Client-Id",
-          "in": "header",
-          "required": true,
-          "description": "Идентификатор клиента.",
-          "schemaReferences": []
-        },
-        {
-          "reference": "#/components/parameters/Api-Key",
-          "name": "Api-Key",
-          "in": "header",
-          "required": true,
-          "description": "API-ключ.",
-          "schemaReferences": []
-        }
-      ],
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schemaReferences": [
-              "#/components/schemas/ProductV1QuantListRequest"
-            ]
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Эконом-товары",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/ProductV1QuantListResponse"
-              ]
-            }
-          }
-        },
-        "default": {
-          "description": "Ошибка",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
-      "operationId": "QuantGetInfo",
-      "method": "POST",
-      "path": "/v1/product/quant/info",
-      "tags": [
-        "Quants"
-      ],
-      "summary": "Информация об эконом-товаре",
-      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1084-Metody-po-tarifu-Ekonom) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
-      "parameters": [
-        {
-          "reference": "#/components/parameters/Client-Id",
-          "name": "Client-Id",
-          "in": "header",
-          "required": true,
-          "description": "Идентификатор клиента.",
-          "schemaReferences": []
-        },
-        {
-          "reference": "#/components/parameters/Api-Key",
-          "name": "Api-Key",
-          "in": "header",
-          "required": true,
-          "description": "API-ключ.",
-          "schemaReferences": []
-        }
-      ],
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schemaReferences": [
-              "#/components/schemas/ProductV1QuantInfoRequest"
-            ]
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Информация об эконом-товаре",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/ProductV1QuantInfoResponse"
-              ]
-            }
-          }
-        },
-        "default": {
-          "description": "Ошибка",
-          "content": {
-            "application/json": {
-              "schemaReferences": [
-                "#/components/schemas/rpcStatus"
-              ]
-            }
-          }
-        }
-      }
-    },
-    {
       "operationId": "SellerActionsCreateDiscount",
       "method": "POST",
       "path": "/v1/seller-actions/create/discount",
@@ -24933,8 +27213,8 @@
         "PromosBeta"
       ],
       "summary": "Получить список товаров из автодобавления в акцию",
-      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsAutoAddProductsListV2\">/v2/actions/auto-add/products/list</a>.\n</aside>\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -25034,8 +27314,8 @@
         "PromosBeta"
       ],
       "summary": "Получить список доступных товаров для автодобавления в акцию",
-      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsAutoAddProductsCandidatesV2\">/v2/actions/auto-add/products/candidates</a>.\n</aside>\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -25135,8 +27415,8 @@
         "PromosBeta"
       ],
       "summary": "Удалить товары из автодобавления в акцию",
-      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsAutoAddProductsDeleteV2\">/v2/actions/auto-add/products/delete</a>.\n</aside>\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -25236,8 +27516,8 @@
         "PromosBeta"
       ],
       "summary": "Добавить или обновить товары в автодобавлении в акцию",
-      "description": "Вы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
-      "deprecated": false,
+      "description": "<aside class=\"warning\">\n13 октября 2026 года отключим метод. Переключитесь на <a href=\"#operation/ActionsAutoAddProductsUpdateV2\">/v2/actions/auto-add/products/update</a>.\n</aside>\n\nВы можете оставить обратную связь о работе метода в [комментариях](https://dev.ozon.ru/community/2009-Novye-metody-dlia-upravleniia-avtodobavleniem-tovarov-v-aktsii/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": true,
       "parameters": [
         {
           "reference": "#/components/parameters/Client-Id",
@@ -25838,7 +28118,16 @@
           "schemaReferences": []
         }
       ],
-      "requestBody": null,
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/notification.v1.NotificationListRequest"
+            ]
+          }
+        }
+      },
       "responses": {
         "200": {
           "description": "Подключённые URL-адреса",
@@ -28405,6 +30694,67 @@
       }
     },
     {
+      "operationId": "FbpOrderDirectTplDlvEdit",
+      "method": "POST",
+      "path": "/v1/fbp/order/direct/tpl-dlv/edit",
+      "tags": [
+        "OrderDirectFBP"
+      ],
+      "summary": "Обновить информацию о доставке сторонней транспортной компанией",
+      "description": "Вы можете оставить обратную связь по этому методу в комментариях к [обсуждению](https://dev.ozon.ru/community/1700-FBP-metody/) в сообществе разработчиков Ozon for dev.\n",
+      "deprecated": false,
+      "parameters": [
+        {
+          "reference": "#/components/parameters/Client-Id",
+          "name": "Client-Id",
+          "in": "header",
+          "required": true,
+          "description": "Идентификатор клиента.",
+          "schemaReferences": []
+        },
+        {
+          "reference": "#/components/parameters/Api-Key",
+          "name": "Api-Key",
+          "in": "header",
+          "required": true,
+          "description": "API-ключ.",
+          "schemaReferences": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schemaReferences": [
+              "#/components/schemas/fbp.v1.FbpOrderDirectTplDlvEditRequest"
+            ]
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Информация обновлена",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/fbp.v1.FbpOrderDirectTplDlvEditResponse"
+              ]
+            }
+          }
+        },
+        "default": {
+          "description": "Ошибка",
+          "content": {
+            "application/json": {
+              "schemaReferences": [
+                "#/components/schemas/googlerpcStatus"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
       "operationId": "FbpAPI_FbpEditTimeslot",
       "method": "POST",
       "path": "/v1/fbp/order/direct/timeslot/edit",
@@ -30771,7 +33121,7 @@
         "Premium"
       ],
       "summary": "Данные аналитики",
-      "description": "Уĸажите период и метриĸи, ĸоторые нужно посчитать. В ответе будет аналитиĸа, сгруппированная по параметру `dimensions`.\n\nДля продавцов без подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n- доступны данные за последние 3 месяца,\n- есть ограничения по способам группировки данных и метрикам.\n\nДля продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) или [Premium Pro](https://seller-edu.ozon.ru/seller-rating/about-rating/podpiska-premium-pro) ограничений нет.\n\nМетод можно использовать не больше 1 раза в минуту.\nСоответствует разделу **Аналитика → Графики** в личном кабинете.\n",
+      "description": "Уĸажите период и метриĸи, ĸоторые нужно посчитать. В ответе будет аналитиĸа, сгруппированная по параметру `dimensions`.\n\nДля продавцов без подписки [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus):\n- доступны данные за последние 3 месяца;\n- есть ограничения по способам группировки данных и метрикам;\n- есть лимит на 50 запросов в сутки.\n\nДля продавцов с подпиской [Premium Plus](https://seller-edu.ozon.ru/seller-rating/about-rating/subscription-premium-plus) или [Premium Pro](https://seller-edu.ozon.ru/seller-rating/about-rating/podpiska-premium-pro) ограничений нет.\n\nМетод можно использовать не больше 1 раза в минуту.\nСоответствует разделу **Аналитика → Продажи моих товаров** в личном кабинете.\n",
       "deprecated": false,
       "parameters": [
         {

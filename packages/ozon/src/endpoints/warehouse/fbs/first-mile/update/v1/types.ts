@@ -2,6 +2,34 @@ import type { OzonFbsWarehouseFirstMileType } from "../../../create/v1/types.js"
 
 export interface UpdateFbsWarehouseFirstMileV1Request {
   /**
+   * Информация о возврате на склад для курьера.
+   *
+   * <!-- seller-sdk:ozon-openapi -->
+   */
+  readonly courier_return_warehouse_info?: {
+    /**
+     * Комментарий для курьера.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly comment?: string;
+    /**
+     * Идентификатор пункта возврата из метода
+     * [/v1/warehouse/fbs/create/return-point/list](#operation/WarehouseFBSCreateReturnPointList).
+     *
+     * Формат: `int64`.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly courier_return_warehouse_id?: number;
+    /**
+     * `true`, чтобы выбрать склад как возвратный.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly is_courier_return_warehouse_match?: boolean;
+  };
+  /**
    * Время на приём заказов в минутах. Например, если вы передадите `3000`, приём заказов будет
    * завершён через 50 часов с момента передачи.
    *

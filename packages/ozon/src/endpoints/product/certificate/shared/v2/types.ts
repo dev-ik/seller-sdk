@@ -2,9 +2,6 @@ export type OzonCertificateAccordanceTypeV2 =
   | "UNKNOWN"
   | "EAEU"
   | "NATIONAL"
-  | "TECHNICAL_REGULATIONS_RF"
-  | "TECHNICAL_REGULATIONS_CU"
-  | "GOST"
   | "CHEMICAL_PRODUCTS"
   | "SAFETY_DATA_SHEET"
   | "REJECTION_LETTER";
@@ -39,7 +36,7 @@ export interface OzonCertificateFileV2 {
   readonly file_content: string;
 
   /**
-   * Название файла.
+   * Название файла с расширением `.jpg`, `.jpeg`, `.png` или `.pdf`.
    *
    * <!-- seller-sdk:ozon-openapi -->
    */
@@ -48,20 +45,17 @@ export interface OzonCertificateFileV2 {
 
 export interface OzonCertificateParamsV2 {
   /**
-   * Тип соответствия требованиям из метода
-   * [/v2/product/certificate/accordance-types/list](#operation/CertificateAccordanceTypes): -
-   * `UNKNOWN` — неизвестный; - `EAEU` — стандарт сертификации ЕАЭС; - `NATIONAL` — национальный
-   * стандарт сертификации; - `TECHNICAL_REGULATIONS_RF` — технический регламент Российской
-   * Федерации; - `TECHNICAL_REGULATIONS_CU` — технический регламент Таможенного союза; - `GOST` —
-   * ГОСТ; - `CHEMICAL_PRODUCTS` — паспорт безопасности химической продукции; - `SAFETY_DATA_SHEET` —
-   * паспорт безопасности; - `REJECTION_LETTER` — отказное письмо.
+   * Стандарт сертификации: - `UNKNOWN` — неизвестный; - `EAEU` — стандарт сертификации ЕАЭС; -
+   * `NATIONAL` — национальный стандарт сертификации; - `CHEMICAL_PRODUCTS` — паспорт безопасности
+   * химической продукции; - `SAFETY_DATA_SHEET` — паспорт безопасности; - `REJECTION_LETTER` —
+   * отказное письмо.
    *
    * <!-- seller-sdk:ozon-openapi -->
    */
   readonly accordance_type?: OzonCertificateAccordanceTypeV2;
 
   /**
-   * Код страны, где выдали сертификат.
+   * Код страны, где выдали сертификат. Укажите код в верхнем регистре.
    *
    * Максимальная длина: `2`.
    *
@@ -87,7 +81,8 @@ export interface OzonCertificateParamsV2 {
    */
   readonly expired_date?: {
     /**
-     * Дата истечения сертификата. Не передавайте параметр, если `infinite = true`.
+     * Дата истечения сертификата. Не раньше `params.issue_date`. Не передавайте параметр, если указали
+     * `infinite`.
      *
      * <!-- seller-sdk:ozon-openapi -->
      */
@@ -129,7 +124,9 @@ export interface OzonCertificateParamsV2 {
   };
 
   /**
-   * Файлы сертификата.
+   * Файлы сертификата. Общий размер файлов — не больше 10 МБ.
+   *
+   * Максимум элементов: `30`.
    *
    * <!-- seller-sdk:ozon-openapi -->
    */

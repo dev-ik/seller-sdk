@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "marketplace": "ozon",
+  "checkedAt": "2026-10-19",
+  "status": "implemented",
+  "source": {
+    "url": "https://docs.ozon.ru/api/seller/swagger.json",
+    "acquisition": "User-supplied official swagger.json; direct download was unavailable due to redirects.",
+    "sha256": "4c5756ae6b68177eae367786656f1b4ebdc00f2ca76c0311cf312a011ad1f9e4",
+    "bytes": 4234584
+  },
+  "scope": "Миграция замен устаревших методов, total_items и несовместимых request contracts. Новые независимые возможности Ozon не входят в эту миграцию; остальные изменения response schemas требуют отдельной проверки.",
+  "snapshotChanges": {
+    "previousPaths": 461,
+    "currentPaths": 483,
+    "addedPaths": 24,
+    "removedPaths": 2,
+    "changedExistingOperations": 38
+  },
+  "implementedReplacements": [
+    {
+      "path": "/v3/posting/fbs/package-label/create",
+      "sdkMethod": "createFbsPackageLabelBatchV3",
+      "operationId": "PostingFbsPackageLabelCreate",
+      "retrySafety": "unsafe"
+    },
+    {
+      "path": "/v2/posting/fbs/package-label/get",
+      "sdkMethod": "getFbsPackageLabelBatchV2",
+      "operationId": "PostingFbsPackageLabelGet",
+      "retrySafety": "safe"
+    },
+    {
+      "path": "/v2/actions/candidates",
+      "sdkMethod": "listPromotionCandidatesV2",
+      "operationId": "ActionsCandidates",
+      "retrySafety": "safe"
+    },
+    {
+      "path": "/v2/actions/products",
+      "sdkMethod": "listPromotionProductsV2",
+      "operationId": "ActionsProducts",
+      "retrySafety": "safe"
+    },
+    {
+      "path": "/v1/actions/products/update",
+      "sdkMethod": "updatePromotionProductsV1",
+      "operationId": "ActionsProductsUpdate",
+      "retrySafety": "unsafe"
+    },
+    {
+      "path": "/v2/actions/products/deactivate",
+      "sdkMethod": "deactivatePromotionProductsV2",
+      "operationId": "ActionsProductsDeactivate",
+      "retrySafety": "unsafe"
+    },
+    {
+      "path": "/v2/actions/auto-add/products/list",
+      "sdkMethod": "listAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsListV2",
+      "retrySafety": "safe"
+    },
+    {
+      "path": "/v2/actions/auto-add/products/candidates",
+      "sdkMethod": "listAutoAddProductCandidatesV2",
+      "operationId": "ActionsAutoAddProductsCandidatesV2",
+      "retrySafety": "safe"
+    },
+    {
+      "path": "/v2/actions/auto-add/products/delete",
+      "sdkMethod": "deleteAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsDeleteV2",
+      "retrySafety": "unsafe"
+    },
+    {
+      "path": "/v2/actions/auto-add/products/update",
+      "sdkMethod": "updateAutoAddProductsV2",
+      "operationId": "ActionsAutoAddProductsUpdateV2",
+      "retrySafety": "unsafe"
+    },
+    {
+      "path": "/v2/product/pictures/import",
+      "sdkMethod": "importProductPicturesV2",
+      "operationId": "ProductImportPicturesV2",
+      "retrySafety": "unsafe"
+    }
+  ],
+  "updatedContracts": [
+    "total_items в /v3/product/list, /v4/product/info/stocks, /v5/product/info/prices; total сохранён с @deprecated",
+    "declared_price в запросе обновления цен и ответах информации о товарах/ценах",
+    "scanit в FBS v3 get и v4 list/unfulfilled",
+    "Новые коды ошибок создания поставок и limit/supply_id в items_validation",
+    "Фильтры, пагинация и мониторинг доступности в /v1/notification/list; options-only вызов сохранён",
+    "courier_return_warehouse_info для создания FBS-склада и обновления первой мили; return_point_id только для агрегаторных rFBS-настроек",
+    "SHOWCASE_SELECT_ACTIVE для списка товаров; enum цен и остатков не расширен, потому что их schemas этого значения не содержат",
+    "delivery_schema обязателен в фильтре отчёта отправлений",
+    "Из request enum сертификатов убраны TECHNICAL_REGULATIONS_RF, TECHNICAL_REGULATIONS_CU и GOST",
+    "action_price добавлен в запрос /v1/seller-actions/products/add"
+  ],
+  "availabilityNotes": [
+    {
+      "paths": [
+        "/v2/posting/fbs/package-label",
+        "/v1/posting/fbs/package-label/create",
+        "/v2/posting/fbs/package-label/create",
+        "/v1/posting/fbs/package-label/get"
+      ],
+      "shutdownDateInSnapshot": "2026-11-02",
+      "source": "https://docs.ozon.ru/api/seller/#operation/PostingFbsPackageLabelCreate"
+    },
+    {
+      "field": "total",
+      "replacement": "total_items",
+      "removalDateInSnapshot": "2026-11-23",
+      "source": "https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductList"
+    },
+    {
+      "group": "Ozon promotions",
+      "shutdownDateInSnapshot": "2026-10-13",
+      "shutdownDateInLaterOfficialAnnouncement": "2026-10-19",
+      "source": "https://t.me/OzonSellerAPI/709",
+      "note": "Официальный файл сохранён без изменения устаревшей даты в descriptions."
+    },
+    {
+      "path": "/v1/product/certificate/products/list",
+      "note": "page/page_size отключены 28 сентября по официальному объявлению, но остаются deprecated в supplied snapshot. Использовать limit/last_id; next last_id — последний result.items.product_id, не отсутствующее response.last_id.",
+      "source": "https://t.me/s/ozonsellerapi"
+    }
+  ],
+  "archivedOperations": {
+    "file": "legacy-operations.json",
+    "paths": ["/v1/product/quant/info", "/v1/product/quant/list"],
+    "note": "Сохранены для совместимости по snapshot 2026-08-14. Отсутствие в новом файле не доказывает live-доступность или конкретную замену."
+  },
+  "newOperationsOutsideMigration": [
+    "/v1/analytics/category/comparison",
+    "/v1/analytics/decommissioned-goods",
+    "/v1/analytics/local-sale/clusters-items/info",
+    "/v1/analytics/local-sale/items-clusters/info",
+    "/v1/analytics/local-sale/total",
+    "/v1/barcode/delete",
+    "/v1/carriage/courier-contact/get",
+    "/v1/carriage/courier-contact/set",
+    "/v1/description-category/dependent-attributes",
+    "/v1/description-category/dependent-attributes/values",
+    "/v1/fbp/order/direct/tpl-dlv/edit",
+    "/v1/supply-order/shipment-plan-compliance/get",
+    "/v1/warehouse/rfbs/return-point/list"
+  ],
+  "verificationLimits": [
+    "Проверка основана на официальном swagger.json, предоставленном пользователем. Прямой доступ к docs.ozon.ru по-прежнему возвращал redirects.",
+    "Запросы с реальными credentials к production Ozon не выполнялись.",
+    "Остальные новые response-поля (например, аналитика, сертификаты, возвраты) не заявлены как полностью синхронизированные в этой миграции."
+  ]
+}

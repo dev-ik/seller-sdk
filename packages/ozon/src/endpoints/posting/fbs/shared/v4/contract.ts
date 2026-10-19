@@ -106,6 +106,7 @@ export const fbsPostingV4Schema = object({
   order_number: string().nullable().optional(),
   parent_posting_number: string().nullable().optional(),
   pickup_code_verified_at: rfc3339DateTimeSchema.nullable().optional(),
+  scanit: string().optional(),
   posting_number: string().nullable().optional(),
   products: array(productSchema).nullable().optional(),
   prr_option: string().nullable().optional(),

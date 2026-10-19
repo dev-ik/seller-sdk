@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { format } from "prettier";
 import ts from "typescript";
+import { readOzonSpecification } from "./ozon-specification.mjs";
 
 const projectDirectory = fileURLToPath(new URL("../", import.meta.url));
 const tsconfigPath = path.join(projectDirectory, "tsconfig.json");
@@ -11,14 +12,13 @@ const operationsPath = path.join(
   "packages/ozon/src/operations.ts",
 );
 const manifestPath = path.join(projectDirectory, "docs/ozon/endpoints.json");
-const specificationPath = path.join(projectDirectory, "docs/ozon/swagger.json");
 const marker = "<!-- seller-sdk:ozon-openapi -->";
 const generatedCommentPattern =
   /^[\t ]*\/\*\*(?:(?!\*\/)[\s\S])*?<!-- seller-sdk:ozon-openapi -->(?:(?!\*\/)[\s\S])*?\*\/\r?\n/gm;
 const checkOnly = process.argv.includes("--check");
 
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-const specification = JSON.parse(await readFile(specificationPath, "utf8"));
+const specification = await readOzonSpecification();
 const operationSchemas = collectOperationSchemas(specification);
 const sourceOverrides = new Map();
 
@@ -78,14 +78,21 @@ if (operationsClass === undefined || !ts.isClassDeclaration(operationsClass)) {
   throw new Error("Could not find OzonOperations.");
 }
 
-const methodsByName = new Map(
-  operationsClass.members
-    .filter(
-      (member) =>
-        ts.isMethodDeclaration(member) && ts.isIdentifier(member.name),
-    )
-    .map((member) => [member.name.text, member]),
-);
+const methodsByName = new Map();
+for (const member of operationsClass.members) {
+  if (!ts.isMethodDeclaration(member) || !ts.isIdentifier(member.name))
+    continue;
+  const previous = methodsByName.get(member.name.text);
+  // Prefer the request overload over a compatibility overload/implementation
+  // that also accepts transport options in the first argument.
+  if (
+    previous &&
+    !previous.body &&
+    previous.parameters[0]?.name.getText() === "input"
+  )
+    continue;
+  methodsByName.set(member.name.text, member);
+}
 const insertionsByFile = new Map();
 const contractIssues = new Set();
 let requestCount = 0;

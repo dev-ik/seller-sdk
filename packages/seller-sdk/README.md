@@ -13,21 +13,24 @@ npm i seller-sdk
 
 Требуется Node.js 20.10 или новее.
 
+## Переход на 0.4.0
+
+В `seller.ozon` изменились контракты алиасов этикеток, автодобавления в акции
+и `products.pictures.import`. Перед обновлением с `0.3.x` прочитайте
+[руководство по миграции Ozon](https://github.com/dev-ik/seller-sdk/blob/main/docs/ozon/MIGRATION-2026-10.md).
+Изменения одинаковы для `seller-sdk` и `@seller-sdk/ozon`.
+Контракты `seller.wb` и `seller.ym` в этом выпуске не менялись.
+
 ## Использование
 
 ```ts
-import {
-  Marketplace,
-  OzonValues,
-  SellerClient,
-  YmValues,
-} from "seller-sdk";
+import { Marketplace, OzonValues, SellerClient, YmValues } from "seller-sdk";
 
 const seller = new SellerClient({
   marketplace: Marketplace.Ozon,
   credentials: {
-    clientId: process.env.OZON_CLIENT_ID!,
-    apiKey: process.env.OZON_API_KEY!,
+    clientId: process.env["OZON_CLIENT_ID"]!,
+    apiKey: process.env["OZON_API_KEY"]!,
   },
   config: {
     timeoutMs: 30_000,
@@ -58,7 +61,7 @@ Wildberries выбирается тем же типизированным regist
 ```ts
 const wbSeller = new SellerClient({
   marketplace: Marketplace.Wb,
-  credentials: { token: process.env.WB_API_TOKEN! },
+  credentials: { token: process.env["WB_API_TOKEN"]! },
 });
 
 await wbSeller.wb.general.getPing();
@@ -69,7 +72,7 @@ Yandex Market выбирается тем же registry:
 ```ts
 const ymSeller = new SellerClient({
   marketplace: Marketplace.Ym,
-  credentials: { apiKey: process.env.YM_API_KEY! },
+  credentials: { apiKey: process.env["YM_API_KEY"]! },
 });
 
 await ymSeller.ym.orders.getBusinessOrders({

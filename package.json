@@ -1,6 +1,6 @@
 {
   "name": "seller-sdk-workspace",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "private": true,
   "description": "Рабочее пространство типобезопасных SDK для API маркетплейсов.",
   "license": "MIT",

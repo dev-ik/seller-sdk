@@ -81,7 +81,17 @@ export interface UpdateErfbsAggregatorDeliveryMethodV1Request {
    *
    * <!-- seller-sdk:ozon-openapi -->
    */
-  readonly return_settings?: OzonErfbsReturnSettings<OzonErfbsConfiguredReturnMethod>;
+  readonly return_settings?: OzonErfbsReturnSettings<OzonErfbsConfiguredReturnMethod> & {
+    /**
+     * Идентификатор пункта возврата. Получите значение параметра методом
+     * [/v1/warehouse/rfbs/return-point/list](#operation/WarehouseRfbsReturnPointList).
+     *
+     * Формат: `int64`.
+     *
+     * <!-- seller-sdk:ozon-openapi -->
+     */
+    readonly return_point_id?: number;
+  };
 
   /**
    * Идентификатор склада.

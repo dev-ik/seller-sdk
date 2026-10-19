@@ -25,7 +25,8 @@ export type OzonProductListVisibility =
   | "AUTO_ARCHIVED"
   | "MANUAL_ARCHIVED"
   | "SEASONAL_AUTO_ARCHIVED"
-  | "VISIBLE_WITH_FBO_STOCK";
+  | "VISIBLE_WITH_FBO_STOCK"
+  | "SHOWCASE_SELECT_ACTIVE";
 
 interface ListProductsFilterBase {
   /**
@@ -119,7 +120,9 @@ export interface OzonProductListItem {
 export interface OzonProductListResult {
   readonly items?: readonly OzonProductListItem[];
   readonly last_id?: string;
+  /** @deprecated Use total_items. */
   readonly total?: number;
+  readonly total_items?: number;
 }
 
 export interface ListProductsResponse {

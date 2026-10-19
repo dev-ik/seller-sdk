@@ -1,3 +1,58 @@
+import { executeCreateFbsPackageLabelBatchV3 } from "./endpoints/posting/fbs/package-label/create/v3/execute.js";
+import type {
+  CreateFbsPackageLabelBatchV3Request,
+  CreateFbsPackageLabelBatchV3Response,
+} from "./endpoints/posting/fbs/package-label/create/v3/types.js";
+import { executeGetFbsPackageLabelBatchV2 } from "./endpoints/posting/fbs/package-label/get/v2/execute.js";
+import type {
+  GetFbsPackageLabelBatchV2Request,
+  GetFbsPackageLabelBatchV2Response,
+} from "./endpoints/posting/fbs/package-label/get/v2/types.js";
+import { executeListPromotionCandidatesV2 } from "./endpoints/promotion/candidates/v2/execute.js";
+import type {
+  ListPromotionCandidatesV2Request,
+  ListPromotionCandidatesV2Response,
+} from "./endpoints/promotion/candidates/v2/types.js";
+import { executeListPromotionProductsV2 } from "./endpoints/promotion/products/v2/execute.js";
+import type {
+  ListPromotionProductsV2Request,
+  ListPromotionProductsV2Response,
+} from "./endpoints/promotion/products/v2/types.js";
+import { executeUpdatePromotionProductsV1 } from "./endpoints/promotion/products/update/v1/execute.js";
+import type {
+  UpdatePromotionProductsV1Request,
+  UpdatePromotionProductsV1Response,
+} from "./endpoints/promotion/products/update/v1/types.js";
+import { executeDeactivatePromotionProductsV2 } from "./endpoints/promotion/products/deactivate/v2/execute.js";
+import type {
+  DeactivatePromotionProductsV2Request,
+  DeactivatePromotionProductsV2Response,
+} from "./endpoints/promotion/products/deactivate/v2/types.js";
+import { executeListAutoAddProductsV2 } from "./endpoints/actions/auto-add/products/list/v2/execute.js";
+import type {
+  ListAutoAddProductsV2Request,
+  ListAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/list/v2/types.js";
+import { executeListAutoAddProductCandidatesV2 } from "./endpoints/actions/auto-add/products/candidates/v2/execute.js";
+import type {
+  ListAutoAddProductCandidatesV2Request,
+  ListAutoAddProductCandidatesV2Response,
+} from "./endpoints/actions/auto-add/products/candidates/v2/types.js";
+import { executeDeleteAutoAddProductsV2 } from "./endpoints/actions/auto-add/products/delete/v2/execute.js";
+import type {
+  DeleteAutoAddProductsV2Request,
+  DeleteAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/delete/v2/types.js";
+import { executeUpdateAutoAddProductsV2 } from "./endpoints/actions/auto-add/products/update/v2/execute.js";
+import type {
+  UpdateAutoAddProductsV2Request,
+  UpdateAutoAddProductsV2Response,
+} from "./endpoints/actions/auto-add/products/update/v2/types.js";
+import { executeImportProductPicturesV2 } from "./endpoints/product/pictures/import/v2/execute.js";
+import type {
+  ImportProductPicturesV2Request,
+  ImportProductPicturesV2Response,
+} from "./endpoints/product/pictures/import/v2/types.js";
 import type { Transport } from "#internal-core";
 import { executeGetRoles } from "./endpoints/access/get-roles/execute.js";
 import type { GetRolesResponse } from "./endpoints/access/get-roles/types.js";
@@ -1724,7 +1779,10 @@ import type {
   EnableNotificationV1Response,
 } from "./endpoints/notification/enable/v1/types.js";
 import { executeListNotificationsV1 } from "./endpoints/notification/list/v1/execute.js";
-import type { ListNotificationsV1Response } from "./endpoints/notification/list/v1/types.js";
+import type {
+  ListNotificationsV1Request,
+  ListNotificationsV1Response,
+} from "./endpoints/notification/list/v1/types.js";
 import { executeListNotificationPushTypesV1 } from "./endpoints/notification/push-type/list/v1/execute.js";
 import type { ListNotificationPushTypesV1Response } from "./endpoints/notification/push-type/list/v1/types.js";
 import { executeGetCargoesV2 } from "./endpoints/cargoes/get/v2/execute.js";
@@ -3864,9 +3922,22 @@ export class OzonOperations {
     return executeEnableNotificationV1(this.#transport, input, options);
   }
   listNotificationsV1(
+    input?: ListNotificationsV1Request,
+    options?: OzonRequestOptions,
+  ): Promise<ListNotificationsV1Response>;
+  /** @deprecated Pass request options as the second argument. */
+  listNotificationsV1(
+    options?: OzonRequestOptions,
+  ): Promise<ListNotificationsV1Response>;
+  listNotificationsV1(
+    inputOrOptions?: ListNotificationsV1Request | OzonRequestOptions,
+    options?: OzonRequestOptions,
+  ): Promise<ListNotificationsV1Response>;
+  listNotificationsV1(
+    inputOrOptions: ListNotificationsV1Request | OzonRequestOptions = {},
     options: OzonRequestOptions = {},
   ): Promise<ListNotificationsV1Response> {
-    return executeListNotificationsV1(this.#transport, options);
+    return executeListNotificationsV1(this.#transport, inputOrOptions, options);
   }
   listNotificationPushTypesV1(
     options: OzonRequestOptions = {},
@@ -5857,5 +5928,79 @@ export class OzonOperations {
     options: OzonRequestOptions = {},
   ): Promise<ListOzonWarehousesResponse> {
     return executeListOzonWarehouses(this.#transport, input, options);
+  }
+  createFbsPackageLabelBatchV3(
+    input: CreateFbsPackageLabelBatchV3Request,
+    options: OzonRequestOptions = {},
+  ): Promise<CreateFbsPackageLabelBatchV3Response> {
+    return executeCreateFbsPackageLabelBatchV3(this.#transport, input, options);
+  }
+  getFbsPackageLabelBatchV2(
+    input: GetFbsPackageLabelBatchV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<GetFbsPackageLabelBatchV2Response> {
+    return executeGetFbsPackageLabelBatchV2(this.#transport, input, options);
+  }
+  listPromotionCandidatesV2(
+    input: ListPromotionCandidatesV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<ListPromotionCandidatesV2Response> {
+    return executeListPromotionCandidatesV2(this.#transport, input, options);
+  }
+  listPromotionProductsV2(
+    input: ListPromotionProductsV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<ListPromotionProductsV2Response> {
+    return executeListPromotionProductsV2(this.#transport, input, options);
+  }
+  updatePromotionProductsV1(
+    input: UpdatePromotionProductsV1Request,
+    options: OzonRequestOptions = {},
+  ): Promise<UpdatePromotionProductsV1Response> {
+    return executeUpdatePromotionProductsV1(this.#transport, input, options);
+  }
+  deactivatePromotionProductsV2(
+    input: DeactivatePromotionProductsV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<DeactivatePromotionProductsV2Response> {
+    return executeDeactivatePromotionProductsV2(
+      this.#transport,
+      input,
+      options,
+    );
+  }
+  listAutoAddProductsV2(
+    input: ListAutoAddProductsV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<ListAutoAddProductsV2Response> {
+    return executeListAutoAddProductsV2(this.#transport, input, options);
+  }
+  listAutoAddProductCandidatesV2(
+    input: ListAutoAddProductCandidatesV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<ListAutoAddProductCandidatesV2Response> {
+    return executeListAutoAddProductCandidatesV2(
+      this.#transport,
+      input,
+      options,
+    );
+  }
+  deleteAutoAddProductsV2(
+    input: DeleteAutoAddProductsV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<DeleteAutoAddProductsV2Response> {
+    return executeDeleteAutoAddProductsV2(this.#transport, input, options);
+  }
+  updateAutoAddProductsV2(
+    input: UpdateAutoAddProductsV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<UpdateAutoAddProductsV2Response> {
+    return executeUpdateAutoAddProductsV2(this.#transport, input, options);
+  }
+  importProductPicturesV2(
+    input: ImportProductPicturesV2Request,
+    options: OzonRequestOptions = {},
+  ): Promise<ImportProductPicturesV2Response> {
+    return executeImportProductPicturesV2(this.#transport, input, options);
   }
 }
