@@ -34,6 +34,12 @@
 - Four TypeScript examples from the migration guide typechecked; their four API calls ran against synthetic responses. Local documentation links and `git diff --check` passed.
 - Real authenticated Ozon calls were not made. The 13 independent new endpoints and remaining optional response-field additions are outside this migration.
 
+## SafeShape update before publication
+
+- Updated all five manifests and the lockfile to `@safe-shape/core@^3.5.1` after the user requested checking the latest version.
+- The declaration build exposed TS4023 for SafeShape's private `OptionalSchemaType`. Added explicit `Schema<existing response type>` annotations to 77 shared schema exports in 27 Ozon files. Compared transpiled output before and after: runtime JavaScript is unchanged.
+- The final `pnpm prepare:release` passed completely with SafeShape 3.5.1: 632 tests, typecheck, lint, generated metadata, builds, tarball checks and consumer installation. All four version 0.4.0 archives were regenerated.
+
 ## Review focus
 
 - New labels have root tasks/status objects, without the old result envelope.

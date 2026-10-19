@@ -1,8 +1,16 @@
-import { array, literal, object, string, union } from "@safe-shape/core";
+import type { OzonSellerReceiptV1 } from "./types.js";
+import {
+  array,
+  literal,
+  object,
+  string,
+  union,
+  type Schema,
+} from "@safe-shape/core";
 import { integerSchema } from "../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../contracts/rfc3339-date-time.js";
 
-export const sellerReceiptV1Schema = object({
+export const sellerReceiptV1Schema: Schema<OzonSellerReceiptV1> = object({
   created_at: rfc3339DateTimeSchema.optional(),
   operation_type: union([
     literal("UNSPECIFIED"),

@@ -39,7 +39,7 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^3.0.0"
+    "@safe-shape/core": "^3.5.1"
   },
   "scripts": {
     "build": "tsc -p ../core/tsconfig.build.json --outDir ../wb/dist/internal/core && tsc -p tsconfig.build.json",

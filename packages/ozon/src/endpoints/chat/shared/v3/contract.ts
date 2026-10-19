@@ -1,7 +1,8 @@
-import { array, boolean, object, string } from "@safe-shape/core";
+import type { OzonChatMessageV3, OzonChatV3 } from "./types.js";
+import { array, boolean, object, string, type Schema } from "@safe-shape/core";
 import { integerSchema } from "../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../contracts/rfc3339-date-time.js";
-export const chatV3Schema = object({
+export const chatV3Schema: Schema<OzonChatV3> = object({
   chat: object({
     chat_id: string().optional(),
     chat_status: string().optional(),
@@ -12,7 +13,7 @@ export const chatV3Schema = object({
   last_message_id: integerSchema.optional(),
   unread_count: integerSchema.optional(),
 });
-export const chatMessageV3Schema = object({
+export const chatMessageV3Schema: Schema<OzonChatMessageV3> = object({
   context: object({
     order_number: string().optional(),
     sku: string().optional(),

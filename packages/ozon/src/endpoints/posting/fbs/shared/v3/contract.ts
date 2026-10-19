@@ -1,4 +1,12 @@
-import { array, boolean, number, object, string } from "@safe-shape/core";
+import type { OzonFbsPostingDetailV3, OzonFbsPostingV3 } from "./types.js";
+import {
+  array,
+  boolean,
+  number,
+  object,
+  string,
+  type Schema,
+} from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../../contracts/rfc3339-date-time.js";
 import {
@@ -119,7 +127,8 @@ const fbsPostingV3Shape = {
   tracking_number: string().optional(),
 };
 
-export const fbsPostingV3Schema = object(fbsPostingV3Shape);
+export const fbsPostingV3Schema: Schema<OzonFbsPostingV3> =
+  object(fbsPostingV3Shape);
 
 const detailProductSchema = object({
   currency_code: string().optional(),
@@ -155,7 +164,7 @@ const productExemplarSchema = object({
   weight: number().optional(),
 });
 
-export const fbsPostingDetailV3Schema = object({
+export const fbsPostingDetailV3Schema: Schema<OzonFbsPostingDetailV3> = object({
   scanit: string().optional(),
   ...fbsPostingV3Shape,
   additional_data: array(

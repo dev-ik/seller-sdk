@@ -1,7 +1,15 @@
-import { array, boolean, number, object, string } from "@safe-shape/core";
+import type { OzonReturnMoneyV1, OzonReturnV1 } from "./types.js";
+import {
+  array,
+  boolean,
+  number,
+  object,
+  string,
+  type Schema,
+} from "@safe-shape/core";
 import { integerSchema } from "../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../contracts/rfc3339-date-time.js";
-export const returnMoneyV1Schema = object({
+export const returnMoneyV1Schema: Schema<OzonReturnMoneyV1> = object({
   currency_code: string().optional(),
   price: number().optional(),
 });
@@ -15,7 +23,7 @@ const returnStatusSchema = object({
   id: integerSchema.optional(),
   sys_name: string().optional(),
 });
-export const returnV1Schema = object({
+export const returnV1Schema: Schema<OzonReturnV1> = object({
   additional_info: object({
     is_opened: boolean().optional(),
     is_super_econom: boolean().optional(),

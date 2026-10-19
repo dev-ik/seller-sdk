@@ -1,5 +1,7 @@
-import { object, string } from "@safe-shape/core";
+import type { CreatePlacementReportResponse } from "./types.js";
+import { object, string, type Schema } from "@safe-shape/core";
 
-export const createPlacementReportResponseSchema = object({
-  code: string().optional(),
-});
+export const createPlacementReportResponseSchema: Schema<CreatePlacementReportResponse> =
+  object({
+    code: string().optional(),
+  });

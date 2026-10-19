@@ -1,3 +1,9 @@
+import type {
+  OzonFbpCancellationState,
+  OzonFbpDraftCreatedResponse,
+  OzonFbpDraftDeleteResponse,
+  OzonFbpDraftRegistrationResponse,
+} from "./types.js";
 import {
   array,
   boolean,
@@ -5,6 +11,7 @@ import {
   object,
   string,
   union,
+  type Schema,
 } from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 export const fbpBundleItemErrorSchema = union([
@@ -42,41 +49,45 @@ const orderError = union([
   literal("INVALID_PICK_UP_DATE"),
   literal("INTERNAL_ERROR"),
 ]);
-export const fbpCancellationStateSchema = object({
-  cancellation_error: object({
-    error_code: union([
-      literal("CODE_UNSPECIFIED"),
-      literal("NO_RESPONSE_FROM_3PF"),
-      literal("ACCEPTANCE_ALREADY_STARTED"),
+export const fbpCancellationStateSchema: Schema<OzonFbpCancellationState> =
+  object({
+    cancellation_error: object({
+      error_code: union([
+        literal("CODE_UNSPECIFIED"),
+        literal("NO_RESPONSE_FROM_3PF"),
+        literal("ACCEPTANCE_ALREADY_STARTED"),
+      ]).optional(),
+      message: string().optional(),
+    }).optional(),
+    cancellation_status: union([
+      literal("STATUS_UNSPECIFIED"),
+      literal("CONFIRMATION"),
+      literal("CANCELED"),
+      literal("NOT_CANCELED"),
     ]).optional(),
-    message: string().optional(),
-  }).optional(),
-  cancellation_status: union([
-    literal("STATUS_UNSPECIFIED"),
-    literal("CONFIRMATION"),
-    literal("CANCELED"),
-    literal("NOT_CANCELED"),
-  ]).optional(),
-});
-export const fbpDraftDeleteResponseSchema = object({
-  cancellation_state: fbpCancellationStateSchema.optional(),
-  row_version: integerSchema.optional(),
-});
-export const fbpDraftRegistrationResponseSchema = object({
-  error: object({
-    bundle_errors: array(
-      object({
-        errors: array(fbpBundleItemErrorSchema).optional(),
-        sku: integerSchema.optional(),
-      }),
-    ).optional(),
-    order_error: orderError.optional(),
-  }).optional(),
-  is_error: boolean().optional(),
-  row_version: integerSchema.optional(),
-});
-export const fbpDraftCreatedResponseSchema = object({
-  draft_id: integerSchema.optional(),
-  row_version: integerSchema.optional(),
-  supply_id: string().optional(),
-});
+  });
+export const fbpDraftDeleteResponseSchema: Schema<OzonFbpDraftDeleteResponse> =
+  object({
+    cancellation_state: fbpCancellationStateSchema.optional(),
+    row_version: integerSchema.optional(),
+  });
+export const fbpDraftRegistrationResponseSchema: Schema<OzonFbpDraftRegistrationResponse> =
+  object({
+    error: object({
+      bundle_errors: array(
+        object({
+          errors: array(fbpBundleItemErrorSchema).optional(),
+          sku: integerSchema.optional(),
+        }),
+      ).optional(),
+      order_error: orderError.optional(),
+    }).optional(),
+    is_error: boolean().optional(),
+    row_version: integerSchema.optional(),
+  });
+export const fbpDraftCreatedResponseSchema: Schema<OzonFbpDraftCreatedResponse> =
+  object({
+    draft_id: integerSchema.optional(),
+    row_version: integerSchema.optional(),
+    supply_id: string().optional(),
+  });

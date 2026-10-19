@@ -1,14 +1,20 @@
-import { array, boolean, object, string } from "@safe-shape/core";
+import type {
+  OzonReviewDetails,
+  OzonReviewPhoto,
+  OzonReviewSummary,
+  OzonReviewVideo,
+} from "./types.js";
+import { array, boolean, object, string, type Schema } from "@safe-shape/core";
 import { integerSchema } from "../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../contracts/rfc3339-date-time.js";
 
-export const reviewPhotoSchema = object({
+export const reviewPhotoSchema: Schema<OzonReviewPhoto> = object({
   height: integerSchema.optional(),
   url: string().optional(),
   width: integerSchema.optional(),
 });
 
-export const reviewVideoSchema = object({
+export const reviewVideoSchema: Schema<OzonReviewVideo> = object({
   height: integerSchema.optional(),
   preview_url: string().optional(),
   short_video_preview_url: string().optional(),
@@ -16,7 +22,7 @@ export const reviewVideoSchema = object({
   width: integerSchema.optional(),
 });
 
-export const reviewSummaryV1Schema = object({
+export const reviewSummaryV1Schema: Schema<OzonReviewSummary> = object({
   comments_amount: integerSchema.optional(),
   id: string().optional(),
   is_rating_participant: boolean().optional(),
@@ -30,7 +36,7 @@ export const reviewSummaryV1Schema = object({
   videos_amount: integerSchema.optional(),
 });
 
-export const reviewDetailsV1Schema = object({
+export const reviewDetailsV1Schema: Schema<OzonReviewDetails> = object({
   comments_amount: integerSchema.optional(),
   dislikes_amount: integerSchema.optional(),
   id: string().optional(),

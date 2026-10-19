@@ -8,6 +8,7 @@ import {
 } from "@safe-shape/core";
 import type {
   OzonCertificateAccordanceTypeV2,
+  OzonCertificateParameterRequirementV2,
   OzonCertificateProductTypeV2,
   OzonCertificateTypeV2,
 } from "./types.js";
@@ -46,7 +47,8 @@ export const certificateProductTypeV2Schema: Schema<OzonCertificateProductTypeV2
     literal("PHARMACEUTICAL_SUBSTANCE"),
   ]);
 
-export const certificateParameterRequirementV2Schema = object({
-  name: string().optional(),
-  required: boolean().optional(),
-});
+export const certificateParameterRequirementV2Schema: Schema<OzonCertificateParameterRequirementV2> =
+  object({
+    name: string().optional(),
+    required: boolean().optional(),
+  });

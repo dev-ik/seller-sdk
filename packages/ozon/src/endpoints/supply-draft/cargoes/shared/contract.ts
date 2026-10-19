@@ -1,3 +1,10 @@
+import type {
+  OzonCargoCreateErrors,
+  OzonCargoDeleteError,
+  OzonCargoLabelErrors,
+  OzonCargoRulesCheck,
+  OzonSupplyCargo,
+} from "./types.js";
 import {
   array,
   boolean,
@@ -5,6 +12,7 @@ import {
   object,
   string,
   union,
+  type Schema,
 } from "@safe-shape/core";
 import { integerSchema } from "../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../contracts/rfc3339-date-time.js";
@@ -46,11 +54,11 @@ const itemValidation = object({
   quant: integerSchema.optional(),
   type: itemError.optional(),
 });
-export const cargoCreateErrorsSchema = object({
+export const cargoCreateErrorsSchema: Schema<OzonCargoCreateErrors> = object({
   error_reasons: array(createReason).optional(),
   items_validation: array(itemValidation).optional(),
 });
-export const cargoCreateErrorsV2Schema = object({
+export const cargoCreateErrorsV2Schema: Schema<OzonCargoCreateErrors> = object({
   error_reasons: array(createReasonV2).optional(),
   items_validation: array(itemValidation).optional(),
 });
@@ -85,7 +93,7 @@ const trackingType = union([
   literal("EXPECTED_ARRIVAL"),
   literal("ACTUAL_ARRIVAL"),
 ]);
-export const supplyCargoSchema = object({
+export const supplyCargoSchema: Schema<OzonSupplyCargo> = object({
   bundle_id: string().optional(),
   cargo_id: integerSchema.optional(),
   content_type: contentType.optional(),
@@ -106,7 +114,7 @@ const supplyDeleteReason = union([
   literal("SUPPLY_CARGOES_LOCKED"),
   literal("OPERATION_NOT_FOUND"),
 ]);
-export const cargoDeleteErrorSchema = object({
+export const cargoDeleteErrorSchema: Schema<OzonCargoDeleteError> = object({
   cargo_error_reasons: array(
     object({
       cargo_id: integerSchema.optional(),
@@ -120,7 +128,7 @@ const ruleState = {
   is_required: boolean().optional(),
   satisfied: boolean().optional(),
 };
-export const cargoRulesCheckSchema = object({
+export const cargoRulesCheckSchema: Schema<OzonCargoRulesCheck> = object({
   supply_id: integerSchema.optional(),
   cargoes_presents_rule: object({
     cargo_count_per_type: array(
@@ -161,6 +169,6 @@ const labelReason = union([
   literal("SUPPLY_IS_EMPTY"),
   literal("CARGOES_NOT_FOUND"),
 ]);
-export const cargoLabelErrorsSchema = object({
+export const cargoLabelErrorsSchema: Schema<OzonCargoLabelErrors> = object({
   error_reasons: array(labelReason).optional(),
 });

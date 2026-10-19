@@ -1,4 +1,8 @@
-import { literal, object, string, union } from "@safe-shape/core";
+import type {
+  OzonSupplyOrderTimeslot,
+  OzonSupplyOrderTimezone,
+} from "./types.js";
+import { literal, object, string, union, type Schema } from "@safe-shape/core";
 
 export const supplyOrderStateSchema = union([
   literal("UNSPECIFIED"),
@@ -15,15 +19,17 @@ export const supplyOrderStateSchema = union([
   literal("OVERDUE"),
 ]);
 
-export const supplyOrderTimeslotSchema = object({
-  from: string().optional(),
-  to: string().optional(),
-});
+export const supplyOrderTimeslotSchema: Schema<OzonSupplyOrderTimeslot> =
+  object({
+    from: string().optional(),
+    to: string().optional(),
+  });
 
-export const supplyOrderTimezoneSchema = object({
-  iana_name: string().optional(),
-  offset: string().optional(),
-});
+export const supplyOrderTimezoneSchema: Schema<OzonSupplyOrderTimezone> =
+  object({
+    iana_name: string().optional(),
+    offset: string().optional(),
+  });
 
 export const supplyOrderTimeslotUpdateErrorSchema = union([
   literal("UPDATE_TIMESLOT_ERROR_UNSPECIFIED"),

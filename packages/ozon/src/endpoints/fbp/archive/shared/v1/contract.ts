@@ -1,3 +1,8 @@
+import type {
+  OzonFbpArchiveDeliveryDetails,
+  OzonFbpArchiveSupply,
+  OzonFbpArchiveTimeslot,
+} from "./types.js";
 import {
   boolean,
   literal,
@@ -5,22 +10,27 @@ import {
   object,
   string,
   union,
+  type Schema,
 } from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../../contracts/rfc3339-date-time.js";
 
-export const fbpArchiveTimeslotSchema = object({
+export const fbpArchiveTimeslotSchema: Schema<OzonFbpArchiveTimeslot> = object({
   timeslot_end: rfc3339DateTimeSchema.optional(),
   timeslot_start: rfc3339DateTimeSchema.optional(),
 });
 
-export const fbpArchiveSkuSummarySchema = object({
+export const fbpArchiveSkuSummarySchema: Schema<
+  NonNullable<OzonFbpArchiveSupply["bundle_sku_summary"]>
+> = object({
   rounded_total_volume_in_litres: number().optional(),
   total_items_count: integerSchema.optional(),
   total_quantity: integerSchema.optional(),
 });
 
-export const fbpArchiveDeclineReasonSchema = object({
+export const fbpArchiveDeclineReasonSchema: Schema<
+  NonNullable<OzonFbpArchiveSupply["decline_reason"]>
+> = object({
   code: union([
     literal("DECLINE_REASON_CODE_UNSPECIFIED"),
     literal("CANNOT_CREATE_SUPPLY_ON_TPF"),
@@ -32,42 +42,43 @@ export const fbpArchiveDeclineReasonSchema = object({
   message: string().optional(),
 });
 
-export const fbpArchiveDeliveryDetailsSchema = object({
-  direct_details: object({
-    by_seller_details: object({
-      driver_name: string().optional(),
-      vehicle_registration_number: string().optional(),
-      vehicle_type: string().optional(),
+export const fbpArchiveDeliveryDetailsSchema: Schema<OzonFbpArchiveDeliveryDetails> =
+  object({
+    direct_details: object({
+      by_seller_details: object({
+        driver_name: string().optional(),
+        vehicle_registration_number: string().optional(),
+        vehicle_type: string().optional(),
+      }).optional(),
+      by_tpl_details: object({
+        tracking_number: string().optional(),
+        transport_company_name: string().optional(),
+      }).optional(),
+      timeslot_details: object({
+        timeslot: fbpArchiveTimeslotSchema.optional(),
+        timeslot_reservation_id: string().optional(),
+      }).optional(),
     }).optional(),
-    by_tpl_details: object({
-      tracking_number: string().optional(),
-      transport_company_name: string().optional(),
-    }).optional(),
-    timeslot_details: object({
+    drop_off_point: object({
+      id: integerSchema.optional(),
+      province_uuid: string().optional(),
       timeslot: fbpArchiveTimeslotSchema.optional(),
-      timeslot_reservation_id: string().optional(),
     }).optional(),
-  }).optional(),
-  drop_off_point: object({
-    id: integerSchema.optional(),
-    province_uuid: string().optional(),
-    timeslot: fbpArchiveTimeslotSchema.optional(),
-  }).optional(),
-  pickup_details: object({
-    address: string().optional(),
-    comment: string().optional(),
-    date: rfc3339DateTimeSchema.optional(),
-    sender_name: string().optional(),
-    sender_phone: string().optional(),
-  }).optional(),
-  supply_type: union([
-    literal("SUPPLY_TYPE_UNSPECIFIED"),
-    literal("DIRECT_BY_SELLER"),
-    literal("DIRECT_BY_TPL"),
-    literal("DROP_OFF"),
-    literal("PICK_UP"),
-  ]).optional(),
-});
+    pickup_details: object({
+      address: string().optional(),
+      comment: string().optional(),
+      date: rfc3339DateTimeSchema.optional(),
+      sender_name: string().optional(),
+      sender_phone: string().optional(),
+    }).optional(),
+    supply_type: union([
+      literal("SUPPLY_TYPE_UNSPECIFIED"),
+      literal("DIRECT_BY_SELLER"),
+      literal("DIRECT_BY_TPL"),
+      literal("DROP_OFF"),
+      literal("PICK_UP"),
+    ]).optional(),
+  });
 
 export const fbpArchiveStatusSchema = union([
   literal("ARCHIVE_STATUS_UNSPECIFIED"),
@@ -76,7 +87,7 @@ export const fbpArchiveStatusSchema = union([
   literal("CANCELLED_BY_SELLER"),
 ]);
 
-export const fbpArchiveSupplySchema = object({
+export const fbpArchiveSupplySchema: Schema<OzonFbpArchiveSupply> = object({
   act_file_uuid: string().optional(),
   bundle_id: string().optional(),
   bundle_sku_summary: fbpArchiveSkuSummarySchema.optional(),

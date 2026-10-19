@@ -1,3 +1,7 @@
+import type {
+  OzonFbpOrderDetails,
+  OzonFbpOrderMutationResponse,
+} from "./types.js";
 import {
   array,
   boolean,
@@ -6,6 +10,7 @@ import {
   object,
   string,
   union,
+  type Schema,
 } from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../../contracts/rfc3339-date-time.js";
@@ -44,13 +49,14 @@ export const fbpOrderValidationErrorTypeSchema = union([
   literal("INVALID_STATE"),
 ]);
 
-export const fbpOrderMutationResponseSchema = object({
-  error: object({
-    order_errors: array(fbpOrderValidationErrorTypeSchema).optional(),
-  }).optional(),
-  is_error: boolean().optional(),
-  row_version: integerSchema.optional(),
-});
+export const fbpOrderMutationResponseSchema: Schema<OzonFbpOrderMutationResponse> =
+  object({
+    error: object({
+      order_errors: array(fbpOrderValidationErrorTypeSchema).optional(),
+    }).optional(),
+    is_error: boolean().optional(),
+    row_version: integerSchema.optional(),
+  });
 
 export const fbpOrderAttentionReasonSchema = union([
   literal("ORDER_ATTENTION_TYPE_UNSPECIFIED"),
@@ -70,13 +76,15 @@ export const fbpOrderStatusSchema = union([
   literal("CANCELLED"),
 ]);
 
-export const fbpOrderBundleSummarySchema = object({
+export const fbpOrderBundleSummarySchema: Schema<
+  NonNullable<OzonFbpOrderDetails["bundle_summary"]>
+> = object({
   rounded_total_volume_in_litres: number().optional(),
   total_item_count: integerSchema.optional(),
   total_quantity: integerSchema.optional(),
 });
 
-export const fbpOrderDetailsSchema = object({
+export const fbpOrderDetailsSchema: Schema<OzonFbpOrderDetails> = object({
   attention_reasons: array(fbpOrderAttentionReasonSchema).optional(),
   bundle_summary: fbpOrderBundleSummarySchema.optional(),
   bundle_uuid: string().optional(),

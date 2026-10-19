@@ -1,10 +1,12 @@
-import { literal, object, string, union } from "@safe-shape/core";
+import type { OzonFbpDirectDraftResponse } from "./types.js";
+import { literal, object, string, union, type Schema } from "@safe-shape/core";
 import { integerSchema } from "../../../../../../contracts/integer.js";
-export const fbpDirectDraftResponseSchema = object({
-  draft_id: integerSchema.optional(),
-  row_version: integerSchema.optional(),
-  supply_id: string().optional(),
-});
+export const fbpDirectDraftResponseSchema: Schema<OzonFbpDirectDraftResponse> =
+  object({
+    draft_id: integerSchema.optional(),
+    row_version: integerSchema.optional(),
+    supply_id: string().optional(),
+  });
 export const fbpDraftValidationErrorSchema = union([
   literal("ERROR_TYPE_UNSPECIFIED"),
   literal("ORDER_DRAFT_LOCKED"),

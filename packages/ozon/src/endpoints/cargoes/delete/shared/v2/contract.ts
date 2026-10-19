@@ -1,4 +1,5 @@
-import { array, literal, object, union } from "@safe-shape/core";
+import type { OzonCargoDeleteErrors } from "./types.js";
+import { array, literal, object, union, type Schema } from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 const cargoReason = union([literal("UNSPECIFIED"), literal("CARGO_NOT_FOUND")]);
 const supplyReason = union([
@@ -14,7 +15,7 @@ const supplyReason = union([
   literal("CANT_DELETE_ALL_TRANSPORT_CARGOES"),
   literal("UNDEFINED"),
 ]);
-export const cargoDeleteErrorsSchema = object({
+export const cargoDeleteErrorsSchema: Schema<OzonCargoDeleteErrors> = object({
   cargo_error_reasons: array(
     object({
       cargo_id: integerSchema.optional(),

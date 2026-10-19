@@ -37,7 +37,7 @@
     }
   },
   "dependencies": {
-    "@safe-shape/core": "^3.0.0",
+    "@safe-shape/core": "^3.5.1",
     "@seller-sdk/ozon": "workspace:*",
     "@seller-sdk/wb": "workspace:*",
     "@seller-sdk/ym": "workspace:*"

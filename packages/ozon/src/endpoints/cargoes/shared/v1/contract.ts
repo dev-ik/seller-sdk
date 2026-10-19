@@ -1,4 +1,17 @@
-import { array, literal, object, string, union } from "@safe-shape/core";
+import type {
+  OzonCargoOperationResponse,
+  OzonCargoTransportActivateError,
+  OzonCargoTransportBindError,
+  OzonCargoTransportOperationStatus,
+} from "./types.js";
+import {
+  array,
+  literal,
+  object,
+  string,
+  union,
+  type Schema,
+} from "@safe-shape/core";
 export const cargoTransportStatusSchema = union([
   literal("SUCCESS"),
   literal("IN_PROGRESS"),
@@ -36,14 +49,21 @@ export const cargoTransportBindErrorSchema = union([
   literal("TRANSPORT_CARGO_IDS_NOT_FOUND"),
   literal("ETTN_IS_UPLOADED"),
 ]);
-export const cargoOperationResponseSchema = object({
-  operation_id: string().optional(),
-});
-export const cargoActivateStatusResponseSchema = object({
+export const cargoOperationResponseSchema: Schema<OzonCargoOperationResponse> =
+  object({
+    operation_id: string().optional(),
+  });
+export const cargoActivateStatusResponseSchema: Schema<{
+  readonly error_reasons?: readonly OzonCargoTransportActivateError[];
+  readonly status?: OzonCargoTransportOperationStatus;
+}> = object({
   error_reasons: array(cargoTransportActivateErrorSchema).optional(),
   status: cargoTransportStatusSchema.optional(),
 });
-export const cargoBindStatusResponseSchema = object({
+export const cargoBindStatusResponseSchema: Schema<{
+  readonly error_reasons?: readonly OzonCargoTransportBindError[];
+  readonly status?: OzonCargoTransportOperationStatus;
+}> = object({
   error_reasons: array(cargoTransportBindErrorSchema).optional(),
   status: cargoTransportStatusSchema.optional(),
 });

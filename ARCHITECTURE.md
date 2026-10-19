@@ -117,7 +117,8 @@ packages/ozon/src/endpoints/<domain>/<operation>/
 
 Эта политика относится только к ответам. Запросы остаются строгими.
 
-Используется `@safe-shape/core@^3.0.0`; миграция следует
+Используется `@safe-shape/core@^3.5.1`. Минимальная поддерживаемая версия
+SafeShape — `3.5.1`; она отдельно проверяется в CI. Переход на ветку 3.x следует
 [официальному руководству 2.x → 3.0](https://github.com/dev-ik/safe_shape/blob/main/docs/migration-2-to-3.md).
 Native diagnostics преобразуются в собственный `ValidationIssue` SDK без
 добавления `severity` и `ruleId` в публичный тип. Контракты остаются синхронными.

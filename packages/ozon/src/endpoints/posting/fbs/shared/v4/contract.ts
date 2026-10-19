@@ -1,4 +1,12 @@
-import { array, boolean, number, object, string } from "@safe-shape/core";
+import type { OzonFbsPostingV4 } from "./types.js";
+import {
+  array,
+  boolean,
+  number,
+  object,
+  string,
+  type Schema,
+} from "@safe-shape/core";
 import { integerSchema } from "../../../../../contracts/integer.js";
 import { rfc3339DateTimeSchema } from "../../../../../contracts/rfc3339-date-time.js";
 import {
@@ -67,7 +75,7 @@ const tarifficationSchema = object({
   next_tariff_type: string().nullable().optional(),
 });
 
-export const fbsPostingV4Schema = object({
+export const fbsPostingV4Schema: Schema<OzonFbsPostingV4> = object({
   addressee: object({ name: string().nullable().optional() })
     .nullable()
     .optional(),
